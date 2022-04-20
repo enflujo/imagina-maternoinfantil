@@ -24,78 +24,54 @@ const guardarJSON = (json, nombre) => {
   writeFileSync(`./pruebas/${nombre}.json`, JSON.stringify(json, null, 2));
 };
 
-denominador.forEach(den => {
-  const { Anno, Departamento, Municipio, Total } = den;
+function estructurarDatos(variable, llave) {
+  variable.forEach(obj => {
+    const { Anno, Departamento, Municipio, Total } = obj;
 
-  if (!datos.hasOwnProperty(Anno)) {
-    datos[Anno] = [];
-  }
+    if (!datos.hasOwnProperty(Anno)) {
+      datos[Anno] = [];
+    }
 
-  const departamento = extraerNombreCodigo(Departamento);
-  let departamentoI = datos[Anno].findIndex(d => d.departamento === departamento.nombre);
+    const departamento = extraerNombreCodigo(Departamento);
+    let departamentoI = datos[Anno].findIndex(d => d.departamento === departamento.nombre);
 
-  if (departamentoI < 0) {
-    datos[Anno].push({
-      departamento: departamento.nombre,
-      codigo: departamento.codigo,
-      municipios: []
-    });
+    if (departamentoI < 0) {
+      datos[Anno].push({
+        departamento: departamento.nombre,
+        codigo: departamento.codigo,
+        municipios: []
+      });
 
-    departamentoI = datos[Anno].length - 1;
-  }
+      departamentoI = datos[Anno].length - 1;
+    }
 
-  const municipio = extraerNombreCodigo(Municipio);
-  const municipioI = datos[Anno][departamentoI].municipios.findIndex(d => d.municipio === municipio.nombre);
+    const municipio = extraerNombreCodigo(Municipio);
+    let municipioI = datos[Anno][departamentoI].municipios.findIndex(d => d.municipio === municipio.nombre);
 
-  if (municipioI < 0) {
-    datos[Anno][departamentoI].municipios.push({
-      municipio: municipio.nombre,
-      codigo: municipio.codigo,
-      denominador: Total
-    })
-  }
-});
+    if (municipioI < 0) {
+      datos[Anno][departamentoI].municipios.push({
+        municipio: municipio.nombre,
+        codigo: municipio.codigo,
+      });
+      municipioI = datos[Anno][departamentoI].municipios.length - 1;
+    }
 
-numerador.forEach(num => {
-  const { Anno, Departamento, Municipio, Total } = num;
+    datos[Anno][departamentoI].municipios[municipioI][llave] = Total;
 
-  if (!datos.hasOwnProperty(Anno)) {
-    datos[Anno] = [];
-  }
+    const numerador = datos[Anno][departamentoI].municipios[municipioI].numerador;
+    const denominador = datos[Anno][departamentoI].municipios[municipioI].denominador;
 
-  const departamento = extraerNombreCodigo(Departamento);
-  let departamentoI = datos[Anno].findIndex(d => d.departamento === departamento.nombre);
+    if (numerador && denominador) {
+      datos[Anno][departamentoI].municipios[municipioI].porcentaje = ((numerador / denominador) * 100);
+    }
 
-  if (departamentoI < 0) {
-    datos[Anno].push({
-      departamento: departamento.nombre,
-      municipios: [],
-      codigo: departamento.codigo
-    });
+  });
+}
 
-    departamentoI = datos[Anno].length - 1;
-  }
-
-  const municipio = extraerNombreCodigo(Municipio);
-  let municipioI = datos[Anno][departamentoI].municipios.findIndex(d => d.municipio === municipio.nombre);
-
-  if (municipioI < 0) {
-    datos[Anno][departamentoI].municipios.push({
-      municipio: municipio.nombre,
-      codigo: municipio.codigo,
-      numerador: Total
-    })
-  } else {
-    console.log('hey')
-    datos[Anno][departamentoI].municipios[municipioI].numerador = Total;
-  }
-
-
-})
-
+estructurarDatos(denominador, 'denominador');
+estructurarDatos(numerador, 'numerador')
 
 guardarJSON(datos, 'prueba1')
-
 
 // for (var i = 0; i < 10; i++) {
 //   if (numerador[i].Anno === denominador[i].Anno && numerador[i].Departamento && numerador[i].Municipio) {
