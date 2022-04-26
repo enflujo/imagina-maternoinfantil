@@ -3,7 +3,8 @@
     <h1>Mitigar el impacto de la pandemia del Covid19 sobre la salud materno infantil</h1>
     <button @click="dibujarMapa">Dibujar mapa</button>
     <div>
-      <canvas id="lienzo"> </canvas>
+      <!-- <canvas id="lienzo"> </canvas> -->
+      <svg id="contenedor-mapa" width="700" height="700"></svg>
     </div>
 
     <!-- <p @click="mostrarDatos('https://www.datos.gov.co/resource/ynn5-77cb.json')">obtener datos</p> -->
@@ -12,13 +13,20 @@
 
 <script>
 import Enlace from '../Componentes/Enlace.vue';
-import { geoTransverseMercator, geoNaturalEarth1, geoPath, json } from 'd3';
+import { select, scaleThreshold, geoPath, geoMercator, geoAlbersUsa, scaleLinear, max } from 'd3';
 import * as topojson from 'topojson';
+
 import municipios from '../../datos/MunicipiosVeredas1MB.json';
+import municipiosTopo from '../../datos/colombia-municipios.json';
+import datosAnticoncepcion from '../../pruebas/prueba1.json';
+
+const llaveDepMapa = 'DPTO_CCDGO';
+const llaveCodigoDatos = 'codigo';
+const llaveMunMapa = 'MPIO_CCNCT';
 
 export default {
   components: { Enlace },
-  data: function () {
+  data() {
     return {
       datos: {
         anchoVentana: document.documentElement.clientWidth,
@@ -34,51 +42,104 @@ export default {
 
   methods: {
     async dibujarMapa() {
+      let dataIndex = {};
+      for (let d of datosAnticoncepcion[2018]) {
+        for (let m of d.municipios) {
+          let codigoMunicipio = m.codigo;
+          dataIndex[codigoMunicipio] = m.porcentaje;
+        }
+      }
+
+      // mapear la información
+      municipios.features = municipios.features.map((d) => {
+        let codigoMunicipio = d.properties['DPTOMPIO'];
+        let porcentaje = dataIndex[codigoMunicipio];
+        d.properties.porcentaje = porcentaje;
+        return d;
+      });
+
+      // Obtener las geometrías para luego adaptar el tamaño con fitSize()
+      //let codigoMunicipio =
+      var tierra = topojson.feature(municipiosTopo, {
+        type: 'GeometryCollection',
+        geometries: municipiosTopo.objects.mpios.geometries,
+      });
+
+      let porcentajeMin = Infinity;
+      let porcentajeMax = 0;
+
+      tierra.features = tierra.features.map((d) => {
+        let codigoMunicipio = d.id;
+        let datosMunicipio;
+
+        datosAnticoncepcion[2018].find((departamento) => {
+          const municipio = departamento.municipios.find((municipio) => municipio.codigo === codigoMunicipio);
+
+          if (municipio) {
+            datosMunicipio = municipio;
+            return true;
+          }
+          return false;
+        });
+
+        if (datosMunicipio) {
+          const porcentaje = datosMunicipio.porcentaje;
+          porcentajeMin = porcentajeMin > porcentaje ? porcentaje : porcentajeMin;
+          porcentajeMax = porcentajeMax < porcentaje ? porcentaje : porcentajeMax;
+
+          d.porcentaje = porcentaje;
+          return d;
+        } else {
+          console.log('ERROR', 'No hay datos del municipio', d.properties.name);
+        }
+
+        return d;
+      });
+
+      tierra.features.sort((a, b) => {
+        if (a.porcentaje > b.porcentaje) return -1;
+        if (b.porcentaje > a.porcentaje) return 1;
+
+        return 0;
+      });
+
+      // const porcentajeMax = max(municipios.features, (d) => d.properties.porcentaje);
+      const escalaColor = scaleLinear();
+
+      escalaColor.domain([porcentajeMin, porcentajeMax]).range(['#BEEFED', '#3f5252']);
+
+      const svg = select('svg');
+
       this.actualizarDimension();
 
-      // Seleccionar el elemento 'lienzo' del html
-      const lienzo = document.getElementById('lienzo');
+      var ancho = +svg.attr('width');
+      var alto = +svg.attr('height');
 
-      lienzo.width = this.anchoVentana / 2;
-      lienzo.height = this.alturaVentana;
+      let projection = geoMercator().fitSize([ancho, alto], tierra);
+      // .scale(ancho)
+      // .translate([ancho / 2, alto / 2]);
 
-      // Elegir y configurar la proyección para el mapa
-      const proyeccion = geoNaturalEarth1()
-        // //.rotate([0, -15])
-        .scale(lienzo.width * 1.4)
-        .translate([lienzo.width * 2, lienzo.height / 2]);
+      const path = geoPath().projection(projection);
 
-      // Elegir el contexto
-      const ctx = lienzo.getContext('2d');
-
-      const generadorTrazo = geoPath(proyeccion, ctx);
-
-      //ctx.fillStyle = 'pink';
-      //ctx.fillRect(0, 5, lienzo.width, lienzo.height);
-      const respuesta = await fetch('.');
-      // const datos = await respuesta.json();
-
-      ctx.beginPath();
-      generadorTrazo(municipios);
-      //generadorTrazo(topojson.mesh(datos, datos.objects.mpios));
-      //generadorTrazo(topojson.mesh(datos, datos.objects.depts));
-      ctx.fillStyle = 'yellow';
-      ctx.fill();
-
-      ctx.strokeStyle = 'black';
-      ctx.stroke();
-      // ctx.beginPath();
-      // ctx.lineWidth = '3';
-      // ctx.strokeStyle = 'black';
-      // ctx.moveTo(0, 5);
-      // ctx.lineTo(100, 100);
-      // ctx.stroke();
+      svg
+        .append('g')
+        .selectAll('path')
+        .data(tierra.features)
+        .enter()
+        .append('path')
+        // draw each country
+        .attr('d', path)
+        .on('click', (d, i) => console.log(i))
+        .attr('stroke', 'black')
+        // set the color of each country
+        .attr('fill', (d) => (d.porcentaje ? escalaColor(d.porcentaje) : '#f5f5f5')); //(d) => escalaColor(d.properties.porcentaje));
     },
 
     actualizarDimension() {
       this.anchoVentana = window.innerWidth;
-      this.alturaVentana = window.innerHeight;
+      this.alturaVentana = window.innerHeight * 2;
     },
+
     /***
      * Obtener datos usando a través de una API
      * @param {string} url - url para hacer la petición
@@ -96,30 +157,11 @@ export default {
       });
       return respuesta.json();
     },
-    mostrarDatos(url) {
-      this.obtenerDatos(url).then((data) => {
-        console.log(data);
-      });
-    },
-
-    // onComplete(resultado, archivo) {
-    //   this.datos = resultado;
-    //   console.log(this.datos);
-    // },
-    // leerArchivo() {
-    //   var archivo = '../codigos_division_colombia.csv';
-    //   console.log(archivo)
-    //   this.$papa.parse(archivo, {
-    //     header: true,
-    //     complete: this.onComplete
-    //   });
-    // }
   },
 };
 </script>
 
 <style lang="scss">
 #lienzo {
-  background-color: gray;
 }
 </style>

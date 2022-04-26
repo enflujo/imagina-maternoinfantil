@@ -71,10 +71,4 @@ function estructurarDatos(variable, llave) {
 estructurarDatos(denominador, 'denominador');
 estructurarDatos(numerador, 'numerador')
 
-guardarJSON(datos, 'prueba1')
-
-// for (var i = 0; i < 10; i++) {
-//   if (numerador[i].Anno === denominador[i].Anno && numerador[i].Departamento && numerador[i].Municipio) {
-//     console.log(numerador[i].Municipio + ': ' + (parseInt(numerador[i].Total) / parseInt(denominador[i].Total)) * 100 + '%');
-//   }
-// }
+guardarJSON(datos, 'anticoncepcion')
