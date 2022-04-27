@@ -81,6 +81,30 @@ function proyeccionMercator(punto, zoom, d) {
   }
   return { x, y };
 }
+// https://stackoverflow.com/questions/2103924/mercator-longitude-and-latitude-calculations-to-x-and-y-on-a-cropped-map-of-the
+function convertGeoToPixel(
+  [longitude, latitude],
+  mapWidth = ancho, // in pixels
+  mapHeight = alto, // in pixels
+  mapLngLeft = longitudMin, // in degrees. the longitude of the left side of the map (i.e. the longitude of whatever is depicted on the left-most part of the map image)
+  mapLngRight = longitudMax, // in degrees. the longitude of the right side of the map
+  mapLatBottom = latitudMin
+) {
+  // in degrees.  the latitude of the bottom of the map
+  const mapLatBottomRad = (mapLatBottom * Math.PI) / 180;
+  const latitudeRad = (latitude * Math.PI) / 180;
+  const mapLngDelta = mapLngRight - mapLngLeft;
+
+  const worldMapWidth = ((mapWidth / mapLngDelta) * 360) / (2 * Math.PI);
+  const mapOffsetY = (worldMapWidth / 2) * Math.log((1 + Math.sin(mapLatBottomRad)) / (1 - Math.sin(mapLatBottomRad)));
+
+  const x = (longitude - mapLngLeft) * (mapWidth / mapLngDelta);
+  const y =
+    mapHeight -
+    ((worldMapWidth / 2) * Math.log((1 + Math.sin(latitudeRad)) / (1 - Math.sin(latitudeRad))) - mapOffsetY);
+
+  return { x, y }; // the pixel x,y value of this point on the map image
+}
 
 function dibujarMapa() {
   svg
@@ -94,12 +118,12 @@ function dibujarMapa() {
         grupo.forEach((punto, i) => {
           if (typeof punto[0] === 'object') {
             punto.forEach(puntoMulti => {
-              const coordenadas = proyeccionMercator(puntoMulti, 2, d);
+              const coordenadas = convertGeoToPixel(puntoMulti);
               const cabeza = i === 0 ? 'M' : 'L';
               res += `${cabeza}${coordenadas.x} ${coordenadas.y} `;
             });
           } else {
-            const coordenadas = proyeccionMercator(punto, 2, d);
+            const coordenadas = convertGeoToPixel(punto);
             const cabeza = i === 0 ? 'M' : 'L';
             res += `${cabeza}${coordenadas.x} ${coordenadas.y} `;
 
