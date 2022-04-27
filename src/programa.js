@@ -1,133 +1,133 @@
 import './scss/estilos.scss';
-import { select, scaleThreshold, geoPath, geoMercator, geoAlbersUsa, scaleLinear, max } from 'd3';
-import * as topojson from 'topojson';
+import { select, geoEquirectangular, geoAlbersUsa, scaleLinear, max } from 'd3';
+import municipios from './datos/municipios.json';
+import datosAnticoncepcion from './datos/anticoncepcion.json';
 
-import municipios from '../../datos/MunicipiosVeredas1MB.json';
-import municipiosTopo from '../../datos/colombia-municipios.json';
-import datosAnticoncepcion from '../../pruebas/prueba1.json';
+const menu = document.getElementById('menu');
+const años = [];
+let ancho = 0;
+let alto = 0;
+let porcentajeMin = Infinity;
+let porcentajeMax = 0;
+let añoSeleccionado = '';
+let latitudMin = Infinity;
+let latitudMax = 0;
+let longitudMin = Infinity;
+let longitudMax = 0;
 
-const llaveDepMapa = 'DPTO_CCDGO';
-const llaveCodigoDatos = 'codigo';
-const llaveMunMapa = 'MPIO_CCNCT';
-let anchoVentana = 0;
-let alturaVentana = 0;
+const svg = select('svg');
+const escalaColor = scaleLinear();
+const proyeccion = geoEquirectangular();
 
-async function dibujarMapa() {
-  let dataIndex = {};
-  for (let d of datosAnticoncepcion[2018]) {
-    for (let m of d.municipios) {
-      let codigoMunicipio = m.codigo;
-      dataIndex[codigoMunicipio] = m.porcentaje;
+function crearMenu() {
+  años.forEach(año => {
+    const boton = document.createElement('span');
+    boton.className = 'boton';
+    boton.innerText = año;
+
+    if (año === años[0]) {
+      boton.classList.add('seleccionado');
+      añoSeleccionado = año;
     }
-  }
 
-  // mapear la información
-  municipios.features = municipios.features.map((d) => {
-    let codigoMunicipio = d.properties['DPTOMPIO'];
-    let porcentaje = dataIndex[codigoMunicipio];
-    d.properties.porcentaje = porcentaje;
-    return d;
+    boton.onclick = () => {
+      const botonSeleccionado = document.querySelector('.seleccionado');
+      if (botonSeleccionado.innerText === año) return;
+      botonSeleccionado.classList.remove('seleccionado');
+      boton.classList.add('seleccionado');
+    };
+    menu.appendChild(boton);
   });
+}
 
-  // Obtener las geometrías para luego adaptar el tamaño con fitSize()
-  //let codigoMunicipio =
-  var tierra = topojson.feature(municipiosTopo, {
-    type: 'GeometryCollection',
-    geometries: municipiosTopo.objects.mpios.geometries,
-  });
+function combinarDatos() {
+  municipios.features = municipios.features.map(municipio => {
+    const codigo = municipio.properties.codigo;
+    const datosMunicipio = datosAnticoncepcion.find(datosMun => datosMun.codMun === codigo);
 
-  let porcentajeMin = Infinity;
-  let porcentajeMax = 0;
-
-  tierra.features = tierra.features.map((d) => {
-    let codigoMunicipio = d.id;
-    let datosMunicipio;
-
-    datosAnticoncepcion[2018].find((departamento) => {
-      const municipio = departamento.municipios.find((municipio) => municipio.codigo === codigoMunicipio);
-
-      if (municipio) {
-        datosMunicipio = municipio;
-        return true;
-      }
-      return false;
+    municipio.geometry.coordinates.forEach(area => {
+      area.forEach(punto => {
+        const [longitud, latitud] = punto;
+        longitudMin = longitudMin > longitud ? longitud : longitudMin;
+        longitudMax = longitudMax < longitud ? longitud : longitudMax;
+        latitudMin = latitudMin > latitud ? latitud : latitudMin;
+        latitudMax = latitudMax < latitud ? latitud : latitudMax;
+      });
     });
 
     if (datosMunicipio) {
-      const porcentaje = datosMunicipio.porcentaje;
-      porcentajeMin = porcentajeMin > porcentaje ? porcentaje : porcentajeMin;
-      porcentajeMax = porcentajeMax < porcentaje ? porcentaje : porcentajeMax;
+      for (let año in datosMunicipio.datos) {
+        if (!años.includes(año)) años.push(año);
+        const porcentaje = datosMunicipio.datos[año].porcentaje;
+        porcentajeMin = porcentajeMin > porcentaje ? porcentaje : porcentajeMin;
+        porcentajeMax = porcentajeMax < porcentaje ? porcentaje : porcentajeMax;
+      }
 
-      d.porcentaje = porcentaje;
-      return d;
+      municipio.datos = datosMunicipio.datos;
+      return municipio;
     } else {
-      console.log('ERROR', 'No hay datos del municipio', d.properties.name);
+      console.log('No hay datos de', municipio.properties.nombre);
     }
-
-    return d;
   });
+}
+function proyeccionMercator(punto, zoom, d) {
+  const latitudeToRadians = (punto[1] * Math.PI) / 180;
+  let mercN = Math.log(Math.tan(Math.PI / 4 + latitudeToRadians / 2));
+  const anchoRadianes = (ancho / 360) * zoom;
+  const x = (punto[0] + 180) * anchoRadianes;
+  const y = alto / 2 - (ancho * zoom * mercN) / (2 * Math.PI);
+  if (!x || !y) {
+    console.log(d);
+  }
+  return { x, y };
+}
 
-  tierra.features.sort((a, b) => {
-    if (a.porcentaje > b.porcentaje) return -1;
-    if (b.porcentaje > a.porcentaje) return 1;
-
-    return 0;
-  });
-
-  // const porcentajeMax = max(municipios.features, (d) => d.properties.porcentaje);
-  const escalaColor = scaleLinear();
-
-  escalaColor.domain([porcentajeMin, porcentajeMax]).range(['#BEEFED', '#3f5252']);
-
-  const svg = select('svg');
-
-  this.actualizarDimension();
-
-  var ancho = +svg.attr('width');
-  var alto = +svg.attr('height');
-
-  let projection = geoMercator().fitSize([ancho, alto], tierra);
-  // .scale(ancho)
-  // .translate([ancho / 2, alto / 2]);
-
-  const path = geoPath().projection(projection);
-
+function dibujarMapa() {
   svg
-    .append('g')
     .selectAll('path')
-    .data(tierra.features)
+    .data(municipios.features)
     .enter()
     .append('path')
-    // draw each country
-    .attr('d', path)
-    .on('click', (d, i) => console.log(i))
+    .attr('d', d => {
+      let res = '';
+      d.geometry.coordinates.forEach(grupo => {
+        grupo.forEach((punto, i) => {
+          if (typeof punto[0] === 'object') {
+            punto.forEach(puntoMulti => {
+              const coordenadas = proyeccionMercator(puntoMulti, 2, d);
+              const cabeza = i === 0 ? 'M' : 'L';
+              res += `${cabeza}${coordenadas.x} ${coordenadas.y} `;
+            });
+          } else {
+            const coordenadas = proyeccionMercator(punto, 2, d);
+            const cabeza = i === 0 ? 'M' : 'L';
+            res += `${cabeza}${coordenadas.x} ${coordenadas.y} `;
+
+            if (i === grupo.length - 1) {
+              res += 'Z';
+            }
+          }
+        });
+      });
+      return res;
+    })
     .attr('stroke', 'black')
-    // set the color of each country
-    .attr('fill', (d) => (d.porcentaje ? escalaColor(d.porcentaje) : '#f5f5f5')); //(d) => escalaColor(d.properties.porcentaje));
+    .attr('fill', 'white');
 }
 
 const actualizarDimension = () => {
-  anchoVentana = window.innerWidth;
-  alturaVentana = window.innerHeight * 2;
+  ancho = window.innerWidth;
+  alto = window.innerHeight / 1.3;
+  svg.attr('width', ancho).attr('height', alto);
+
+  escalaColor.domain([porcentajeMin, porcentajeMax]).range(['#BEEFED', '#3f5252']);
+  proyeccion.fitSize([500, 500], municipios);
+
+  dibujarMapa();
 };
 
-/***
- * Obtener datos usando a través de una API
- * @param {string} url - url para hacer la petición
- */
-async function obtenerDatos(url = '') {
-  const respuesta = await fetch(url, {
-    method: 'GET',
-    data: {
-      $$app_token: '3ApcMRIM9OAbaYtZIwOq03uGt',
-    },
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return respuesta.json();
-}
-
-window.addEventListener('resize', dibujarMapa);
-dibujarMapa();
+combinarDatos();
+crearMenu();
+actualizarDimension();
+// window.addEventListener('resize', actualizarDimension);
+// console.log(municipios, porcentajeMax, porcentajeMin, años, latitudMax, latitudMin, longitudMax, longitudMin);

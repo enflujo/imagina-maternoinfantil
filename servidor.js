@@ -8,8 +8,28 @@ const xlsx = require('xlsx');
  * @param {string} nombre Nombre del archivo.
  */
 const guardarJSON = (json, nombre) => {
-  writeFileSync(`./src/datos/${nombre}.json`, JSON.stringify(json, null, 2));
+  writeFileSync(`./src/datos/${nombre}.json`, JSON.stringify(json));
 };
+
+/**
+ * Redondea y reduce el número de decimales de un numero.
+ *
+ * @example
+ * ```js
+ * redondearDecimal(3.1938477402, 2, 5);
+ * ```
+ * @param {number} num Número decimal que se va a transformar.
+ * @param {number} minimo El mínimo de decimales que debe tener el resultado.
+ * @param {number} maximo El máximo de decimales que debe tener el resultado.
+ * @returns {number} Número con decimales reducidos.
+ */
+const redondearDecimal = (num, minimo, maximo) =>
+  Number(
+    new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: minimo,
+      maximumFractionDigits: maximo
+    }).format(num)
+  );
 
 const extraerNombreCodigo = texto => {
   const arr = texto.split('-');
@@ -20,6 +40,7 @@ const extraerNombreCodigo = texto => {
 
 const rutaDenominador = './src/datos/porcentaje_anticoncepcion_denominador.xlsx';
 const rutaNumerador = './src/datos/porcentaje_anticoncepcion_numerador.xlsx';
+const geojson = require('./src/datos/MunicipiosVeredas1MB.json');
 const excelDenominador = xlsx.readFile(rutaDenominador);
 const excelNumerador = xlsx.readFile(rutaNumerador, { header: 1, range: 2 });
 
@@ -69,7 +90,42 @@ function estructurarDatos(datosFuente, llave) {
   });
 }
 
+function reducirGeometria(geometria) {
+  geometria.coordinates = geometria.coordinates.map(bloqueMulti => {
+    return bloqueMulti.map(poly => {
+      return poly.map(punto => {
+        if (typeof punto === 'object') {
+          // Es MultiPolygon, seguir al siguiente nivel.
+          return punto.map(nodo => redondearDecimal(nodo, 2, 5));
+        }
+        // Es Polygon, resolver desde este nivel.
+        return redondearDecimal(punto, 2, 5);
+      });
+    });
+  });
+
+  return geometria;
+}
+
+function limpiarGeojson() {
+  geojson.features = geojson.features
+    .filter(municipio => municipio.geometry)
+    .map(municipio => {
+      return {
+        type: municipio.type,
+        properties: {
+          codigo: municipio.properties.DPTOMPIO,
+          nombre: municipio.properties.MPIO_CNMBR,
+          departamento: municipio.properties.MPIO_CCDGO
+        },
+        geometry: reducirGeometria(municipio.geometry)
+      };
+    });
+}
+
 estructurarDatos(denominador, 'denominador');
 estructurarDatos(numerador, 'numerador');
+limpiarGeojson();
 
 guardarJSON(datos, 'anticoncepcion');
+guardarJSON(geojson, 'municipios');
