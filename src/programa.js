@@ -1,7 +1,6 @@
 import './scss/estilos.scss';
-import { select, geoEquirectangular, geoAlbersUsa, scaleLinear, max, selectAll } from 'd3';
 import procesarDatos from './utilidades/procesarDatos';
-import { aRadianes, mercatorY } from './utilidades/ayudas';
+import { aRadianes, escalaColores, mercatorY } from './utilidades/ayudas';
 
 let ancho = 0;
 let alto = 0;
@@ -9,6 +8,7 @@ let añoSeleccionado = '';
 
 const { municipios, años, porcentajeMin, porcentajeMax, latitudMin, latitudMax, longitudMin, longitudMax } =
   procesarDatos();
+const mapearColor = escalaColores(porcentajeMin, porcentajeMax, '#BEEFED', '#00000');
 
 const sur = aRadianes(latitudMin);
 const norte = aRadianes(latitudMax);
@@ -18,8 +18,6 @@ const yMin = mercatorY(sur);
 const yMax = mercatorY(norte);
 const menu = document.getElementById('menu');
 const contenedor = document.getElementById('contenedorMapa');
-const svg = select('svg');
-const escalaColor = scaleLinear();
 
 function crearMenu() {
   años.forEach((año) => {
@@ -38,7 +36,7 @@ function crearMenu() {
       botonSeleccionado.classList.remove('seleccionado');
       boton.classList.add('seleccionado');
       añoSeleccionado = año;
-      selectAll('svg > *').remove();
+      contenedor.innerHTML = '';
       dibujarMapa();
     };
     menu.appendChild(boton);
@@ -65,48 +63,49 @@ function crearSeccionSvg(punto, cabeza) {
   return `${cabeza}${coordenadas.x} ${coordenadas.y} `;
 }
 
-function dibujarMapa() {
-  svg
-    .selectAll('path')
-    .data(municipios.features)
-    .enter()
-    .append('path')
-    .attr('d', (d) => {
-      let res = '';
-      d.geometry.coordinates.forEach((grupo) => {
-        grupo.forEach((punto, i) => {
-          const cabeza = i === 0 ? 'M' : 'L';
+function crearLinea(coordenadas) {
+  let res = '';
+  coordenadas.forEach((grupo) => {
+    grupo.forEach((punto, i) => {
+      const cabeza = i === 0 ? 'M' : 'L';
 
-          if (typeof punto[0] === 'object') {
-            punto.forEach((puntoMulti) => {
-              res += crearSeccionSvg(puntoMulti, cabeza);
-            });
-          } else {
-            res += crearSeccionSvg(punto, cabeza);
-          }
-
-          res += i === grupo.length - 1 ? 'Z' : '';
+      if (typeof punto[0] === 'object') {
+        punto.forEach((puntoMulti) => {
+          res += crearSeccionSvg(puntoMulti, cabeza);
         });
-      });
-      return res;
-    })
-    // .attr('stroke', 'black')
-    .attr('fill', (d) => (d.datos[añoSeleccionado] ? escalaColor(d.datos[añoSeleccionado].porcentaje) : 'white'));
+      } else {
+        res += crearSeccionSvg(punto, cabeza);
+      }
+
+      res += i === grupo.length - 1 ? 'Z' : '';
+    });
+  });
+  return res;
+}
+
+function dibujarMapa() {
+  municipios.features.forEach((municipio) => {
+    const formaMunicipio = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    formaMunicipio.setAttributeNS(null, 'd', crearLinea(municipio.geometry.coordinates));
+    formaMunicipio.setAttributeNS(
+      null,
+      'fill',
+      municipio.datos[añoSeleccionado] ? mapearColor(municipio.datos[añoSeleccionado].porcentaje) : 'white'
+    );
+
+    contenedor.appendChild(formaMunicipio);
+  });
 }
 
 const actualizarDimension = () => {
-  ancho = window.innerWidth / 1.8;
+  ancho = window.innerWidth;
   alto = window.innerHeight / 1.3;
-  svg.attr('width', ancho).attr('height', alto);
-
-  escalaColor.domain([porcentajeMin, porcentajeMax]).range(['#BEEFED', 'black']);
-
+  contenedor.setAttributeNS(null, 'width', ancho);
+  contenedor.setAttributeNS(null, 'height', alto);
+  contenedor.innerHTML = '';
   dibujarMapa();
 };
 
 crearMenu(años);
 actualizarDimension();
-
-console.log(latitudMin, latitudMax, longitudMin, longitudMax);
-// window.addEventListener('resize', actualizarDimension);
-// console.log(municipios, porcentajeMax, porcentajeMin, años, latitudMax, latitudMin, longitudMax, longitudMin);
+window.addEventListener('resize', actualizarDimension);
