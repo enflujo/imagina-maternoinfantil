@@ -1,5 +1,5 @@
 {
-  "name": "plantilla-vue",
+  "name": "imagina-maternoinfantil",
   "version": "0.0.1",
   "main": "index.js",
   "author": "Juan Camilo González Jiménez <j.gonzalezj@uniandes.edu.co>",
@@ -49,8 +49,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "topojson": "^3.0.2",
-    "vue": "^2.6.14",
     "xlsx": "^0.18.5"
   },
   "nodemonConfig": {
