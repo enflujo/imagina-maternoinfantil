@@ -18,13 +18,13 @@ export const hexARGB = (valor) => {
 };
 
 /**
- * Convierte una escala de valores a una escala de colores y mapea el 
+ * Convierte una escala de valores a una escala de colores y mapea el
  * valor ingresado al color correspondiente.
- * @param {number} valorMin 
- * @param {number} valorMax 
+ * @param {number} valorMin
+ * @param {number} valorMax
  * @param {color} color1 Color inicial de la escala en hexadecimal.
  * @param {color} color2 Color final de la escala en hexadecimal.
- * @returns 
+ * @returns
  */
 export const escalaColores = (valorMin, valorMax, color1, color2) => {
   const [rMin, gMin, bMin] = hexARGB(color1);
