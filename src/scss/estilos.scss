@@ -15,6 +15,10 @@ body {
   padding: 0;
 }
 
+#menu {
+  margin: 1em;
+}
+
 .boton {
   cursor: pointer;
   margin: 1em;
@@ -27,5 +31,25 @@ body {
 
   &.seleccionado {
     background-color: #a6d5cd;
+  }
+}
+
+#contenedorMapa {
+  margin-left: 4em;
+}
+
+#informacion {
+  position: absolute;
+  color: rgb(250, 253, 253);
+  font-size: 0.85em;
+  padding: 0.5em;
+  opacity: 0;
+  transition: opacity 0.23s ease-out;
+  background-color: rgba(64, 45, 100, 0.8);
+  pointer-events: none;
+  transform: translate(-50%, -110%);
+
+  p {
+    margin: 0.3em;
   }
 }
