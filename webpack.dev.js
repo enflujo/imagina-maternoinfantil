@@ -8,7 +8,6 @@ module.exports = merge(base, {
   target: 'web',
   devServer: {
     static: path.join(__dirname, 'docs'),
-    historyApiFallback: true
   },
   module: {
     rules: [
@@ -16,27 +15,24 @@ module.exports = merge(base, {
         test: /\.(css|scss)$/,
         use: [
           {
-            loader: 'vue-style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ['postcss-preset-env', 'autoprefixer']
-              }
-            }
+                plugins: ['postcss-preset-env', 'autoprefixer'],
+              },
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
-  }
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
+  },
 });

@@ -13,22 +13,22 @@ module.exports = merge(base, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ['postcss-preset-env', 'autoprefixer']
-              }
-            }
+                plugins: ['postcss-preset-env', 'autoprefixer'],
+              },
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
   },
-  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin()]
+  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin()],
 });
