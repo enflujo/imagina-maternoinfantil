@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nodemon servidor.js",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack serve --config webpack.dev.js"
+    "start": "webpack serve --config webpack.dev.js",
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write --list-different ."
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -24,6 +26,7 @@
     "postcss": "^8.4.12",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.4",
+    "prettier": "^2.6.2",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",

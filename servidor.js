@@ -27,11 +27,11 @@ const redondearDecimal = (num, minimo, maximo) =>
   Number(
     new Intl.NumberFormat('en-US', {
       minimumFractionDigits: minimo,
-      maximumFractionDigits: maximo
+      maximumFractionDigits: maximo,
     }).format(num)
   );
 
-const extraerNombreCodigo = texto => {
+const extraerNombreCodigo = (texto) => {
   const arr = texto.split('-');
   const codigo = arr[0].trim();
   const nombre = arr[1].trim();
@@ -52,12 +52,12 @@ numerador.pop();
 const datos = [];
 
 function estructurarDatos(datosFuente, llave) {
-  datosFuente.forEach(obj => {
+  datosFuente.forEach((obj) => {
     const { Anno, Departamento, Municipio, Total } = obj;
 
     const municipio = extraerNombreCodigo(Municipio);
     const departamento = extraerNombreCodigo(Departamento);
-    let municipioI = datos.findIndex(mun => mun.codMun === municipio.codigo);
+    let municipioI = datos.findIndex((mun) => mun.codMun === municipio.codigo);
 
     if (municipioI < 0) {
       datos.push({
@@ -65,7 +65,7 @@ function estructurarDatos(datosFuente, llave) {
         codMun: municipio.codigo,
         departamento: departamento.nombre,
         codDep: departamento.codigo,
-        datos: {}
+        datos: {},
       });
 
       municipioI = datos.length - 1;
@@ -75,7 +75,7 @@ function estructurarDatos(datosFuente, llave) {
       datos[municipioI].datos[Anno] = {
         numerador: 0,
         denominador: 0,
-        porcentaje: 0
+        porcentaje: 0,
       };
     }
 
@@ -91,12 +91,12 @@ function estructurarDatos(datosFuente, llave) {
 }
 
 function reducirGeometria(geometria) {
-  geometria.coordinates = geometria.coordinates.map(bloqueMulti => {
-    return bloqueMulti.map(poly => {
-      return poly.map(punto => {
+  geometria.coordinates = geometria.coordinates.map((bloqueMulti) => {
+    return bloqueMulti.map((poly) => {
+      return poly.map((punto) => {
         if (typeof punto === 'object') {
           // Es MultiPolygon, seguir al siguiente nivel.
-          return punto.map(nodo => redondearDecimal(nodo, 2, 5));
+          return punto.map((nodo) => redondearDecimal(nodo, 2, 5));
         }
         // Es Polygon, resolver desde este nivel.
         return redondearDecimal(punto, 2, 5);
@@ -109,16 +109,16 @@ function reducirGeometria(geometria) {
 
 function limpiarGeojson() {
   geojson.features = geojson.features
-    .filter(municipio => municipio.geometry)
-    .map(municipio => {
+    .filter((municipio) => municipio.geometry)
+    .map((municipio) => {
       return {
         type: municipio.type,
         properties: {
           codigo: municipio.properties.DPTOMPIO,
           nombre: municipio.properties.MPIO_CNMBR,
-          departamento: municipio.properties.MPIO_CCDGO
+          departamento: municipio.properties.MPIO_CCDGO,
         },
-        geometry: reducirGeometria(municipio.geometry)
+        geometry: reducirGeometria(municipio.geometry),
       };
     });
 }
