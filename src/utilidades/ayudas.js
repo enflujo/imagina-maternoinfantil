@@ -17,10 +17,22 @@ export const hexARGB = (valor) => {
   return rgb;
 };
 
+/**
+ * Convierte una escala de valores a una escala de colores y mapea el 
+ * valor ingresado al color correspondiente.
+ * @param {number} valorMin 
+ * @param {number} valorMax 
+ * @param {color} color1 Color inicial de la escala en hexadecimal.
+ * @param {color} color2 Color final de la escala en hexadecimal.
+ * @returns 
+ */
 export const escalaColores = (valorMin, valorMax, color1, color2) => {
   const [rMin, gMin, bMin] = hexARGB(color1);
   const [rMax, gMax, bMax] = hexARGB(color2);
 
+  /**
+   * @param {number} valor Valor que va a ser mapeado a la escala de color
+   */
   return (valor) => {
     const r = mapear(valor, valorMin, valorMax, rMin, rMax);
     const g = mapear(valor, valorMin, valorMax, gMin, gMax);
@@ -29,6 +41,9 @@ export const escalaColores = (valorMin, valorMax, color1, color2) => {
   };
 };
 
+/**
+ * Proyecta un punto en coordenadas a pixeles.
+ */
 export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   const sur = aRadianes(latitudMin);
   const norte = aRadianes(latitudMax);

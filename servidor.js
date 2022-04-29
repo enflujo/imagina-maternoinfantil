@@ -51,6 +51,12 @@ numerador.pop();
 
 const datos = [];
 
+/**
+ * Toma datos en formato json y los agrega a un array `datos` para combinar distintas
+ * variables y fuentes en una sola estructura de datos.
+ * @param {json} datosFuente Datos originales.
+ * @param {string} llave Nombre de los nuevos datos que se agregan.
+ */
 function estructurarDatos(datosFuente, llave) {
   datosFuente.forEach((obj) => {
     const { Anno, Departamento, Municipio, Total } = obj;
@@ -116,7 +122,7 @@ function limpiarGeojson() {
         properties: {
           codigo: municipio.properties.DPTOMPIO,
           nombre: municipio.properties.MPIO_CNMBR,
-          departamento: municipio.properties.MPIO_CCDGO,
+          departamento: municipio.properties.DPTO_CCDGO,
         },
         geometry: reducirGeometria(municipio.geometry),
       };
