@@ -52,8 +52,13 @@ numerador.pop();
 const datos = [];
 
 /**
- * Toma datos en formato json y los agrega a un array `datos` para combinar distintas
- * variables y fuentes en una sola estructura de datos.
+ * Agrega al objeto `datos` la información de un archivo .json y su respectiva llave. 
+ * Se usa para combinar en una sola estructura el total de personas que 
+ * asistieron a consultas médicas y el número de personas que consultaron por 
+ * anticoncepción por año y municipio. Con esos datos calcula el 
+ * porcentaje = `(numerador / denominador) * 100` es decir, 
+ * (consultas-por-anticoncepcion / consultas-totales) * 100, y agrega esa 
+ * variable a la estructura de los datos.
  * @param {json} datosFuente Datos originales.
  * @param {string} llave Nombre de los nuevos datos que se agregan.
  */

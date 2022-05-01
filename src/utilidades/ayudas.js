@@ -20,8 +20,8 @@ export const hexARGB = (valor) => {
 /**
  * Convierte una escala de valores a una escala de colores y mapea el
  * valor ingresado al color correspondiente.
- * @param {number} valorMin
- * @param {number} valorMax
+ * @param {number} valorMin Valor mínimo de la escala que se quiere mapear.
+ * @param {number} valorMax Valor máximo de la escala que se quiere mapear.
  * @param {color} color1 Color inicial de la escala en hexadecimal.
  * @param {color} color2 Color final de la escala en hexadecimal.
  * @returns
@@ -31,7 +31,7 @@ export const escalaColores = (valorMin, valorMax, color1, color2) => {
   const [rMax, gMax, bMax] = hexARGB(color2);
 
   /**
-   * @param {number} valor Valor que va a ser mapeado a la escala de color
+   * @param {number} valor Cualquier número de la escala que se quiere mapear.
    */
   return (valor) => {
     const r = mapear(valor, valorMin, valorMax, rMin, rMax);
@@ -42,7 +42,7 @@ export const escalaColores = (valorMin, valorMax, color1, color2) => {
 };
 
 /**
- * Proyecta un punto en coordenadas a pixeles.
+ * Proyecta un punto de coordenadas a pixeles.
  */
 export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   const sur = aRadianes(latitudMin);
@@ -54,7 +54,7 @@ export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudM
 
   // https://stackoverflow.com/questions/41557891/convert-lat-long-to-x-y-position-within-a-bounding-box
   /**
-   * Proyección de un punto en coordenadas a pixeles
+   * Proyección de un punto de coordenadas a pixeles
    *
    * @param {array} punto Punto en formato [longitud, latitud]
    * @param {number} ancho Ancho del mapa en pixeles
