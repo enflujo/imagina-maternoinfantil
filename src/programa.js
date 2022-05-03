@@ -50,7 +50,7 @@ function crearSeccionSvg(punto, cabeza) {
 
 /**
  * Averigua si cada `grupo` de coordenadas es un polígono o un multipolígono y a la
- * variable `res` (respuesta), que contiene los datos de los SVG, le agrega la 
+ * variable `res` (respuesta), que contiene los datos de los SVG, le agrega la
  * ubicación de cada punto y sus líneas conectoras.
  *
  * `M` = _moveTo_ (Inicio del _path_. `M{punto.x} {punto.y}`)
