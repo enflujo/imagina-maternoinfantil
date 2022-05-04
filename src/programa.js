@@ -48,6 +48,19 @@ function crearSeccionSvg(punto, cabeza) {
   return `${cabeza}${coordenadas.x} ${coordenadas.y} `;
 }
 
+/**
+ * Averigua si cada `grupo` de coordenadas es un polígono o un multipolígono y a la
+ * variable `res` (respuesta), que contiene los datos de los SVG, le agrega la
+ * ubicación de cada punto y sus líneas conectoras.
+ *
+ * `M` = _moveTo_ (Inicio del _path_. `M{punto.x} {punto.y}`)
+ *
+ * `L` = _lineTo_ (Punto de una línea. `Lpunto.x} {punto.y}`)
+ *
+ * `Z` = _closePath_ (Fin del _path_. `Z`)
+ * @param {Object} coordenadas Array de coordenadas
+ * @returns res contiene los datos de los elementos SVG<path>
+ */
 function crearLinea(coordenadas) {
   let res = '';
   coordenadas.forEach((grupo) => {
@@ -68,6 +81,10 @@ function crearLinea(coordenadas) {
   return res;
 }
 
+/**
+ * Dibuja el mapa haciendo un _append_ de las formas SVG y lo colorea
+ * según una escala cromática que corresponde a una escala de valores de los datos.
+ */
 function dibujarMapa() {
   municipios.features.forEach((municipio) => {
     const formaMunicipio = document.createElementNS('http://www.w3.org/2000/svg', 'path');
