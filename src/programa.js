@@ -1,9 +1,11 @@
 import './scss/estilos.scss';
 import procesarDatos from './utilidades/procesarDatos';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
+import { convertirEscala } from '@enflujo/alquimia';
 
 const menu = document.getElementById('menu');
 const contenedor = document.getElementById('contenedorMapa');
+
 const informacion = document.getElementById('informacion');
 const infoMun = informacion.querySelector('#municipio');
 const infoNum = informacion.querySelector('#numerador');
@@ -143,3 +145,15 @@ contenedor.onmousemove = (evento) => {
     left: `${evento.pageX}px`,
   });
 };
+
+const contenedorPrueba = document.getElementById('graficas');
+const detalle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+detalle.setAttributeNS(null, 'width', window.innerWidth / 2);
+detalle.setAttributeNS(null, 'height', window.innerHeight / 2);
+
+const medellin = municipios.features[0];
+console.log(medellin);
+
+contenedorPrueba.appendChild(detalle);
+
+console.log(convertirEscala(50, 0, 100, 100, 200));
