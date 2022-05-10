@@ -1,7 +1,8 @@
+import { convertirEscala } from '@enflujo/alquimia';
+
 export const PI_CUARTO = Math.PI / 4;
 export const aRadianes = (grados) => (grados * Math.PI) / 180;
 export const mercatorY = (latitud) => Math.log(Math.tan(latitud / 2 + PI_CUARTO));
-export const mapear = (valor, x1, y1, x2, y2) => ((valor - x1) * (y2 - x2)) / (y1 - x1) + x2;
 
 export const hexARGB = (valor) => {
   valor = valor.includes('#') ? valor.replace('#', '') : valor;
@@ -34,9 +35,9 @@ export const escalaColores = (valorMin, valorMax, color1, color2) => {
    * @param {number} valor Cualquier número de la escala que se quiere mapear.
    */
   return (valor) => {
-    const r = mapear(valor, valorMin, valorMax, rMin, rMax);
-    const g = mapear(valor, valorMin, valorMax, gMin, gMax);
-    const b = mapear(valor, valorMin, valorMax, bMin, bMax);
+    const r = convertirEscala(valor, valorMin, valorMax, rMin, rMax);
+    const g = convertirEscala(valor, valorMin, valorMax, gMin, gMax);
+    const b = convertirEscala(valor, valorMin, valorMax, bMin, bMax);
     return `rgb(${r},${g},${b})`;
   };
 };

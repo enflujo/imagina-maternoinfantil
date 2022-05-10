@@ -1,8 +1,4 @@
-import municipios from '../datos/municipios.json';
-import datosAnticoncepcion from '../datos/anticoncepcion.json';
-
-export default () => {
-  const años = [];
+export default (municipios, fuente) => {
   let porcentajeMin = Infinity;
   let porcentajeMax = -Infinity;
   let latitudMin = Infinity;
@@ -12,7 +8,17 @@ export default () => {
 
   municipios.features = municipios.features.map((municipio) => {
     const codigo = municipio.properties.codigo;
-    const datosMunicipio = datosAnticoncepcion.find((datosMun) => datosMun.codMun === codigo);
+    let datosMunicipio;
+    // Acá están disponibles los datos de departamento para cuando se necesite mapear info a nivel departamental.
+    const datosDepartamento = fuente.find((datosDep) => {
+      const municipio = datosDep.municipios.find((datosMun) => datosMun.mun === codigo);
+
+      if (municipio) {
+        datosMunicipio = municipio;
+        return true;
+      }
+      return false;
+    });
 
     municipio.geometry.coordinates.forEach((area) => {
       area.forEach((punto) => {
@@ -25,19 +31,18 @@ export default () => {
     });
 
     if (datosMunicipio) {
-      for (let año in datosMunicipio.datos) {
-        if (!años.includes(año)) años.push(año);
-        const porcentaje = datosMunicipio.datos[año].porcentaje;
+      for (let año in datosMunicipio.agregados) {
+        const porcentaje = datosMunicipio.agregados[año][2];
         porcentajeMin = porcentajeMin > porcentaje ? porcentaje : porcentajeMin;
         porcentajeMax = porcentajeMax < porcentaje ? porcentaje : porcentajeMax;
       }
 
-      municipio.datos = datosMunicipio.datos;
-      return municipio;
+      municipio.datos = datosMunicipio.agregados;
     } else {
-      console.log('No hay datos de', municipio.properties.nombre);
+      // console.log('No hay datos de', municipio.properties.nombre);
     }
+    return municipio;
   });
 
-  return { municipios, años, porcentajeMin, porcentajeMax, latitudMin, latitudMax, longitudMin, longitudMax };
+  return { municipios, porcentajeMin, porcentajeMax, latitudMin, latitudMax, longitudMin, longitudMax };
 };
