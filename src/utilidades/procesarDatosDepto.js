@@ -8,7 +8,7 @@ export default (departamentos, fuente) => {
 
   departamentos.features = departamentos.features.map((departamento) => {
     const codigo = departamento.properties.codigo;
-    const datosDepartamento = fuente.find(depObj => codigo === depObj.dep);
+    const datosDepartamento = fuente.find((depObj) => codigo === depObj.dep);
 
     departamento.geometry.coordinates.forEach((area) => {
       area.forEach((punto) => {
