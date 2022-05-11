@@ -40,7 +40,8 @@ const extraerNombreCodigo = (texto) => {
 
 const rutaDenominador = './src/datos/porcentaje_anticoncepcion_denominador.xlsx';
 const rutaNumerador = './src/datos/porcentaje_anticoncepcion_numerador.xlsx';
-const geojson = require('./src/datos/MunicipiosVeredas1MB.json');
+const municipiosGeoJson = require('./src/datos/MunicipiosVeredas1MB.json');
+const departamentosGeoJson = require('./src/datos/departamentosFuente.json');
 const excelDenominador = xlsx.readFile(rutaDenominador);
 const excelNumerador = xlsx.readFile(rutaNumerador, { header: 1, range: 2 });
 
@@ -119,7 +120,7 @@ function reducirGeometria(geometria) {
 }
 
 function limpiarGeojson() {
-  geojson.features = geojson.features
+  municipiosGeoJson.features = municipiosGeoJson.features
     .filter((municipio) => municipio.geometry)
     .map((municipio) => {
       return {
@@ -132,11 +133,26 @@ function limpiarGeojson() {
         geometry: reducirGeometria(municipio.geometry),
       };
     });
+
+  departamentosGeoJson.features = departamentosGeoJson.features
+    .filter((departamento) => departamento.geometry)
+    .map((departamento) => {
+      return {
+        type: departamento.type,
+        properties: {
+          codigo: departamento.properties.DPTO,
+          nombre: departamento.properties.NOMBRE_DPT,
+        },
+        geometry: reducirGeometria(departamento.geometry),
+      };
+    });
 }
 
-estructurarDatos(denominador, 'denominador');
-estructurarDatos(numerador, 'numerador');
+// estructurarDatos(denominador, 'denominador');
+// estructurarDatos(numerador, 'numerador');
 limpiarGeojson();
+// const departamentosGeo = limpiarGeojson(municipiosGeoJson);
 
 guardarJSON(datos, 'anticoncepcion');
-guardarJSON(geojson, 'municipios');
+guardarJSON(municipiosGeoJson, 'municipios');
+guardarJSON(departamentosGeoJson, 'departamentos');
