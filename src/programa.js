@@ -1,10 +1,13 @@
 import './scss/estilos.scss';
 import procesarDatos from './utilidades/procesarDatos';
+import procesarDatosDepto from './utilidades/procesarDatosDepto';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
 import fuentes from './utilidades/fuentes';
 
 const menu = document.getElementById('menu');
-const contenedor = document.getElementById('contenedorMapa');
+const menuDeptos = document.getElementById('menuDeptos');
+const contenedorDeptos = document.getElementById('contenedorMapaDeptos');
+const contenedorMun = document.getElementById('contenedorMapaMun');
 
 const informacion = document.getElementById('informacion');
 const infoMun = informacion.querySelector('#municipio');
@@ -12,6 +15,7 @@ const infoNum = informacion.querySelector('#numerador');
 const infoDen = informacion.querySelector('#denominador');
 const infoPor = informacion.querySelector('#porcentaje');
 const descIndicador = document.getElementById('descripcionIndicador');
+const descIndicadorDeptos = document.getElementById('descripcionIndicadorDeptos');
 
 let ancho = 0;
 let alto = 0;
@@ -26,31 +30,38 @@ async function cargarDatos(nombreArchivo) {
 
 async function inicio() {
   const datosMunicipios = await cargarDatos('municipios');
+  const datosDepartamentos = await cargarDatos('departamentos');
   // Cambiar el indice acá para cargar indicadores, va de 0 a 27.
   // indice 1 es 'nacidos vivos bajo peso' (ver utilidades/fuentes.js)
-  const fuenteNombre = Object.keys(fuentes)[1];
+  const fuenteNombre = Object.keys(fuentes)[2];
   descIndicador.innerText = fuentes[fuenteNombre].descripcion;
+  descIndicadorDeptos.innerText = fuentes[fuenteNombre].descripcion;
   const fuente = await cargarDatos(fuenteNombre);
-  const { municipios, porcentajeMin, porcentajeMax, latitudMin, latitudMax, longitudMin, longitudMax } = procesarDatos(
-    datosMunicipios,
-    fuente
-  );
+
+  const { departamentos, porcentajeMin, porcentajeMax, latitudMin, latitudMax, longitudMin, longitudMax } =
+    procesarDatosDepto(datosDepartamentos, fuente);
+
+  const { municipios } = procesarDatos(datosMunicipios, fuente);
 
   crearMenu(Object.keys(fuente[0].agregados), municipios);
-  mapearColor = escalaColores(porcentajeMin, porcentajeMax, '#BEEFED', '#000');
+  crearMenuDeptos(Object.keys(fuente[0].agregados), departamentos);
+  mapearColor = escalaColores(porcentajeMin, porcentajeMax, '#BEEFED', '#0042BF');
   mapearCoordenadas = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
 
   actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
-  dibujarMapa(municipios);
+  dibujarMapa(municipios, 'municipios');
+  dibujarMapa(departamentos, 'departamentos');
+
   window.addEventListener('resize', () => {
     actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
-    dibujarMapa(municipios);
+    dibujarMapa(municipios, 'municipios');
+    dibujarMapa(departamentos, 'departamentos');
   });
 }
 
 inicio();
 
-function crearMenu(años, municipios) {
+function crearMenuDeptos(años, departamentos) {
   años.forEach((año) => {
     const boton = document.createElement('span');
     boton.className = 'boton';
@@ -67,8 +78,32 @@ function crearMenu(años, municipios) {
       botonSeleccionado.classList.remove('seleccionado');
       boton.classList.add('seleccionado');
       añoSeleccionado = año;
-      contenedor.innerHTML = '';
-      dibujarMapa(municipios);
+      contenedorDeptos.innerHTML = '';
+      dibujarMapa(departamentos, 'departamentos');
+    };
+    menuDeptos.appendChild(boton);
+  });
+}
+
+function crearMenu(años, municipos) {
+  años.forEach((año) => {
+    const boton = document.createElement('span');
+    boton.className = 'boton';
+    boton.innerText = año;
+
+    /* if (año === años[0]) {
+      boton.classList.add('seleccionado');
+      añoSeleccionado = año;
+    } */
+
+    boton.onclick = () => {
+      const botonSeleccionado = document.querySelector('.seleccionado');
+      if (botonSeleccionado.innerText === año) return;
+      botonSeleccionado.classList.remove('seleccionado');
+      boton.classList.add('seleccionado');
+      añoSeleccionado = año;
+      contenedorMun.innerHTML = '';
+      dibujarMapa(municipos, 'municipios');
     };
     menu.appendChild(boton);
   });
@@ -116,7 +151,7 @@ function crearLinea(coordenadas) {
  * Dibuja el mapa haciendo un _append_ de las formas SVG y lo colorea
  * según una escala cromática que corresponde a una escala de valores de los datos.
  */
-function dibujarMapa(municipios) {
+function dibujarMapa(municipios, division) {
   municipios.features.forEach((municipio) => {
     const formaMunicipio = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     formaMunicipio.setAttributeNS(null, 'd', crearLinea(municipio.geometry.coordinates));
@@ -125,7 +160,6 @@ function dibujarMapa(municipios) {
       const [numerador, denominador, porcentaje] = municipio.datos[añoSeleccionado];
       const color = mapearColor(porcentaje);
       formaMunicipio.setAttributeNS(null, 'fill', color);
-
       formaMunicipio.onmouseenter = () => {
         informacion.style.opacity = 1;
         infoMun.innerText = municipio.properties.nombre;
@@ -138,14 +172,20 @@ function dibujarMapa(municipios) {
         informacion.style.opacity = 0;
       };
 
-      contenedor.appendChild(formaMunicipio);
+      // Según la división, pinta el mapa en un contenedor distinto
+      if (division === 'departamentos') {
+        contenedorDeptos.appendChild(formaMunicipio);
+      }
+      if (division === 'municipios') {
+        contenedorMun.appendChild(formaMunicipio);
+      }
     }
   });
 }
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   ancho = window.innerWidth;
-  alto = window.innerHeight / 1.3;
+  alto = window.innerHeight / 1.4;
 
   const coordenadasAncho = longitudMax - longitudMin;
   const coordenadasAlto = latitudMax - latitudMin;
@@ -159,13 +199,24 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   ancho = ancho | 0;
   alto = alto | 0;
 
-  contenedor.setAttributeNS(null, 'width', ancho);
-  contenedor.setAttributeNS(null, 'height', alto);
+  contenedorMun.setAttributeNS(null, 'width', ancho);
+  contenedorMun.setAttributeNS(null, 'height', alto);
 
-  contenedor.innerHTML = '';
+  contenedorDeptos.setAttributeNS(null, 'width', ancho);
+  contenedorDeptos.setAttributeNS(null, 'height', alto);
+
+  contenedorMun.innerHTML = '';
+  contenedorDeptos.innerHTML = '';
 };
 
-contenedor.onmousemove = (evento) => {
+contenedorMun.onmousemove = (evento) => {
+  Object.assign(informacion.style, {
+    top: `${evento.pageY}px`,
+    left: `${evento.pageX}px`,
+  });
+};
+
+contenedorDeptos.onmousemove = (evento) => {
   Object.assign(informacion.style, {
     top: `${evento.pageY}px`,
     left: `${evento.pageX}px`,
