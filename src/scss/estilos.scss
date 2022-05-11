@@ -97,30 +97,31 @@ h2 {
 .titulo {
   font-family: $fuenteTitulos;
   font-size: 2em;
-  width: 60%;
   margin-left: 10%;
   padding-top: 10%;
+}
+
+.tituloPrincipal {
+  width: 60%;
 }
 
 .subtitulo {
   font-family: $fuenteTexto;
   font-weight: 300;
-  width: 40%;
   margin-left: 10%;
   padding-left: 2%;
-  font-size: 1em;
   border-left: white;
   border-left-style: solid;
   border-width: 3px;
 }
 
-#subtituloColor {
+.subtituloColor {
   border-left: $colorTexto;
   border-left-style: solid;
   border-width: 3px;
 }
 
-#tituloMapas {
+.tituloMapas {
   padding-top: 6%;
 }
 
@@ -143,7 +144,7 @@ h2 {
 
 .boton {
   cursor: pointer;
-  margin: 1em;
+  margin: 0.5em;
   border: 1px dotted;
   padding: 0.3em;
   font-family: $fuenteTexto;
@@ -156,14 +157,6 @@ h2 {
   &.seleccionado {
     background-color: rgba(239, 100, 97, 0.3);
   }
-}
-
-#contenedorMapaMun {
-  // margin-left: 6em;
-}
-
-#contenedorMapaDeptos {
-  // margin-left: 6em;
 }
 
 #informacion {
@@ -186,10 +179,21 @@ h2 {
 #graficas {
   display: flex;
   margin-left: 15%;
+  margin-top: 2em;
 }
 
 .menuAños {
+  display: flex;
+  flex-wrap: wrap;
   margin-left: 10%;
   margin-bottom: 6%;
   margin-top: 3%;
+}
+
+.descripcion {
+  flex: 0.6;
+}
+
+.seccion {
+  display: flex;
 }

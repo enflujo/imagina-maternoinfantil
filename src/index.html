@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="titulo">
+      <div class="titulo tituloPrincipal">
         <h1>¿QUÉ PASA CON LA SALUD MATERNO INFANTIL EN COLOMBIA?</h1>
       </div>
       <div class="subtitulo">
@@ -35,13 +35,13 @@
 
     <div id="separador"></div>
 
-    <div id="pantallaColombia">
-      <div id="tituloMapas" class="titulo">
-        <h2>Indicadores por departamentos</h2>
-      </div>
-      <div class="subtitulo" id="subtituloColor"><h3 id="descripcionIndicadorDeptos"></h3></div>
+    <div id="pantallaColombia" class="seccion">
+      <div class="descripcion">
+        <h2 class="titulo tituloMapas">Indicadores por departamentos</h2>
+        <h3 id="descripcionIndicadorDeptos" class="subtitulo subtituloColor"></h3>
 
-      <div id="menuDeptos" class="menuAños"></div>
+        <div id="menuDeptos" class="menuAños"></div>
+      </div>
 
       <div id="informacion">
         <p id="municipio"></p>
@@ -50,21 +50,18 @@
         <p id="denominador"></p>
         <p id="porcentaje"></p>
       </div>
+
       <div id="graficas">
         <svg id="contenedorMapaDeptos"></svg>
       </div>
     </div>
 
-    <div id="pantallaMunicipios">
-      <div class="titulo" id="tituloMapas">
-        <h2>Indicadores por municipios</h2>
+    <div id="pantallaMunicipios" class="seccion">
+      <div class="descripcion">
+        <h2 class="titulo tituloMapas">Indicadores por municipios</h2>
+        <h3 id="descripcionIndicador" class="subtitulo subtituloColor"></h3>
+        <div id="menu" class="menuAños"></div>
       </div>
-      <div class="subtitulo" id="subtituloColor">
-        <h3 id="descripcionIndicador"></h3>
-      </div>
-      <div id="menu" class="menuAños"></div>
-
-      <div id="filtros"></div>
 
       <div id="informacion">
         <p id="municipio"></p>
@@ -73,6 +70,7 @@
         <p id="denominador"></p>
         <p id="porcentaje"></p>
       </div>
+
       <div id="graficas">
         <svg id="contenedorMapaMun"></svg>
       </div>
