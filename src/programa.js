@@ -3,9 +3,7 @@ import procesarDatos from './utilidades/procesarDatos';
 import procesarDatosDepto from './utilidades/procesarDatosDepto';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
 import fuentes from './utilidades/fuentes';
-import { doc } from 'prettier';
 
-import home from './assets/images/home.png';
 const menu = document.getElementById('menu');
 const menuDeptos = document.getElementById('menuDeptos');
 const contenedorDeptos = document.getElementById('contenedorMapaDeptos');

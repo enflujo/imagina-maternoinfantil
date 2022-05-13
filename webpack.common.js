@@ -4,10 +4,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/programa.js',
   output: {
-    path: path.resolve(__dirname, `./docs`),
+    path: path.resolve(__dirname, `./publico`),
     filename: '[name].[fullhash].js',
     chunkFilename: '[name].[fullhash].js',
-    assetModuleFilename: 'src/assets/images/[name].[ext]',
   },
   module: {
     rules: [
@@ -20,11 +19,15 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        use: ['file-loader'],
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },
