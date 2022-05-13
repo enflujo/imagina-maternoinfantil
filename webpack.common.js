@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, `./docs`),
     filename: '[name].[fullhash].js',
     chunkFilename: '[name].[fullhash].js',
+    assetModuleFilename: 'src/assets/images/[name].[ext]',
   },
   module: {
     rules: [
@@ -19,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        type: 'asset/resource',
+        use: ['file-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

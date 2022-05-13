@@ -3,7 +3,9 @@ import procesarDatos from './utilidades/procesarDatos';
 import procesarDatosDepto from './utilidades/procesarDatosDepto';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
 import fuentes from './utilidades/fuentes';
+import { doc } from 'prettier';
 
+import home from './assets/images/home.png';
 const menu = document.getElementById('menu');
 const menuDeptos = document.getElementById('menuDeptos');
 const contenedorDeptos = document.getElementById('contenedorMapaDeptos');
@@ -234,3 +236,58 @@ contenedorDeptos.onmousemove = (evento) => {
 // contenedorPrueba.appendChild(detalle);
 
 // console.log(convertirEscala(50, 0, 100, 100, 200));
+
+// Galería ******
+
+const galeria = document.getElementById('galeria');
+const contenedorGaleria = document.getElementById('contenedorGaleria');
+const contenedorImagen = document.getElementById('contenedorImagen');
+const urlImagenes = [
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
+  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
+];
+let urImagenSeleccionada = '';
+
+function crearGaleria() {
+  for (var i = 0; i < urlImagenes.length; i++) {
+    const elemento = document.createElement('div');
+    // Agregar imagen al div
+    const imagen = new Image();
+    imagen.classList.add('imagen');
+    imagen.id = `${i}`;
+    imagen.src = urlImagenes[i];
+
+    elemento.appendChild(imagen);
+    galeria.appendChild(elemento);
+
+    imagen.onclick = () => {
+      const imagenAbierta = document.getElementById('abierta');
+      if (imagenAbierta) {
+        contenedorImagen.removeChild(imagenAbierta);
+      }
+      urImagenSeleccionada = imagen.src;
+      contenedorGaleria.classList.add('abierto');
+      abrirGaleria();
+    };
+  }
+}
+
+function abrirGaleria() {
+  const imagenAbierta = new Image();
+  imagenAbierta.id = 'abierta';
+  imagenAbierta.src = urImagenSeleccionada;
+  contenedorImagen.appendChild(imagenAbierta);
+
+  imagenAbierta.onclick = () => {
+    contenedorImagen.removeChild(imagenAbierta);
+    contenedorGaleria.classList.remove('abierto');
+  };
+}
+crearGaleria();
