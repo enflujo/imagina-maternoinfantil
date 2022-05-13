@@ -4,6 +4,13 @@ import procesarDatosDepto from './utilidades/procesarDatosDepto';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
 import fuentes from './utilidades/fuentes';
 
+// Importar imágenes para galería
+import img1 from './imgs/1_4Home_2.png';
+import img2 from './imgs/2_3home y mapa colombia.png';
+import img3 from './imgs/3_3departamentos 1.png';
+import img4 from './imgs/4_3departamentos 2.png';
+import img5 from './imgs/5_3Buscador comparador general.png';
+
 const menu = document.getElementById('menu');
 const menuDeptos = document.getElementById('menuDeptos');
 const contenedorDeptos = document.getElementById('contenedorMapaDeptos');
@@ -234,3 +241,92 @@ contenedorDeptos.onmousemove = (evento) => {
 // contenedorPrueba.appendChild(detalle);
 
 // console.log(convertirEscala(50, 0, 100, 100, 200));
+
+// Galería ******
+
+const galeria = document.getElementById('galeria');
+const contenedorGaleria = document.getElementById('contenedorGaleria');
+const contenedorImagen = document.getElementById('contenedorImagen');
+const urlImagenes = [img1, img2, img3, img4, img5];
+let imagenSeleccionada = 0;
+
+function crearGaleria() {
+  for (let i = 0; i < urlImagenes.length; i++) {
+    const elemento = document.createElement('div');
+    // Agregar imagen al div
+    const imagen = new Image();
+
+    imagen.classList.add('imagen');
+    imagen.id = `${i}`;
+    imagen.src = urlImagenes[i];
+
+    elemento.appendChild(imagen);
+    galeria.appendChild(elemento);
+
+    imagen.onclick = () => {
+      const imagenAbierta = document.getElementById('abierta');
+      if (imagenAbierta) {
+        contenedorImagen.removeChild(imagenAbierta);
+      }
+      imagenSeleccionada = parseInt(imagen.id);
+      contenedorGaleria.classList.add('abierto');
+      ampliarImagen(urlImagenes[imagenSeleccionada]);
+    };
+  }
+}
+
+function ampliarImagen(urlImagen) {
+  const imagenAbierta = new Image();
+  imagenAbierta.src = urlImagen;
+  contenedorImagen.appendChild(imagenAbierta);
+  contenedorImagen.classList.add('abierto');
+
+  const flechaDerecha = document.createElement('div');
+  const flechaIzquierda = document.createElement('div');
+  flechaDerecha.id = 'flechaDerecha';
+  flechaDerecha.innerText = '>';
+  flechaIzquierda.id = 'flechaIzquierda';
+  flechaIzquierda.innerText = '<';
+
+  contenedorImagen.appendChild(flechaDerecha);
+  contenedorImagen.appendChild(flechaIzquierda);
+
+  imagenAbierta.onclick = () => {
+    contenedorImagen.removeChild(imagenAbierta);
+    contenedorImagen.removeChild(flechaDerecha);
+    contenedorImagen.removeChild(flechaIzquierda);
+    contenedorGaleria.classList.remove('abierto');
+    contenedorImagen.classList.remove('abierto');
+  };
+
+  flechaDerecha.onclick = () => {
+    if (imagenSeleccionada < urlImagenes.length - 1) {
+      flechaIzquierda.style.visibility = 'visible';
+      contenedorImagen.removeChild(imagenAbierta);
+      imagenSeleccionada += 1;
+      imagenAbierta.src = urlImagenes[imagenSeleccionada];
+      contenedorImagen.appendChild(imagenAbierta);
+      if (imagenSeleccionada === urlImagenes.length - 1) {
+        flechaDerecha.style.visibility = 'hidden';
+      }
+    } else {
+      return;
+    }
+  };
+
+  flechaIzquierda.onclick = () => {
+    if (imagenSeleccionada > 0) {
+      flechaDerecha.style.visibility = 'visible';
+      contenedorImagen.removeChild(imagenAbierta);
+      imagenSeleccionada -= 1;
+      imagenAbierta.src = urlImagenes[imagenSeleccionada];
+      contenedorImagen.appendChild(imagenAbierta);
+      if (imagenSeleccionada === 0) {
+        flechaIzquierda.style.visibility = 'hidden';
+      }
+    } else {
+      return;
+    }
+  };
+}
+crearGaleria();

@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/programa.js',
   output: {
-    path: path.resolve(__dirname, `./docs`),
+    path: path.resolve(__dirname, `./publico`),
     filename: '[name].[fullhash].js',
     chunkFilename: '[name].[fullhash].js',
   },
@@ -24,6 +24,10 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },
