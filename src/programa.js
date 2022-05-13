@@ -4,6 +4,13 @@ import procesarDatosDepto from './utilidades/procesarDatosDepto';
 import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
 import fuentes from './utilidades/fuentes';
 
+// Importar imágenes para galería
+import img1 from './imgs/1_4Home_2.png';
+import img2 from './imgs/2_3home y mapa colombia.png';
+import img3 from './imgs/3_3departamentos 1.png';
+import img4 from './imgs/4_3departamentos 2.png';
+import img5 from './imgs/5_3Buscador comparador general.png';
+
 const menu = document.getElementById('menu');
 const menuDeptos = document.getElementById('menuDeptos');
 const contenedorDeptos = document.getElementById('contenedorMapaDeptos');
@@ -240,24 +247,15 @@ contenedorDeptos.onmousemove = (evento) => {
 const galeria = document.getElementById('galeria');
 const contenedorGaleria = document.getElementById('contenedorGaleria');
 const contenedorImagen = document.getElementById('contenedorImagen');
-const urlImagenes = [
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-  'https://www.dataviz-inspiration.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwho-speaks-in-shakespeare.4488aa86.png&w=1200&q=75',
-  'https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80',
-];
-let urImagenSeleccionada = '';
+const urlImagenes = [img1, img2, img3, img4, img5];
+let imagenSeleccionada = 0;
 
 function crearGaleria() {
-  for (var i = 0; i < urlImagenes.length; i++) {
+  for (let i = 0; i < urlImagenes.length; i++) {
     const elemento = document.createElement('div');
     // Agregar imagen al div
     const imagen = new Image();
+
     imagen.classList.add('imagen');
     imagen.id = `${i}`;
     imagen.src = urlImagenes[i];
@@ -270,22 +268,65 @@ function crearGaleria() {
       if (imagenAbierta) {
         contenedorImagen.removeChild(imagenAbierta);
       }
-      urImagenSeleccionada = imagen.src;
+      imagenSeleccionada = parseInt(imagen.id);
       contenedorGaleria.classList.add('abierto');
-      abrirGaleria();
+      ampliarImagen(urlImagenes[imagenSeleccionada]);
     };
   }
 }
 
-function abrirGaleria() {
+function ampliarImagen(urlImagen) {
   const imagenAbierta = new Image();
-  imagenAbierta.id = 'abierta';
-  imagenAbierta.src = urImagenSeleccionada;
+  imagenAbierta.src = urlImagen;
   contenedorImagen.appendChild(imagenAbierta);
+  contenedorImagen.classList.add('abierto');
+
+  const flechaDerecha = document.createElement('div');
+  const flechaIzquierda = document.createElement('div');
+  flechaDerecha.id = 'flechaDerecha';
+  flechaDerecha.innerText = '>';
+  flechaIzquierda.id = 'flechaIzquierda';
+  flechaIzquierda.innerText = '<';
+
+  contenedorImagen.appendChild(flechaDerecha);
+  contenedorImagen.appendChild(flechaIzquierda);
 
   imagenAbierta.onclick = () => {
     contenedorImagen.removeChild(imagenAbierta);
+    contenedorImagen.removeChild(flechaDerecha);
+    contenedorImagen.removeChild(flechaIzquierda);
     contenedorGaleria.classList.remove('abierto');
+    contenedorImagen.classList.remove('abierto');
+  };
+
+  flechaDerecha.onclick = () => {
+    if (imagenSeleccionada < urlImagenes.length - 1) {
+      flechaIzquierda.style.visibility = 'visible';
+      contenedorImagen.removeChild(imagenAbierta);
+      imagenSeleccionada += 1;
+      imagenAbierta.src = urlImagenes[imagenSeleccionada];
+      contenedorImagen.appendChild(imagenAbierta);
+      if (imagenSeleccionada === urlImagenes.length - 1) {
+        flechaDerecha.style.visibility = 'hidden';
+      }
+    } else {
+      return;
+    }
+  };
+
+  flechaIzquierda.onclick = () => {
+    if (imagenSeleccionada > 0) {
+      flechaDerecha.style.visibility = 'visible';
+      contenedorImagen.removeChild(imagenAbierta);
+      imagenSeleccionada -= 1;
+      imagenAbierta.src = urlImagenes[imagenSeleccionada];
+      contenedorImagen.appendChild(imagenAbierta);
+      if (imagenSeleccionada === 0) {
+        flechaIzquierda.style.visibility = 'hidden';
+      }
+    } else {
+      return;
+    }
   };
 }
 crearGaleria();
