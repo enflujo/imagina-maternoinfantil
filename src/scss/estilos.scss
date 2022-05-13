@@ -220,6 +220,8 @@ h2 {
 #galeria {
   display: flex;
   overflow-x: scroll;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .imagen {
