@@ -31,7 +31,7 @@ let mapearColor;
 let mapearCoordenadas;
 
 async function cargarDatos(nombreArchivo) {
-  const res = await fetch(`https://juanca.ml/mi/${nombreArchivo}.json`);
+  const res = await fetch(`https://enflujo.com/bodega/mi/${nombreArchivo}.json`);
   return await res.json();
 }
 
