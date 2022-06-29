@@ -1,8 +1,8 @@
 import './scss/estilos.scss';
 import procesarDatos from './utilidades/procesarDatos';
-import procesarDatosDepto from './utilidades/procesarDatosDepto';
-import { escalaColores, escalaCoordenadas } from './utilidades/ayudas';
-import fuentes from './utilidades/fuentes';
+import procesarDatosDepto from '../src/utilidades/procesarDatosDepto';
+import { escalaColores, escalaCoordenadas } from '../src/utilidades/ayudas';
+import fuentes from '../src/utilidades/fuentes';
 
 // Importar imágenes para galería
 import img1 from './imgs/1_4Home_2.png';
@@ -114,44 +114,6 @@ function crearMenu(años, municipos) {
     };
     menu.appendChild(boton);
   });
-}
-
-function crearSeccionSvg(punto, cabeza) {
-  const coordenadas = mapearCoordenadas(punto, ancho, alto);
-  return `${cabeza}${coordenadas.x} ${coordenadas.y} `;
-}
-
-/**
- * Averigua si cada `grupo` de coordenadas es un polígono o un multipolígono y a la
- * variable `res` (respuesta), que contiene los datos de los SVG, le agrega la
- * ubicación de cada punto y sus líneas conectoras.
- *
- * `M` = _moveTo_ (Inicio del _path_. `M{punto.x} {punto.y}`)
- *
- * `L` = _lineTo_ (Punto de una línea. `Lpunto.x} {punto.y}`)
- *
- * `Z` = _closePath_ (Fin del _path_. `Z`)
- * @param {Object} coordenadas Array de coordenadas
- * @returns res contiene los datos de los elementos SVG<path>
- */
-function crearLinea(coordenadas) {
-  let res = '';
-  coordenadas.forEach((grupo) => {
-    grupo.forEach((punto, i) => {
-      const cabeza = i === 0 ? 'M' : 'L';
-
-      if (typeof punto[0] === 'object') {
-        punto.forEach((puntoMulti) => {
-          res += crearSeccionSvg(puntoMulti, cabeza);
-        });
-      } else {
-        res += crearSeccionSvg(punto, cabeza);
-      }
-
-      res += i === grupo.length - 1 ? 'Z' : '';
-    });
-  });
-  return res;
 }
 
 /**
