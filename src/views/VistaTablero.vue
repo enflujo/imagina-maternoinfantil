@@ -4,6 +4,7 @@ import Mapa from '@/components/MapaElemento.vue';
 import fuentes from '@/utilidades/fuentes';
 const datos = ref([]);
 const formaDepartamentos = ref([]);
+const año = ref(2015);
 const rutaBase = 'https://enflujo.com/bodega';
 
 async function cambiarIndicador(nombreArchivo) {
@@ -32,7 +33,7 @@ cargarFormaDepartamentos();
       </li>
     </ul>
 
-    <Mapa :forma="formaDepartamentos" :datos="datos"></Mapa>
+    <Mapa :forma="formaDepartamentos" :datos="datos" :año="año"></Mapa>
   </main>
 </template>
 

@@ -1,23 +1,29 @@
 <script setup>
-import { onUpdated, ref } from 'vue';
+import { onUpdated, ref, watch } from 'vue';
 // import procesarDatos from '@/utilidades/procesarDatosDepto';
 import { escalaCoordenadas, escalaColores, crearLinea } from '@/utilidades/ayudas';
 
 const props = defineProps({
   forma: Object,
   datos: Object,
+  año: Number,
 });
 const datosCargados = ref(false);
 const latitudMin = -4.2473;
 const latitudMax = 12.4361;
 const longitudMin = -79.0731;
 const longitudMax = -66.874;
+const datosLugar = ref([]);
 
 const ancho = ref(0);
 const alto = ref(0);
 
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, '#BEEFED', '#0042BF');
+
+watch(props.datos, () => {
+  console.log('se agregaron los datos');
+});
 
 onUpdated(() => {
   if (!datosCargados.value) {
@@ -62,7 +68,13 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 
 function definirColor(seccion) {
   if (props.datos.length) {
-    console.log('hola');
+    const datosLugar = props.datos.find((obj) => seccion.properties.codigo === obj.codigo);
+    const valorActual = datosLugar.datos[props.año];
+
+    return mapearColor(valorActual[2]);
+    // console.log(seccion);
+    // const [numerador, denominador, porcentaje] = props.datos[props.año];
+    // console.log(props.datos);
   }
 }
 </script>
@@ -70,10 +82,11 @@ function definirColor(seccion) {
 <template>
   <svg ref="mapa" v-if="props.forma" :width="ancho" :height="alto">
     <path
-      v-for="(seccion, i) in props.forma.features"
-      :key="`seccion-${i}`"
+      v-for="seccion in props.forma.features"
+      :key="`seccion-${seccion.codigo}`"
       :d="pintarSeccion(seccion)"
       :fill="definirColor(seccion)"
+      @mouseenter=""
     ></path>
   </svg>
 </template>
