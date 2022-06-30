@@ -1,10 +1,10 @@
 <script setup>
-import { onUpdated, ref, watch } from 'vue';
+import { onUpdated, ref, reactive, watch } from 'vue';
 // import procesarDatos from '@/utilidades/procesarDatosDepto';
 import { escalaCoordenadas, escalaColores, crearLinea } from '@/utilidades/ayudas';
 
 const props = defineProps({
-  forma: Object,
+  geojson: Object,
   datos: Object,
   año: Number,
 });
@@ -13,41 +13,77 @@ const latitudMin = -4.2473;
 const latitudMax = 12.4361;
 const longitudMin = -79.0731;
 const longitudMax = -66.874;
-const datosLugar = ref([]);
-
+const datosSecciones = reactive([]);
+const informacion = ref(null);
+const nombreLugar = ref('');
+const infoNumerador = ref('');
+const infoDenominador = ref('');
+const infoPorcentaje = ref('');
+const mapa = ref(null);
+const infoVisible = ref(false);
 const ancho = ref(0);
 const alto = ref(0);
+const infoIzq = ref(0);
+const infoDer = ref(0);
 
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, '#BEEFED', '#0042BF');
 
-watch(props.datos, () => {
-  console.log('se agregaron los datos');
-});
+// const datosLugares = computed(() => {
+//   return
+// })
+
+watch(
+  () => props.datos,
+  (nuevos) => {
+    if (!datosSecciones.length) return;
+    props.geojson.features.forEach((lugar, i) => {
+      const { codigo } = lugar.properties;
+      const datosLugar = nuevos.find((obj) => obj.codigo === codigo);
+
+      datosSecciones[i].datos = datosLugar.datos;
+      datosSecciones[i].color = mapearColor(datosLugar.datos[props.año][2]);
+    });
+  }
+);
 
 onUpdated(() => {
   if (!datosCargados.value) {
-    if (props.forma.features && props.forma.features.length && props.datos.length) {
-      // const { latitudMin, latitudMax, longitudMin, longitudMax } = procesarDatos(props.forma, []);
+    if (props.geojson.features && props.datos.length) {
       mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
-      console.log('hey');
-      datosCargados.value = true;
-      console.log(props.forma);
       actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
+
+      props.geojson.features.forEach((lugar) => {
+        const { codigo, nombre } = lugar.properties;
+        const datosLugar = props.datos.find((obj) => obj.codigo === codigo);
+
+        datosSecciones.push({
+          codigo,
+          nombre,
+          datos: datosLugar.datos,
+          linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value),
+          color: mapearColor(datosLugar.datos[props.año][2]),
+        });
+      });
+      datosCargados.value = true;
+
+      // dibujarMapa();
       // dibujar;
-      // console.log(props.datos, props.forma.features);
+      // console.log(props.datos, props.geojson.features);
     }
   }
+  // console.log(seccionesMapa);
 });
 
-function pintarSeccion(seccion) {
-  if (mapearCoordenadas.value) {
-    return crearLinea(seccion.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value);
-  } else {
-    console.log('aun no hay función para mapear');
-    return null;
-  }
-}
+// function pintarSeccion(seccion) {
+//   if (mapearCoordenadas.value) {
+//     console.log('tick');
+//     return crearLinea(seccion.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value);
+//   } else {
+//     console.log('aun no hay función para mapear');
+//     return null;
+//   }
+// }
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   ancho.value = window.innerWidth;
@@ -66,29 +102,67 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   alto.value = alto.value | 0;
 };
 
-function definirColor(seccion) {
-  if (props.datos.length) {
-    const datosLugar = props.datos.find((obj) => seccion.properties.codigo === obj.codigo);
-    const valorActual = datosLugar.datos[props.año];
+// function definirColor(seccion) {
+//   if (props.datos.length) {
+//     const datosLugar = props.datos.find((obj) => seccion.properties.codigo === obj.codigo);
+//     const valorActual = datosLugar.datos[props.año];
 
-    return mapearColor(valorActual[2]);
-    // console.log(seccion);
-    // const [numerador, denominador, porcentaje] = props.datos[props.año];
-    // console.log(props.datos);
-  }
+//     if (valorActual) return mapearColor(valorActual[2]);
+
+//     return null;
+//     // console.log(seccion);
+//     // const [numerador, denominador, porcentaje] = props.datos[props.año];
+//     // console.log(props.datos);
+//   }
+// }
+
+function eventoEncima(seccion) {
+  const [numerador, denominador, porcentaje] = seccion.datos[props.año];
+  infoVisible.value = true;
+  nombreLugar.value = seccion.nombre;
+  infoNumerador.value = numerador;
+  infoDenominador.value = denominador;
+  infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
+}
+
+function eventoFuera() {
+  infoVisible.value = false;
+}
+
+function eventoMovimiento(evento) {
+  infoIzq.value = evento.pageX;
+  infoDer.value = evento.pageY;
 }
 </script>
 
 <template>
-  <svg ref="mapa" v-if="props.forma" :width="ancho" :height="alto">
+  <svg id="mapa" ref="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
     <path
-      v-for="seccion in props.forma.features"
+      v-for="seccion in datosSecciones"
       :key="`seccion-${seccion.codigo}`"
-      :d="pintarSeccion(seccion)"
-      :fill="definirColor(seccion)"
-      @mouseenter=""
+      :d="seccion.linea"
+      :fill="seccion.color"
+      @mouseenter="() => eventoEncima(seccion)"
+      @mouseleave="eventoFuera"
     ></path>
   </svg>
+
+  <div id="informacion" ref="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoDer}px`">
+    <p id="departamento">{{ nombreLugar }}</p>
+    <p id="numerador">{{ infoNumerador }}</p>
+    <p id="denominador">{{ infoDenominador }}</p>
+    <p id="porcentaje">{{ infoPorcentaje }}</p>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#mapa {
+  position: fixed;
+  left: 40vw;
+  top: 50px;
+}
+
+#informacion {
+  position: absolute;
+}
+</style>

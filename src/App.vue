@@ -1,13 +1,13 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import SeccionIntroduccion from '@/components/SeccionIntroduccion.vue';
+// import SeccionIntroduccion from '@/components/SeccionIntroduccion.vue';
 </script>
 
 <template>
   <div>
-    <header>
+    <!-- <header>
       <SeccionIntroduccion />
-    </header>
+    </header> -->
 
     <RouterView />
   </div>
