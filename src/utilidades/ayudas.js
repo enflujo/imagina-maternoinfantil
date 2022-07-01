@@ -66,7 +66,7 @@ export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudM
    *
    * @param {array} punto Punto en formato [longitud, latitud]
    * @param {number} ancho Ancho del mapa en pixeles
-   * @param {number} alto Alto del mapa en piexeles
+   * @param {number} alto Alto del mapa en pixeles
    * @returns {object} Coordenadas en {x, y}
    */
   return ([longitud, latitud], ancho, alto) => {
@@ -94,7 +94,7 @@ function crearSeccionSvg(punto, cabeza, mapearCoordenadas, ancho, alto) {
  *
  * `M` = _moveTo_ (Inicio del _path_. `M{punto.x} {punto.y}`)
  *
- * `L` = _lineTo_ (Punto de una línea. `Lpunto.x} {punto.y}`)
+ * `L` = _lineTo_ (Punto de una línea. `L{punto.x} {punto.y}`)
  *
  * `Z` = _closePath_ (Fin del _path_. `Z`)
  * @param {Object} coordenadas Array de coordenadas
