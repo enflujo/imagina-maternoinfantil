@@ -1,37 +1,50 @@
 <script setup>
-import { onUpdated, ref, reactive, watch } from 'vue';
-// import procesarDatos from '@/utilidades/procesarDatosDepto';
-import { escalaCoordenadas, escalaColores, crearLinea } from '@/utilidades/ayudas';
+import { ref, reactive, watch } from 'vue';
+import buscarExtremos from '../utilidades/buscarExtremosGeojson';
+import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
 
 const props = defineProps({
   geojson: Object,
   datos: Object,
   año: Number,
 });
-const datosCargados = ref(false);
-const latitudMin = -4.2473;
-const latitudMax = 12.4361;
-const longitudMin = -79.0731;
-const longitudMax = -66.874;
 const datosSecciones = reactive([]);
-const informacion = ref(null);
 const nombreLugar = ref('');
 const infoNumerador = ref('');
 const infoDenominador = ref('');
 const infoPorcentaje = ref('');
-const mapa = ref(null);
 const infoVisible = ref(false);
 const ancho = ref(0);
 const alto = ref(0);
 const infoIzq = ref(0);
-const infoDer = ref(0);
-
+const infoArriba = ref(0);
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, '#BEEFED', '#0042BF');
 
 // const datosLugares = computed(() => {
 //   return
 // })
+
+watch(
+  () => props.geojson,
+  (nuevos) => {
+    const { latitudMin, latitudMax, longitudMin, longitudMax } = buscarExtremos(nuevos);
+    mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
+    actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
+
+    nuevos.features.forEach((lugar) => {
+      const { codigo, nombre } = lugar.properties;
+
+      datosSecciones.push({
+        codigo,
+        nombre,
+        datos: [],
+        linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value),
+        color: 'transparent',
+      });
+    });
+  }
+);
 
 watch(
   () => props.datos,
@@ -46,44 +59,6 @@ watch(
     });
   }
 );
-
-onUpdated(() => {
-  if (!datosCargados.value) {
-    if (props.geojson.features && props.datos.length) {
-      mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
-      actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
-
-      props.geojson.features.forEach((lugar) => {
-        const { codigo, nombre } = lugar.properties;
-        const datosLugar = props.datos.find((obj) => obj.codigo === codigo);
-
-        datosSecciones.push({
-          codigo,
-          nombre,
-          datos: datosLugar.datos,
-          linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value),
-          color: mapearColor(datosLugar.datos[props.año][2]),
-        });
-      });
-      datosCargados.value = true;
-
-      // dibujarMapa();
-      // dibujar;
-      // console.log(props.datos, props.geojson.features);
-    }
-  }
-  // console.log(seccionesMapa);
-});
-
-// function pintarSeccion(seccion) {
-//   if (mapearCoordenadas.value) {
-//     console.log('tick');
-//     return crearLinea(seccion.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value);
-//   } else {
-//     console.log('aun no hay función para mapear');
-//     return null;
-//   }
-// }
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   ancho.value = window.innerWidth;
@@ -102,20 +77,6 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   alto.value = alto.value | 0;
 };
 
-// function definirColor(seccion) {
-//   if (props.datos.length) {
-//     const datosLugar = props.datos.find((obj) => seccion.properties.codigo === obj.codigo);
-//     const valorActual = datosLugar.datos[props.año];
-
-//     if (valorActual) return mapearColor(valorActual[2]);
-
-//     return null;
-//     // console.log(seccion);
-//     // const [numerador, denominador, porcentaje] = props.datos[props.año];
-//     // console.log(props.datos);
-//   }
-// }
-
 function eventoEncima(seccion) {
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
   infoVisible.value = true;
@@ -131,12 +92,12 @@ function eventoFuera() {
 
 function eventoMovimiento(evento) {
   infoIzq.value = evento.pageX;
-  infoDer.value = evento.pageY;
+  infoArriba.value = evento.pageY;
 }
 </script>
 
 <template>
-  <svg id="mapa" ref="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
+  <svg id="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
     <path
       v-for="seccion in datosSecciones"
       :key="`seccion-${seccion.codigo}`"
@@ -147,7 +108,7 @@ function eventoMovimiento(evento) {
     ></path>
   </svg>
 
-  <div id="informacion" ref="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoDer}px`">
+  <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoArriba}px`">
     <p id="departamento">{{ nombreLugar }}</p>
     <p id="numerador">{{ infoNumerador }}</p>
     <p id="denominador">{{ infoDenominador }}</p>
