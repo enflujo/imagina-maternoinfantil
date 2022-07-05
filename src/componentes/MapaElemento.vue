@@ -20,6 +20,7 @@ const infoIzq = ref(0);
 const infoArriba = ref(0);
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, '#BEEFED', '#0042BF');
+const colorLinea = '#ffc1f8';
 
 // const datosLugares = computed(() => {
 //   return
@@ -40,7 +41,7 @@ watch(
         nombre,
         datos: [],
         linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value),
-        color: 'transparent',
+        color: 'white',
       });
     });
   }
@@ -78,6 +79,7 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 };
 
 function eventoEncima(seccion) {
+  if (!seccion.datos[props.año]) return;
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
   infoVisible.value = true;
   nombreLugar.value = seccion.nombre;
@@ -103,6 +105,7 @@ function eventoMovimiento(evento) {
       :key="`seccion-${seccion.codigo}`"
       :d="seccion.linea"
       :fill="seccion.color"
+      :stroke="colorLinea"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
     ></path>
