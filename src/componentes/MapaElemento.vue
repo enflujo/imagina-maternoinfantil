@@ -7,6 +7,7 @@ const props = defineProps({
   geojson: Object,
   datos: Object,
   año: Number,
+  colores: Object,
 });
 const datosSecciones = reactive([]);
 const nombreLugar = ref('');
@@ -19,8 +20,8 @@ const alto = ref(0);
 const infoIzq = ref(0);
 const infoArriba = ref(0);
 const mapearCoordenadas = ref();
-const mapearColor = escalaColores(0, 100, '#BEEFED', '#0042BF');
-const colorLinea = '#ffc1f8';
+const mapearColor = escalaColores(0, 100, props.colores[0], props.colores[1]);
+const colorLinea = 'transparent'; //'#ffc1f8';
 
 // const datosLugares = computed(() => {
 //   return
@@ -32,7 +33,7 @@ watch(
     const { latitudMin, latitudMax, longitudMin, longitudMax } = buscarExtremos(nuevos);
     mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
     actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
-
+    datosSecciones.splice(0);
     nuevos.features.forEach((lugar) => {
       const { codigo, nombre } = lugar.properties;
 
@@ -52,8 +53,14 @@ watch(
   (nuevos) => {
     if (!datosSecciones.length) return;
     props.geojson.features.forEach((lugar, i) => {
+      datosSecciones[i].datos = [];
+      datosSecciones[i].color = 'transparent';
       const { codigo } = lugar.properties;
       const datosLugar = nuevos.find((obj) => obj.codigo === codigo);
+
+      if (!datosLugar || !datosLugar.datos[props.año]) {
+        return;
+      }
 
       datosSecciones[i].datos = datosLugar.datos;
       datosSecciones[i].color = mapearColor(datosLugar.datos[props.año][2]);
@@ -106,6 +113,7 @@ function eventoMovimiento(evento) {
       :d="seccion.linea"
       :fill="seccion.color"
       :stroke="colorLinea"
+      stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
     ></path>
