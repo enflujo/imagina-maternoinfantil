@@ -3,7 +3,7 @@
  *
  * @param {Object} geojson - Datos en GeoJSON
  */
-export default (geojson) => {
+export const extremosLugar = (geojson) => {
   let latitudMin = Infinity;
   let latitudMax = -Infinity;
   let longitudMin = Infinity;
@@ -22,4 +22,17 @@ export default (geojson) => {
   });
 
   return { latitudMin, latitudMax, longitudMin, longitudMax };
+};
+
+export const extremosPorcentaje = (datos, año) => {
+  let porcentajeMin = Infinity;
+  let porcentajeMax = -Infinity;
+
+  datos.forEach((lugar) => {
+    const porcentaje = lugar.datos[año][2];
+    porcentajeMin = porcentaje < porcentajeMin ? porcentaje : porcentajeMin;
+    porcentajeMax = porcentaje > porcentajeMax ? porcentaje : porcentajeMax;
+  });
+
+  return { porcentajeMin, porcentajeMax };
 };

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import VistaTablero from '../views/VistaTablero.vue';
+import VistaTablero from '../vistas/VistaTablero.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
