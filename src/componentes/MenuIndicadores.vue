@@ -27,7 +27,6 @@ const props = defineProps({
   width: 35vw;
   font-size: 0.9em;
   font-family: $fuenteTexto;
-  position: fixed;
 }
 
 .contenedorMenu {

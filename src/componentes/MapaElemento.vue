@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
-import buscarExtremos from '../utilidades/buscarExtremosGeojson';
+import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
 
 const props = defineProps({
@@ -30,7 +30,7 @@ const colorLinea = 'transparent'; //'#ffc1f8';
 watch(
   () => props.geojson,
   (nuevos) => {
-    const { latitudMin, latitudMax, longitudMin, longitudMax } = buscarExtremos(nuevos);
+    const { latitudMin, latitudMax, longitudMin, longitudMax } = extremosLugar(nuevos);
     mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
     actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
     datosSecciones.splice(0);
@@ -48,25 +48,31 @@ watch(
   }
 );
 
+watch(() => props.año, actualizarDatos);
+
 watch(
   () => props.datos,
-  (nuevos) => {
+  () => {
     if (!datosSecciones.length) return;
-    props.geojson.features.forEach((lugar, i) => {
-      datosSecciones[i].datos = [];
-      datosSecciones[i].color = 'transparent';
-      const { codigo } = lugar.properties;
-      const datosLugar = nuevos.find((obj) => obj.codigo === codigo);
-
-      if (!datosLugar || !datosLugar.datos[props.año]) {
-        return;
-      }
-
-      datosSecciones[i].datos = datosLugar.datos;
-      datosSecciones[i].color = mapearColor(datosLugar.datos[props.año][2]);
-    });
+    actualizarDatos();
   }
 );
+
+function actualizarDatos() {
+  props.geojson.features.forEach((lugar, i) => {
+    datosSecciones[i].datos = [];
+    datosSecciones[i].color = 'transparent';
+    const { codigo } = lugar.properties;
+    const datosLugar = props.datos.find((obj) => obj.codigo === codigo);
+
+    if (!datosLugar || !datosLugar.datos[props.año]) {
+      return;
+    }
+
+    datosSecciones[i].datos = datosLugar.datos;
+    datosSecciones[i].color = mapearColor(datosLugar.datos[props.año][2]);
+  });
+}
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   ancho.value = window.innerWidth;
@@ -129,7 +135,6 @@ function eventoMovimiento(evento) {
 
 <style lang="scss" scoped>
 #mapa {
-  position: fixed;
   left: 40vw;
   top: 50px;
 }
