@@ -1,4 +1,9 @@
-import { convertirEscala } from '@enflujo/alquimia';
+export const convertirEscala = (valor, escalaBaseMin, escalaBaseMax, escalaDestinoMin, escalaDestinoMax) => {
+  return (
+    ((valor - escalaBaseMin) * (escalaDestinoMax - escalaDestinoMin)) / (escalaBaseMax - escalaBaseMin) +
+    escalaDestinoMin
+  );
+};
 
 export const PI_CUARTO = Math.PI / 4;
 export const aRadianes = (grados) => (grados * Math.PI) / 180;
@@ -6,9 +11,11 @@ export const mercatorY = (latitud) => Math.log(Math.tan(latitud / 2 + PI_CUARTO)
 
 export const hexARGB = (valor) => {
   valor = valor.includes('#') ? valor.replace('#', '') : valor;
+
   if (valor.length === 3) {
     valor = valor[0] + valor[0] + valor[1] + valor[1] + valor[2] + valor[2];
   }
+
   if (valor.length != 6) {
     console.log(`No se puede convertir el color ${valor}`);
   }
@@ -59,7 +66,7 @@ export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudM
    *
    * @param {array} punto Punto en formato [longitud, latitud]
    * @param {number} ancho Ancho del mapa en pixeles
-   * @param {number} alto Alto del mapa en piexeles
+   * @param {number} alto Alto del mapa en pixeles
    * @returns {object} Coordenadas en {x, y}
    */
   return ([longitud, latitud], ancho, alto) => {
@@ -74,3 +81,42 @@ export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudM
     return { x, y };
   };
 };
+
+function crearSeccionSvg(punto, cabeza, mapearCoordenadas, ancho, alto) {
+  const coordenadas = mapearCoordenadas(punto, ancho, alto);
+  return `${cabeza}${coordenadas.x} ${coordenadas.y} `;
+}
+
+/**
+ * Averigua si cada `grupo` de coordenadas es un polígono o un multipolígono y a la
+ * variable `res` (respuesta), que contiene los datos de los SVG, le agrega la
+ * ubicación de cada punto y sus líneas conectoras.
+ *
+ * `M` = _moveTo_ (Inicio del _path_. `M{punto.x} {punto.y}`)
+ *
+ * `L` = _lineTo_ (Punto de una línea. `L{punto.x} {punto.y}`)
+ *
+ * `Z` = _closePath_ (Fin del _path_. `Z`)
+ * @param {Object} coordenadas Array de coordenadas
+ * @param {Callback} mapearCoordenadas Función para mapear de latitud, longitud a pixeles.
+ * @returns res contiene los datos de los elementos SVG<path>
+ */
+export function crearLinea(coordenadas, mapearCoordenadas, ancho, alto) {
+  let res = '';
+  coordenadas.forEach((grupo) => {
+    grupo.forEach((punto, i) => {
+      const cabeza = i === 0 ? 'M' : 'L';
+
+      if (typeof punto[0] === 'object') {
+        punto.forEach((puntoMulti) => {
+          res += crearSeccionSvg(puntoMulti, cabeza, mapearCoordenadas, ancho, alto);
+        });
+      } else {
+        res += crearSeccionSvg(punto, cabeza, mapearCoordenadas, ancho, alto);
+      }
+
+      res += i === grupo.length - 1 ? 'Z' : '';
+    });
+  });
+  return res;
+}

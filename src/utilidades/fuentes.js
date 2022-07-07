@@ -1,144 +1,109 @@
-export default {
-  'muerte fetoinfantil': {
-    descripcion: 'Muerte fetoinfantil',
-    nombreArchivo: 'muerte-fetoinfantil',
-    notas: '',
+export default [
+  {
+    nombreArchivo: 'NACIDOS VIVOS BAJO PESO',
+    nombreIndicador: 'Nacidos vivos con bajo peso al nacer',
+    definicion:
+      'Indica la proporción de nacidos vivos a término (37 semanas o más) que nacieron con peso inferior a 2.500 gramos al momento de nacer en un momento y territorio específico, con respecto al total de nacidos vivos en el mismo periodo y lugar.',
   },
-  'nacidos vivos bajo peso': {
-    descripcion: 'Porcentaje de nacidos vivos a término con bajo peso al nacer',
-    nombreArchivo: 'nacidos-bajo-peso',
-    notas: '',
+  {
+    nombreArchivo: 'NACIDOS VIVOS 4 CONS PRENATAL',
+    nombreIndicador: 'Nacidos vivos con 4 o más controles prenatales',
+    definicion:
+      'Indica la proporción de nacidos vivos cuyas madres asistieron a 4 o más controles prenatales en un momento y territorio específico.',
   },
-  'nacidos vivos < 4 cp': {
-    descripcion: 'Porcentaje de nacidos vivos con cuatro o más consultas de control prenatal',
-    nombreArchivo: 'nacidos-vivos-4-cp',
-    notas: '',
+  {
+    nombreArchivo: 'PROMEDIO CONTROLES PRENATALES',
+    nombreIndicador: 'Controles durante el embarazo',
+    definicion: 'Indica el número promedio de controles prenatales en los nacidos vivos.',
   },
-  'nacidos padres 4 años >': {
-    descripcion:
-      'Porcentaje de nacidos vivos de mujeres entre 15 a 18 años donde el padre es mayor 4 o más años de edad',
-    nombreArchivo: 'nacidos-padres-4',
-    notas: '',
+  {
+    nombreArchivo: 'NACIDOS VIVOS <15 PAPA 4',
+    nombreIndicador: 'Nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 años o más',
+    definicion:
+      'Indica la proporción de nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 o más años, con respecto al total de nacimientos en un periodo y territorio definido.',
   },
-  'nacidos < 15 padres 4 años >': {
-    descripcion:
-      'Porcentaje de nacidos vivos de mujeres menores de 15 años donde el padre es mayor 4 o más años de edad',
-    nombreArchivo: 'nacidos-15-padres-4',
-    notas: '',
+  {
+    nombreArchivo: 'PARTOS INSTITUCIONALES',
+    nombreIndicador: 'Partos institucionales',
+    definicion:
+      'Indica la proporción de nacidos vivos que nacieron en instituciones de salud en un momento y territorio específico, con respecto al total de nacidos vivos.',
   },
-  'partos atendidos personal calif': {
-    descripcion: 'Porcentaje de partos atendidos por personal calificado',
-    nombreArchivo: 'partos-personal-calif',
-    notas: '',
+  {
+    nombreArchivo: 'PARTOS POR CESAREA',
+    nombreIndicador: 'Partos por cesárea',
+    definicion:
+      'Indica la proporción de nacidos vivos que nacieron por cesárea en un momento y territorio específico, con respecto al total de nacidos vivos.',
   },
-  partos: {
-    descripcion: 'Porcentaje de partos institucionales',
-    nombreArchivo: 'partos',
-    notas: '',
+  {
+    nombreArchivo: 'NACIDOS DE <14 AÑOS',
+    nombreIndicador: 'Nacidos vivos de madres menores de 14 años',
+    definicion:
+      'Indica la proporción de nacidos vivos en mujeres menores de 14 años con respecto a todos los nacidos vivos.',
   },
-  'partos por cesarea': {
-    descripcion: 'Porcentaje de partos por cesárea',
-    nombreArchivo: 'partos-cesarea',
-    notas: '',
+  {
+    nombreArchivo: 'PROP NACIDOS DE MUJ 14 A 17',
+    nombreIndicador: 'Nacidos vivos de madres de 14 a 17 años',
+    definicion:
+      'Indica la proporción de nacidos vivos en mujeres entre 14 y 17 años con respecto a todos los nacidos vivos.',
   },
-  'nacidos de <14': {
-    descripcion: 'Porporción de nacidos vivos hijos de mujeres menores de 14 años',
-    nombreArchivo: 'nacidos-14',
-    notas: '',
+  {
+    nombreArchivo: 'RAZON MORT MATERNA 1 AÑO',
+    nombreIndicador: 'Mortalidad materna a 1 año',
+    definicion:
+      'Indica el número de muertes de mujeres durante el embarazo parto o puerperio (después de los 42 días después del parto, pero antes de un año de la terminación del embarazo) por cualquier causa relacionada o agravada por el embarazo, parto o puerperio.',
   },
-  'controles prenatales': {
-    descripcion: 'Promedio de controles prenatales',
-    nombreArchivo: 'controles-prenatales',
-    notas: '',
+  {
+    nombreArchivo: 'FECUNDIDAD 10 A 14 AÑOS',
+    nombreIndicador: 'Fecundidad en mujeres de 10 a 14 años',
+    definicion:
+      'Indica el número de nacidos vivos de madres entre 10 a 14 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
   },
-  'nacidos de 14 a 17': {
-    descripcion: 'Proporción de nacidos vivos hijos de mujeres de 14 a 17 años',
-    nombreArchivo: 'nacidos-14-17',
-    notas: '',
+  {
+    nombreArchivo: 'FECUNDIDAD 10 A 19 AÑOS',
+    nombreIndicador: 'Fecundidad en mujeres de 10 a 19 años',
+    definicion:
+      'Indica el número de nacidos vivos de madres entre 10 a 19 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
   },
-  'nacidos de 18 a 26': {
-    descripcion: 'Proporción de nacidos vivos hijos de mujeres de 18 a 26 años',
-    nombreArchivo: 'nacidos-18-26',
-    notas: '',
+  {
+    nombreArchivo: 'FECUNDIDAD 15 A 19 AÑOS',
+    nombreIndicador: 'Fecundidad en mujeres de 15 a 19 años',
+    definicion:
+      'Indica el número de nacidos vivos de madres entre 15 a 19 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
   },
-  'mortalidad materna 1 año': {
-    descripcion: 'Razón de mortalidad materna a 1 año',
-    nombreArchivo: 'mortalidad-materna-1',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD EN LA NIÑEZ',
+    nombreIndicador: 'Mortalidad en menores de 5 años',
+    definicion:
+      'Indica el número de defunciones ocurridas en niños menores de 5 años por cada 1.000 nacidos vivos en un periodo y territorio determinado.',
   },
-  'mortalidad materna 42 dias': {
-    descripcion: 'Razón de mortalidad materna a 42 días',
-    nombreArchivo: 'mortalidad-materna-42',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD EN < 1 AÑO',
+    nombreIndicador: 'Mortalidad en menores de 1 año',
+    definicion:
+      'Indica el número de defunciones ocurridas en niños menores de 1 año por cada 1.000 nacidos vivos en un periodo y territorio determinado.',
   },
-  'fecundidad 10 a 14': {
-    descripcion: 'Tasa de fecundidad específica en mujeres de 10 a 14 años',
-    nombreArchivo: 'fecundidad-10-14',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD < 5IRA',
+    nombreIndicador: 'Mortalidad por Infección Respiratoria Aguda (IRA) en menores de 5 años',
+    definicion:
+      'Indica el número de defunciones en niños menores de 5 años por infecciones respiratorias agudas con respecto a la población de niños menores de 5 años.',
   },
-  'fecundidad 10 a 19': {
-    descripcion: 'Tasa de fecundidad específica en mujeres de 10 a 19 años',
-    nombreArchivo: 'fecundidad-10-19',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD < 5EDA',
+    nombreIndicador: 'Mortalidad por Enfermedad Diarreica Aguda (EDA) en menores de 5 años',
+    definicion:
+      'Indica el número de defunciones en niños menores de 5 años por enfermedad diarreica aguda con respecto a la población de niños menores de 5 años.',
   },
-  'fecundidad 15 a 19': {
-    descripcion: 'Tasa de fecundidad específica en mujeres de 15 a 19 años',
-    nombreArchivo: 'fecundidad-15-19',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD PERINATAL',
+    nombreIndicador: 'Mortalidad perinatal',
+    definicion:
+      'Corresponde al número de muertes fetales con 22 semanas completas (154 días) de gestación o con 500 gramos o más de peso fetal y los siete días completos después del nacimiento, con respecto a los nacidos vivos más el número de muertes fetales con 22 semanas completas (154 días) de gestación o con 500 gramos o más de peso.',
   },
-  'mortalidad menores de 5 años': {
-    descripcion: 'Tasa de mortalidad en la niñez (menores de 5 años de edad)',
-    nombreArchivo: 'mortalidad-menores-5',
-    notas: '',
+  {
+    nombreArchivo: 'MORTALIDAD DESNUTRICI< 5',
+    nombreIndicador: 'Mortalidad en menores de 5 años por desnutrición',
+    definicion:
+      'Número de muertes por desnutrición en menores de 5 años con respecto a la población de niños menores de 5 años.',
   },
-  'mortalidad menores de 1 año': {
-    descripcion: 'Tasa de mortalidad en la niñez (menores de un año de edad)',
-    nombreArchivo: 'mortalidad-menores-1',
-    notas: '',
-  },
-  'mortalidad < 5 eda': {
-    descripcion: 'Tasa de mortalidad en niños menores de 5 años por enfermedad diarreica aguda',
-    nombreArchivo: 'mortalidad-5-eda',
-    notas: '',
-  },
-  'mortalidad <5 era': {
-    descripcion: 'Tasa de mortalidad en niños menores de 5 años por infección respiratoria aguda',
-    nombreArchivo: 'mortalidad-5-era',
-    notas: '',
-  },
-  'mortalidad fetal': {
-    descripcion: 'tasa de mortalidad fetal',
-    nombreArchivo: 'mortalidad-fetal',
-    notas: '',
-  },
-  'mortalidad neonatal': {
-    descripcion: 'Tasa de mortalidad neonatal',
-    nombreArchivo: 'mortalidad-neonatal',
-    notas: '',
-  },
-  'mortalidad neonatal tardia': {
-    descripcion: 'Tasa de mortalidad neonatal tardía',
-    nombreArchivo: 'mortalidad-neonatal-tardia',
-    notas: '',
-  },
-  'mortalidad neonatal temprana': {
-    descripcion: 'Tasa de mortalidad neonatal temprana',
-    nombreArchivo: 'mortalidad-neonatal-temprana',
-    notas: '',
-  },
-  'mortalidad perinatal': {
-    descripcion: 'tasa de mortalidad perinatal',
-    nombreArchivo: 'mortalidad-perinatal',
-    notas: '',
-  },
-  'mortalidad desnutricion <5': {
-    descripcion: 'Tasa de mortalidad por desnutrición en menores de 5 años',
-    nombreArchivo: 'mortalidad-neonatal',
-    notas: '',
-  },
-  'mortalidad postneonatal': {
-    descripcion: 'tasa de mortalidad postneonatal',
-    nombreArchivo: 'mortalidad-postneonatal',
-    notas: '',
-  },
-};
+];
