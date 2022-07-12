@@ -31,9 +31,9 @@ async function cambiarIndicador(indiceIndicador, forzar) {
     const datosIndicador = await respuesta.json();
     datos.value = datosIndicador;
 
-    definirPorcentajes();
-
     indicadorActual.value = indiceIndicador;
+
+    definirPorcentajes();
   }
 }
 
@@ -65,6 +65,7 @@ cambiarNivel(nivel.value);
 
 <template>
   <main>
+    <MenuIndicadores :cambiarIndicador="cambiarIndicador" :indicadorActual="indicadorActual" />
     <div id="filtros">
       <ul id="menuVistaLugar">
         <li @click="() => cambiarNivel('departamentos')" class="nivel">Departamentos</li>
@@ -74,8 +75,6 @@ cambiarNivel(nivel.value);
 
       <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" />
     </div>
-    <MenuIndicadores :cambiarIndicador="cambiarIndicador" :indicadorActual="indicadorActual" />
-
     <Mapa :geojson="formaDepartamentos" :datos="datos" :año="año" :colores="colores" />
   </main>
 </template>
@@ -89,6 +88,8 @@ main {
 }
 
 #filtros {
-  left: 50vw;
+  left: 7vw;
+  height: fit-content;
+  position: relative;
 }
 </style>
