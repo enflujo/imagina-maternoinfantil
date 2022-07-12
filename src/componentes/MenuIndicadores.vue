@@ -24,9 +24,12 @@ const props = defineProps({
 @import '@/assets/constantes.scss';
 
 #menuIndicadores {
-  width: 35vw;
+  width: 25vw;
   font-size: 0.9em;
   font-family: $fuenteTexto;
+  top: 15vh;
+  left: 2vw;
+  position: relative;
 }
 
 .contenedorMenu {

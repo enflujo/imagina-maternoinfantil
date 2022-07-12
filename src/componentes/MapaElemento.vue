@@ -135,8 +135,10 @@ function eventoMovimiento(evento) {
 
 <style lang="scss" scoped>
 #mapa {
-  left: 40vw;
-  top: 50px;
+  left: -10vw;
+  top: 216px;
+  position: relative;
+  transform: scale(1.2);
 }
 
 #informacion {
