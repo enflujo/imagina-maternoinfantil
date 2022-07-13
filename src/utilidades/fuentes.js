@@ -62,7 +62,7 @@ export default [
   },
   {
     nombreArchivo: 'RAZON MORT MATERNA 1 AÑO',
-    nombreIndicador: 'Razón de mortalidad Materna a 1 año',
+    nombreIndicador: 'Razón de mortalidad materna a 1 año',
     definicion:
       'Indica el número de muertes de mujeres durante el embarazo parto o puerperio (después de los 42 días después del parto, pero antes de un año de la terminación del embarazo) por cualquier causa relacionada o agravada por el embarazo, parto o puerperio.',
     calculo: 'Muertes maternas durante un año / Nacidos vivos durante el mismo periodo',
