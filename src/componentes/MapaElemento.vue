@@ -8,6 +8,7 @@ const props = defineProps({
   datos: Object,
   año: Number,
   colores: Object,
+  actualizarVistaLugar: Function,
 });
 const datosSecciones = reactive([]);
 const nombreLugar = ref('');
@@ -109,6 +110,10 @@ function eventoMovimiento(evento) {
   infoIzq.value = evento.pageX;
   infoArriba.value = evento.pageY;
 }
+
+function eventoClic(datos) {
+  props.actualizarVistaLugar(datos);
+}
 </script>
 
 <template>
@@ -122,6 +127,7 @@ function eventoMovimiento(evento) {
       stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
+      @click="() => eventoClic(seccion.datos)"
     ></path>
   </svg>
 
@@ -135,13 +141,13 @@ function eventoMovimiento(evento) {
 
 <style lang="scss" scoped>
 #mapa {
-  left: -10vw;
-  top: 216px;
+  left: 19em;
+  top: 10em;
   position: relative;
-  transform: scale(1.2);
+  transform: scale(1.5);
 }
 
 #informacion {
-  position: absolute;
+  position: fixed;
 }
 </style>

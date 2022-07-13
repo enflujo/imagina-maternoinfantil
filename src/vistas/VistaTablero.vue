@@ -6,8 +6,10 @@ import MenuAños from '../componentes/MenuAños.vue';
 import LeyendaColor from '../componentes/LeyendaColor.vue';
 import fuentes from '../utilidades/fuentes';
 import { extremosPorcentaje } from '../utilidades/procesador';
+import LineaTiempo from '../componentes/LineaTiempo.vue';
 
 const datos = ref([]);
+const datosLugar = ref(null);
 const formaDepartamentos = ref([]);
 const rutaBase = 'https://enflujo.com/bodega';
 const año = ref(2015);
@@ -60,22 +62,39 @@ function actualizarAño(nuevoAño) {
   definirPorcentajes();
 }
 
+function actualizarVistaLugar(datos) {
+  datosLugar.value = datos;
+}
+
 cambiarNivel(nivel.value);
 </script>
 
 <template>
   <main>
     <MenuIndicadores :cambiarIndicador="cambiarIndicador" :indicadorActual="indicadorActual" />
-    <div id="filtros">
-      <ul id="menuVistaLugar">
-        <li @click="() => cambiarNivel('departamentos')" class="nivel">Departamentos</li>
-        <li @click="() => cambiarNivel('municipios')" class="nivel">Municipios</li>
-      </ul>
-      <MenuAños :años="años" :actualizarAño="actualizarAño" :añoActual="año" />
 
-      <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" />
+    <div id="seccionCentral">
+      <div id="filtros">
+        <ul id="menuVistaLugar">
+          <li @click="() => cambiarNivel('departamentos')" class="nivel">Departamentos</li>
+          <li @click="() => cambiarNivel('municipios')" class="nivel">Municipios</li>
+        </ul>
+        <MenuAños :años="años" :actualizarAño="actualizarAño" :añoActual="año" />
+        <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2>
+      </div>
+      <Mapa
+        :geojson="formaDepartamentos"
+        :datos="datos"
+        :año="año"
+        :colores="colores"
+        :actualizarVistaLugar="actualizarVistaLugar"
+      />
+      <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
     </div>
-    <Mapa :geojson="formaDepartamentos" :datos="datos" :año="año" :colores="colores" />
+
+    <div id="seccionDerecha">
+      <LineaTiempo :años="años" :datos="datosLugar" :indicadorActual="indicadorActual" />
+    </div>
   </main>
 </template>
 
@@ -88,8 +107,27 @@ main {
 }
 
 #filtros {
-  left: 7vw;
+  left: 10vw;
+  width: 100%;
   height: fit-content;
   position: relative;
+
+  #indicadorSeleccionado {
+    font-size: 1.4em;
+    width: 60%;
+    margin-left: 40px;
+  }
+}
+
+#seccionCentral {
+  position: relative;
+  width: 50vw;
+  left: 7px;
+}
+
+#seccionDerecha {
+  margin-top: 100px;
+  position: relative;
+  width: 25vw;
 }
 </style>
