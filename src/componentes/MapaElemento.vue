@@ -111,8 +111,8 @@ function eventoMovimiento(evento) {
   infoArriba.value = evento.pageY;
 }
 
-function eventoClic(datos) {
-  props.actualizarVistaLugar(datos);
+function eventoClic(datos, lugar) {
+  props.actualizarVistaLugar(datos, lugar);
 }
 </script>
 
@@ -127,7 +127,7 @@ function eventoClic(datos) {
       stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="() => eventoClic(seccion.datos)"
+      @click="() => eventoClic(seccion.datos, seccion.nombre)"
     ></path>
   </svg>
 
@@ -142,9 +142,9 @@ function eventoClic(datos) {
 <style lang="scss" scoped>
 #mapa {
   left: 19em;
-  top: 10em;
+  top: 8em;
   position: relative;
-  transform: scale(1.5);
+  transform: scale(1.3);
 }
 
 #informacion {

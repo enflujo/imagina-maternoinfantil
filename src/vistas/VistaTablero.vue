@@ -10,6 +10,7 @@ import LineaTiempo from '../componentes/LineaTiempo.vue';
 
 const datos = ref([]);
 const datosLugar = ref(null);
+const lugarSeleccionado = ref(null);
 const formaDepartamentos = ref([]);
 const rutaBase = 'https://enflujo.com/bodega';
 const año = ref(2015);
@@ -62,8 +63,9 @@ function actualizarAño(nuevoAño) {
   definirPorcentajes();
 }
 
-function actualizarVistaLugar(datos) {
+function actualizarVistaLugar(datos, lugar) {
   datosLugar.value = datos;
+  lugarSeleccionado.value = lugar;
 }
 
 cambiarNivel(nivel.value);
@@ -93,7 +95,12 @@ cambiarNivel(nivel.value);
     </div>
 
     <div id="seccionDerecha">
-      <LineaTiempo :años="años" :datos="datosLugar" :indicadorActual="indicadorActual" />
+      <LineaTiempo
+        :años="años"
+        :datos="datosLugar"
+        :indicadorActual="indicadorActual"
+        :lugarActual="lugarSeleccionado"
+      />
     </div>
   </main>
 </template>
@@ -121,13 +128,13 @@ main {
 
 #seccionCentral {
   position: relative;
-  width: 50vw;
+  width: 45vw;
   left: 7px;
 }
 
 #seccionDerecha {
   margin-top: 100px;
   position: relative;
-  width: 25vw;
+  width: 30vw;
 }
 </style>
