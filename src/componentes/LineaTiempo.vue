@@ -6,7 +6,7 @@ const props = defineProps({
   años: Object,
   datos: Object,
   indicadorActual: Number,
-  lugarActual: Object,
+  lugarActual: String,
 });
 
 const datosLugar = reactive([]);
@@ -15,6 +15,7 @@ const infoVisible = ref(false);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
+const alturaGrafica = 200;
 
 let lineaTiempo;
 let detalle;
@@ -28,9 +29,8 @@ const porcentajeMax = () => {
 };
 
 function eventoEncima(porcentaje, evento) {
-  console.log(evento);
   infoX.value = evento.pageX - 10;
-  infoY.value = evento.pageY - 23;
+  infoY.value = evento.pageY - 53;
   infoVisible.value = true;
   infoPorcentaje.value = porcentaje;
 }
@@ -59,17 +59,22 @@ watch(
 
 <template>
   <h3 @click="transformarDatos()">{{ props.lugarActual }}</h3>
-  <div id="lineaTiempo">
+  <div v-if="datos" id="lineaTiempo">
     <div id="linea">
-      <div id="divisionEjeY" v-for="i in divisionesEjeY" :key="`${i}`" :style="`top: ${-(200 / 5) * i + 199}px`">
-        <div id="valorEjeY">{{ ((porcentajeMax() / 5) * i).toFixed(0) }}%</div>
+      <div
+        id="divisionEjeY"
+        v-for="i in divisionesEjeY"
+        :key="`${i}`"
+        :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
+      >
+        <div id="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
       </div>
     </div>
     <div id="años">
       <span v-for="(d, i) in datosLugar" :key="`fecha${d.anno}`">
         <div
           id="punto"
-          :style="`top: -${convertirEscala(d.porcentaje, 0, porcentajeMax(), 0, 200)}px`"
+          :style="`top: -${convertirEscala(d.porcentaje, 0, Math.ceil(porcentajeMax()), 0, alturaGrafica) + 2}px`"
           @mouseenter="(e) => eventoEncima(d.porcentaje, e)"
           @mouseleave="eventoFuera"
         ></div>
@@ -101,8 +106,8 @@ watch(
 
     #divisionEjeY {
       height: 1px;
-      width: 10px;
-      background-color: black;
+      width: 610px;
+      background-color: #52bf9a85;
       left: -10px;
       top: 0px;
       position: absolute;
@@ -123,14 +128,15 @@ watch(
   #divisionEjeX {
     height: 10px;
     width: 1px;
-    background-color: black;
+    background-color: rgb(82 191 154);
     left: 0px;
     bottom: 39px;
     position: absolute;
   }
 
   #punto {
-    background-color: #397dff;
+    background-color: #4e4e4e;
+    border-radius: 50%;
     width: 4px;
     height: 4px;
     position: relative;

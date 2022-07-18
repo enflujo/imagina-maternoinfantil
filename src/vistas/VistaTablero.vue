@@ -89,6 +89,7 @@ cambiarNivel(nivel.value);
         :datos="datos"
         :año="año"
         :colores="colores"
+        :nivel="nivel"
         :actualizarVistaLugar="actualizarVistaLugar"
       />
       <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->

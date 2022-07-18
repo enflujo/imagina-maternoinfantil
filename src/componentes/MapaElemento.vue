@@ -2,12 +2,14 @@
 import { ref, reactive, watch } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
+import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const props = defineProps({
   geojson: Object,
   datos: Object,
   año: Number,
   colores: Object,
+  nivel: String,
   actualizarVistaLugar: Function,
 });
 const datosSecciones = reactive([]);
@@ -95,8 +97,11 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 function eventoEncima(seccion) {
   if (!seccion.datos[props.año]) return;
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
+  const deptoActual = departamentos.datos.find((d) => d[0] === seccion.codigo);
+  const municipioActual = municipios.datos.find((d) => d[3] === seccion.codigo);
+
   infoVisible.value = true;
-  nombreLugar.value = seccion.nombre;
+  nombreLugar.value = props.nivel === 'departamentos' ? deptoActual[1] : municipioActual[1];
   infoNumerador.value = numerador;
   infoDenominador.value = denominador;
   infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
@@ -127,7 +132,7 @@ function eventoClic(datos, lugar) {
       stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="() => eventoClic(seccion.datos, seccion.nombre)"
+      @click="() => eventoClic(seccion.datos, nombreLugar)"
     ></path>
   </svg>
 
