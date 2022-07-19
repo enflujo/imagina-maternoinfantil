@@ -108,8 +108,12 @@ export function crearLinea(coordenadas, mapearCoordenadas, ancho, alto) {
       const cabeza = i === 0 ? 'M' : 'L';
 
       if (typeof punto[0] === 'object') {
-        punto.forEach((puntoMulti) => {
-          res += crearSeccionSvg(puntoMulti, cabeza, mapearCoordenadas, ancho, alto);
+        punto.forEach((puntoMulti, j) => {
+          if (j === 0) {
+            res += crearSeccionSvg(puntoMulti, 'M', mapearCoordenadas, ancho, alto);
+          } else {
+            res += crearSeccionSvg(puntoMulti, 'L', mapearCoordenadas, ancho, alto);
+          }
         });
       } else {
         res += crearSeccionSvg(punto, cabeza, mapearCoordenadas, ancho, alto);
