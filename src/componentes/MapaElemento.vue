@@ -2,7 +2,6 @@
 import { ref, reactive, watch } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
-import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const props = defineProps({
   geojson: Object,
@@ -25,10 +24,6 @@ const infoArriba = ref(0);
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, props.colores[0], props.colores[1]);
 const colorLinea = 'transparent'; //'#ffc1f8';
-
-// const datosLugares = computed(() => {
-//   return
-// })
 
 watch(
   () => props.geojson,
@@ -97,11 +92,9 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 function eventoEncima(seccion) {
   if (!seccion.datos[props.año]) return;
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
-  const deptoActual = departamentos.datos.find((d) => d[0] === seccion.codigo);
-  const municipioActual = municipios.datos.find((d) => d[3] === seccion.codigo);
 
   infoVisible.value = true;
-  nombreLugar.value = props.nivel === 'departamentos' ? deptoActual[1] : municipioActual[1];
+  nombreLugar.value = seccion.nombre;
   infoNumerador.value = numerador;
   infoDenominador.value = denominador;
   infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
