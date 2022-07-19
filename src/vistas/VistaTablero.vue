@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import Mapa from '../componentes/MapaElemento.vue';
 import MenuIndicadores from '../componentes/MenuIndicadores.vue';
 import MenuAños from '../componentes/MenuAños.vue';
-import LeyendaColor from '../componentes/LeyendaColor.vue';
+// import LeyendaColor from '../componentes/LeyendaColor.vue';
 import fuentes from '../utilidades/fuentes';
 import { extremosPorcentaje } from '../utilidades/procesador';
 import LineaTiempo from '../componentes/LineaTiempo.vue';

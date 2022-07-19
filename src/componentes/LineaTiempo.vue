@@ -1,5 +1,5 @@
 <script setup>
-import { markRaw, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { convertirEscala } from '../utilidades/ayudas';
 
 const props = defineProps({
@@ -16,9 +16,6 @@ const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
 const alturaGrafica = 200;
-
-let lineaTiempo;
-let detalle;
 
 const porcentajeMax = () => {
   let listaPorcentajes = [];
