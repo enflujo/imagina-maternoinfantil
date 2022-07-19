@@ -2,12 +2,15 @@
 import { ref, reactive, watch } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
+import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const props = defineProps({
   geojson: Object,
   datos: Object,
   año: Number,
   colores: Object,
+  nivel: String,
+  actualizarVistaLugar: Function,
 });
 const datosSecciones = reactive([]);
 const nombreLugar = ref('');
@@ -94,8 +97,11 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 function eventoEncima(seccion) {
   if (!seccion.datos[props.año]) return;
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
+  const deptoActual = departamentos.datos.find((d) => d[0] === seccion.codigo);
+  const municipioActual = municipios.datos.find((d) => d[3] === seccion.codigo);
+
   infoVisible.value = true;
-  nombreLugar.value = seccion.nombre;
+  nombreLugar.value = props.nivel === 'departamentos' ? deptoActual[1] : municipioActual[1];
   infoNumerador.value = numerador;
   infoDenominador.value = denominador;
   infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
@@ -108,6 +114,10 @@ function eventoFuera() {
 function eventoMovimiento(evento) {
   infoIzq.value = evento.pageX;
   infoArriba.value = evento.pageY;
+}
+
+function eventoClic(datos, lugar) {
+  props.actualizarVistaLugar(datos, lugar);
 }
 </script>
 
@@ -122,6 +132,7 @@ function eventoMovimiento(evento) {
       stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
+      @click="() => eventoClic(seccion.datos, nombreLugar)"
     ></path>
   </svg>
 
@@ -135,13 +146,13 @@ function eventoMovimiento(evento) {
 
 <style lang="scss" scoped>
 #mapa {
-  left: -10vw;
-  top: 216px;
+  left: 19em;
+  top: 8em;
   position: relative;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 #informacion {
-  position: absolute;
+  position: fixed;
 }
 </style>
