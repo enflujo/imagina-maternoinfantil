@@ -1,0 +1,75 @@
+/** * * @param {*} color1 Color inicial en rgb, rgba o hex, entre comillas * @param {*} color2 Color final en rgb, rgba o hex, entre comillas * @param {*} contenedor Elemento del documento al cual se agrega el elemento coloreado */export function colorearGradienteRadial(color1, color2, contenedor) { const defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); const gradiente = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+ var pasos = [ { color: color1, offset: '0%' }, { color: color2, offset: '100%' }, ];
+ // Parses an array of stop information and appends <stop> elements to the <linearGradient> pasos.forEach((paso) => { const el = document.createElementNS('http://www.w3.org/2000/svg', 'stop'); el.setAttributeNS(null, 'offset', paso.offset); el.setAttributeNS(null, 'stop-color', paso.color); gradiente.appendChild(el); });
+ // Apply the <lineargradient> to <defs> gradiente.id = 'Gradiente'; gradiente.setAttribute('x1', '0'); gradiente.setAttribute('x2', '0'); gradiente.setAttribute('y1', '0'); gradiente.setAttribute('y2', '1'); defs.appendChild(gradiente);
+ contenedor.appendChild(defs);}
+export function colorearGradienteLineal(color1, color2, contenedor) { const defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); const gradiente = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+ var pasos = [ { color: color1, offset: '0%' }, { color: color2, offset: '100%' }, ];
+ // Parses an array of stop information and appends <stop> elements to the <linearGradient> pasos.forEach((paso) => { const el = document.createElementNS('http://www.w3.org/2000/svg', 'stop'); el.setAttributeNS(null, 'offset', paso.offset); el.setAttributeNS(null, 'stop-color', paso.color); gradiente.appendChild(el); });
+ // Apply the <lineargradient> to <defs> gradiente.id = 'Gradiente'; gradiente.setAttribute('x1', '0'); gradiente.setAttribute('x2', '0'); gradiente.setAttribute('y1', '0'); gradiente.setAttribute('y2', '1'); defs.appendChild(gradiente);
+ contenedor.appendChild(defs);}
+
+
+
+
+
+
+
+
+
+// Pruebas (anto)
+function crearLineasVerticales(coordenadas, porcentaje) {
+  let res = '';
+  const mover = 'M';
+  const linea = 'L';
+  const cerrar = 'Z';
+
+  coordenadas.forEach((grupo) => {
+    // dibujar líneas de la altura del porcentaje
+
+    if (grupo.length > 1) {
+      const puntos = mapearCoordenadas(grupo[0], ancho / 2, alto / 2);
+      //  res += `${mover} ${puntos.x} ${puntos.y}`;
+
+      if (municipio.datos && municipio.datos[añoSeleccionado]) {
+        const [numerador, denominador, porcentaje] = municipio.datos[añoSeleccionado];
+        //si hay datos del porcentaje, agregar una sección al svg que vaya del punto (x, y) al punto (x, ((y ** 2 / y) - porcentaje * 3))
+        // res += `${linea}${puntos.x} ${puntos.y ** 2 / puntos.y - datos.porcentaje * 3}`;
+
+        //  res += ` ${linea}${puntos.x} ${puntos.y + porcentaje} ${linea}${puntos.x + porcentaje ** 1.3} ${puntos.y + 45}`;
+        // }
+        // res += cerrar;
+      }
+      res = [puntos.x, puntos.y, porcentaje];
+    }
+  });
+  res;
+  return res;
+}
+
+
+
+/* function dibujarMapaCuadrados(municipios) {
+  let mapearColorCuadrados = escalaColores(30, 100, '#FFFFFF', '#ba69db');
+
+  municipios.features.forEach((municipio) => {
+    if (municipio.datos && municipio.datos[añoSeleccionado]) {
+      const [numerador, denominador, porcentaje] = municipio.datos[añoSeleccionado];
+      const color = mapearColorCuadrados(porcentaje);
+
+      colorearGradienteRadial('rgba(255,0,255,0.7)', 'rgba(255,255,0,0.7)', contenedorCuadrados);
+
+      const formaMunicipio = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+
+      formaMunicipio.setAttributeNS(null, 'cx', crearLineasVerticales(municipio.geometry.coordinates)[0]);
+      formaMunicipio.setAttributeNS(null, 'cy', crearLineasVerticales(municipio.geometry.coordinates)[1]);
+      formaMunicipio.setAttributeNS(null, 'r', porcentaje / 10);
+      formaMunicipio.setAttributeNS(null, 'fill', 'url(#Gradiente)');
+      formaMunicipio.setAttributeNS(null, 'stroke', color);
+      formaMunicipio.setAttributeNS(null, 'stroke-width', 2);
+
+      contenedorCuadrados.appendChild(formaMunicipio);
+    }
+  });
+} */
+

@@ -6,7 +6,8 @@ const props = defineProps({
   años: Object,
   datos: Object,
   indicadorActual: Number,
-  lugarActual: String,
+  lugarActual: Object,
+  actualizarDatos: Function,
 });
 
 const datosLugar = reactive([]);
@@ -36,37 +37,55 @@ function eventoFuera() {
   infoVisible.value = false;
 }
 
+function actualizarDatos(nuevos) {
+  datosLugar.splice(0);
+  Object.keys(nuevos).forEach((anno) => {
+    const [numerador, denominador, porcentaje] = nuevos[anno];
+
+    datosLugar.push({
+      anno: anno,
+      numerador,
+      denominador,
+      porcentaje,
+    });
+  });
+}
+
 watch(
   () => props.datos,
   (nuevos) => {
-    datosLugar.splice(0);
-    Object.keys(nuevos).forEach((anno) => {
-      const [numerador, denominador, porcentaje] = nuevos[anno];
+    actualizarDatos(nuevos);
+  }
+);
 
-      datosLugar.push({
-        anno: anno,
-        numerador,
-        denominador,
-        porcentaje,
-      });
-    });
+watch(
+  () => props.indicadorActual,
+  () => {
+    if (!props.datos) {
+      console.log('miau');
+      return;
+    } else {
+      actualizarDatos(props.datos);
+    }
   }
 );
 </script>
 
 <template>
-  <h3 @click="transformarDatos()">{{ props.lugarActual }}</h3>
+  <span v-if="props.lugarActual">
+    <h3>{{ props.lugarActual[1] }} {{ props.indicadorActual }}</h3>
+  </span>
   <div v-if="datos" id="lineaTiempo">
-    <div id="linea">
-      <div
+    <span id="linea">
+      <span
         id="divisionEjeY"
         v-for="i in divisionesEjeY"
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
         <div id="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
-      </div>
-    </div>
+      </span>
+    </span>
     <div id="años">
       <span v-for="(d, i) in datosLugar" :key="`fecha${d.anno}`">
         <div
@@ -76,7 +95,7 @@ watch(
           @mouseleave="eventoFuera"
         ></div>
 
-        <div id="divisionEjeX" :style="`left: ${(600 / datosLugar.length) * i + 20}px`"></div>
+        <span id="divisionEjeX" :style="`left: ${(600 / datosLugar.length) * i + 20}px`"></span>
         <h4>{{ d.anno }}</h4>
       </span>
     </div>

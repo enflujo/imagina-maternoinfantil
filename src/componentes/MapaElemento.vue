@@ -13,7 +13,7 @@ const props = defineProps({
   actualizarVistaLugar: Function,
 });
 const datosSecciones = reactive([]);
-const nombreLugar = ref('');
+const lugar = ref('');
 const infoNumerador = ref('');
 const infoDenominador = ref('');
 const infoPorcentaje = ref('');
@@ -101,7 +101,7 @@ function eventoEncima(seccion) {
   const municipioActual = municipios.datos.find((d) => d[3] === seccion.codigo);
 
   infoVisible.value = true;
-  nombreLugar.value = props.nivel === 'departamentos' ? deptoActual[1] : municipioActual[1];
+  lugar.value = props.nivel === 'departamentos' ? deptoActual : municipioActual;
   infoNumerador.value = numerador;
   infoDenominador.value = denominador;
   infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
@@ -132,12 +132,12 @@ function eventoClic(datos, lugar) {
       stroke-width="0.5px"
       @mouseenter="() => eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="() => eventoClic(seccion.datos, nombreLugar)"
+      @click="() => eventoClic(seccion.datos, lugar)"
     ></path>
   </svg>
 
   <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoArriba}px`">
-    <p id="departamento">{{ nombreLugar }}</p>
+    <p id="departamento">{{ lugar[1] }}</p>
     <p id="numerador">{{ infoNumerador }}</p>
     <p id="denominador">{{ infoDenominador }}</p>
     <p id="porcentaje">{{ infoPorcentaje }}</p>
