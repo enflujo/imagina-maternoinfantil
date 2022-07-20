@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Mapa from '../componentes/MapaElemento.vue';
 import MenuIndicadores from '../componentes/MenuIndicadores.vue';
 import MenuAños from '../componentes/MenuAños.vue';
@@ -8,6 +8,7 @@ import fuentes from '../utilidades/fuentes';
 import { extremosPorcentaje } from '../utilidades/procesador';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
+import { usarIndicador } from '../cerebro/indicador';
 
 const datos = ref([]);
 const datosLugar = ref(null);
@@ -28,12 +29,16 @@ const _cache = {
   municipios: null,
 };
 
+const cerebroIndicador = usarIndicador();
+
 for (let n = añoMin; n <= añoMax; n++) {
   años.push(n);
 }
 
 async function cambiarIndicador(indiceIndicador, forzar) {
   if (forzar || indicadorActual.value !== indiceIndicador) {
+    cerebroIndicador.cambiar(indiceIndicador);
+    console.log(indiceIndicador, cerebroIndicador.indiceActual);
     const { nombreArchivo } = fuentes[indiceIndicador];
     const respuesta = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-${nivel.value}.json`);
 
@@ -120,16 +125,17 @@ cambiarNivel(nivel.value);
 <template>
   <main>
     <MenuIndicadores :cambiarIndicador="cambiarIndicador" :indicadorActual="indicadorActual" />
-
+    <h2>{{ cerebroIndicador.indiceActual }}</h2>
     <div id="seccionCentral">
       <div id="filtros">
         <ul id="menuVistaLugar">
-          <li @click="() => cambiarNivel('departamentos')" class="nivel">Departamentos</li>
-          <li @click="() => cambiarNivel('municipios')" class="nivel">Municipios</li>
+          <li @click="cambiarNivel('departamentos')" class="nivel">Departamentos</li>
+          <li @click="cambiarNivel('municipios')" class="nivel">Municipios</li>
         </ul>
         <MenuAños :años="años" :actualizarAño="actualizarAño" :añoActual="año" />
         <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2>
       </div>
+
       <Mapa
         :geojson="geojsonLugar"
         :datos="datos"
