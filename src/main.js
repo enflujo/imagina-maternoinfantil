@@ -9,4 +9,4 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(rutas);
 
-app.mount('#app');
+app.mount('#aplicacion');
