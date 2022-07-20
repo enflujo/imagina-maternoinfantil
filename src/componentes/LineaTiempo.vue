@@ -55,28 +55,28 @@ watch(
 </script>
 
 <template>
-  <h3 @click="transformarDatos()">{{ props.lugarActual }}</h3>
+  <h3>{{ props.lugarActual }}</h3>
   <div v-if="datos" id="lineaTiempo">
     <div id="linea">
       <div
-        id="divisionEjeY"
+        class="divisionEjeY"
         v-for="i in divisionesEjeY"
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
-        <div id="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
+        <div class="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
       </div>
     </div>
     <div id="años">
       <span v-for="(d, i) in datosLugar" :key="`fecha${d.anno}`">
         <div
-          id="punto"
+          class="punto"
           :style="`top: -${convertirEscala(d.porcentaje, 0, Math.ceil(porcentajeMax()), 0, alturaGrafica) + 2}px`"
           @mouseenter="(e) => eventoEncima(d.porcentaje, e)"
           @mouseleave="eventoFuera"
         ></div>
 
-        <div id="divisionEjeX" :style="`left: ${(600 / datosLugar.length) * i + 20}px`"></div>
+        <div class="divisionEjeX" :style="`left: ${(600 / datosLugar.length) * i + 20}px`"></div>
         <h4>{{ d.anno }}</h4>
       </span>
     </div>
@@ -101,7 +101,7 @@ watch(
     border-left: 2px solid;
     border-bottom: 2px solid;
 
-    #divisionEjeY {
+    .divisionEjeY {
       height: 1px;
       width: 610px;
       background-color: #52bf9a85;
@@ -110,7 +110,7 @@ watch(
       position: absolute;
     }
 
-    #valorEjeY {
+    .valorEjeY {
       left: -37px;
       position: relative;
       top: -5px;
@@ -122,7 +122,7 @@ watch(
     justify-content: space-between;
   }
 
-  #divisionEjeX {
+  .divisionEjeX {
     height: 10px;
     width: 1px;
     background-color: rgb(82 191 154);
@@ -131,7 +131,7 @@ watch(
     position: absolute;
   }
 
-  #punto {
+  .punto {
     background-color: #4e4e4e;
     border-radius: 50%;
     width: 4px;
