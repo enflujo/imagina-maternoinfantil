@@ -57,23 +57,11 @@ watch(
     actualizarDatos(nuevos);
   }
 );
-
-watch(
-  () => props.indicadorActual,
-  () => {
-    if (!props.datos) {
-      console.log('miau');
-      return;
-    } else {
-      actualizarDatos(props.datos);
-    }
-  }
-);
 </script>
 
 <template>
   <span v-if="props.lugarActual">
-    <h3>{{ props.lugarActual[1] }} {{ props.indicadorActual }}</h3>
+    <h3>{{ props.lugarActual[1] }}</h3>
   </span>
   <div v-if="datos" id="lineaTiempo">
     <span id="linea">
