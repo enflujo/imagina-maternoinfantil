@@ -60,9 +60,7 @@ watch(
 </script>
 
 <template>
-  <span v-if="props.lugarActual">
-    <h3>{{ props.lugarActual[1] }}</h3>
-  </span>
+  <h3 v-if="props.lugarActual">{{ props.lugarActual[1] }}</h3>
   <div v-if="datos" id="lineaTiempo">
     <span id="linea">
       <span
@@ -74,10 +72,11 @@ watch(
         <div id="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
       </span>
     </span>
+
     <div id="años">
       <span v-for="(d, i) in datosLugar" :key="`fecha${d.anno}`">
         <div
-          id="punto"
+          class="punto"
           :style="`top: -${convertirEscala(d.porcentaje, 0, Math.ceil(porcentajeMax()), 0, alturaGrafica) + 2}px`"
           @mouseenter="(e) => eventoEncima(d.porcentaje, e)"
           @mouseleave="eventoFuera"
@@ -108,7 +107,7 @@ watch(
     border-left: 2px solid;
     border-bottom: 2px solid;
 
-    #divisionEjeY {
+    .divisionEjeY {
       height: 1px;
       width: 610px;
       background-color: #52bf9a85;
@@ -117,7 +116,7 @@ watch(
       position: absolute;
     }
 
-    #valorEjeY {
+    .valorEjeY {
       left: -37px;
       position: relative;
       top: -5px;
@@ -129,7 +128,7 @@ watch(
     justify-content: space-between;
   }
 
-  #divisionEjeX {
+  .divisionEjeX {
     height: 10px;
     width: 1px;
     background-color: rgb(82 191 154);
@@ -138,7 +137,7 @@ watch(
     position: absolute;
   }
 
-  #punto {
+  .punto {
     background-color: #4e4e4e;
     border-radius: 50%;
     width: 4px;
