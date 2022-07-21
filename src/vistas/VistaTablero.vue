@@ -7,6 +7,7 @@ import MenuAños from '../componentes/MenuAños.vue';
 import fuentes from '../utilidades/fuentes';
 import { extremosPorcentaje } from '../utilidades/procesador';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
+import ModuloLista from '../componentes/ModuloLista.vue';
 import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 import { usarIndicador } from '../cerebro/indicador';
 
@@ -44,6 +45,11 @@ async function cambiarIndicador(indiceIndicador, forzar) {
 
     const datosIndicador = await respuesta.json();
     datos.value = datosIndicador;
+
+    if (lugarSeleccionado.value) {
+      const dLugar = datosIndicador.find((obj) => obj.codigo === lugarSeleccionado.value[0]);
+      if (dLugar) datosLugar.value = dLugar.datos;
+    }
 
     indicadorActual.value = indiceIndicador;
 
@@ -116,7 +122,13 @@ function actualizarAño(nuevoAño) {
 
 function actualizarVistaLugar(datos, lugar) {
   datosLugar.value = datos;
+  console.log(datos);
   lugarSeleccionado.value = lugar;
+}
+
+function actualizarDatos(datos) {
+  datosLugar.value = datos;
+  console.log('miau2');
 }
 
 cambiarNivel(nivel.value);
@@ -153,7 +165,11 @@ cambiarNivel(nivel.value);
         :datos="datosLugar"
         :indicadorActual="indicadorActual"
         :lugarActual="lugarSeleccionado"
+        :actualizarDatos="actualizarDatos"
       />
+      <div>
+        <ModuloLista :datos="datos" :año="año" :nivel="nivel" :indicadorActual="indicadorActual" />
+      </div>
     </div>
   </main>
 </template>

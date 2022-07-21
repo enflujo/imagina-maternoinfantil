@@ -29,11 +29,11 @@ export const extremosPorcentaje = (datos, año) => {
   let porcentajeMax = -Infinity;
 
   datos.forEach((lugar) => {
-    if (!lugar.datos[año]) return;
-
-    const porcentaje = lugar.datos[año][2];
-    porcentajeMin = porcentaje < porcentajeMin ? porcentaje : porcentajeMin;
-    porcentajeMax = porcentaje > porcentajeMax ? porcentaje : porcentajeMax;
+    if (lugar.datos.año) {
+      const porcentaje = lugar.datos[año][2];
+      porcentajeMin = porcentaje < porcentajeMin ? porcentaje : porcentajeMin;
+      porcentajeMax = porcentaje > porcentajeMax ? porcentaje : porcentajeMax;
+    }
   });
 
   return { porcentajeMin, porcentajeMax };

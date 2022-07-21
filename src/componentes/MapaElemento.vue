@@ -145,7 +145,7 @@ function eventoClic(datos, lugar) {
   </svg>
 
   <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoArriba}px`">
-    <p id="departamento">{{ nombreLugar }}</p>
+    <p id="departamento">{{ lugar[1] }}</p>
     <p id="numerador">{{ infoNumerador }}</p>
     <p id="denominador">{{ infoDenominador }}</p>
     <p id="porcentaje">{{ infoPorcentaje }}</p>
