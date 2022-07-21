@@ -2,7 +2,6 @@
 import { ref, reactive, watch } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
-import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const props = defineProps({
   geojson: Object,
@@ -24,11 +23,7 @@ const infoIzq = ref(0);
 const infoArriba = ref(0);
 const mapearCoordenadas = ref();
 const mapearColor = escalaColores(0, 100, props.colores[0], props.colores[1]);
-const colorLinea = 'transparent'; //'#ffc1f8';
-
-// const datosLugares = computed(() => {
-//   return
-// })
+const colorLinea = 'white'; //'#ffc1f8';
 
 watch(
   () => props.geojson,
@@ -37,8 +32,22 @@ watch(
     mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
     actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
     datosSecciones.splice(0);
+
     nuevos.features.forEach((lugar) => {
       const { codigo, nombre } = lugar.properties;
+
+      // POR HACER: mostrar san andrés y providencia dentro de los espacios del mapa.
+      if (codigo === '88') {
+        lugar.geometry.coordinates = lugar.geometry.coordinates.map((multipoligono) => {
+          return multipoligono.map((poligono) => {
+            return poligono.map((punto) => {
+              // ESTO NO FUNCIONA PORQUE EL MAPA SE MUEVE Y ESTO QUEDA EN LUGARES RAROS
+              // creo que toca es mover los puntos desde pixeles y no de coordenadas.
+              return [punto[0] + 6, punto[1] - 1.5];
+            });
+          });
+        });
+      }
 
       datosSecciones.push({
         codigo,
@@ -97,11 +106,9 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 function eventoEncima(seccion) {
   if (!seccion.datos[props.año]) return;
   const [numerador, denominador, porcentaje] = seccion.datos[props.año];
-  const deptoActual = departamentos.datos.find((d) => d[0] === seccion.codigo);
-  const municipioActual = municipios.datos.find((d) => d[3] === seccion.codigo);
 
   infoVisible.value = true;
-  nombreLugar.value = props.nivel === 'departamentos' ? deptoActual[1] : municipioActual[1];
+  nombreLugar.value = seccion.nombre;
   infoNumerador.value = numerador;
   infoDenominador.value = denominador;
   infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
@@ -129,10 +136,11 @@ function eventoClic(datos, lugar) {
       :d="seccion.linea"
       :fill="seccion.color"
       :stroke="colorLinea"
+      :data-nombre="seccion.nombre"
       stroke-width="0.5px"
-      @mouseenter="() => eventoEncima(seccion)"
+      @mouseenter="eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="() => eventoClic(seccion.datos, nombreLugar)"
+      @click="eventoClic(seccion.datos, nombreLugar)"
     ></path>
   </svg>
 

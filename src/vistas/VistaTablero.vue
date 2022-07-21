@@ -7,11 +7,13 @@ import MenuAños from '../componentes/MenuAños.vue';
 import fuentes from '../utilidades/fuentes';
 import { extremosPorcentaje } from '../utilidades/procesador';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
+import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
+import { usarIndicador } from '../cerebro/indicador';
 
 const datos = ref([]);
 const datosLugar = ref(null);
 const lugarSeleccionado = ref(null);
-const formaDepartamentos = ref([]);
+const geojsonLugar = ref([]);
 const rutaBase = 'https://enflujo.com/bodega';
 const año = ref(2015);
 const indicadorActual = ref(0);
@@ -22,12 +24,21 @@ const porcentajeMin = ref(null);
 const añoMin = 2015;
 const añoMax = 2020;
 const años = [];
+const _cache = {
+  departamentos: null,
+  municipios: null,
+};
+
+const cerebroIndicador = usarIndicador();
+
 for (let n = añoMin; n <= añoMax; n++) {
   años.push(n);
 }
 
 async function cambiarIndicador(indiceIndicador, forzar) {
   if (forzar || indicadorActual.value !== indiceIndicador) {
+    cerebroIndicador.cambiar(indiceIndicador);
+    console.log(indiceIndicador, cerebroIndicador.indiceActual);
     const { nombreArchivo } = fuentes[indiceIndicador];
     const respuesta = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-${nivel.value}.json`);
 
@@ -41,8 +52,48 @@ async function cambiarIndicador(indiceIndicador, forzar) {
 }
 
 async function cargarGeojson() {
-  const respuesta = await fetch(`${rutaBase}/${nivel.value}.json`);
-  formaDepartamentos.value = await respuesta.json();
+  const cache = _cache[nivel.value];
+
+  /**
+   * Si ya se descargaron los datos, no volveros a pedir al servidor
+   */
+  if (cache) {
+    geojsonLugar.value = cache;
+  } else {
+    /**
+     * Cargar los datos desde el servidor si aún no se han cargado
+     */
+    const respuesta = await fetch(`${rutaBase}/${nivel.value}.json`);
+    const geojson = await respuesta.json();
+
+    /**
+     * Cambiar los nombres de los lugares para que tengan tildes y mayúsculas
+     */
+    let infoLugares;
+    let llaveCodigo = 0;
+
+    if (nivel.value === 'departamentos') {
+      infoLugares = departamentos.datos;
+    } else {
+      infoLugares = municipios.datos;
+      llaveCodigo = 3;
+    }
+
+    geojson.features = geojson.features.map((lugar) => {
+      const infoLugar = infoLugares.find((d) => d[llaveCodigo] === lugar.properties.codigo);
+
+      // Reemplazar el nombre actual (Sin tildes y todo en mayúsculas) por el que está bien escrito.
+      if (infoLugar) {
+        lugar.properties.nombre = infoLugar[1];
+      }
+
+      return lugar;
+    });
+
+    // Guardar datos procesados en el cache.
+    _cache[nivel.value] = geojson;
+    geojsonLugar.value = geojson;
+  }
 }
 
 async function cambiarNivel(valor) {
@@ -74,18 +125,19 @@ cambiarNivel(nivel.value);
 <template>
   <main>
     <MenuIndicadores :cambiarIndicador="cambiarIndicador" :indicadorActual="indicadorActual" />
-
+    <h2>{{ cerebroIndicador.indiceActual }}</h2>
     <div id="seccionCentral">
       <div id="filtros">
         <ul id="menuVistaLugar">
-          <li @click="() => cambiarNivel('departamentos')" class="nivel">Departamentos</li>
-          <li @click="() => cambiarNivel('municipios')" class="nivel">Municipios</li>
+          <li @click="cambiarNivel('departamentos')" class="nivel">Departamentos</li>
+          <li @click="cambiarNivel('municipios')" class="nivel">Municipios</li>
         </ul>
         <MenuAños :años="años" :actualizarAño="actualizarAño" :añoActual="año" />
         <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2>
       </div>
+
       <Mapa
-        :geojson="formaDepartamentos"
+        :geojson="geojsonLugar"
         :datos="datos"
         :año="año"
         :colores="colores"
