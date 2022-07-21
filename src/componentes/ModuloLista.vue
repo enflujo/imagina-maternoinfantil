@@ -1,6 +1,5 @@
 <script setup>
-import { ref, reactive, watch, onMounted } from 'vue';
-import fuentes from '../utilidades/fuentes';
+import { ref, reactive, watch } from 'vue';
 import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const props = defineProps({
@@ -10,7 +9,6 @@ const props = defineProps({
   indicadorActual: Number,
 });
 
-let lista = document.getElementById('lista');
 let datosOrdenados = reactive([]);
 let criterioOrden = ref('porcentaje');
 
