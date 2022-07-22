@@ -1,16 +1,16 @@
 <script setup>
-import { reactive, ref, watch } from 'vue';
+import { ref } from 'vue';
+import { usarCerebroDatos } from '../cerebro/datos';
+import { usarCerebroGlobales } from '../cerebro/globales';
 import { convertirEscala } from '../utilidades/ayudas';
 
 const props = defineProps({
   años: Object,
-  datos: Object,
-  indicadorActual: Number,
-  lugarActual: Object,
-  actualizarDatos: Function,
 });
 
-const datosLugar = reactive([]);
+const cerebroGlobales = usarCerebroGlobales();
+const cerebroDatos = usarCerebroDatos();
+
 const divisionesEjeY = [0, 1, 2, 3, 4, 5];
 const infoVisible = ref(false);
 const infoPorcentaje = ref('');
@@ -20,7 +20,7 @@ const alturaGrafica = 200;
 
 const porcentajeMax = () => {
   let listaPorcentajes = [];
-  datosLugar.forEach((dato) => {
+  cerebroDatos.datosLugar.forEach((dato) => {
     listaPorcentajes.push(dato.porcentaje);
   });
   return Math.max.apply(Math, listaPorcentajes);
@@ -36,45 +36,24 @@ function eventoEncima(porcentaje, evento) {
 function eventoFuera() {
   infoVisible.value = false;
 }
-
-function actualizarDatos(nuevos) {
-  datosLugar.splice(0);
-  Object.keys(nuevos).forEach((anno) => {
-    const [numerador, denominador, porcentaje] = nuevos[anno];
-
-    datosLugar.push({
-      anno: anno,
-      numerador,
-      denominador,
-      porcentaje,
-    });
-  });
-}
-
-watch(
-  () => props.datos,
-  (nuevos) => {
-    actualizarDatos(nuevos);
-  }
-);
 </script>
 
 <template>
-  <h3 v-if="props.lugarActual">{{ props.lugarActual[1] }}</h3>
-  <div v-if="datos" id="lineaTiempo">
+  <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
+  <div v-if="cerebroDatos.datosLugar.length" id="lineaTiempo">
     <span id="linea">
       <span
-        id="divisionEjeY"
+        class="divisionEjeY"
         v-for="i in divisionesEjeY"
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
-        <div id="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
+        <div class="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
       </span>
     </span>
 
     <div id="años">
-      <span v-for="(d, i) in datosLugar" :key="`fecha${d.anno}`">
+      <span v-for="(d, i) in cerebroDatos.datosLugar" :key="`fecha${d.anno}`">
         <div
           class="punto"
           :style="`top: -${convertirEscala(d.porcentaje, 0, Math.ceil(porcentajeMax()), 0, alturaGrafica) + 2}px`"
@@ -82,7 +61,7 @@ watch(
           @mouseleave="eventoFuera"
         ></div>
 
-        <span id="divisionEjeX" :style="`left: ${(600 / datosLugar.length) * i + 20}px`"></span>
+        <span class="divisionEjeX" :style="`left: ${(600 / cerebroDatos.datosLugar.length) * i + 20}px`"></span>
         <h4>{{ d.anno }}</h4>
       </span>
     </div>

@@ -1,14 +1,21 @@
 <script setup>
+import { usarCerebroGlobales } from '../cerebro/globales';
+
 const props = defineProps({
   años: Object,
-  actualizarAño: Function,
-  añoActual: Number,
 });
+
+const cerebroGlobales = usarCerebroGlobales();
 </script>
 
 <template>
   <ul id="menuAños">
-    <li v-for="n in props.años" :key="n" @click="actualizarAño(n)" :class="n === añoActual ? 'actual' : ''">
+    <li
+      v-for="n in props.años"
+      :key="n"
+      @click="cerebroGlobales.actualizarAño(n)"
+      :class="n === cerebroGlobales.año ? 'actual' : ''"
+    >
       {{ n }}
     </li>
   </ul>

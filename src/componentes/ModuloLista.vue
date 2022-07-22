@@ -1,32 +1,18 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
+import { usarCerebroDatos } from '../cerebro/datos';
+import { usarCerebroGlobales } from '../cerebro/globales';
 import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
-const props = defineProps({
-  datos: Object,
-  año: Number,
-  nivel: String,
-  indicadorActual: Number,
-});
+const cerebroGlobales = usarCerebroGlobales();
+const cerebroDatos = usarCerebroDatos();
 
 let datosOrdenados = reactive([]);
 let criterioOrden = ref('porcentaje');
 
-props.datos.forEach((dato) => {
-  const lugar = dato.codigo;
-  const porcentaje = dato.datos[props.año][2];
-  datosOrdenados.push({ lugar: lugar, porcentaje: porcentaje });
-});
-
-watch(() => props.año, actualizarDatos);
-watch(() => props.indicadorActual, actualizarDatos);
-watch(
-  () => props.datos,
-  () => {
-    if (!datosOrdenados.length) return;
-    actualizarDatos;
-  }
-);
+watch(() => cerebroGlobales.año, actualizarDatos);
+watch(() => cerebroDatos.indice, actualizarDatos);
+watch(() => cerebroDatos.datos, actualizarDatos);
 
 function comparar(a, b) {
   if (+a[criterioOrden.value] < +b[criterioOrden.value]) {
@@ -46,19 +32,19 @@ function elegirOrden(criterio) {
 function actualizarDatos() {
   datosOrdenados.splice(0);
 
-  if (!props.datos) return;
-  props.datos.forEach((dato) => {
+  if (!cerebroDatos.datos) return;
+  cerebroDatos.datos.forEach((dato) => {
     const lugarCodigo = dato.codigo;
     let lugarNombre = '';
 
-    if (props.nivel === 'departamentos') {
+    if (cerebroGlobales.nivel === 'departamentos') {
       if (dato.codigo !== '-1') {
         const depto = departamentos.datos.find((d) => d[0] === lugarCodigo);
         lugarNombre = depto[1];
       } else {
         lugarNombre = 'Lugar desconocido';
       }
-    } else if (props.nivel === 'municipios') {
+    } else if (cerebroGlobales.nivel === 'municipios') {
       if (municipios.datos.find((d) => d[3] === dato.codigo)) {
         const municipio = municipios.datos.find((d) => d[3] === dato.codigo);
         lugarNombre = municipio[1];
@@ -67,8 +53,8 @@ function actualizarDatos() {
       }
     }
 
-    if (dato.datos[props.año]) {
-      const [numerador, denominador, porcentaje] = dato.datos[props.año];
+    if (dato.datos[cerebroGlobales.año]) {
+      const [numerador, denominador, porcentaje] = dato.datos[cerebroGlobales.año];
 
       datosOrdenados.push({
         lugarCodigo: lugarCodigo,

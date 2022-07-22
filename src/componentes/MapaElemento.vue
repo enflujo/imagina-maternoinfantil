@@ -2,15 +2,10 @@
 import { ref, reactive, watch } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
+import { usarCerebroDatos } from '../cerebro/datos';
+import { usarCerebroGlobales } from '../cerebro/globales';
+import { colores } from '../utilidades/constantes';
 
-const props = defineProps({
-  geojson: Object,
-  datos: Object,
-  año: Number,
-  colores: Object,
-  nivel: String,
-  actualizarVistaLugar: Function,
-});
 const datosSecciones = reactive([]);
 const nombreLugar = ref('');
 const infoNumerador = ref('');
@@ -22,11 +17,14 @@ const alto = ref(0);
 const infoIzq = ref(0);
 const infoArriba = ref(0);
 const mapearCoordenadas = ref();
-const mapearColor = escalaColores(0, 100, props.colores[0], props.colores[1]);
+const mapearColor = escalaColores(0, 100, colores[0], colores[1]);
 const colorLinea = 'white'; //'#ffc1f8';
 
+const cerebroDatos = usarCerebroDatos();
+const cerebroGlobales = usarCerebroGlobales();
+
 watch(
-  () => props.geojson,
+  () => cerebroDatos.geojsonLugar,
   (nuevos) => {
     const { latitudMin, latitudMax, longitudMin, longitudMax } = extremosLugar(nuevos);
     mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
@@ -60,10 +58,10 @@ watch(
   }
 );
 
-watch(() => props.año, actualizarDatos);
+watch(() => cerebroGlobales.año, actualizarDatos);
 
 watch(
-  () => props.datos,
+  () => cerebroDatos.datos,
   () => {
     if (!datosSecciones.length) return;
     actualizarDatos();
@@ -71,18 +69,18 @@ watch(
 );
 
 function actualizarDatos() {
-  props.geojson.features.forEach((lugar, i) => {
+  cerebroDatos.geojsonLugar.features.forEach((lugar, i) => {
     datosSecciones[i].datos = [];
     datosSecciones[i].color = 'transparent';
     const { codigo } = lugar.properties;
-    const datosLugar = props.datos.find((obj) => obj.codigo === codigo);
+    const datosLugar = cerebroDatos.datos.find((obj) => obj.codigo === codigo);
 
-    if (!datosLugar || !datosLugar.datos[props.año]) {
+    if (!datosLugar || !datosLugar.datos[cerebroGlobales.año]) {
       return;
     }
 
     datosSecciones[i].datos = datosLugar.datos;
-    datosSecciones[i].color = mapearColor(datosLugar.datos[props.año][2]);
+    datosSecciones[i].color = mapearColor(datosLugar.datos[cerebroGlobales.año][2]);
   });
 }
 
@@ -104,8 +102,8 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 };
 
 function eventoEncima(seccion) {
-  if (!seccion.datos[props.año]) return;
-  const [numerador, denominador, porcentaje] = seccion.datos[props.año];
+  if (!seccion.datos[cerebroGlobales.año]) return;
+  const [numerador, denominador, porcentaje] = seccion.datos[cerebroGlobales.año];
 
   infoVisible.value = true;
   nombreLugar.value = seccion.nombre;
@@ -122,10 +120,6 @@ function eventoMovimiento(evento) {
   infoIzq.value = evento.pageX;
   infoArriba.value = evento.pageY;
 }
-
-function eventoClic(datos, lugar) {
-  props.actualizarVistaLugar(datos, lugar);
-}
 </script>
 
 <template>
@@ -140,12 +134,12 @@ function eventoClic(datos, lugar) {
       stroke-width="0.5px"
       @mouseenter="eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="eventoClic(seccion.datos, nombreLugar)"
+      @click="cerebroDatos.actualizarDatosLugar(seccion)"
     ></path>
   </svg>
 
   <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoArriba}px`">
-    <p id="departamento">{{ lugar[1] }}</p>
+    <p id="departamento">{{ nombreLugar }}</p>
     <p id="numerador">{{ infoNumerador }}</p>
     <p id="denominador">{{ infoDenominador }}</p>
     <p id="porcentaje">{{ infoPorcentaje }}</p>
@@ -157,7 +151,7 @@ function eventoClic(datos, lugar) {
   left: 19em;
   top: 8em;
   position: relative;
-  transform: scale(1.3);
+  // transform: scale(1.3);
 }
 
 #informacion {

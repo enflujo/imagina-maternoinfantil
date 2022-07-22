@@ -1,19 +1,18 @@
 <script setup>
+import { usarCerebroDatos } from '../cerebro/datos';
 import fuentes from '../utilidades/fuentes';
-const props = defineProps({
-  cambiarIndicador: Function,
-  indicadorActual: Number,
-});
+
+const cerebroDatos = usarCerebroDatos();
 </script>
 
 <template>
   <ul id="menuIndicadores" class="contenedorMenu">
     <li
       v-for="(indicador, i) in fuentes"
-      @click="props.cambiarIndicador(i)"
+      @click="cerebroDatos.cambiarIndicador(i)"
       :key="indicador.nombreIndicador"
       class="botonIndicador"
-      :class="i === props.indicadorActual ? 'activo' : ''"
+      :class="i === cerebroDatos.indice ? 'activo' : ''"
     >
       {{ indicador.nombreIndicador }}
     </li>
