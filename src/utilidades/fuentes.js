@@ -5,8 +5,18 @@ export default [
     nombreIndicador: 'Proporción de nacidos vivos a término con bajo peso al nacer',
     definicion:
       'Indica la proporción de nacidos vivos a término (37 semanas o más) que nacieron con peso inferior a 2.500 gramos al momento de nacer en un momento y territorio específico, con respecto al total de nacidos vivos en el mismo periodo y lugar.',
+    grupo: 'Salud sexual y reproductiva',
     calculo:
       'Número de nacidos vivos a término (37 semanas o más) que pesaron menos de 2.500 gramos / Total de nacidos vivos en el mismo periodo y territorio',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos a término que pesaron menos de 2499 gramos',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Nacidos vivos',
+    unidadDeMedida: 'Por 100 (%)',
+    fichaTecnica: { descripcion: '', parametros: [] },
+    nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
+    serieDisponible: [],
+    interpretacion:
+      'El bajo peso al nacer es un serio problema de salud pública ya que expresa las condiciones de salud durante la gestación. Se asocia a complicaciones durante los primeros meses de vida, por ejemplo, mortalidad, deficiencias en el desarrollo cognitivo, e incluso puede aumentar el riesgo de padecer enfermedades no transmisibles como la diabetes durante la adultez. Un valor de 8% significa que existen 8 nacidos a término con bajo peso al nacer por cada 100 nacidos vivos en un territorio y momento específico. Más información sobre la importancia del adecuado peso al nacer:  https://apps.who.int/iris/bitstream/handle/10665/255733/WHO_NMH_NHD_14.5_spa.pdf',
+    meta: { umbral: 10, descripcion: 'No debe superar el 10% según la meta a 2021 del Plan Decenal de Salud Pública.' },
   },
   {
     nombreTabla: 'NACIDOS VIVOS 4 CONS PRENATAL',
