@@ -2,11 +2,6 @@
 import { ref } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
-import { convertirEscala } from '../utilidades/ayudas';
-
-const props = defineProps({
-  años: Object,
-});
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();

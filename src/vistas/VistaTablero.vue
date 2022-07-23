@@ -7,17 +7,13 @@ import MenuAños from '../componentes/MenuAños.vue';
 import fuentes from '../utilidades/fuentes';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
-import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 
-const datos = ref([]);
-const año = ref(2015);
 const indicadorActual = ref(0);
 const añoMin = 2015;
 const añoMax = 2020;
 const años = [];
 
-const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
 
 for (let n = añoMin; n <= añoMax; n++) {
