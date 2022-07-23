@@ -7,22 +7,22 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .prettierignore"
   },
   "dependencies": {
     "@enflujo/alquimia": "^0.0.1",
-    "pinia": "^2.0.14",
+    "pinia": "^2.0.16",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.1"
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-plugin-vue": "^9.2.0",
     "prettier": "^2.5.1",
-    "sass": "^1.53.0",
-    "vite": "^2.9.12"
+    "sass": "^1.54.0",
+    "vite": "^3.0.2"
   }
 }
