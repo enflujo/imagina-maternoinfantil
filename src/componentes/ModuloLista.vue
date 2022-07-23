@@ -15,12 +15,12 @@ watch(() => cerebroDatos.indice, actualizarDatos);
 watch(() => cerebroDatos.datos, actualizarDatos);
 
 function comparar(a, b) {
-  if (+a[criterioOrden.value] < +b[criterioOrden.value]) {
-    return 1;
-  }
-  if (+a[criterioOrden.value] > +b[criterioOrden.value]) {
-    return -1;
-  }
+  const criterio = criterioOrden.value;
+  const valorA = +a[criterio];
+  const valorB = +b[criterio];
+
+  if (valorA < valorB) return 1;
+  if (valorA > valorB) return -1;
   return 0;
 }
 
