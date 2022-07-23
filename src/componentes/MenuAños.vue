@@ -25,6 +25,8 @@ const cerebroGlobales = usarCerebroGlobales();
 ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 li {

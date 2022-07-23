@@ -23,12 +23,10 @@ const cerebroDatos = usarCerebroDatos();
 @import '@/assets/constantes.scss';
 
 #menuIndicadores {
-  width: 18vw;
+  width: 20vw;
   font-size: 0.9em;
   font-family: $fuenteTexto;
-  top: 15vh;
-  left: 2vw;
-  position: relative;
+  padding: 0 0 0 10px;
 }
 
 .contenedorMenu {

@@ -36,15 +36,15 @@ watch(
 
       // POR HACER: mostrar san andrés y providencia dentro de los espacios del mapa.
       if (codigo === '88') {
-        lugar.geometry.coordinates = lugar.geometry.coordinates.map((multipoligono) => {
-          return multipoligono.map((poligono) => {
-            return poligono.map((punto) => {
-              // ESTO NO FUNCIONA PORQUE EL MAPA SE MUEVE Y ESTO QUEDA EN LUGARES RAROS
-              // creo que toca es mover los puntos desde pixeles y no de coordenadas.
-              return [punto[0] + 6, punto[1] - 1.5];
-            });
-          });
-        });
+        // lugar.geometry.coordinates = lugar.geometry.coordinates.map((multipoligono) => {
+        //   return multipoligono.map((poligono) => {
+        //     return poligono.map((punto) => {
+        //       // ESTO NO FUNCIONA PORQUE EL MAPA SE MUEVE Y ESTO QUEDA EN LUGARES RAROS
+        //       // creo que toca es mover los puntos desde pixeles y no de coordenadas.
+        //       return [punto[0] + 6, punto[1] - 1.5];
+        //     });
+        //   });
+        // });
       }
 
       datosSecciones.push({
@@ -148,9 +148,11 @@ function eventoMovimiento(evento) {
 
 <style lang="scss" scoped>
 #mapa {
-  left: 19em;
-  top: 8em;
-  position: relative;
+  margin: 0 auto;
+  display: block;
+  // left: 19em;
+  // top: 8em;
+  // position: relative;
   // transform: scale(1.3);
 }
 

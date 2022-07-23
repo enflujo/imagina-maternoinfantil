@@ -1,16 +1,16 @@
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import Mapa from '../componentes/MapaElemento.vue';
 import MenuIndicadores from '../componentes/MenuIndicadores.vue';
 import MenuAños from '../componentes/MenuAños.vue';
 // import LeyendaColor from '../componentes/LeyendaColor.vue';
-import fuentes from '../utilidades/fuentes';
+// import fuentes from '../utilidades/fuentes';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
 import { usarCerebroGlobales } from '../cerebro/globales';
 
-const indicadorActual = ref(0);
-const añoMin = 2015;
+// const indicadorActual = ref(0);
+const añoMin = 2005;
 const añoMax = 2020;
 const años = [];
 
@@ -34,7 +34,7 @@ cerebroGlobales.cambiarNivel();
           <li @click="cerebroGlobales.cambiarNivel('municipios')" class="nivel">Municipios</li>
         </ul>
         <MenuAños :años="años" />
-        <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2>
+        <!-- <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2> -->
       </div>
 
       <Mapa />
@@ -42,7 +42,7 @@ cerebroGlobales.cambiarNivel();
     </div>
 
     <div id="seccionDerecha">
-      <LineaTiempo :años="años" />
+      <LineaTiempo />
       <ModuloLista />
     </div>
   </main>
@@ -57,10 +57,7 @@ main {
 }
 
 #filtros {
-  left: 10vw;
-  width: 100%;
-  height: fit-content;
-  position: relative;
+  margin-left: 1em;
 
   #indicadorSeleccionado {
     font-size: 1.4em;
@@ -70,13 +67,11 @@ main {
 }
 
 #seccionCentral {
-  position: relative;
-  width: 45vw;
-  left: 7px;
+  width: 50vw;
 }
 
 #seccionDerecha {
-  margin-top: 100px;
+  // margin-top: 100px;
   position: relative;
   width: 30vw;
 }

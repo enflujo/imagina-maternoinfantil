@@ -7,7 +7,7 @@ export const usarCerebroGlobales = defineStore('globales', {
     porcentajeMax: null,
     porcentajeMin: null,
     nivel: 'departamentos',
-    año: 2015,
+    año: 2005,
     lugarSeleccionado: null,
   }),
 
