@@ -26,7 +26,9 @@ const cerebroDatos = usarCerebroDatos();
   width: 20vw;
   font-size: 0.9em;
   font-family: $fuenteTexto;
-  padding: 0 0 0 10px;
+  padding: 0 0 5em 10px;
+  overflow: auto;
+  height: 100vh;
 }
 
 .contenedorMenu {

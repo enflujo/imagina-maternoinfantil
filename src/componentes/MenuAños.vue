@@ -33,7 +33,7 @@ li {
   background-color: aquamarine;
   padding: 0.5em;
   margin: 0 0.3em;
-  font-size: 0.9em;
+  font-size: 0.8em;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
