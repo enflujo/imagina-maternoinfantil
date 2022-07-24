@@ -1,5 +1,5 @@
 <script setup>
-// import { ref } from 'vue';
+import { ref } from 'vue';
 import Mapa from '../componentes/MapaElemento.vue';
 import MenuIndicadores from '../componentes/MenuIndicadores.vue';
 import MenuAños from '../componentes/MenuAños.vue';
@@ -8,13 +8,28 @@ import MenuAños from '../componentes/MenuAños.vue';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
 import { usarCerebroGlobales } from '../cerebro/globales';
+import { onMounted, onUnmounted } from 'vue-demi';
 
 // const indicadorActual = ref(0);
 const añoMin = 2005;
 const añoMax = 2020;
 const años = [];
-
+const anchoDerecha = ref(0);
+const seccionDerecha = ref(null);
 const cerebroGlobales = usarCerebroGlobales();
+
+onMounted(() => {
+  actualizarDims();
+  window.addEventListener('resize', actualizarDims);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', actualizarDims);
+});
+
+function actualizarDims() {
+  anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
+}
 
 for (let n = añoMin; n <= añoMax; n++) {
   años.push(n);
@@ -41,8 +56,8 @@ cerebroGlobales.cambiarNivel();
       <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
     </div>
 
-    <div id="seccionDerecha">
-      <LineaTiempo />
+    <div id="seccionDerecha" ref="seccionDerecha">
+      <LineaTiempo :ancho="anchoDerecha" />
       <ModuloLista />
     </div>
   </main>

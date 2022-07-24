@@ -1,8 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { convertirEscala } from '../utilidades/ayudas';
+
+const props = defineProps({
+  ancho: Number,
+});
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
@@ -13,6 +17,14 @@ const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
 const alturaGrafica = 200;
+const pasoX = ref(0);
+
+watch(() => props.ancho, actualizarAncho);
+watch(() => cerebroDatos.datosLugar, actualizarAncho);
+
+function actualizarAncho() {
+  pasoX.value = props.ancho / cerebroDatos.datosLugar.length;
+}
 
 const porcentajeMax = () => {
   let listaPorcentajes = [];
@@ -57,7 +69,7 @@ function eventoFuera() {
           @mouseleave="eventoFuera"
         ></div>
 
-        <span class="divisionEjeX" :style="`left: ${(600 / cerebroDatos.datosLugar.length) * i + 20}px`"></span>
+        <span class="divisionEjeX" :style="`left: ${(pasoX * i) | 0}px`"></span>
         <h4>{{ d.anno }}</h4>
       </span>
     </div>
@@ -74,20 +86,19 @@ function eventoFuera() {
   position: absolute;
   flex-direction: column;
   font-size: 0.7em;
-  margin-top: 2em;
+  width: 100%;
 
   #linea {
     height: 200px;
-    width: 600px;
+    width: calc(100% - 10px);
     border-left: 2px solid;
     border-bottom: 2px solid;
 
     .divisionEjeY {
       height: 1px;
-      width: 610px;
+      width: 100%;
       background-color: #52bf9a85;
       left: -10px;
-      top: 0px;
       position: absolute;
     }
 
@@ -115,11 +126,9 @@ function eventoFuera() {
   .punto {
     background-color: #4e4e4e;
     border-radius: 50%;
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     position: relative;
-    top: -3px;
-    left: 15px;
     cursor: pointer;
   }
 
