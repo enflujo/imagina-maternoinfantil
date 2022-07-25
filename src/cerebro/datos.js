@@ -10,6 +10,7 @@ export const usarCerebroDatos = defineStore('datos', {
     indice: 0,
     cargandoDatos: false,
     datos: [],
+    datosNacionales: [],
     datosLugar: [],
     _cache: {
       departamentos: null,
@@ -36,8 +37,21 @@ export const usarCerebroDatos = defineStore('datos', {
         const cerebroGlobales = usarCerebroGlobales();
         const { nombreArchivo } = fuentes[indiceIndicador];
         const respuesta = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-${cerebroGlobales.nivel}.json`);
-
+        const respuestaPais = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-pais.json`);
         const datosIndicador = await respuesta.json();
+        const datosPais = await respuestaPais.json();
+
+        this.datosNacionales = Object.keys(datosPais).map((anno) => {
+          const [numerador, denominador, porcentaje] = datosPais[anno];
+
+          return {
+            anno: anno,
+            numerador,
+            denominador,
+            porcentaje,
+          };
+        });
+
         this.datos = datosIndicador;
 
         if (cerebroGlobales.lugarSeleccionado) {
@@ -120,7 +134,6 @@ export const usarCerebroDatos = defineStore('datos', {
           porcentaje,
         };
       });
-      // this.datosLugar = datos;
     },
   },
 });

@@ -26,14 +26,6 @@ function actualizarAncho() {
   pasoX.value = props.ancho / cerebroDatos.datosLugar.length;
 }
 
-const porcentajeMax = () => {
-  let listaPorcentajes = [];
-  cerebroDatos.datosLugar.forEach((dato) => {
-    listaPorcentajes.push(dato.porcentaje);
-  });
-  return Math.max.apply(Math, listaPorcentajes);
-};
-
 function eventoEncima(porcentaje, evento) {
   infoX.value = evento.pageX - 10;
   infoY.value = evento.pageY - 53;
@@ -56,7 +48,7 @@ function eventoFuera() {
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
-        <div class="valorEjeY">{{ ((Math.ceil(porcentajeMax()) / 5) * i).toFixed(1) }}%</div>
+        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}%</div>
       </span>
     </span>
 
@@ -64,7 +56,7 @@ function eventoFuera() {
       <span v-for="(d, i) in cerebroDatos.datosLugar" :key="`fecha${d.anno}`">
         <div
           class="punto"
-          :style="`top: -${convertirEscala(d.porcentaje, 0, Math.ceil(porcentajeMax()), 0, alturaGrafica) + 2}px`"
+          :style="`top: -${convertirEscala(d.porcentaje, 0, 100, 0, alturaGrafica) + 2}px`"
           @mouseenter="(e) => eventoEncima(d.porcentaje, e)"
           @mouseleave="eventoFuera"
         ></div>
