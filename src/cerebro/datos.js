@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroGlobales } from './globales';
 import { rutaBase } from '../utilidades/constantes';
-import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 export const usarCerebroDatos = defineStore('datos', {
   state: () => ({
@@ -82,32 +81,8 @@ export const usarCerebroDatos = defineStore('datos', {
         /**
          * Cargar los datos desde el servidor si aún no se han cargado
          */
-        const respuesta = await fetch(`${rutaBase}/${cerebroGlobales.nivel}.json`);
+        const respuesta = await fetch(`${rutaBase}/mi_v2/${cerebroGlobales.nivel}.json`);
         const geojson = await respuesta.json();
-
-        /**
-         * Cambiar los nombres de los lugares para que tengan tildes y mayúsculas
-         */
-        let infoLugares;
-        let llaveCodigo = 0;
-
-        if (cerebroGlobales.nivel === 'departamentos') {
-          infoLugares = departamentos.datos;
-        } else {
-          infoLugares = municipios.datos;
-          llaveCodigo = 3;
-        }
-
-        geojson.features = geojson.features.map((lugar) => {
-          const infoLugar = infoLugares.find((d) => d[llaveCodigo] === lugar.properties.codigo);
-
-          // Reemplazar el nombre actual (Sin tildes y todo en mayúsculas) por el que está bien escrito.
-          if (infoLugar) {
-            lugar.properties.nombre = infoLugar[1];
-          }
-
-          return lugar;
-        });
 
         // Guardar datos procesados en el cache.
         this._cache[cerebroGlobales.nivel] = geojson;
