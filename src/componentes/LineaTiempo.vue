@@ -48,7 +48,7 @@ function eventoFuera() {
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
-        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}%</div>
+        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}</div>
       </span>
     </span>
 

@@ -9,6 +9,7 @@ import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { onMounted, onUnmounted } from 'vue-demi';
+import FichaTecnica from '../componentes/FichaTecnica.vue';
 
 // const indicadorActual = ref(0);
 const añoMin = 2005;
@@ -59,6 +60,7 @@ cerebroGlobales.cambiarNivel();
     <div id="seccionDerecha" ref="seccionDerecha">
       <LineaTiempo :ancho="anchoDerecha" />
       <ModuloLista />
+      <FichaTecnica />
     </div>
   </main>
 </template>
