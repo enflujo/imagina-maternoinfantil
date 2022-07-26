@@ -6,6 +6,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos a término (37 semanas o más) que nacieron con peso inferior a 2.500 gramos al momento de nacer en un momento y territorio específico, con respecto al total de nacidos vivos en el mismo periodo y lugar.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos a término (37 semanas o más) que pesaron menos de 2.500 gramos / Total de nacidos vivos en el mismo periodo y territorio',
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos a término que pesaron menos de 2499 gramos',
@@ -25,6 +26,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos cuyas madres asistieron a 4 o más controles prenatales en un momento y territorio específico.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos cuyas gestantes asistieron a 4 o más controles prenatales / Total de nacidos vivos',
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos cuyas madres tuvieron 4 o más controles prenatales',
@@ -42,27 +44,13 @@ export default [
     },
   },
   {
-    nombreTabla: 'PROMEDIO CONTROLES PRENATALES',
-    nombreArchivo: 'controles-prenatales',
-    nombreIndicador: 'Número promedio de controles prenatales',
-    definicion: 'Indica el número promedio de controles prenatales en los nacidos vivos.',
-    calculo: '',
-    fuenteNumerador: '',
-    fuenteDenominador: '',
-    unidadDeMedida: '',
-    fichaTecnica: { descripcion: '', parametros: [] },
-    nivelDesagregacion: [],
-    serieDisponible: [],
-    interpretacion: '',
-    meta: { umbral: 10, descripcion: '' },
-  },
-  {
     nombreTabla: 'NACIDOS VIVOS <15 PAPA 4',
     nombreArchivo: 'nacidos-menores15-padre4',
     nombreIndicador: 'Proporción de nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 años o más',
     definicion:
       'Indica la proporción de nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 o más años, con respecto al total de nacimientos en un periodo y territorio definido.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 años o más / Total de nacidos vivos para el mismo periodo de tiempo y territorio.',
     fuenteNumerador:
@@ -83,6 +71,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos que nacieron en instituciones de salud en un momento y territorio específico, con respecto al total de nacidos vivos.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos que nacieron en una institución de salud / Total de nacidos vivos para el mismo periodo de tiempo y territorio',
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos que nacieron en instituciones de salud',
@@ -102,6 +91,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos que nacieron por cesárea en un momento y territorio específico, con respecto al total de nacidos vivos.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos que nacieron por cesárea / Total de nacidos vivos para el mismo periodo de tiempo y territorio',
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos que nacieron por cesárea',
@@ -121,6 +111,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos en mujeres menores de 14 años con respecto a todos los nacidos vivos.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos en niñas menores de 14 años o menos / Total de nacidos vivos en el mismo periodo de tiempo y territorio',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -143,6 +134,7 @@ export default [
     definicion:
       'Indica la proporción de nacidos vivos en mujeres entre 14 y 17 años con respecto a todos los nacidos vivos.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'proporción',
     calculo:
       'Número de nacidos vivos en niñas menores de entre 14 y 17 años / Total de nacidos vivos en el mismo periodo de tiempo y territorio',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -162,6 +154,7 @@ export default [
     definicion:
       'Indica el número de muertes de mujeres durante el embarazo parto o puerperio (después de los 42 días después del parto, pero antes de un año de la terminación del embarazo) por cualquier causa relacionada o agravada por el embarazo, parto o puerperio.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'razón',
     calculo: 'Muertes maternas durante un año / Nacidos vivos durante el mismo periodo',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
@@ -184,6 +177,7 @@ export default [
     definicion:
       'Indica el número de nacidos vivos de madres entre 10 a 14 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'tasa',
     calculo:
       'Número de nacidos vivos en mujeres de 10 a 14 años / Total de mujeres entre 10 y 14 años en un periodo y territorio específico',
     fuenteNumerador: '',
@@ -202,6 +196,7 @@ export default [
     definicion:
       'Indica el número de nacidos vivos de madres entre 10 a 19 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'tasa',
     calculo:
       'Número de nacidos vivos en mujeres de 10 a 19 años / Total de mujeres entre 10 y 19 años en un periodo y territorio específico',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -224,6 +219,7 @@ export default [
     definicion:
       'Indica el número de nacidos vivos de madres entre 15 a 19 años durante un periodo, por cada 1.000 mujeres de la misma edad en el mismo periodo y un territorio.',
     grupo: 'Salud sexual y reproductiva',
+    tipo: 'tasa',
     calculo:
       'Número de nacidos vivos en mujeres de 15 a 19 años / Total de mujeres entre 15 y 19 años en un periodo y territorio específico',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -247,6 +243,7 @@ export default [
     definicion:
       'Indica el número de defunciones ocurridas en niños menores de 5 años por cada 1.000 nacidos vivos en un periodo y territorio determinado.',
     grupo: 'Infantil',
+    tipo: 'tasa',
     calculo:
       'Número de muertes de menores de 5 años en un periodo específico / Número de nacidos vivos en el mismo periodo',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -269,6 +266,7 @@ export default [
     definicion:
       'Indica el número de defunciones ocurridas en niños menores de 1 año por cada 1.000 nacidos vivos en un periodo y territorio determinado.',
     grupo: 'Infantil',
+    tipo: 'tasa',
     calculo:
       'Número de muertes de menores de 1 año en un periodo específico / Número de nacidos vivos en el mismo periodo',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -291,6 +289,7 @@ export default [
     definicion:
       'Indica el número de defunciones en niños menores de 5 años por infecciones respiratorias agudas con respecto a la población de niños menores de 5 años.',
     grupo: 'Infantil',
+    tipo: 'tasa',
     calculo: 'Número de muertes por IRA en menores de 5 años / Número total de menores de 5 años',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
@@ -309,6 +308,7 @@ export default [
     definicion:
       'Indica el número de defunciones en niños menores de 5 años por enfermedad diarreica aguda con respecto a la población de niños menores de 5 años.',
     grupo: 'Infantil',
+    tipo: 'tasa',
     calculo: 'Número de muertes por EDA en menores de 5 años / Número total de menores de 5 años',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
@@ -327,6 +327,7 @@ export default [
     definicion:
       'Corresponde al número de muertes fetales con 22 semanas completas (154 días) de gestación o con 500 gramos o más de peso fetal y los siete días completos después del nacimiento, con respecto a los nacidos vivos más el número de muertes fetales con 22 semanas completas (154 días) de gestación o con 500 gramos o más de peso.',
     grupo: 'Ruta materno perinatal (Infantil)',
+    tipo: 'tasa',
     calculo:
       'Número de casos de muerte perinatal en un periodo de tiempo / Total de nacidos vivos + muertes fetales en el mismo periodo de tiempo',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
@@ -350,6 +351,7 @@ export default [
     definicion:
       'Número de muertes por desnutrición en menores de 5 años con respecto a la población de niños menores de 5 años.',
     grupo: 'Infantil',
+    tipo: 'tasa',
     calculo: 'Número de muertes por desnutrición en menores de 5 años / Número total de menores de 5 años',
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
