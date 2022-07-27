@@ -17,6 +17,7 @@ export const usarCerebroDatos = defineStore('datos', {
       municipios: null,
     },
     geojsonLugar: [],
+    geojsonSanAndres: [],
   }),
 
   getters: {
@@ -71,6 +72,7 @@ export const usarCerebroDatos = defineStore('datos', {
     async cargarGeojson() {
       const cerebroGlobales = usarCerebroGlobales();
       const cache = this._cache[cerebroGlobales.nivel];
+      let sanAndres;
 
       /**
        * Si ya se descargaron los datos, no volveros a pedir al servidor
@@ -82,13 +84,13 @@ export const usarCerebroDatos = defineStore('datos', {
         /**
          * Cargar los datos desde el servidor si aún no se han cargado
          */
-        const respuesta = await fetch(`${rutaBase}/${cerebroGlobales.nivel}.json`);
+        const respuesta = await fetch(`${rutaBase}/mi_v2/${cerebroGlobales.nivel}.json`);
         const geojson = await respuesta.json();
 
         /**
          * Cambiar los nombres de los lugares para que tengan tildes y mayúsculas
          */
-        let infoLugares;
+        /*   let infoLugares;
         let llaveCodigo = 0;
 
         if (cerebroGlobales.nivel === 'departamentos') {
@@ -96,9 +98,9 @@ export const usarCerebroDatos = defineStore('datos', {
         } else {
           infoLugares = municipios.datos;
           llaveCodigo = 3;
-        }
+        } */
 
-        geojson.features = geojson.features.map((lugar) => {
+        /* geojson.features = geojson.features.map((lugar) => {
           const infoLugar = infoLugares.find((d) => d[llaveCodigo] === lugar.properties.codigo);
 
           // Reemplazar el nombre actual (Sin tildes y todo en mayúsculas) por el que está bien escrito.
@@ -107,11 +109,24 @@ export const usarCerebroDatos = defineStore('datos', {
           }
 
           return lugar;
-        });
+        }); */
 
         // Guardar datos procesados en el cache.
+        // if (geojson.features)
+
+        let geoSanAndres;
+
+        geojson.features = geojson.features.filter((lugar) => {
+          if (lugar.properties.codigo === '88') {
+            geoSanAndres = lugar;
+            return false;
+          }
+          return true;
+        });
+
         this._cache[cerebroGlobales.nivel] = geojson;
         this.geojsonLugar = geojson;
+        this.geojsonSanAndres = geoSanAndres;
 
         this.cargandoDatos = false;
       }
