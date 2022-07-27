@@ -18,6 +18,9 @@ const ancho = ref(0);
 const alto = ref(0);
 const anchoSanAndres = ref(0);
 const altoSanAdres = ref(0);
+const anchoProvidencia = ref(0);
+const altoProvidencia = ref(0);
+
 const infoIzq = ref(0);
 const infoArriba = ref(0);
 const mapearCoordenadas = ref();
@@ -33,7 +36,6 @@ watch(
   () => cerebroDatos.geojsonLugar,
   (nuevos) => {
     const { latitudMin, latitudMax, longitudMin, longitudMax } = extremosLugar(nuevos);
-    console.log(extremosLugar(nuevos));
     mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
     actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
     datosSecciones.splice(0);
@@ -68,30 +70,53 @@ watch(
   () => cerebroDatos.geojsonSanAndres,
   (lugar) => {
     const coordenadasProvidencia = [...lugar.geometry.coordinates[1], ...lugar.geometry.coordinates[2]];
+
     const pro = extremosLugar(coordenadasProvidencia);
     const sa = extremosLugar(lugar.geometry.coordinates[0]);
-    console.log(pro, sa);
+
+    const coordenadasAnchoSanAndres = sa.longitudMax - sa.longitudMin;
+    const coordenadasAltoSanAndres = sa.latitudMax - sa.latitudMin;
+    const coordenadasAnchoProvidencia = pro.longitudMax - pro.longitudMin;
+    const coordenadasAltoProvidencia = pro.latitudMax - pro.latitudMin;
 
     mapearSanAndres.value = escalaCoordenadas(sa.latitudMin, sa.latitudMax, sa.longitudMin, sa.longitudMax);
     mapearProvidencia.value = escalaCoordenadas(pro.latitudMin, pro.latitudMax, pro.longitudMin, pro.longitudMax);
-    // actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
+
     datosSanAndres.splice(0);
+    datosProvidencia.splice(0);
+
+    if (coordenadasAnchoSanAndres > coordenadasAltoSanAndres) {
+      altoSanAdres.value = anchoSanAndres.value * (coordenadasAltoSanAndres / coordenadasAnchoSanAndres);
+    } else {
+      anchoSanAndres.value = altoSanAdres.value * (coordenadasAnchoSanAndres / coordenadasAltoSanAndres);
+    }
+
+    if (coordenadasAnchoProvidencia > coordenadasAltoProvidencia) {
+      altoProvidencia.value = anchoProvidencia.value * (coordenadasAltoProvidencia / coordenadasAnchoProvidencia);
+    } else {
+      anchoProvidencia.value = altoProvidencia.value * (coordenadasAnchoProvidencia / coordenadasAltoProvidencia);
+    }
 
     const { codigo, nombre } = lugar.properties;
-    //latitudMax:  longitudMax:
 
-    // console.log(
-    //   anchoSanAndres.value,
-    //   altoSanAdres.value,
-    //   lugar.geometry.coordinates[0],
-    //   mapearSanAndres.value([-81.73899, -4.2473], 500, altoSanAdres.value),
-    //   mapearSanAndres.value([-66.874, 13.39744], anchoSanAndres.value, altoSanAdres.value)
-    // );
     datosSanAndres.push({
       codigo,
       nombre,
       datos: [],
       linea: crearLinea(lugar.geometry.coordinates[0], mapearSanAndres.value, anchoSanAndres.value, altoSanAdres.value),
+      color: 'red',
+    });
+
+    datosProvidencia.push({
+      codigo,
+      nombre,
+      datos: [],
+      linea: crearLinea(
+        lugar.geometry.coordinates[2],
+        mapearProvidencia.value,
+        anchoProvidencia.value,
+        altoProvidencia.value
+      ),
       color: 'red',
     });
 
@@ -147,6 +172,7 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   const coordenadasAncho = longitudMax - longitudMin;
   const coordenadasAlto = latitudMax - latitudMin;
 
+  // Revisa las proporciones del mapa para que no se deforme
   if (coordenadasAncho > coordenadasAlto) {
     alto.value = ancho.value * (coordenadasAlto / coordenadasAncho);
   } else {
@@ -156,8 +182,11 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   ancho.value = ancho.value | 0;
   alto.value = alto.value | 0;
 
-  anchoSanAndres.value = (ancho.value / 3) | 0;
+  anchoSanAndres.value = (ancho.value / 10) | 0;
   altoSanAdres.value = anchoSanAndres.value * 2.5;
+
+  anchoProvidencia.value = (ancho.value / 20) | 0;
+  altoProvidencia.value = anchoProvidencia.value * 2.5;
 };
 
 function eventoEncima(seccion) {
@@ -249,7 +278,9 @@ function eventoMovimiento(evento) {
   // transform: scale(1.3);
 }
 
-#mapaSanAndres {
+#sanAndresProvidencia {
+  width: 50%;
+  display: flex;
 }
 
 #informacion {
