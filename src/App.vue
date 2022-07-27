@@ -1,10 +1,12 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import Encabezado from './componentes/Encabezado.vue';
 // import SeccionIntroduccion from '@/components/SeccionIntroduccion.vue';
 </script>
 
 <template>
   <main>
+    <Encabezado />
     <!-- <header>
       <SeccionIntroduccion />
     </header> -->

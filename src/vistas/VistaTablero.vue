@@ -39,16 +39,17 @@ cerebroGlobales.cambiarNivel();
 </script>
 
 <template>
-  <main>
+  <div id="contenedorGeneral">
     <MenuIndicadores />
 
     <div id="seccionCentral">
       <div id="filtros">
+        <MenuAños :años="años" />
         <ul id="menuVistaLugar">
           <li @click="cerebroGlobales.cambiarNivel('departamentos')" class="nivel">Departamentos</li>
           <li @click="cerebroGlobales.cambiarNivel('municipios')" class="nivel">Municipios</li>
         </ul>
-        <MenuAños :años="años" />
+
         <!-- <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2> -->
       </div>
 
@@ -60,12 +61,15 @@ cerebroGlobales.cambiarNivel();
       <LineaTiempo :ancho="anchoDerecha" />
       <ModuloLista />
     </div>
-  </main>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-main {
+@import '@/assets/constantes.scss';
+
+#contenedorGeneral {
   display: flex;
+  margin-top: $tamañoEncabezado;
 }
 .nivel {
   cursor: pointer;

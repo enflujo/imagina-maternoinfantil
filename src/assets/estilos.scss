@@ -1,22 +1,5 @@
-@import './_constantes.scss';
-
-html {
-  box-sizing: border-box;
-  height: 100%;
-  background-color: $colorFondoClaro;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+@import './constantes';
+@import './normalizar';
 
 h3 {
   font-weight: 400;
@@ -39,7 +22,6 @@ h2 {
 
 #lineaSuperior {
   margin-left: 0%;
-  font-family: $fuenteTitulos;
   font-size: 1.2em;
   display: flex;
   justify-content: flex-end;
@@ -96,7 +78,6 @@ h2 {
 }
 
 .titulo {
-  font-family: $fuenteTitulos;
   font-size: 2em;
   margin-left: 10%;
   padding-top: 10%;
