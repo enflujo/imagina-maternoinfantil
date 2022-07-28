@@ -77,6 +77,7 @@ cerebroGlobales.cambiarNivel();
 
 #filtros {
   margin-left: 1em;
+  display: flex;
 
   #indicadorSeleccionado {
     font-size: 1.4em;

@@ -121,6 +121,9 @@ h2 {
 }
 // Dispositivos grandes y pantallas medianas
 @media (min-width: $minPantalla) {
+  #menuIndicadores {
+    width: 50vw;
+  }
 }
 // Pantallas grandes
 @media (min-width: $minPantallaGrande) {

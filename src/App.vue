@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import Encabezado from './componentes/Encabezado.vue';
+import Encabezado from './componentes/SeccionEncabezado.vue';
 // import SeccionIntroduccion from '@/components/SeccionIntroduccion.vue';
 </script>
 

@@ -147,6 +147,8 @@ function eventoMovimiento(evento) {
 </template>
 
 <style lang="scss" scoped>
+@import '@/assets/constantes.scss';
+
 #mapa {
   margin: 0 auto;
   display: block;
@@ -157,6 +159,19 @@ function eventoMovimiento(evento) {
 }
 
 #informacion {
-  position: fixed;
+  position: absolute;
+  color: rgb(239, 100, 97);
+  font-size: 0.85em;
+  font-family: $fuenteTexto;
+  padding: 0.5em;
+  opacity: 0;
+  transition: opacity 0.23s ease-out;
+  background-color: rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  transform: translate(-50%, -110%);
+
+  p {
+    margin: 0.3em;
+  }
 }
 </style>

@@ -24,10 +24,10 @@
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: $colorOscuro;
   border-right: 2px solid $colorBlanco;
-  padding: 0 1em 0 2em;
+  padding: 0.2em 1em 0 2em;
   margin-top: 0.7em;
 }
 
