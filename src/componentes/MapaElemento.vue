@@ -43,18 +43,6 @@ watch(
     nuevos.features.forEach((lugar) => {
       const { codigo, nombre } = lugar.properties;
 
-      // POR HACER: mostrar san andrés y providencia dentro de los espacios del mapa.
-      if (codigo === '88') {
-        // lugar.geometry.coordinates = lugar.geometry.coordinates.map((multipoligono) => {
-        //   return multipoligono.map((poligono) => {
-        //     return poligono.map((punto) => {
-        //       // ESTO NO FUNCIONA PORQUE EL MAPA SE MUEVE Y ESTO QUEDA EN LUGARES RAROS
-        //       // creo que toca es mover los puntos desde pixeles y no de coordenadas.
-        //       return [punto[0] + 6, punto[1] - 1.5];
-        //     });
-        //   });
-        // });
-      }
       datosSecciones.push({
         codigo,
         nombre,
@@ -69,73 +57,61 @@ watch(
 watch(
   () => cerebroDatos.geojsonSanAndres,
   (lugar) => {
-    const coordenadasProvidencia = [...lugar.geometry.coordinates[1], ...lugar.geometry.coordinates[2]];
+    if (cerebroGlobales.nivel === 'departamentos') {
+      const coordenadasProvidencia = [...lugar.geometry.coordinates[1], ...lugar.geometry.coordinates[2]];
 
-    const pro = extremosLugar(coordenadasProvidencia);
-    const sa = extremosLugar(lugar.geometry.coordinates[0]);
+      const pro = extremosLugar(coordenadasProvidencia);
+      const sa = extremosLugar(lugar.geometry.coordinates[0]);
 
-    const coordenadasAnchoSanAndres = sa.longitudMax - sa.longitudMin;
-    const coordenadasAltoSanAndres = sa.latitudMax - sa.latitudMin;
-    const coordenadasAnchoProvidencia = pro.longitudMax - pro.longitudMin;
-    const coordenadasAltoProvidencia = pro.latitudMax - pro.latitudMin;
+      const coordenadasAnchoSanAndres = sa.longitudMax - sa.longitudMin;
+      const coordenadasAltoSanAndres = sa.latitudMax - sa.latitudMin;
+      const coordenadasAnchoProvidencia = pro.longitudMax - pro.longitudMin;
+      const coordenadasAltoProvidencia = pro.latitudMax - pro.latitudMin;
 
-    mapearSanAndres.value = escalaCoordenadas(sa.latitudMin, sa.latitudMax, sa.longitudMin, sa.longitudMax);
-    mapearProvidencia.value = escalaCoordenadas(pro.latitudMin, pro.latitudMax, pro.longitudMin, pro.longitudMax);
+      mapearSanAndres.value = escalaCoordenadas(sa.latitudMin, sa.latitudMax, sa.longitudMin, sa.longitudMax);
+      mapearProvidencia.value = escalaCoordenadas(pro.latitudMin, pro.latitudMax, pro.longitudMin, pro.longitudMax);
 
-    datosSanAndres.splice(0);
-    datosProvidencia.splice(0);
+      datosSanAndres.splice(0);
+      datosProvidencia.splice(0);
 
-    if (coordenadasAnchoSanAndres > coordenadasAltoSanAndres) {
-      altoSanAdres.value = anchoSanAndres.value * (coordenadasAltoSanAndres / coordenadasAnchoSanAndres);
-    } else {
-      anchoSanAndres.value = altoSanAdres.value * (coordenadasAnchoSanAndres / coordenadasAltoSanAndres);
-    }
+      if (coordenadasAnchoSanAndres > coordenadasAltoSanAndres) {
+        altoSanAdres.value = anchoSanAndres.value * (coordenadamapearColsAnchoSanAndres / coordenadasAltoSanAndres);
+      }
 
-    if (coordenadasAnchoProvidencia > coordenadasAltoProvidencia) {
-      altoProvidencia.value = anchoProvidencia.value * (coordenadasAltoProvidencia / coordenadasAnchoProvidencia);
-    } else {
-      anchoProvidencia.value = altoProvidencia.value * (coordenadasAnchoProvidencia / coordenadasAltoProvidencia);
-    }
+      if (coordenadasAnchoProvidencia > coordenadasAltoProvidencia) {
+        altoProvidencia.value = anchoProvidencia.value * (coordenadasAltoProvidencia / coordenadasAnchoProvidencia);
+      } else {
+        anchoProvidencia.value = altoProvidencia.value * (coordenadasAnchoProvidencia / coordenadasAltoProvidencia);
+      }
 
-    const { codigo, nombre } = lugar.properties;
+      const { codigo, nombre } = lugar.properties;
 
-    datosSanAndres.push({
-      codigo,
-      nombre,
-      datos: [],
-      linea: crearLinea(lugar.geometry.coordinates[0], mapearSanAndres.value, anchoSanAndres.value, altoSanAdres.value),
-      color: 'red',
-    });
-
-    datosProvidencia.push({
-      codigo,
-      nombre,
-      datos: [],
-      linea: crearLinea(
-        lugar.geometry.coordinates[2],
-        mapearProvidencia.value,
-        anchoProvidencia.value,
-        altoProvidencia.value
-      ),
-      color: 'red',
-    });
-
-    lugar.geometry.coordinates.forEach(() => {
-      /*       datosProvidencia.push({
+      datosSanAndres.push({
         codigo,
         nombre,
         datos: [],
-        linea: crearLinea(coordenadasProvidencia, mapearProvidencia.value, ancho.value / 4, alto.value / 4),
+        linea: crearLinea(
+          lugar.geometry.coordinates[0],
+          mapearSanAndres.value,
+          anchoSanAndres.value,
+          altoSanAdres.value
+        ),
         color: 'white',
-      }); */
-      // datosProvidencia.push({
-      //   codigo,
-      //   nombre,
-      //   datos: [],
-      //   linea: crearLinea(lugar.geometry.coordinates[2], mapearProvidencia.value, ancho.value / 4, alto.value / 4),
-      //   color: 'white',
-      // });
-    });
+      });
+
+      datosProvidencia.push({
+        codigo,
+        nombre,
+        datos: [],
+        linea: crearLinea(
+          lugar.geometry.coordinates[2],
+          mapearProvidencia.value,
+          anchoProvidencia.value,
+          altoProvidencia.value
+        ),
+        color: 'white',
+      });
+    }
   }
 );
 
@@ -163,6 +139,44 @@ function actualizarDatos() {
     datosSecciones[i].datos = datosLugar.datos;
     datosSecciones[i].color = mapearColor(datosLugar.datos[cerebroGlobales.año][2]);
   });
+
+  // Colorear San Andrés
+  datosSanAndres.color = 'transparent';
+
+  let datosSanAndresActualizados;
+
+  if (cerebroGlobales.nivel === 'departamentos') {
+    datosSanAndresActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88');
+  } else if (cerebroGlobales.nivel === 'municipios') {
+    datosSanAndresActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88001');
+  }
+
+  datosSanAndres.datos = datosSanAndresActualizados.datos;
+
+  if (!datosSanAndres || !datosSanAndres.datos[cerebroGlobales.año]) {
+    return;
+  }
+
+  datosSanAndres.color = mapearColor(datosSanAndres.datos[cerebroGlobales.año][2]);
+
+  // Colorear Providencia
+  datosProvidencia.color = 'transparent';
+
+  let datosProvidenciaActualizados;
+
+  if (cerebroGlobales.nivel === 'departamentos') {
+    datosProvidenciaActualizados = datosSanAndresActualizados;
+  } else if (cerebroGlobales.nivel === 'municipios') {
+    datosProvidenciaActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88564');
+  }
+
+  datosProvidencia.datos = datosProvidenciaActualizados.datos;
+
+  if (!datosProvidencia || !datosProvidencia.datos[cerebroGlobales.año]) {
+    return;
+  }
+
+  datosProvidencia.color = mapearColor(datosProvidencia.datos[cerebroGlobales.año][2]);
 }
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
@@ -182,10 +196,10 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
   ancho.value = ancho.value | 0;
   alto.value = alto.value | 0;
 
-  anchoSanAndres.value = (ancho.value / 10) | 0;
+  anchoSanAndres.value = (ancho.value / 20) | 0;
   altoSanAdres.value = anchoSanAndres.value * 2.5;
 
-  anchoProvidencia.value = (ancho.value / 20) | 0;
+  anchoProvidencia.value = (ancho.value / 30) | 0;
   altoProvidencia.value = anchoProvidencia.value * 2.5;
 };
 
@@ -217,7 +231,7 @@ function eventoMovimiento(evento) {
         v-for="seccion in datosSanAndres"
         :key="`seccion-${seccion.codigo}`"
         :d="seccion.linea"
-        :fill="seccion.color"
+        :fill="datosSanAndres.color"
         :stroke="colorLinea"
         :data-nombre="seccion.nombre"
         stroke-width="0.5px"
@@ -232,7 +246,7 @@ function eventoMovimiento(evento) {
         v-for="seccion in datosProvidencia"
         :key="`seccion-${seccion.codigo}`"
         :d="seccion.linea"
-        :fill="seccion.color"
+        :fill="datosProvidencia.color"
         :stroke="colorLinea"
         :data-nombre="seccion.nombre"
         stroke-width="0.5px"
@@ -272,6 +286,7 @@ function eventoMovimiento(evento) {
 #mapa {
   margin: 0 auto;
   display: block;
+
   // left: 19em;
   // top: 8em;
   // position: relative;
@@ -279,8 +294,21 @@ function eventoMovimiento(evento) {
 }
 
 #sanAndresProvidencia {
-  width: 50%;
+  width: 8%;
   display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  padding: 1em;
+  border: solid 1px cadetblue;
+  margin: 6em 0em 0em 4em;
+}
+
+#mapaProvidencia {
+  height: auto;
+  width: 3vw;
+}
+
+#mapaSanAndres {
 }
 
 #informacion {
