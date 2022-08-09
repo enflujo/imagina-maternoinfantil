@@ -73,21 +73,20 @@ function actualizarDatos() {
 <template>
   <div v-if="datosOrdenados.length > 0" id="modulo">
     <span id="menuOrden">
-      Ordenar por:
       <span
         class="botonOrden"
         :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
         @click="elegirOrden('porcentaje')"
-        >porcentaje</span
+        >Por porcentaje</span
       >
       <span class="botonOrden" :class="criterioOrden === 'numerador' ? 'activo' : ''" @click="elegirOrden('numerador')"
-        >numerador</span
+        >Por numerador</span
       >
       <span
         class="botonOrden"
         :class="criterioOrden === 'denominador' ? 'activo' : ''"
         @click="elegirOrden('denominador')"
-        >denominador</span
+        >Por denominador</span
       >
     </span>
     <div id="lista">
@@ -116,11 +115,16 @@ function actualizarDatos() {
   #menuOrden {
     display: flex;
     justify-content: space-around;
-    width: 90%;
+    margin-bottom: 25px;
   }
 
   .botonOrden {
     cursor: pointer;
+    padding: 1em;
+    background-color: #0041bf;
+    color: white;
+    width: 30%;
+    font-size: 1.2em;
 
     &:hover {
       opacity: 0.6;
@@ -129,13 +133,21 @@ function actualizarDatos() {
     &.activo {
       opacity: 1;
       font-weight: bold;
+      background-color: white;
+      color: #0041bf;
+      border: solid 2px #0041bf;
     }
   }
 
   #lista {
-    border: solid 1px black;
-    width: 90%;
-    padding: 1em;
+    border: solid 2px #0041bf;
+    border-radius: 3%;
+    color: #0041bf;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    padding: 20px;
+    grid-gap: 20px;
   }
 }
 

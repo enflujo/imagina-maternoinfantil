@@ -40,6 +40,7 @@ function eventoFuera() {
 
 <template>
   <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
+  <div v-if="cerebroDatos.datosLugar.length" id="unidadEjeY">Unidades eje Y</div>
   <div v-if="cerebroDatos.datosLugar.length" id="lineaTiempo">
     <span id="linea">
       <span
@@ -48,7 +49,7 @@ function eventoFuera() {
         :key="`${i}`"
         :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
       >
-        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}%</div>
+        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}</div>
       </span>
     </span>
 
@@ -73,6 +74,11 @@ function eventoFuera() {
 </template>
 
 <style lang="scss" scoped>
+#unidadEjeY {
+  position: relative;
+  left: -86px;
+  margin-bottom: 18px;
+}
 #lineaTiempo {
   display: flex;
   position: absolute;

@@ -94,5 +94,6 @@ cerebroGlobales.cambiarNivel();
   // margin-top: 100px;
   position: relative;
   width: 30vw;
+  margin-right: 50px;
 }
 </style>
