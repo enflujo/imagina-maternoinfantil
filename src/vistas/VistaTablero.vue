@@ -7,6 +7,8 @@ import MenuAños from '../componentes/MenuAños.vue';
 // import fuentes from '../utilidades/fuentes';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
+import FichaTecnica from '../componentes/FichaTecnica.vue';
+
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { onMounted, onUnmounted } from 'vue-demi';
 
@@ -40,8 +42,10 @@ cerebroGlobales.cambiarNivel();
 
 <template>
   <div id="contenedorGeneral">
-    <MenuIndicadores />
-
+    <div id="seccionIzquierda">
+      <MenuIndicadores />
+      <FichaTecnica />
+    </div>
     <div id="seccionCentral">
       <div id="filtros">
         <MenuAños :años="años" />
