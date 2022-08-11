@@ -8,9 +8,11 @@ import MenuAños from '../componentes/MenuAños.vue';
 import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
 import FichaTecnica from '../componentes/FichaTecnica.vue';
+import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { onMounted, onUnmounted } from 'vue-demi';
+import { usarCerebroDatos } from '../cerebro/datos';
 
 // const indicadorActual = ref(0);
 const añoMin = 2005;
@@ -18,7 +20,9 @@ const añoMax = 2020;
 const años = [];
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
+const mostrarFicha = ref(false);
 const cerebroGlobales = usarCerebroGlobales();
+const cerebroDatos = usarCerebroDatos();
 
 onMounted(() => {
   actualizarDims();
@@ -28,6 +32,18 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', actualizarDims);
 });
+
+function mostrarFichaTecnica() {
+  cerebroGlobales.mostrarFicha = !cerebroGlobales.mostrarFicha;
+  console.log(cerebroGlobales.mostrarFicha);
+  const fichaTecnica = document.getElementById('fichaTecnica');
+
+  if (cerebroGlobales.mostrarFicha === true) {
+    fichaTecnica.style.visibility = 'visible';
+  } else {
+    fichaTecnica.style.visibility = 'hidden';
+  }
+}
 
 function actualizarDims() {
   anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
@@ -54,7 +70,10 @@ cerebroGlobales.cambiarNivel();
           <li @click="cerebroGlobales.cambiarNivel('municipios')" class="nivel">Municipios</li>
         </ul>
 
-        <!-- <h2 id="indicadorSeleccionado">{{ fuentes[indicadorActual].nombreIndicador }}</h2> -->
+        <h2 v-if="cerebroDatos" id="indicadorSeleccionado">
+          {{ fuentes[cerebroDatos.indice].nombreIndicador }}
+          <div @click="mostrarFichaTecnica" id="masInfo">?</div>
+        </h2>
       </div>
 
       <Mapa />
@@ -84,9 +103,28 @@ cerebroGlobales.cambiarNivel();
   display: flex;
 
   #indicadorSeleccionado {
+    position: relative;
+    color: #0041bf;
     font-size: 1.4em;
-    width: 60%;
-    margin-left: 40px;
+    width: 50%;
+    margin: 1em;
+    background-color: white;
+    padding: 1em;
+    border: 3px solid #0041bf;
+
+    #masInfo {
+      width: 1.5em;
+      height: 1.5em;
+      position: absolute;
+      right: 8%;
+      bottom: -15%;
+      border-radius: 50%;
+      background-color: white;
+      border: 1px solid #0041bf;
+      text-align: center;
+      padding-top: 0.11em;
+      cursor: pointer;
+    }
   }
 }
 
