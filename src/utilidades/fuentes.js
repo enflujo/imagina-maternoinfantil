@@ -17,7 +17,11 @@ export default [
     serieDisponible: [],
     interpretacion:
       'El bajo peso al nacer es un serio problema de salud pública ya que expresa las condiciones de salud durante la gestación. Se asocia a complicaciones durante los primeros meses de vida, por ejemplo, mortalidad, deficiencias en el desarrollo cognitivo, e incluso puede aumentar el riesgo de padecer enfermedades no transmisibles como la diabetes durante la adultez. Un valor de 8% significa que existen 8 nacidos a término con bajo peso al nacer por cada 100 nacidos vivos en un territorio y momento específicos. Más información sobre la importancia del adecuado peso al nacer: https://apps.who.int/iris/bitstream/handle/10665/255733/WHO_NMH_NHD_14.5_spa.pdf',
-    meta: { umbral: 10, descripcion: 'No debe superar el 10% según la meta a 2021 del Plan Decenal de Salud Pública.' },
+    meta: {
+      umbral: 10,
+      descripcion: 'No debe superar el 10% según la meta a 2021 del Plan Decenal de Salud Pública.',
+      tendenciaDeseada: 'abajo',
+    },
     limitacion: '',
   },
   {
@@ -42,6 +46,7 @@ export default [
       umbral: 95,
       descripcion:
         'Según el Plan decenal de salud pública el 95% de las mujeres gestantes deben tener 4 o más controles prenatales. Según la meta de ODS para 2030, el 93% de las gestantes deben tener 4 o más controles prenatales.',
+      tendenciaDeseada: 'arriba',
     },
     limitacion: '',
   },
@@ -64,7 +69,11 @@ export default [
     serieDisponible: [],
     interpretacion:
       'Cuando existe un embarazo en una niña menor de 14 años se considera delito de acceso carnal abusivo, según el artículo 208 de la Ley 1236 de 2008. Usualmente la edad de los padres es mayor que la de las madres lo cual sugiere que estos embarazos se asocian a abuso. Las relaciones sexuales con menores de 14 años son un delito, el reporte ante las autoridades competentes es un deber ciudadano para garantizar la atención y acompañamientos oportunos de la menor.',
-    meta: { umbral: 0, descripcion: 'No existe meta, pero cualquier valor es inadmisible.' },
+    meta: {
+      umbral: 0,
+      descripcion: 'No existe meta, pero cualquier valor es inadmisible.',
+      tendenciaDeseada: 'abajo',
+    },
     limitacion: '',
   },
   {
@@ -85,7 +94,11 @@ export default [
     serieDisponible: [],
     interpretacion:
       'Un valor de 98% indica que 98 partos de cada 100 nacimientos en un lugar y momento específico ocurren en instituciones de salud. La atención institucional del parto es una de las medidas básicas para disminuir la mortalidad materna y perinatal. No obstante, el parto debe ser atendido en condiciones de calidad y con personal entrenado para que se disminuya la posibilidad de complicaciones en el momento del alumbramiento. Las 24 horas posteriores al nacimiento son vitales tanto para la madre como para el bebé, por ello, es importante que durante esas horas reciban seguimiento y atención médica. Recientemente la Corte Constitucional reconoció la partería como un saber ancestral y patrimonial. Existe un deber constitucional y legal de integrar la partería como forma de medicina ancestral al Sistema General de Seguridad Social en Salud. Las parteras constituyen una fuente de educación sexual y planificación familiar en zonas en donde el acceso a los servicios de salud es muy limitado. Mas información: Sentencia T-128-22 https://www.corteconstitucional.gov.co/noticia.php?Corte-Constitucional-reconoce-la-parter%C3%ADa-como-saber-ancestral-y-patrimonio-cultural-de-la-Naci%C3%B3n,-exhorta-al-Ministerio-de-Salud-a-integrar-a-las-parteras-al-Sistema-de-Seguridad-Social-en-Salud-y-al-Congreso-a-legislar-sobre-este-tema-9274 ',
-    meta: { umbral: null, descripcion: 'No existe una meta definida' },
+    meta: {
+      umbral: null,
+      descripcion: 'No existe una meta definida',
+      tendenciaDeseada: 'arriba',
+    },
     limitacion: '',
   },
   {
@@ -106,7 +119,11 @@ export default [
     serieDisponible: [],
     interpretacion:
       'Un valor de 17% indica que 17 de cada 100 nacidos vivos han sido partos atendidos por cesárea, en un momento y territorio determinados. La cesárea solo debe ocurrir cuando se encuentra justificada desde el punto de vista médico para disminuir el riesgo de complicaciones y muerte de la gestante y el recién nacido. En situaciones como el parto prolongado o el sufrimiento fetal está recomendada la cesárea. Un informe de la Organización Mundial de la Salud reportó que 1 de cada 5 partos se realiza por cesárea. La cesárea es un procedimiento quirúrgico que puede conllevar a riesgos como todos los procedimientos de este tipo, y más si no es necesario. Mayor información: https://www.who.int/news/item/16-06-2021-caesarean-section-rates-continue-to-rise-amid-growing-inequalities-in-access Epidemia de cesáreas en Colombia: https://repositorio.uniandes.edu.co/bitstream/handle/1992/59067/Trabajo%20de%20grado_Epidemia%20de%20ces%c3%a1reas%20en%20Colombia_A%20De%20la%20Torre_FINAL.pdf?sequence=3&isAllowed=y',
-    meta: { umbral: null, descripcion: 'No existe una meta clara, ya que depende de situaciones particulares' },
+    meta: {
+      umbral: null,
+      descripcion: 'No existe una meta clara, ya que depende de situaciones particulares',
+      tendenciaDeseada: 'abajo',
+    },
     limitacion: '',
   },
   {
@@ -130,6 +147,7 @@ export default [
     meta: {
       umbral: 15,
       descripcion: 'La meta según PDSP es reducir la proporción de gestantes adolescentes al 15% al nivel nacional.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -151,7 +169,11 @@ export default [
     serieDisponible: [],
     interpretacion:
       'Un valor de 15% indica que ocurrieron 15 nacimientos en madres menores de 14 años por cada 100 nacidos vivos, en un territorio y momento específicos. La prevención del embarazo en la adolescencia es una responsabilidad compartida. En primer lugar, la educación sexual y reproductiva es fundamental, no solamente para que los adolescentes tengan relaciones sexuales seguras y accedan a métodos de planificación, sino para que puedan tomar decisiones informadas y consientes sobre sus propios cuerpos. En segundo lugar, una educación sexual con enfoque de género puede garantizar que se ejerzan menos violencias dentro de las relaciones sexuales y sentimentales y que las personas que son violentadas de alguna forma, puedan identificar con más facilidad los canales de atención, apoyo y denuncia. Tanto las instituciones educativas, como los centros de salud y las familias, deben fomentar la creación de redes de apoyo y comunicación para que las niñas y adolescentes en estado de embarazo no sean revictimizadas. Además, las redes de apoyo pueden aumentar la probabilidad de que esas niñas y adolescentes permanezcan en lugares seguros y lejos de los círculos de violencia. Las relaciones sexuales con menores de 14 años son un delito, el reporte ante las autoridades competentes es un deber ciudadano para garantizar la atención y acompañamientos oportunos de la menor. ',
-    meta: { umbral: 15, descripcion: 'La meta según PDSP es reducir la proporción de gestantes adolescentes al 15%' },
+    meta: {
+      umbral: 15,
+      descripcion: 'La meta según PDSP es reducir la proporción de gestantes adolescentes al 15%',
+      tendenciaDeseada: 'abajo',
+    },
     limitacion: '',
   },
   {
@@ -172,9 +194,10 @@ export default [
     interpretacion:
       'Una razón de 3 significa que hubo 3 muertes maternas por cada 100.000 nacidos vivos en un momento y territorio determinados. Este es un indicador trazador de la calidad de vida y expresa una mortalidad evitable e injustificada. Se relaciona con otros indicadores como el control prenatal y la atención del parto institucional y con calidad. La mortalidad materna es más frecuente en las regiones apartadas y de difícil acceso a los servicios sanitarios.Los determinantes sociales de la mortalidad materna se encuentran relacionados con el área geográfica, existiendo una diferencia sustancial entre áreas rurales y urbanas y, con la pertenencia étnica. Según el informe del Instituto de Salud Pública sobre mortalidad materna de 2019, las razones más altas se encuentran en áreas geográficas asociadas a grupos poblacionales étnicos. Adicionalmente, los mayores casos se presentan en el régimen subsidiado de salud. Lo anterior, hace un llamado a prestar especial atención a factores sociales que influyen en las condiciones de vida de las madres; como la educación, la situación económica y el acceso a servicios de salud. Fuente: Informe de evento. Mortalidad materna, Colombia 2019. Instituto Nacional de Salud.',
     meta: {
-      umbral: 150,
+      umbral: 45,
       descripcion:
         'Ninguna muerte materna es aceptable, sin embargo, de acuerdo con el Plan Decenal de Salud pública, los casos anuales no deben superar 150 muertes en el país. Meta ODS: A 2030 se reducirá a 32 la mortalidad materna por cada 100.000 nacidos vivos',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -200,6 +223,7 @@ export default [
       umbral: 61,
       descripcion:
         'Debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15-19 años para Colombia. ODS A 2030 A 46 por 1.000 mujeres de 15 a 19 ',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -225,6 +249,7 @@ export default [
       umbral: 61,
       descripcion:
         'Debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15-19 años para Colombia. ODS A 2030 A 46 por 1.000 mujeres de 15 a 19 ',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -250,6 +275,7 @@ export default [
       umbral: 61,
       descripcion:
         'Debería estar por debajo de 61 nacimientos por cada 1000 mujeres de 15 a 19 años para Colombia. ODS A 2030 por debajo de 46 nacimientos por 1.000 mujeres de 15 a 19',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -275,6 +301,7 @@ export default [
       umbral: 15,
       descripcion:
         'A 2021 se habrá disminuido la mortalidad nacional en la niñez a 15 por 1000 nacidos vivos o menos. ODS: A 2030 A 15 por 1000',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -300,6 +327,7 @@ export default [
       umbral: 12,
       descripcion:
         'A 2021 se habrá disminuido la mortalidad infantil nacional ajustada a 12 o menos por cada 1000 nacidos vivos. ODS 2030 a 14 por cada 1000',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -324,6 +352,7 @@ export default [
       umbral: 8.9,
       descripcion:
         'A 2021, se logra la reducción progresiva de la mortalidad por Infección Respiratoria Aguda (incluida Neumonía), buscando llegar a una mortalidad por Neumonía de menos de 8,9 casos por cada 100.000 menores de cinco años.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -348,6 +377,7 @@ export default [
       umbral: null,
       descripcion:
         'No existe una meta definida como tal. A 2021, se cuenta con el diseño, implementación y desarrollo progresivo de planes y programas territoriales de promoción y prevención de las enfermedades transmitidas por agua, suelo y alimentos',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -373,6 +403,7 @@ export default [
       umbral: 12,
       descripcion:
         'De acuerdo con las metas de los Objetivos de Desarrollo Sostenible se espera que a 2030 se reduzca en los países a menos de 12 muertes por cada 1000 nacidos vivos.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -397,6 +428,7 @@ export default [
       umbral: 0,
       descripcion:
         'Según el PDSP se esperaba reducir la mortalidad infantil evitable por desnutrición en forma progresiva el 30% en el 2013, 50% en el 2015 y 100% en 2020.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -430,6 +462,7 @@ export default [
       umbral: null,
       descripcion:
         'De acuerdo con la Resolución 3280 de 2018, a partir del año hasta los 5 años, se debe consultar una vez al año.',
+      tendenciaDeseada: 'arriba',
     },
     limitacion: 'Con la información disponible no es posible conocer cuántas veces asistió al año una misma persona.',
   },
@@ -459,6 +492,7 @@ export default [
       umbral: 1.0,
       descripcion:
         'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos. Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%',
+      tendenciaDeseada: 'abajo',
     },
     limitacion:
       'Esta información depende de la especificidad con la cual el personal de salud diligencia los RIPS. En este caso puntual se analiza la información del código O981 y no se incluyeron otros como O983 otras infecciones con un modo de transmisión predominantemente sexual que complican el embarazo, parto y puerperio.',
@@ -466,7 +500,7 @@ export default [
   {
     nombreTabla: '',
     nombreArchivo: '',
-    nombreIndicador: 'Proporción de personas por infecciones predominantemente sexual',
+    nombreIndicador: 'Proporción de personas atendidas por infecciones predominantemente sexuales',
     definicion:
       'Se refiere a la proporción de personas que fueron atendidas en consulta por infecciones de transmisión sexual en un momento y territorio específico.',
     grupo: 'Salud sexual y reproductiva',
@@ -497,6 +531,7 @@ export default [
     meta: {
       umbral: null,
       descripcion: 'No existe una meta específica sobre este tipo de infecciones excepto para VIH y sífilis congénita.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion: '',
   },
@@ -526,6 +561,7 @@ export default [
       umbral: 100,
       descripcion:
         'Ninguna persona debe ser víctima del maltrato. Según el Plan decenal de salud pública, para el año 2022, el 100% de las víctimas de violencias de género y violencias sexuales identificadas deben recibir una atención integral de los sectores de salud, protección y justicia para la restitución de los derechos que les han sido vulnerados. Para el año 2022, el 100% de las EAPB en coordinación con las Secretarías Departamentales y Municipales de Salud, deben contar con una red integrada de servicios para víctimas de violencias de género y violencias sexuales.',
+      tendenciaDeseada: 'abajo',
     },
     limitacion:
       'Este es un indicador que puede estar sub-registrado en la medida en que no siempre se relacionan este tipo de diagnósticos durante una consulta de servicios de salud.',
@@ -553,6 +589,7 @@ export default [
       umbral: 80,
       descripcion:
         'De acuerdo con el Plan Decenal de Salud Pública 2012-2021, el 80% de las mujeres entre 15-19 años deberán hacer uso de métodos anticonceptivos modernos. Es importante anotar que en la meta no se hace referencia a los hombres quienes también hacen uso de los métodos anticonceptivos. La encuesta nacional de demografía y salud del año 2015 indicó que: “Solo el 10.5 % de hombres independientemente de su estatus conyugal y actividad sexual reportan haber hablado sobre anticoncepción con un profesional de salud". De allí la importancia de repensar las intervenciones para que también se incluyan a los hombres en temas de salud sexual y reproductiva. Meta ODS: De aquí a 2030, garantizar el acceso universal a los servicios de salud sexual y reproductiva, incluidos los de planificación familiar, información y educación, y la integración de la salud reproductiva en las estrategias y los programas nacionales',
+      tendenciaDeseada: 'arriba',
     },
     limitacion:
       'Este indicador incluye información sobre toda la población (mujeres y hombres) y la meta se encuentra enfocada únicamente en las mujeres.',
