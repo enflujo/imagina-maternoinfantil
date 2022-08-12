@@ -109,7 +109,7 @@ function actualizarDatos() {
 @import '@/assets/constantes.scss';
 
 #modulo {
-  margin-top: 20em;
+  margin-top: 2em;
   font-family: $fuenteTexto;
 
   #menuOrden {
