@@ -12,6 +12,7 @@ import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
+import Creditos from '../componentes/Creditos.vue';
 
 // const indicadorActual = ref(0);
 const añoMin = 2005;
@@ -60,10 +61,12 @@ cerebroGlobales.cambiarNivel();
 
 <template>
   <div id="contenedorGeneral">
+    <Creditos />
     <div id="seccionIzquierda">
       <MenuIndicadores />
       <FichaTecnica />
     </div>
+
     <div id="seccionCentral">
       <div id="filtros">
         <MenuAños :años="años" />
