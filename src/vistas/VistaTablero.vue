@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Mapa from '../componentes/MapaElemento.vue';
 import MenuIndicadores from '../componentes/MenuIndicadores.vue';
 import MenuAños from '../componentes/MenuAños.vue';
@@ -11,7 +11,6 @@ import FichaTecnica from '../componentes/FichaTecnica.vue';
 import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
-import { onMounted, onUnmounted } from 'vue-demi';
 import { usarCerebroDatos } from '../cerebro/datos';
 
 // const indicadorActual = ref(0);
@@ -69,8 +68,20 @@ cerebroGlobales.cambiarNivel();
       <div id="filtros">
         <MenuAños :años="años" />
         <ul id="menuVistaLugar">
-          <li @click="cerebroGlobales.cambiarNivel('departamentos')" class="nivel">Departamentos</li>
-          <li @click="cerebroGlobales.cambiarNivel('municipios')" class="nivel">Municipios</li>
+          <li
+            @click="cerebroGlobales.cambiarNivel('departamentos')"
+            class="nivel boton"
+            :class="cerebroGlobales.nivel === 'departamentos' ? 'activo' : ''"
+          >
+            Departamentos
+          </li>
+          <li
+            @click="cerebroGlobales.cambiarNivel('municipios')"
+            class="nivel boton"
+            :class="cerebroGlobales.nivel === 'municipios' ? 'activo' : ''"
+          >
+            Municipios
+          </li>
         </ul>
 
         <h2 v-if="cerebroDatos" id="indicadorSeleccionado">
@@ -97,12 +108,13 @@ cerebroGlobales.cambiarNivel();
   display: flex;
   margin-top: $tamañoEncabezado;
 }
+
 .nivel {
   cursor: pointer;
 }
 
 #filtros {
-  margin-left: 1em;
+  margin: 1em;
   display: flex;
 
   #indicadorSeleccionado {
@@ -140,5 +152,10 @@ cerebroGlobales.cambiarNivel();
   position: relative;
   width: 30vw;
   margin-right: 50px;
+}
+
+#menuVistaLugar {
+  display: flex;
+  margin-left: 1em;
 }
 </style>

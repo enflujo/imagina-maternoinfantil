@@ -1,6 +1,36 @@
 @import './constantes';
 @import './normalizar';
 
+.boton {
+  border: 2px solid $colorOscuro;
+  background-color: $colorBlanco;
+  cursor: pointer;
+  padding: 0.3em 1em;
+
+  &.desplegable {
+    &::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-top: solid $tamañoTriangulo $colorOscuro;
+      border-left: solid $tamañoTriangulo transparent;
+      border-right: solid $tamañoTriangulo transparent;
+      top: 0.8em;
+      right: $tamañoTriangulo;
+    }
+  }
+
+  &.activo {
+    background-color: $colorOscuro;
+    color: $colorBlanco;
+  }
+
+  // &:hover {
+
+  // }
+}
+
 // h3 {
 //   font-weight: 400;
 //   font-size: 1.6em;
