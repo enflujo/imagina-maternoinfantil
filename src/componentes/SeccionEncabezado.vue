@@ -1,9 +1,23 @@
-<script setup></script>
+<script setup>
+import { usarCerebroGlobales } from '../cerebro/globales';
+const cerebroGlobales = usarCerebroGlobales();
+
+function mostrarCreditos() {
+  const creditos = document.getElementById('creditos');
+  cerebroGlobales.mostrarCreditos = !cerebroGlobales.mostrarCreditos;
+  if (cerebroGlobales.mostrarCreditos === true) {
+    creditos.style.visibility = 'visible';
+  } else {
+    creditos.style.visibility = 'hidden';
+  }
+}
+</script>
 
 <template>
   <header id="encabezado">
     <div id="contenedor">
-      <h1>Salud Maternoinfantil en Colombia</h1>
+      <h1 class="elementoMenu">Salud Maternoinfantil en Colombia</h1>
+      <h1 class="elementoMenu" @click="mostrarCreditos">Créditos</h1>
     </div>
   </header>
 </template>
@@ -21,6 +35,10 @@
 
 #contenedor {
   display: flex;
+}
+
+.elementoMenu {
+  cursor: pointer;
 }
 
 h1 {
