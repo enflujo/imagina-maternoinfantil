@@ -233,9 +233,9 @@ function eventoEncima(seccion) {
 
   infoVisible.value = true;
   nombreLugar.value = seccion.nombre;
-  infoNumerador.value = numerador;
+  infoNumerador.value = `${numerador} de`;
   infoDenominador.value = denominador;
-  infoPorcentaje.value = `${porcentaje.toFixed(2)}%`;
+  infoPorcentaje.value = `${porcentaje.toFixed(2)}`;
 }
 
 function eventoFuera() {

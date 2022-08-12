@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import fuentes from '../utilidades/fuentes';
+import FichaTecnica from '../componentes/FichaTecnica.vue';
 
 const cerebroDatos = usarCerebroDatos();
 const contenedor = ref(null);
