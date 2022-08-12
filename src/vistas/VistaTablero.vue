@@ -14,13 +14,8 @@ import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
 import Creditos from '../componentes/Creditos.vue';
 
-// const indicadorActual = ref(0);
-const añoMin = 2005;
-const añoMax = 2020;
-const años = [];
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
-const mostrarFicha = ref(false);
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
@@ -52,10 +47,6 @@ function actualizarDims() {
   anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
 }
 
-for (let n = añoMin; n <= añoMax; n++) {
-  años.push(n);
-}
-
 cerebroGlobales.cambiarNivel();
 </script>
 
@@ -69,7 +60,7 @@ cerebroGlobales.cambiarNivel();
 
     <div id="seccionCentral">
       <div id="filtros">
-        <MenuAños :años="años" />
+        <MenuAños />
         <ul id="menuVistaLugar">
           <li
             @click="cerebroGlobales.cambiarNivel('departamentos')"

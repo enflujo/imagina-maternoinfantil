@@ -1,11 +1,9 @@
 <script setup>
+import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 
-const props = defineProps({
-  años: Object,
-});
-
 const cerebroGlobales = usarCerebroGlobales();
+const cerebroDatos = usarCerebroDatos();
 </script>
 
 <template>
@@ -13,7 +11,7 @@ const cerebroGlobales = usarCerebroGlobales();
     <span class="boton cuadro desplegable">{{ cerebroGlobales.año }}</span>
     <ul id="menuAños">
       <li
-        v-for="n in props.años"
+        v-for="n in cerebroDatos.años"
         :key="n"
         @click="cerebroGlobales.actualizarAño(n)"
         class="opcionAño cuadro"

@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroGlobales } from './globales';
 import { rutaBase } from '../utilidades/constantes';
-import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 export const usarCerebroDatos = defineStore('datos', {
   state: () => ({
@@ -18,6 +17,7 @@ export const usarCerebroDatos = defineStore('datos', {
     },
     geojsonLugar: [],
     geojsonSanAndres: [],
+    años: [],
   }),
 
   getters: {
@@ -42,8 +42,13 @@ export const usarCerebroDatos = defineStore('datos', {
         const datosIndicador = await respuesta.json();
         const datosPais = await respuestaPais.json();
 
+        let añoMin = Infinity;
+        let añoMax = 0;
+
         this.datosNacionales = Object.keys(datosPais).map((anno) => {
           const [numerador, denominador, porcentaje] = datosPais[anno];
+          añoMin = anno < añoMin ? anno : añoMin;
+          añoMax = anno > añoMax ? anno : añoMax;
 
           return {
             anno: anno,
@@ -53,6 +58,11 @@ export const usarCerebroDatos = defineStore('datos', {
           };
         });
 
+        const años = [];
+        for (let i = +añoMin; i <= +añoMax; i++) {
+          años.push(i);
+        }
+        this.años = años;
         this.datos = datosIndicador;
 
         if (cerebroGlobales.lugarSeleccionado) {
@@ -72,7 +82,6 @@ export const usarCerebroDatos = defineStore('datos', {
     async cargarGeojson() {
       const cerebroGlobales = usarCerebroGlobales();
       const cache = this._cache[cerebroGlobales.nivel];
-      let sanAndres;
 
       /**
        * Si ya se descargaron los datos, no volveros a pedir al servidor
@@ -87,33 +96,6 @@ export const usarCerebroDatos = defineStore('datos', {
         const respuesta = await fetch(`${rutaBase}/mi_v2/${cerebroGlobales.nivel}.json`);
         const geojson = await respuesta.json();
 
-        /**
-         * Cambiar los nombres de los lugares para que tengan tildes y mayúsculas
-         */
-        /*   let infoLugares;
-        let llaveCodigo = 0;
-
-        if (cerebroGlobales.nivel === 'departamentos') {
-          infoLugares = departamentos.datos;
-        } else {
-          infoLugares = municipios.datos;
-          llaveCodigo = 3;
-        } */
-
-        /* geojson.features = geojson.features.map((lugar) => {
-          const infoLugar = infoLugares.find((d) => d[llaveCodigo] === lugar.properties.codigo);
-
-          // Reemplazar el nombre actual (Sin tildes y todo en mayúsculas) por el que está bien escrito.
-          if (infoLugar) {
-            lugar.properties.nombre = infoLugar[1];
-          }
-
-          return lugar;
-        }); */
-
-        // Guardar datos procesados en el cache.
-        // if (geojson.features)
-
         let geoSanAndres;
 
         geojson.features = geojson.features.filter((lugar) => {
@@ -124,6 +106,7 @@ export const usarCerebroDatos = defineStore('datos', {
           return true;
         });
 
+        // Guardar datos procesados en el cache.
         this._cache[cerebroGlobales.nivel] = geojson;
         this.geojsonLugar = geojson;
         this.geojsonSanAndres = geoSanAndres;
