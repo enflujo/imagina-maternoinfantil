@@ -9,11 +9,10 @@ const cerebroGlobales = usarCerebroGlobales();
 
 <template>
   <div>
-    mostrar ficha
     <div id="fichaTecnica">
-      <span id="titulo"
-        ><h2>{{ fuentes[cerebroDatos.indiceActual].nombreIndicador }}</h2></span
-      >
+      <span id="titulo">
+        <h2>{{ fuentes[cerebroDatos.indiceActual].nombreIndicador }}</h2>
+      </span>
       <div id="contenido">
         <div class="tituloSeccion">Definición</div>
         <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].definicion }}</div>
@@ -33,8 +32,25 @@ const cerebroGlobales = usarCerebroGlobales();
         <div class="tituloSeccion">Fuente del denominador</div>
         <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteDenominador }}</div>
 
+        <div class="tituloSeccion">Nivel de desagregación</div>
+        <div class="informacion">
+          <p v-for="nivel in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${nivel}`">
+            {{ nivel }}
+          </p>
+        </div>
+
         <div class="tituloSeccion">Cómo se interpreta</div>
         <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].interpretacion }}</div>
+
+        <div class="tituloSeccion">Meta</div>
+        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].meta.descripcion }}</div>
+
+        <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="tituloSeccion">
+          Limitaciones del indicador
+        </div>
+        <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="informacion">
+          {{ fuentes[cerebroDatos.indiceActual].limitacion }}
+        </div>
       </div>
     </div>
   </div>

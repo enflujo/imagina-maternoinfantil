@@ -34,14 +34,17 @@ onUnmounted(() => {
 });
 
 function mostrarFichaTecnica() {
-  cerebroGlobales.mostrarFicha = !cerebroGlobales.mostrarFicha;
-  console.log(cerebroGlobales.mostrarFicha);
   const fichaTecnica = document.getElementById('fichaTecnica');
+  const botonFicha = document.getElementById('masInfo');
+
+  cerebroGlobales.mostrarFicha = !cerebroGlobales.mostrarFicha;
 
   if (cerebroGlobales.mostrarFicha === true) {
     fichaTecnica.style.visibility = 'visible';
+    botonFicha.innerText = 'X';
   } else {
     fichaTecnica.style.visibility = 'hidden';
+    botonFicha.innerText = '?';
   }
 }
 
