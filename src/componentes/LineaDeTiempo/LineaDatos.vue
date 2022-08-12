@@ -13,7 +13,6 @@ const radioPuntos = 4;
 
 function construirLinea() {
   let linea = '';
-  console.log(props.datos);
 
   props.datos.forEach((instancia, i) => {
     const x = props.posicionX(instancia.anno);
