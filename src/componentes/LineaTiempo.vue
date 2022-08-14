@@ -151,17 +151,25 @@ function eventoFuera() {
     />
 
     <line
-      v-for="año in cerebroDatos.años"
-      :key="`marca-${año}`"
+      v-for="anno in cerebroDatos.años"
+      :key="`marca-${anno}`"
       class="marcaTiempo"
-      :x1="posicionX(año)"
+      :x1="posicionX(anno)"
       :y1="alturaVis"
-      :x2="posicionX(año)"
+      :x2="posicionX(anno)"
       :y2="alturaVis + 7"
     />
 
-    <text v-for="año in cerebroDatos.años" :key="`año-${año}`" class="año" :x="posicionX(año)" :y="alturaGrafica - 5">
-      {{ año }}
+    <text
+      v-for="anno in cerebroDatos.años"
+      :key="`año-${anno}`"
+      class="año"
+      :class="anno === cerebroGlobales.año ? 'activo' : ''"
+      :x="posicionX(anno)"
+      :y="alturaGrafica - 5"
+      @click="cerebroGlobales.actualizarAño(anno)"
+    >
+      {{ anno }}
     </text>
   </svg>
 
@@ -178,6 +186,8 @@ function eventoFuera() {
   width: fit-content;
   position: fixed;
   opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
 }
 
 svg {
@@ -204,6 +214,16 @@ svg {
     fill: $colorOscuro;
     font-weight: bold;
     transform: translateX(-10px);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &.activo {
+      opacity: 0.6;
+      cursor: default;
+    }
   }
 
   .añoActual {
