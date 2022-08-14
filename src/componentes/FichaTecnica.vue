@@ -1,9 +1,9 @@
 <script setup>
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroDatos } from '../cerebro/datos';
-import { usarCerebroGlobales } from '../cerebro/globales';
+// import { usarCerebroGlobales } from '../cerebro/globales';
 const cerebroDatos = usarCerebroDatos();
-const cerebroGlobales = usarCerebroGlobales();
+// const cerebroGlobales = usarCerebroGlobales();
 //const mostrarFichaTecnica = mostrarFicha();
 </script>
 
