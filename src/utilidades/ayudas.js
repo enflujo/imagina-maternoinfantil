@@ -84,7 +84,7 @@ export const escalaCoordenadas = (latitudMin, latitudMax, longitudMin, longitudM
 
 function crearSeccionSvg(punto, cabeza, mapearCoordenadas, ancho, alto) {
   const coordenadas = mapearCoordenadas(punto, ancho, alto);
-  return `${cabeza}${coordenadas.x} ${coordenadas.y} `;
+  return `${cabeza}${coordenadas.x | 0} ${coordenadas.y | 0} `;
 }
 
 /**

@@ -21,13 +21,12 @@ const altoSanAdres = ref(0);
 const anchoProvidencia = ref(0);
 const altoProvidencia = ref(0);
 
-const infoIzq = ref(0);
-const infoArriba = ref(0);
+const posInfo = reactive({ x: 0, y: 0 });
+const mapa = ref();
 const mapearCoordenadas = ref();
 const mapearProvidencia = ref();
 const mapearSanAndres = ref();
 const mapearColor = escalaColores(0, 100, colores[0], colores[1]);
-const colorLinea = 'white'; //'#ffc1f8';
 
 const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
@@ -75,7 +74,7 @@ watch(
       datosProvidencia.splice(0);
 
       if (coordenadasAnchoSanAndres > coordenadasAltoSanAndres) {
-        altoSanAdres.value = anchoSanAndres.value * (coordenadamapearColsAnchoSanAndres / coordenadasAltoSanAndres);
+        altoSanAdres.value = anchoSanAndres.value * (coordenadasAnchoSanAndres / coordenadasAltoSanAndres);
       }
 
       if (coordenadasAnchoProvidencia > coordenadasAltoProvidencia) {
@@ -226,8 +225,17 @@ function eventoFuera() {
 }
 
 function eventoMovimiento(evento) {
-  infoIzq.value = evento.pageX;
-  infoArriba.value = evento.pageY;
+  posInfo.x = evento.pageX;
+  posInfo.y = evento.pageY;
+}
+
+function eventoClic(seccion, contenedor, evento) {
+  // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
+  const elemento = evento.target;
+  contenedor.append(elemento);
+
+  // Cambiar lugar
+  cerebroDatos.actualizarDatosLugar(seccion);
 }
 </script>
 
@@ -239,7 +247,6 @@ function eventoMovimiento(evento) {
         :key="`seccion-${seccion.codigo}`"
         :d="seccion.linea"
         :fill="datosSanAndres.color"
-        :stroke="colorLinea"
         :data-nombre="seccion.nombre"
         stroke-width="0.5px"
         @mouseenter="eventoEncima(seccion)"
@@ -254,7 +261,6 @@ function eventoMovimiento(evento) {
         :key="`seccion-${seccion.codigo}`"
         :d="seccion.linea"
         :fill="datosProvidencia.color"
-        :stroke="colorLinea"
         :data-nombre="seccion.nombre"
         stroke-width="0.5px"
         @mouseenter="eventoEncima(seccion)"
@@ -264,22 +270,25 @@ function eventoMovimiento(evento) {
     </svg>
   </div>
 
-  <svg id="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
+  <svg id="mapa" ref="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
     <path
       v-for="seccion in datosSecciones"
       :key="`seccion-${seccion.codigo}`"
+      class="lugar"
+      :class="
+        cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre ? 'activo' : ''
+      "
       :d="seccion.linea"
       :fill="seccion.color"
-      :stroke="colorLinea"
       :data-nombre="seccion.nombre"
-      stroke-width="0.5px"
       @mouseenter="eventoEncima(seccion)"
       @mouseleave="eventoFuera"
-      @click="cerebroDatos.actualizarDatosLugar(seccion)"
+      @click="(e) => eventoClic(seccion, mapa, e)"
+      shape-rendering="geometricPrecision"
     ></path>
   </svg>
 
-  <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${infoIzq}px; top:${infoArriba}px`">
+  <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
     <p id="departamento">{{ nombreLugar }}</p>
     <p id="numerador">{{ infoNumerador }}</p>
     <p id="denominador">{{ infoDenominador }}</p>
@@ -293,11 +302,6 @@ function eventoMovimiento(evento) {
 #mapa {
   margin: 0 auto;
   display: block;
-
-  // left: 19em;
-  // top: 8em;
-  // position: relative;
-  // transform: scale(1.3);
 }
 
 #sanAndresProvidencia {
@@ -315,7 +319,12 @@ function eventoMovimiento(evento) {
   width: 3vw;
 }
 
-#mapaSanAndres {
+.lugar {
+  stroke: $colorBlanco;
+
+  &.activo {
+    stroke: #fd8348;
+  }
 }
 
 #informacion {
