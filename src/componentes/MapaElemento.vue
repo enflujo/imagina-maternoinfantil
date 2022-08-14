@@ -324,6 +324,7 @@ function eventoClic(seccion, contenedor, evento) {
 
   &.activo {
     stroke: #fd8348;
+    stroke-width: 2;
   }
 }
 
