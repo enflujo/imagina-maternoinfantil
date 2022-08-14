@@ -61,35 +61,35 @@ function actualizarDatos() {
 
 <template>
   <div v-if="datosOrdenados.length > 0" id="modulo">
+    <span>Ordenar por: </span>
     <span id="menuOrden">
       <span
         class="botonOrden"
         :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
         @click="elegirOrden('porcentaje')"
-        >Por porcentaje</span
+        >Porcentaje</span
       >
       <span class="botonOrden" :class="criterioOrden === 'numerador' ? 'activo' : ''" @click="elegirOrden('numerador')"
-        >Por numerador</span
+        >Numerador</span
       >
       <span
         class="botonOrden"
         :class="criterioOrden === 'denominador' ? 'activo' : ''"
         @click="elegirOrden('denominador')"
-        >Por denominador</span
+        >Denominador</span
       >
     </span>
-    <div id="lista">
-      <span class="dato" v-for="dato in datosOrdenados" :key="`lugar${dato}`">
-        <ul>
-          {{
-            dato.lugarNombre
-          }}
-          :
-          {{
-            dato[criterioOrden]
-          }}
-        </ul></span
-      >
+    <div id="contenedor">
+      <div id="lista">
+        <ul class="dato">
+          <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
+            <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
+              {{ dato.lugarNombre }}:
+              {{ dato[criterioOrden] }}
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -100,11 +100,12 @@ function actualizarDatos() {
 #modulo {
   margin-top: 2em;
   font-family: $fuenteTexto;
+  color: #0041bf;
 
   #menuOrden {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 25px;
+    justify-content: space-between;
+    margin: 5px auto;
   }
 
   .botonOrden {
@@ -112,8 +113,11 @@ function actualizarDatos() {
     padding: 1em;
     background-color: #0041bf;
     color: white;
-    width: 30%;
-    font-size: 1.2em;
+    font-size: 1em;
+    width: 28%;
+    height: fit-content;
+    text-align: center;
+    padding: 0.5em;
 
     &:hover {
       opacity: 0.6;
@@ -128,21 +132,35 @@ function actualizarDatos() {
     }
   }
 
-  #lista {
+  #contenedor {
+    height: 40vh;
+    min-height: fit-content;
+    overflow-y: scroll;
+    overflow-x: clip;
     border: solid 2px #0041bf;
-    border-radius: 3%;
+    border-radius: 15px;
     color: #0041bf;
+    margin-bottom: 20px;
+  }
+
+  #lista {
     padding: 2em;
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
     padding: 20px;
-    grid-gap: 20px;
+    margin-bottom: 15px;
+    column-count: 3;
+    column-gap: 10px;
+    width: 29vw;
+    height: fit-content;
+
+    li {
+      margin-bottom: 3px;
+    }
   }
 }
 
 .dato {
   line-height: 1em;
-  width: 96%;
   display: block;
+  font-size: 0.9em;
 }
 </style>
