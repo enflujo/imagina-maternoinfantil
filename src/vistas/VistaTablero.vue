@@ -12,7 +12,7 @@ import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
-import Creditos from '../componentes/Creditos.vue';
+import Creditos from '../componentes/CreditosElemento.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -114,9 +114,9 @@ cerebroGlobales.cambiarNivel();
   #indicadorSeleccionado {
     position: relative;
     color: #0041bf;
-    font-size: 1.4em;
+    font-size: 1em;
     width: 50%;
-    margin: 1em;
+    margin-left: 1em;
     background-color: white;
     padding: 1em;
     border: 3px solid #0041bf;
@@ -151,5 +151,6 @@ cerebroGlobales.cambiarNivel();
 #menuVistaLugar {
   display: flex;
   margin-left: 1em;
+  flex-direction: column;
 }
 </style>
