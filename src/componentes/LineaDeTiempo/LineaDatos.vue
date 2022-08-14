@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import { convertirEscala } from '../../utilidades/ayudas';
 
 const props = defineProps({

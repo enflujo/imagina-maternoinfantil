@@ -213,23 +213,6 @@ function eventoEncima(seccion) {
   else {
     [numerador, denominador, porcentaje] = seccion.datos[cerebroGlobales.año];
   }
-  //}
-
-  // TODO: No sirve a nivel municipal
-  /*   if (cerebroGlobales.nivel === 'municipios') {
-    let datosSanAndresActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88001');
-
-    if (seccion.codigo === '88001') {
-      [numerador, denominador, porcentaje] = datosSanAndresActualizados.datos[cerebroGlobales.año];
-    } else if (seccion.codigo === '88564') {
-      let datosProvidenciaActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88564');
-
-      [numerador, denominador, porcentaje] = datosProvidenciaActualizados.datos[cerebroGlobales.año];
-    } else if (!seccion.datos[cerebroGlobales.año]) return;
-    else {
-      [numerador, denominador, porcentaje] = seccion.datos[cerebroGlobales.año];
-    }
-  } */
 
   infoVisible.value = true;
   nombreLugar.value = seccion.nombre;

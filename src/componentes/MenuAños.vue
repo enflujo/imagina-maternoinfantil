@@ -66,23 +66,4 @@ nav {
     color: $colorOscuro;
   }
 }
-
-// li {
-//   display: block;
-//   background-color: aquamarine;
-//   padding: 0.5em;
-//   margin: 0 0.3em;
-//   font-size: 0.8em;
-//   cursor: pointer;
-//   transition: all 0.25s ease-in-out;
-
-//   &:hover {
-//     background-color: rgb(47, 201, 149);
-//   }
-
-//   &.actual {
-//     background-color: rgb(82, 191, 154);
-//     color: white;
-//   }
-// }
 </style>
