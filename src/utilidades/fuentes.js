@@ -433,8 +433,8 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: '',
-    nombreArchivo: '',
+    nombreTabla: 'control < 5 años',
+    nombreArchivo: 'control-5',
     nombreIndicador: 'Proporción de población menor de 5 años que es atendida para controles de rutina del niño o niña',
     definicion:
       'Indica la proporción de niños menores de 5 años que se atendieron por controles de rutina con respecto al total de niños atendidos en un momento y territorio determinado.',
@@ -467,8 +467,8 @@ export default [
     limitacion: 'Con la información disponible no es posible conocer cuántas veces asistió al año una misma persona.',
   },
   {
-    nombreTabla: '',
-    nombreArchivo: '',
+    nombreTabla: 'sifilis',
+    nombreArchivo: 'sifilis',
     nombreIndicador: 'Proporción de gestantes atendidas por sífilis gestacional',
     definicion:
       'Indica la proporción de gestantes con diagnóstico de sífilis gestacional que se atendieron con respecto al total de gestantes en un momento y territorio determinado.',
@@ -498,8 +498,8 @@ export default [
       'Esta información depende de la especificidad con la cual el personal de salud diligencia los RIPS. En este caso puntual se analiza la información del código O981 y no se incluyeron otros como O983 otras infecciones con un modo de transmisión predominantemente sexual que complican el embarazo, parto y puerperio.',
   },
   {
-    nombreTabla: '',
-    nombreArchivo: '',
+    nombreTabla: 'trasmision sexual',
+    nombreArchivo: 'trasmision-sexual',
     nombreIndicador: 'Proporción de personas atendidas por infecciones predominantemente sexuales',
     definicion:
       'Se refiere a la proporción de personas que fueron atendidas en consulta por infecciones de transmisión sexual en un momento y territorio específico.',
@@ -536,8 +536,8 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: '',
-    nombreArchivo: '',
+    nombreTabla: 'maltrato',
+    nombreArchivo: 'maltrato',
     nombreIndicador: 'Proporción de personas que fueron atendidas por síndromes de maltrato.',
     definicion:
       'Indica la proporción de personas que fueron atendidas por maltrato (abandono, abuso físico, abuso sexual, abuso psicológico, otros síndromes de maltrato) con respecto al total de personas atendidas en un momento y territorio específico',
@@ -567,8 +567,8 @@ export default [
       'Este es un indicador que puede estar sub-registrado en la medida en que no siempre se relacionan este tipo de diagnósticos durante una consulta de servicios de salud.',
   },
   {
-    nombreTabla: '',
-    nombreArchivo: '',
+    nombreTabla: 'asesoria anticoncepcion',
+    nombreArchivo: 'asesoria-anticoncepcion',
     nombreIndicador: 'Proporción de personas que consultaron por servicios de anticoncepción',
     definicion:
       'Indica la proporción de personas atendidas anualmente por servicios de anticoncepción con respecto al total de personas atendidas en el mismo periodo y territorio.',
