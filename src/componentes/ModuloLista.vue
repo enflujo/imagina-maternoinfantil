@@ -2,7 +2,6 @@
 import { ref, reactive, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
-import { departamentos, municipios } from '../utilidades/lugaresDeColombia';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
@@ -37,20 +36,10 @@ function actualizarDatos() {
     const lugarCodigo = dato.codigo;
     let lugarNombre = '';
 
-    if (cerebroGlobales.nivel === 'departamentos') {
-      if (dato.codigo !== '-1') {
-        const depto = departamentos.datos.find((d) => d[0] === lugarCodigo);
-        lugarNombre = depto[1];
-      } else {
-        lugarNombre = 'Lugar desconocido';
-      }
-    } else if (cerebroGlobales.nivel === 'municipios') {
-      if (municipios.datos.find((d) => d[3] === dato.codigo)) {
-        const municipio = municipios.datos.find((d) => d[3] === dato.codigo);
-        lugarNombre = municipio[1];
-      } else {
-        lugarNombre = 'Lugar desconocido';
-      }
+    if (dato.codigo !== '-1') {
+      lugarNombre = dato.nombre;
+    } else {
+      lugarNombre = 'Lugar desconocido';
     }
 
     if (dato.datos[cerebroGlobales.año]) {
