@@ -16,6 +16,8 @@ export const usarCerebroDatos = defineStore('datos', {
       municipios: null,
     },
     geojsonLugar: [],
+    geojsonSanAndres: [],
+    años: [],
   }),
 
   getters: {
@@ -40,8 +42,13 @@ export const usarCerebroDatos = defineStore('datos', {
         const datosIndicador = await respuesta.json();
         const datosPais = await respuestaPais.json();
 
+        let añoMin = Infinity;
+        let añoMax = 0;
+
         this.datosNacionales = Object.keys(datosPais).map((anno) => {
           const [numerador, denominador, porcentaje] = datosPais[anno];
+          añoMin = anno < añoMin ? anno : añoMin;
+          añoMax = anno > añoMax ? anno : añoMax;
 
           return {
             anno: anno,
@@ -51,6 +58,11 @@ export const usarCerebroDatos = defineStore('datos', {
           };
         });
 
+        const años = [];
+        for (let i = +añoMin; i <= +añoMax; i++) {
+          años.push(i);
+        }
+        this.años = años;
         this.datos = datosIndicador;
 
         if (cerebroGlobales.lugarSeleccionado) {
@@ -84,9 +96,20 @@ export const usarCerebroDatos = defineStore('datos', {
         const respuesta = await fetch(`${rutaBase}/mi_v2/${cerebroGlobales.nivel}.json`);
         const geojson = await respuesta.json();
 
+        let geoSanAndres;
+
+        geojson.features = geojson.features.filter((lugar) => {
+          if (lugar.properties.codigo === '88') {
+            geoSanAndres = lugar;
+            return false;
+          }
+          return true;
+        });
+
         // Guardar datos procesados en el cache.
         this._cache[cerebroGlobales.nivel] = geojson;
         this.geojsonLugar = geojson;
+        this.geojsonSanAndres = geoSanAndres;
 
         this.cargandoDatos = false;
       }

@@ -1,8 +1,8 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
-import { convertirEscala } from '../utilidades/ayudas';
+import LineaDatos from './LineaDeTiempo/LineaDatos.vue';
 
 const props = defineProps({
   ancho: Number,
@@ -11,24 +11,32 @@ const props = defineProps({
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
-const divisionesEjeY = [0, 1, 2, 3, 4, 5];
 const infoVisible = ref(false);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
-const alturaGrafica = 200;
-const pasoX = ref(0);
+const alturaGrafica = 250;
+const margen = 25;
+const margenInterna = 10;
+const alturaVis = alturaGrafica - margen;
+const colores = {
+  lineaNal: '#219196',
+};
 
-watch(() => props.ancho, actualizarAncho);
-watch(() => cerebroDatos.datosLugar, actualizarAncho);
+const pasoX = computed(() => (props.ancho / cerebroDatos.años.length) | 0);
+const posicionX = (año) => {
+  const i = cerebroDatos.años.findIndex((a) => a == año);
+  return i * pasoX.value + margenInterna;
+};
 
-function actualizarAncho() {
-  pasoX.value = props.ancho / cerebroDatos.datosLugar.length;
+function alturaEjeY(i) {
+  if (i === 0) return 1;
+  return ((alturaVis / 5) * i) | 0;
 }
 
 function eventoEncima(porcentaje, evento) {
   infoX.value = evento.pageX - 10;
-  infoY.value = evento.pageY - 53;
+  infoY.value = evento.pageY - 30;
   infoVisible.value = true;
   infoPorcentaje.value = porcentaje;
 }
@@ -40,97 +48,122 @@ function eventoFuera() {
 
 <template>
   <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
-  <div v-if="cerebroDatos.datosLugar.length" id="lineaTiempo">
-    <span id="linea">
-      <span
-        class="divisionEjeY"
-        v-for="i in divisionesEjeY"
-        :key="`${i}`"
-        :style="`top: ${-(alturaGrafica / 5) * i + 199}px`"
-      >
-        <div class="valorEjeY">{{ ((100 / 5) * i).toFixed(1) }}%</div>
-      </span>
-    </span>
 
-    <div id="años">
-      <span v-for="(d, i) in cerebroDatos.datosLugar" :key="`fecha${d.anno}`">
-        <div
-          class="punto"
-          :style="`top: -${convertirEscala(d.porcentaje, 0, 100, 0, alturaGrafica) + 2}px`"
-          @mouseenter="(e) => eventoEncima(d.porcentaje, e)"
-          @mouseleave="eventoFuera"
-        ></div>
+  <svg :width="props.ancho" :height="alturaGrafica">
+    <!-- DIVISIONES -->
+    <line
+      v-for="(division, i) in Array(5)"
+      :key="`division-${i}`"
+      class="lineaDivision"
+      x1="0"
+      :y1="alturaEjeY(i)"
+      :x2="props.ancho"
+      :y2="alturaEjeY(i)"
+      shape-rendering="crispEdges"
+    />
 
-        <span class="divisionEjeX" :style="`left: ${(pasoX * i) | 0}px`"></span>
-        <h4>{{ d.anno }}</h4>
-      </span>
-    </div>
+    <!-- MARCA AÑO ACTUAL -->
+    <line
+      class="añoActual"
+      :x1="posicionX(cerebroGlobales.año)"
+      y1="0"
+      :x2="posicionX(cerebroGlobales.año)"
+      :y2="alturaVis"
+    />
 
-    <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">
-      {{ infoPorcentaje }}%
-    </div>
-  </div>
+    <!-- LINEA DATOS NACIONALES -->
+    <LineaDatos
+      v-if="cerebroDatos.datosNacionales.length"
+      :datos="cerebroDatos.datosNacionales"
+      :posicionX="posicionX"
+      :alturaVis="alturaVis"
+      :color="colores.lineaNal"
+      @eventoEncima="eventoEncima"
+      @eventoFuera="eventoFuera"
+    />
+
+    <!-- LINEA DATOS LUGAR (Departamento o municipio) -->
+    <LineaDatos
+      v-if="cerebroDatos.datosLugar.length"
+      :datos="cerebroDatos.datosLugar"
+      :posicionX="posicionX"
+      :alturaVis="alturaVis"
+      color="black"
+      @eventoEncima="eventoEncima"
+      @eventoFuera="eventoFuera"
+    />
+
+    <!-- MARCO -->
+    <line class="lineaMarco" x1="2" y1="0" x2="2" :y2="alturaVis" shape-rendering="crispEdges" />
+    <line
+      class="lineaMarco"
+      x1="0"
+      :y1="alturaVis"
+      :x2="props.ancho - margen"
+      :y2="alturaVis"
+      shape-rendering="crispEdges"
+    />
+
+    <line
+      v-for="año in cerebroDatos.años"
+      :key="`marca-${año}`"
+      class="marcaTiempo"
+      :x1="posicionX(año)"
+      :y1="alturaVis"
+      :x2="posicionX(año)"
+      :y2="alturaVis + 7"
+    />
+
+    <text v-for="año in cerebroDatos.años" :key="`año-${año}`" class="año" :x="posicionX(año)" :y="alturaGrafica - 5">
+      {{ año }}
+    </text>
+  </svg>
+
+  <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">{{ infoPorcentaje }}%</div>
 </template>
 
 <style lang="scss" scoped>
-#lineaTiempo {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  font-size: 0.7em;
-  width: 100%;
+@import '@/assets/constantes.scss';
 
-  #linea {
-    height: 200px;
-    width: calc(100% - 10px);
-    border-left: 2px solid;
-    border-bottom: 2px solid;
+#detalle {
+  background-color: #7fffd4;
+  color: black;
+  font-size: 1em;
+  width: fit-content;
+  position: fixed;
+  opacity: 0;
+}
 
-    .divisionEjeY {
-      height: 1px;
-      width: 100%;
-      background-color: #52bf9a85;
-      left: -10px;
-      position: absolute;
-    }
+svg {
+  display: block;
 
-    .valorEjeY {
-      left: -37px;
-      position: relative;
-      top: -5px;
-    }
+  .lineaMarco {
+    stroke: $colorOscuro;
+    stroke-width: 3;
   }
 
-  #años {
-    display: flex;
-    justify-content: space-between;
+  .lineaDivision {
+    stroke: $colorOscuro;
+    stroke-width: 1;
+    opacity: 0.6;
   }
 
-  .divisionEjeX {
-    height: 10px;
-    width: 1px;
-    background-color: rgb(82 191 154);
-    left: 0px;
-    bottom: 39px;
-    position: absolute;
+  .marcaTiempo {
+    stroke: $colorOscuro;
+    stroke-width: 2;
   }
 
-  .punto {
-    background-color: #4e4e4e;
-    border-radius: 50%;
-    width: 6px;
-    height: 6px;
-    position: relative;
-    cursor: pointer;
+  .año {
+    font-size: 12px;
+    fill: $colorOscuro;
+    font-weight: bold;
+    transform: translateX(-10px);
   }
 
-  #detalle {
-    background-color: #7fffd4;
-    color: black;
-    font-size: 1.3em;
-    width: fit-content;
-    position: fixed;
-    opacity: 0;
+  .añoActual {
+    stroke: $colorMenuClaro;
+    stroke-width: 5;
+    opacity: 0.6;
   }
 }
 </style>

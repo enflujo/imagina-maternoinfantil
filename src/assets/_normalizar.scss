@@ -1,0 +1,61 @@
+@use 'sass:color';
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: $colorFondoClaro;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+blockquote,
+dl,
+dd,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+time {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $fuentePesoNegrita;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  font-family: $fuenteTexto;
+  font-weight: $fuentePesoRegular;
+}
+
+::selection {
+  background-color: color.scale($colorFondo, $lightness: 50%);
+  color: black;
+}
