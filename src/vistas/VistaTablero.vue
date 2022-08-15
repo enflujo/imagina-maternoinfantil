@@ -50,7 +50,7 @@ function mostrarCuali() {
 }
 
 function actualizarDims() {
-  anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
+  anchoDerecha.value = seccionDerecha.value.clientWidth;
 }
 
 cerebroGlobales.cambiarNivel();
@@ -147,14 +147,13 @@ cerebroGlobales.cambiarNivel();
 }
 
 #seccionCentral {
-  width: 50vw;
+  width: 40vw;
 }
 
 #seccionDerecha {
-  // margin-top: 100px;
   position: relative;
-  width: 30vw;
-  margin-right: 50px;
+  width: 40vw;
+  margin-right: 30px;
 }
 
 #menuVistaLugar {

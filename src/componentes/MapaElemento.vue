@@ -22,11 +22,13 @@ const anchoProvidencia = ref(0);
 const altoProvidencia = ref(0);
 
 const posInfo = reactive({ x: 0, y: 0 });
+const coloresMapa = { fondo: 'white' };
 const mapa = ref();
 const mapearCoordenadas = ref();
 const mapearProvidencia = ref();
 const mapearSanAndres = ref();
 const mapearColor = escalaColores(0, 100, colores[0], colores[1]);
+const sinDatos = ref(false);
 
 const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
@@ -95,7 +97,7 @@ watch(
           anchoSanAndres.value,
           altoSanAdres.value
         ),
-        color: 'white',
+        color: coloresMapa.fondo,
       });
 
       datosProvidencia.push({
@@ -108,7 +110,7 @@ watch(
           anchoProvidencia.value,
           altoProvidencia.value
         ),
-        color: 'white',
+        color: coloresMapa.fondo,
       });
     }
   }
@@ -125,22 +127,30 @@ watch(
 );
 
 function actualizarDatos() {
+  const añoSeleccionado = cerebroGlobales.año;
+  const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
+
+  sinDatos.value = !datosNacionalesAño;
+
   cerebroDatos.geojsonLugar.features.forEach((lugar, i) => {
     datosSecciones[i].datos = [];
-    datosSecciones[i].color = 'transparent';
+    datosSecciones[i].color = coloresMapa.fondo;
     const { codigo } = lugar.properties;
     const datosLugar = cerebroDatos.datos.find((obj) => obj.codigo === codigo);
 
-    if (!datosLugar || !datosLugar.datos[cerebroGlobales.año]) {
+    if (!datosLugar) return;
+
+    if (!datosLugar.datos[añoSeleccionado]) {
+      datosSecciones[i].color = 'url(#sinInfo)';
       return;
     }
 
     datosSecciones[i].datos = datosLugar.datos;
-    datosSecciones[i].color = mapearColor(datosLugar.datos[cerebroGlobales.año][2]);
+    datosSecciones[i].color = mapearColor(datosLugar.datos[añoSeleccionado][2]);
   });
 
   // Colorear San Andrés
-  datosSanAndres.color = 'transparent';
+  datosSanAndres.color = coloresMapa.fondo;
 
   let datosSanAndresActualizados;
 
@@ -159,7 +169,7 @@ function actualizarDatos() {
   datosSanAndres.color = mapearColor(datosSanAndres.datos[cerebroGlobales.año][2]);
 
   // Colorear Providencia
-  datosProvidencia.color = 'transparent';
+  datosProvidencia.color = coloresMapa.fondo;
 
   let datosProvidenciaActualizados;
 
@@ -271,6 +281,11 @@ function eventoClic(seccion, contenedor, evento) {
   </div>
 
   <svg id="mapa" ref="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
+    <defs>
+      <pattern id="sinInfo" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(45)">
+        <line x1="0" y="0" x2="0" y2="3.5" stroke="#46484A" stroke-width="1" />
+      </pattern>
+    </defs>
     <path
       v-for="seccion in datosSecciones"
       :key="`seccion-${seccion.codigo}`"
@@ -287,6 +302,10 @@ function eventoClic(seccion, contenedor, evento) {
       shape-rendering="geometricPrecision"
     ></path>
   </svg>
+
+  <div id="sinDatos" v-if="sinDatos">
+    Este indicador no tiene datos disponibles para el año <span class="resaltar">{{ cerebroGlobales.año }}.</span>
+  </div>
 
   <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
     <p id="departamento">{{ nombreLugar }}</p>
@@ -321,6 +340,7 @@ function eventoClic(seccion, contenedor, evento) {
 
 .lugar {
   stroke: $colorBlanco;
+  transition: fill 0.3s ease-out;
 
   &.activo {
     stroke: #fd8348;
@@ -342,6 +362,21 @@ function eventoClic(seccion, contenedor, evento) {
 
   p {
     margin: 0.3em;
+  }
+}
+
+#sinDatos {
+  position: absolute;
+  border: 3px solid #eb5050;
+  background-color: $colorBlanco;
+  top: 50%;
+  left: 35vw;
+  padding: 1em;
+  max-width: 200px;
+  transform: translateY(-50%);
+
+  .resaltar {
+    font-weight: bold;
   }
 }
 </style>

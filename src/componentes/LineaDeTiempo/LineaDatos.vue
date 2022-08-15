@@ -1,8 +1,7 @@
 <script setup>
-import { convertirEscala } from '../../utilidades/ayudas';
-
 const props = defineProps({
   posicionX: Function,
+  posicionY: Function,
   datos: Array,
   alturaVis: Number,
   color: String,
@@ -16,7 +15,7 @@ function construirLinea() {
   props.datos.forEach((instancia, i) => {
     const x = props.posicionX(instancia.anno);
     // POR HACER! acá toca cambiar los valores cuando no es porcentaje
-    const y = convertirEscala(instancia.porcentaje, 0, 100, props.alturaVis, 0);
+    const y = props.posicionY(instancia.porcentaje);
 
     if (i === 0) {
       linea += `M${x} ${y}`;
@@ -38,7 +37,7 @@ function construirLinea() {
       :key="`puntoNal-${i}`"
       class="puntoDatos"
       :cx="posicionX(instancia.anno)"
-      :cy="convertirEscala(instancia.porcentaje, 0, 100, alturaVis, 0)"
+      :cy="posicionY(instancia.porcentaje)"
       :r="radioPuntos"
       :fill="color"
       @mouseenter="(e) => $emit('eventoEncima', instancia.porcentaje, e)"

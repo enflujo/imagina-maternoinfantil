@@ -65,6 +65,16 @@ export const usarCerebroDatos = defineStore('datos', {
         this.años = años;
         this.datos = datosIndicador;
 
+        // if (cerebroGlobales.año) {
+        //   const existeAñoSeleccionado = años.includes(cerebroGlobales.año);
+
+        //   if (!existeAñoSeleccionado) {
+        //     if (años[0] > cerebroGlobales.año) {
+        //       cerebroGlobales.año = años[0];
+        //     }
+        //   }
+        // }
+
         if (cerebroGlobales.lugarSeleccionado) {
           const dLugar = datosIndicador.find((obj) => obj.codigo === cerebroGlobales.lugarSeleccionado.codigo);
 
