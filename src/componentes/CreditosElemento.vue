@@ -131,7 +131,6 @@ function cerrarCreditos() {
     justify-content: center;
     text-align: center;
     padding-top: 0.1em;
-    font-weight: bold;
   }
 
   .seccion {

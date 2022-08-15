@@ -2,6 +2,7 @@
 import { ref, reactive, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
+import fuentes from '../utilidades/fuentes';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
@@ -67,16 +68,17 @@ function actualizarDatos() {
         class="botonOrden"
         :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
         @click="elegirOrden('porcentaje')"
-        >Porcentaje</span
+      >
+        {{ fuentes[cerebroDatos.indice].tipo }}</span
       >
       <span class="botonOrden" :class="criterioOrden === 'numerador' ? 'activo' : ''" @click="elegirOrden('numerador')"
-        >Numerador</span
+        >numerador</span
       >
       <span
         class="botonOrden"
         :class="criterioOrden === 'denominador' ? 'activo' : ''"
         @click="elegirOrden('denominador')"
-        >Denominador</span
+        >denominador</span
       >
     </span>
     <div id="contenedor">
@@ -113,8 +115,8 @@ function actualizarDatos() {
     padding: 1em;
     background-color: #0041bf;
     color: white;
-    font-size: 1em;
-    width: 28%;
+    font-size: 0.9em;
+    width: 31%;
     height: fit-content;
     text-align: center;
     padding: 0.5em;
