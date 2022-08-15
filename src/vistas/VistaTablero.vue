@@ -13,6 +13,7 @@ import fuentes from '../utilidades/fuentes';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
 import Creditos from '../componentes/CreditosElemento.vue';
+import HistoriasCuali from '../componentes/HistoriasCuali.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -43,6 +44,11 @@ function mostrarFichaTecnica() {
   }
 }
 
+function mostrarCuali() {
+  const historiasCuali = document.getElementById('cuali');
+  historiasCuali.style.visibility = 'visible';
+}
+
 function actualizarDims() {
   anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
 }
@@ -53,6 +59,7 @@ cerebroGlobales.cambiarNivel();
 <template>
   <div id="contenedorGeneral">
     <Creditos />
+    <HistoriasCuali />
     <div id="seccionIzquierda">
       <MenuIndicadores />
       <FichaTecnica />
@@ -86,6 +93,8 @@ cerebroGlobales.cambiarNivel();
 
       <Mapa />
       <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
+
+      <div @click="mostrarCuali">Mostrar historias Cuali</div>
     </div>
 
     <div id="seccionDerecha" ref="seccionDerecha">
