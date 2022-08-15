@@ -65,10 +65,10 @@ const cerebroDatos = usarCerebroDatos();
   background-color: #55efa1;
   z-index: 99;
   position: absolute;
-  top: 22vh;
-  left: 3vw;
-  border: 35px solid #55efa1;
-  border-radius: 15px 0 0 0;
+  top: 170px;
+  left: 33vw;
+  border: 25px solid #55efa1;
+  border-radius: 15px;
   visibility: hidden;
   overflow-y: scroll;
 
@@ -76,10 +76,11 @@ const cerebroDatos = usarCerebroDatos();
     background-color: #0041bf;
     color: white;
     display: block;
-    border-radius: 15px 0 0 0;
+    border-radius: 15px 15px 0 0;
     justify-content: center;
-    padding: 10% 5%;
+    padding: 5% 5%;
     text-align: center;
+    font-size: 0.95em;
   }
 
   #contenido {
@@ -98,7 +99,7 @@ const cerebroDatos = usarCerebroDatos();
       font-size: 1.1em;
       display: flex;
       align-items: center;
-      padding-left: 1em;
+      padding: 1em;
       border: 3px solid #0041bf;
       border-top: 0;
       text-align: left;
