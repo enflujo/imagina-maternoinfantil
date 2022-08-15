@@ -13,6 +13,10 @@ export default [
     fuenteDenominador: 'CUBO INDICADORES EEVV: Nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
     nombreEjeY: 'Porcentaje (%)',
+    fichaTecnica: { descripcion: '', parametros: [] },
+    nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
+    serieDisponible: [],
+    interpretacion:
       'El bajo peso al nacer es un serio problema de salud pública ya que expresa las condiciones de salud durante la gestación. Se asocia a complicaciones durante los primeros meses de vida, por ejemplo, mortalidad, deficiencias en el desarrollo cognitivo, e incluso puede aumentar el riesgo de padecer enfermedades no transmisibles como la diabetes durante la adultez. Un valor de 8% significa que existen 8 nacidos a término con bajo peso al nacer por cada 100 nacidos vivos en un territorio y momento específicos. Más información sobre la importancia del adecuado peso al nacer: https://apps.who.int/iris/bitstream/handle/10665/255733/WHO_NMH_NHD_14.5_spa.pdf',
     meta: {
       umbral: 10,
