@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { convertirEscala } from '../utilidades/ayudas';
@@ -17,46 +17,51 @@ const infoVisible = ref(false);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
-const posUmbral = reactive({
-  y: 0,
-  alto: 0,
-});
-const alturaGrafica = 250;
-const margen = 25;
-const margenInterna = 10;
-const alturaVis = alturaGrafica - margen;
-const colores = {
-  lineaNal: '#219196',
+const posUmbral = reactive({ y: 0, alto: 0 });
+const colores = { lineaNal: '#219196' };
+const dimsVis = {
+  alto: 250,
+  altoVis: 0,
+  marcoIz: 30,
+  marcoAbajo: 20,
+  margenIz: 10,
+  margenArriba: 15,
+  base: 0,
+  inicioX: 0,
 };
+dimsVis.altoVis = dimsVis.alto - dimsVis.marcoAbajo - dimsVis.margenArriba;
+dimsVis.base = dimsVis.alto - dimsVis.marcoAbajo;
+dimsVis.inicioX = dimsVis.marcoIz + dimsVis.margenIz;
 
-watch(
-  () => cerebroDatos.indice,
-  (indice) => {
-    const { umbral, tendenciaDeseada } = fuentes[indice].meta;
-    const umbralY = convertirEscala(umbral, 0, 100, alturaVis, 0);
-    let y = 0;
-    let alto = umbralY;
-
-    if (tendenciaDeseada === 'abajo') {
-      y = umbralY;
-      alto = alturaVis - umbralY;
-    }
-    posUmbral.y = y;
-    posUmbral.alto = alto;
-  }
-);
+watch(() => cerebroDatos.indice, definirUmbral);
+onMounted(definirUmbral);
 
 const tieneUmbral = computed(() => fuentes[cerebroDatos.indice].meta.umbral);
 const tendencia = computed(() => fuentes[cerebroDatos.indice].meta.tendenciaDeseada);
-const pasoX = computed(() => (props.ancho / cerebroDatos.años.length) | 0);
+const pasoX = computed(() => ((props.ancho - dimsVis.inicioX) / cerebroDatos.años.length) | 0);
 const posicionX = (año) => {
   const i = cerebroDatos.años.findIndex((a) => a == año);
-  return i * pasoX.value + margenInterna;
+  return i * pasoX.value + dimsVis.inicioX;
 };
+const posicionY = (valor) => convertirEscala(valor, 0, 100, dimsVis.base, dimsVis.margenArriba);
 
 function alturaEjeY(i) {
-  if (i === 0) return 1;
-  return ((alturaVis / 5) * i) | 0;
+  if (i === 0) return dimsVis.margenArriba;
+  return (((dimsVis.altoVis / 5) * i) | 0) + dimsVis.margenArriba;
+}
+
+function definirUmbral() {
+  const { umbral, tendenciaDeseada } = fuentes[cerebroDatos.indice].meta;
+  const umbralY = posicionY(umbral);
+  let y = dimsVis.margenArriba;
+  let alto = umbralY;
+
+  if (tendenciaDeseada === 'abajo') {
+    y = umbralY;
+    alto = dimsVis.base - umbralY;
+  }
+  posUmbral.y = y;
+  posUmbral.alto = alto;
 }
 
 function eventoEncima(porcentaje, evento) {
@@ -69,111 +74,159 @@ function eventoEncima(porcentaje, evento) {
 function eventoFuera() {
   infoVisible.value = false;
 }
+
+// const añoRecortado = (valor) => valor.toString().substring(2);
 </script>
 
 <template>
-  <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
+  <section id="lineaDeTiempo">
+    <header>
+      <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
 
-  <svg :width="props.ancho" :height="alturaGrafica">
-    <defs>
-      <linearGradient id="arriba" x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="0%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
-        <stop offset="100%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
-      </linearGradient>
+      <p id="descripcionY">{{ fuentes[cerebroDatos.indice].meta.descripcion }}</p>
+    </header>
 
-      <linearGradient id="abajo" x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="0%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
-        <stop offset="100%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
-      </linearGradient>
-    </defs>
-    <!-- DIVISIONES -->
-    <line
-      v-for="(division, i) in Array(5)"
-      :key="`division-${i}`"
-      class="lineaDivision"
-      x1="0"
-      :y1="alturaEjeY(i)"
-      :x2="props.ancho"
-      :y2="alturaEjeY(i)"
-      shape-rendering="crispEdges"
-    />
+    <svg :width="props.ancho" :height="dimsVis.alto">
+      <defs>
+        <linearGradient id="arriba" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
+        </linearGradient>
 
-    <rect
-      v-if="tieneUmbral"
-      class="umbral"
-      x="0"
-      :y="posUmbral.y"
-      :width="ancho"
-      :height="posUmbral.alto"
-      :fill="`url(#${tendencia})`"
-    />
+        <linearGradient id="abajo" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
+        </linearGradient>
 
-    <!-- MARCA AÑO ACTUAL -->
-    <line
-      class="añoActual"
-      :x1="posicionX(cerebroGlobales.año)"
-      y1="0"
-      :x2="posicionX(cerebroGlobales.año)"
-      :y2="alturaVis"
-    />
+        <pattern id="sinInfo" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(45)">
+          <line x1="0" y="0" x2="0" y2="3.5" stroke="#46484A" stroke-width="1" />
+        </pattern>
+      </defs>
+      <!-- MARCO -->
+      <line
+        class="lineaMarco"
+        :x1="dimsVis.marcoIz"
+        y1="0"
+        :x2="dimsVis.marcoIz"
+        :y2="dimsVis.alto"
+        shape-rendering="crispEdges"
+      />
+      <line
+        class="lineaMarco"
+        :x1="dimsVis.marcoIz"
+        :y1="dimsVis.base"
+        :x2="props.ancho"
+        :y2="dimsVis.base"
+        shape-rendering="crispEdges"
+      />
 
-    <!-- LINEA DATOS NACIONALES -->
-    <LineaDatos
-      v-if="cerebroDatos.datosNacionales.length"
-      :datos="cerebroDatos.datosNacionales"
-      :posicionX="posicionX"
-      :alturaVis="alturaVis"
-      :color="colores.lineaNal"
-      @eventoEncima="eventoEncima"
-      @eventoFuera="eventoFuera"
-    />
+      <line
+        v-for="anno in cerebroDatos.años"
+        :key="`marca-${anno}`"
+        class="marcaMarco"
+        :x1="posicionX(anno)"
+        :y1="dimsVis.base"
+        :x2="posicionX(anno)"
+        :y2="dimsVis.base + 7"
+      />
 
-    <!-- LINEA DATOS LUGAR (Departamento o municipio) -->
-    <LineaDatos
-      v-if="cerebroDatos.datosLugar.length"
-      :datos="cerebroDatos.datosLugar"
-      :posicionX="posicionX"
-      :alturaVis="alturaVis"
-      color="black"
-      @eventoEncima="eventoEncima"
-      @eventoFuera="eventoFuera"
-    />
+      <text
+        v-for="anno in cerebroDatos.años"
+        :key="`año-${anno}`"
+        class="año textoEje"
+        :class="anno === cerebroGlobales.año ? 'activo' : ''"
+        :x="posicionX(anno)"
+        :y="dimsVis.base + 16"
+        @click="cerebroGlobales.actualizarAño(anno)"
+      >
+        {{ anno }}
+      </text>
 
-    <!-- MARCO -->
-    <line class="lineaMarco" x1="2" y1="0" x2="2" :y2="alturaVis" shape-rendering="crispEdges" />
-    <line
-      class="lineaMarco"
-      x1="0"
-      :y1="alturaVis"
-      :x2="props.ancho - margen"
-      :y2="alturaVis"
-      shape-rendering="crispEdges"
-    />
+      <text class="nombreEje" x="0" :y="dimsVis.base + 14">Año</text>
 
-    <line
-      v-for="anno in cerebroDatos.años"
-      :key="`marca-${anno}`"
-      class="marcaTiempo"
-      :x1="posicionX(anno)"
-      :y1="alturaVis"
-      :x2="posicionX(anno)"
-      :y2="alturaVis + 7"
-    />
+      <!-- DIVISIONES -->
+      <line
+        v-for="(division, i) in Array(5)"
+        :key="`division-${i}`"
+        class="lineaDivision"
+        :x1="dimsVis.marcoIz"
+        :y1="alturaEjeY(i)"
+        :x2="props.ancho"
+        :y2="alturaEjeY(i)"
+        shape-rendering="crispEdges"
+      />
 
-    <text
-      v-for="anno in cerebroDatos.años"
-      :key="`año-${anno}`"
-      class="año"
-      :class="anno === cerebroGlobales.año ? 'activo' : ''"
-      :x="posicionX(anno)"
-      :y="alturaGrafica - 5"
-      @click="cerebroGlobales.actualizarAño(anno)"
-    >
-      {{ anno }}
-    </text>
-  </svg>
+      <line
+        v-for="(division, i) in Array(5)"
+        :key="`division2-${i}`"
+        class="marcaMarco"
+        :x1="dimsVis.marcoIz - 7"
+        :y1="alturaEjeY(i)"
+        :x2="dimsVis.marcoIz"
+        :y2="alturaEjeY(i)"
+        shape-rendering="crispEdges"
+      />
 
-  <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">{{ infoPorcentaje }}%</div>
+      <text
+        v-for="(division, i) in Array(5)"
+        :key="`division2-${i}`"
+        class="textoEjeY textoEje"
+        :x="dimsVis.marcoIz - 25"
+        :y="alturaEjeY(i) + 4"
+        shape-rendering="crispEdges"
+      >
+        {{ 80 }}
+      </text>
+
+      <!-- UMBRAL -->
+      <rect
+        v-if="tieneUmbral"
+        class="umbral"
+        :x="dimsVis.marcoIz"
+        :y="posUmbral.y"
+        :width="ancho"
+        :height="posUmbral.alto"
+        :fill="`url(#${tendencia})`"
+      />
+
+      <!-- MARCA AÑO ACTUAL -->
+      <line
+        class="añoActual"
+        :x1="posicionX(cerebroGlobales.año)"
+        y1="0"
+        :x2="posicionX(cerebroGlobales.año)"
+        :y2="dimsVis.base"
+      />
+
+      <!-- LINEA DATOS NACIONALES -->
+      <LineaDatos
+        v-if="cerebroDatos.datosNacionales.length"
+        :datos="cerebroDatos.datosNacionales"
+        :posicionX="posicionX"
+        :posicionY="posicionY"
+        :alturaVis="dimsVis.altoVis"
+        :color="colores.lineaNal"
+        @eventoEncima="eventoEncima"
+        @eventoFuera="eventoFuera"
+      />
+
+      <!-- LINEA DATOS LUGAR (Departamento o municipio) -->
+      <LineaDatos
+        v-if="cerebroDatos.datosLugar.length"
+        :datos="cerebroDatos.datosLugar"
+        :posicionX="posicionX"
+        :posicionY="posicionY"
+        :alturaVis="dimsVis.altoVis"
+        color="black"
+        @eventoEncima="eventoEncima"
+        @eventoFuera="eventoFuera"
+      />
+    </svg>
+
+    <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">
+      {{ infoPorcentaje }}%
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -198,22 +251,19 @@ svg {
     stroke-width: 3;
   }
 
+  .marcaMarco {
+    stroke: $colorOscuro;
+    stroke-width: 2;
+  }
+
   .lineaDivision {
     stroke: $colorOscuro;
     stroke-width: 1;
     opacity: 0.6;
   }
 
-  .marcaTiempo {
-    stroke: $colorOscuro;
-    stroke-width: 2;
-  }
-
   .año {
-    font-size: 12px;
-    fill: $colorOscuro;
-    font-weight: bold;
-    transform: translateX(-10px);
+    transform: translateX(-5px);
     cursor: pointer;
 
     &:hover {
@@ -234,6 +284,18 @@ svg {
 
   .umbral {
     opacity: 0.6;
+  }
+
+  .nombreEje {
+    font-size: 14px;
+    fill: $colorOscuro;
+    font-weight: bold;
+  }
+
+  .textoEje {
+    font-size: 10px;
+    fill: $colorOscuro;
+    font-weight: bold;
   }
 }
 </style>
