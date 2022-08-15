@@ -1,10 +1,22 @@
 <script setup>
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroDatos } from '../cerebro/datos';
-// import { usarCerebroGlobales } from '../cerebro/globales';
+import { reactive, watch, ref, onMounted } from 'vue-demi';
+
 const cerebroDatos = usarCerebroDatos();
-// const cerebroGlobales = usarCerebroGlobales();
-//const mostrarFichaTecnica = mostrarFicha();
+let interpretacion = ref(null);
+
+function reemplazarURLs(texto) {
+  if (!texto) return;
+  var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+  return texto.replace(urlRegex, function (url) {
+    var hyperlink = url;
+    if (!hyperlink.match('^https?:\/\/')) {
+      hyperlink = 'http://' + hyperlink;
+    }
+    return `<a href="${hyperlink}" target="_blank" > ${url} </a>`;
+  });
+}
 </script>
 
 <template>
@@ -39,8 +51,10 @@ const cerebroDatos = usarCerebroDatos();
           </p>
         </div>
 
-        <div class="tituloSeccion">Cómo se interpreta</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].interpretacion }}</div>
+        <div class="tituloSeccion" @click="mostrarTexto(fuentes[cerebroDatos.indiceActual].interpretacion)">
+          Cómo se interpreta
+        </div>
+        <div class="informacion" v-html="reemplazarURLs(fuentes[cerebroDatos.indiceActual].interpretacion)"></div>
 
         <div class="tituloSeccion">Meta</div>
         <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].meta.descripcion }}</div>
