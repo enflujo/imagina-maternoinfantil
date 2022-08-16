@@ -20,7 +20,6 @@ const dimsSanAndresP = reactive({ ancho: 0, alto: 0 });
 const posInfo = reactive({ x: 0, y: 0 });
 const coloresMapa = { fondo: 'white' };
 const mapa = ref();
-const mapearColor = escalaColores(0, 100, colores[0], colores[1]);
 const sinDatos = ref(false);
 
 const datosLugar = ref([]);
@@ -105,7 +104,7 @@ function iniciarDatosSanAndres() {
   datosProvidencia.value = providencia;
 }
 
-function redefinirSanAndresP(seccion, añoSeleccionado) {
+function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
   const d = cerebroDatos.datos.find((obj) => obj.codigo === seccion.codigo);
   if (!d) return seccion;
 
@@ -124,6 +123,7 @@ function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
+  const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores[0], colores[1]);
 
   sinDatos.value = !datosNacionalesAño;
 
@@ -145,8 +145,8 @@ function actualizarDatos() {
   });
 
   if (cerebroGlobales.nivel === 'departamentos') {
-    datosSanAndres.value = datosSanAndres.value.map((d) => redefinirSanAndresP(d, añoSeleccionado));
-    datosProvidencia.value = datosProvidencia.value.map((d) => redefinirSanAndresP(d, añoSeleccionado));
+    datosSanAndres.value = datosSanAndres.value.map((d) => redefinirSanAndresP(d, añoSeleccionado, mapearColor));
+    datosProvidencia.value = datosProvidencia.value.map((d) => redefinirSanAndresP(d, añoSeleccionado, mapearColor));
   }
 }
 
@@ -202,8 +202,11 @@ function eventoMovimiento(evento) {
 
 function eventoClic(seccion, contenedor, evento) {
   // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-  const elemento = evento.target;
-  contenedor.append(elemento);
+
+  if (contenedor) {
+    const elemento = evento.target;
+    contenedor.append(elemento);
+  }
 
   // Cambiar lugar
   cerebroDatos.actualizarDatosLugar(seccion);
@@ -232,7 +235,7 @@ function eventoClic(seccion, contenedor, evento) {
         :data-nombre="seccion.nombre"
         @mouseenter="eventoEncima(seccion)"
         @mouseleave="eventoFuera"
-        @click="(e) => eventoClic(seccion, mapa, e)"
+        @click="(e) => eventoClic(seccion)"
         shape-rendering="geometricPrecision"
       />
 
@@ -250,7 +253,7 @@ function eventoClic(seccion, contenedor, evento) {
         :data-nombre="seccion.nombre"
         @mouseenter="eventoEncima(seccion)"
         @mouseleave="eventoFuera"
-        @click="(e) => eventoClic(seccion, mapa, e)"
+        @click="(e) => eventoClic(seccion)"
         shape-rendering="geometricPrecision"
       />
     </svg>
@@ -340,7 +343,7 @@ function eventoClic(seccion, contenedor, evento) {
 }
 
 #informacion {
-  position: absolute;
+  position: fixed;
   color: rgb(239, 100, 97);
   font-size: 0.85em;
   font-family: $fuenteTexto;
@@ -357,7 +360,7 @@ function eventoClic(seccion, contenedor, evento) {
 }
 
 #sinDatos {
-  position: absolute;
+  position: fixed;
   border: 3px solid #eb5050;
   background-color: $colorBlanco;
   top: 50%;

@@ -18,6 +18,7 @@ export const usarCerebroDatos = defineStore('datos', {
     geojsonLugar: null,
     geojsonSanAndres: null,
     años: [],
+    valorMax: 0,
   }),
 
   getters: {
@@ -36,7 +37,7 @@ export const usarCerebroDatos = defineStore('datos', {
 
       if (forzar || this.indice !== indiceIndicador) {
         const cerebroGlobales = usarCerebroGlobales();
-        const { nombreArchivo } = fuentes[indiceIndicador];
+        const { nombreArchivo, tipo } = fuentes[indiceIndicador];
         const respuesta = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-${cerebroGlobales.nivel}.json`);
         const respuestaPais = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-pais.json`);
         const datosIndicador = await respuesta.json();
@@ -64,6 +65,14 @@ export const usarCerebroDatos = defineStore('datos', {
         }
         this.años = años;
         this.datos = datosIndicador;
+
+        if (tipo === 'proporción') {
+          this.valorMax = 100;
+        } else if (tipo === 'razón') {
+          this.valorMax = 1000;
+        } else {
+          this.valorMax = 500;
+        }
 
         // if (cerebroGlobales.año) {
         //   const existeAñoSeleccionado = años.includes(cerebroGlobales.año);

@@ -48,7 +48,8 @@ const posicionX = (año) => {
   const i = cerebroDatos.años.findIndex((a) => a == año);
   return i * pasoX.value + dimsVis.inicioX;
 };
-const posicionY = (valor) => convertirEscala(valor, 0, 100, dimsVis.base, dimsVis.margenArriba);
+const posicionY = (valor) =>
+  convertirEscala(valor, 0, cerebroDatos.valorMax || 100, dimsVis.base, dimsVis.margenArriba);
 
 function alturaEjeY(i) {
   if (i === 0) return dimsVis.margenArriba;
@@ -68,6 +69,7 @@ function definirUmbral() {
     y = umbralY;
     alto = dimsVis.base - umbralY;
   }
+
   posUmbral.y = y;
   posUmbral.alto = alto;
 }
@@ -94,7 +96,6 @@ function colorFondoDetalle(valor) {
         color = '#219196';
       }
     } else {
-      console.log('hhh');
       if (valor <= umbralIndicador.value) {
         color = '#0000a4';
       } else {
@@ -108,6 +109,21 @@ function colorFondoDetalle(valor) {
   return color;
 }
 
+function textoPuntoY(i) {
+  const info = fuentes[cerebroDatos.indice];
+  let respuesta = '';
+
+  if (info.tipo === 'proporción') {
+    respuesta = 100 - i * 20;
+  } else if (info.tipo === 'razón') {
+    respuesta = 1000 - i * 200;
+  } else {
+    respuesta = 500 - i * 100;
+  }
+
+  return respuesta;
+}
+
 // const añoRecortado = (valor) => valor.toString().substring(2);
 </script>
 
@@ -116,7 +132,7 @@ function colorFondoDetalle(valor) {
     <header>
       <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
 
-      <p id="descripcionY">{{ fuentes[cerebroDatos.indice].meta.descripcion }}</p>
+      <p id="descripcionY">{{ fuentes[cerebroDatos.indice].nombreEjeY }}</p>
     </header>
 
     <svg :width="props.ancho" :height="dimsVis.alto">
@@ -208,7 +224,7 @@ function colorFondoDetalle(valor) {
         :y="alturaEjeY(i) + 4"
         shape-rendering="crispEdges"
       >
-        {{ 80 }}
+        {{ textoPuntoY(i) }}
       </text>
 
       <!-- UMBRAL -->
@@ -264,6 +280,10 @@ function colorFondoDetalle(valor) {
     >
       {{ infoPorcentaje }}
     </div>
+
+    <footer>
+      <p id="descripcionMeta">{{ fuentes[cerebroDatos.indice].meta.descripcion }}</p>
+    </footer>
   </section>
 </template>
 
@@ -335,5 +355,21 @@ svg {
     fill: $colorOscuro;
     font-weight: bold;
   }
+}
+
+#descripcionY {
+  color: $colorOscuro;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#descripcionMeta {
+  // color: rgb(20, 99, 20);
+  border: 2px solid rgb(35, 150, 115);
+  background-color: $colorBlanco;
+  padding: 0.3em 1em;
+  text-align: center;
+  margin-top: 1em;
+  margin-left: 30px;
 }
 </style>
