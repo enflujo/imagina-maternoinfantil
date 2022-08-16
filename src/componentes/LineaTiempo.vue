@@ -17,6 +17,8 @@ const infoVisible = ref(false);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
+const umbralIndicador = ref(null);
+const tendenciaDeseada = ref(null);
 const posUmbral = reactive({ y: 0, alto: 0 });
 const colores = { lineaNal: '#219196' };
 const dimsVis = {
@@ -39,6 +41,9 @@ onMounted(definirUmbral);
 const tieneUmbral = computed(() => fuentes[cerebroDatos.indice].meta.umbral);
 const tendencia = computed(() => fuentes[cerebroDatos.indice].meta.tendenciaDeseada);
 const pasoX = computed(() => ((props.ancho - dimsVis.inicioX) / cerebroDatos.años.length) | 0);
+
+tendenciaDeseada.value = tendencia;
+
 const posicionX = (año) => {
   const i = cerebroDatos.años.findIndex((a) => a == año);
   return i * pasoX.value + dimsVis.inicioX;
@@ -51,12 +56,15 @@ function alturaEjeY(i) {
 }
 
 function definirUmbral() {
-  const { umbral, tendenciaDeseada } = fuentes[cerebroDatos.indice].meta;
+  const { umbral, tendenciaDeseada: tendencia } = fuentes[cerebroDatos.indice].meta;
   const umbralY = posicionY(umbral);
   let y = dimsVis.margenArriba;
-  let alto = umbralY;
+  let alto = umbralY - dimsVis.margenArriba;
 
-  if (tendenciaDeseada === 'abajo') {
+  umbralIndicador.value = umbral;
+  tendenciaDeseada.value = tendencia;
+
+  if (tendencia === 'abajo') {
     y = umbralY;
     alto = dimsVis.base - umbralY;
   }
@@ -73,6 +81,31 @@ function eventoEncima(porcentaje, evento) {
 
 function eventoFuera() {
   infoVisible.value = false;
+}
+
+function colorFondoDetalle(valor) {
+  let color = '';
+
+  if (umbralIndicador.value) {
+    if (tendenciaDeseada.value === 'abajo') {
+      if (valor > umbralIndicador.value) {
+        color = '#0000a4';
+      } else {
+        color = '#219196';
+      }
+    } else {
+      console.log('hhh');
+      if (valor <= umbralIndicador.value) {
+        color = '#0000a4';
+      } else {
+        color = '#219196';
+      }
+    }
+  } else {
+    color = '#626363';
+  }
+
+  return color;
 }
 
 // const añoRecortado = (valor) => valor.toString().substring(2);
@@ -223,8 +256,13 @@ function eventoFuera() {
       />
     </svg>
 
-    <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">
-      {{ infoPorcentaje }}%
+    <div
+      id="detalle"
+      :style="`opacity:${infoVisible ? 1 : 0}; background-color:${colorFondoDetalle(
+        infoPorcentaje
+      )}; left:${infoX}px;top:${infoY}px`"
+    >
+      {{ infoPorcentaje }}
     </div>
   </section>
 </template>
@@ -233,14 +271,14 @@ function eventoFuera() {
 @import '@/assets/constantes.scss';
 
 #detalle {
-  background-color: #7fffd4;
-  color: black;
-  font-size: 1em;
+  color: white;
+  font-size: 0.9em;
   width: fit-content;
   position: fixed;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease-in-out;
+  padding: 2px;
 }
 
 svg {

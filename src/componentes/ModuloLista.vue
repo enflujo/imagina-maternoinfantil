@@ -2,11 +2,13 @@
 import { ref, reactive, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
+import fuentes from '../utilidades/fuentes';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
 let datosOrdenados = reactive([]);
+let datosLugarDesconocido = reactive([]);
 let criterioOrden = ref('porcentaje');
 
 watch(() => cerebroGlobales.año, actualizarDatos);
@@ -30,6 +32,7 @@ function elegirOrden(criterio) {
 
 function actualizarDatos() {
   datosOrdenados.splice(0);
+  datosLugarDesconocido.splice(0);
 
   if (!cerebroDatos.datos) return;
   cerebroDatos.datos.forEach((dato) => {
@@ -45,13 +48,23 @@ function actualizarDatos() {
     if (dato.datos[cerebroGlobales.año]) {
       const [numerador, denominador, porcentaje] = dato.datos[cerebroGlobales.año];
 
-      datosOrdenados.push({
-        lugarCodigo: lugarCodigo,
-        lugarNombre: lugarNombre,
-        numerador: numerador,
-        denominador: denominador,
-        porcentaje: porcentaje,
-      });
+      if (lugarNombre === 'Lugar desconocido') {
+        datosLugarDesconocido.push({
+          lugarCodigo: lugarCodigo,
+          lugarNombre: lugarNombre,
+          numerador: numerador,
+          denominador: denominador,
+          porcentaje: porcentaje,
+        });
+      } else {
+        datosOrdenados.push({
+          lugarCodigo: lugarCodigo,
+          lugarNombre: lugarNombre,
+          numerador: numerador,
+          denominador: denominador,
+          porcentaje: porcentaje,
+        });
+      }
     }
   });
 
@@ -67,16 +80,17 @@ function actualizarDatos() {
         class="botonOrden"
         :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
         @click="elegirOrden('porcentaje')"
-        >Porcentaje</span
+      >
+        {{ fuentes[cerebroDatos.indice].tipo }}</span
       >
       <span class="botonOrden" :class="criterioOrden === 'numerador' ? 'activo' : ''" @click="elegirOrden('numerador')"
-        >Numerador</span
+        >numerador</span
       >
       <span
         class="botonOrden"
         :class="criterioOrden === 'denominador' ? 'activo' : ''"
         @click="elegirOrden('denominador')"
-        >Denominador</span
+        >denominador</span
       >
     </span>
     <div id="contenedor">
@@ -89,6 +103,9 @@ function actualizarDatos() {
             </span>
           </li>
         </ul>
+      </div>
+      <div id="lugarDesconocido" v-if="datosLugarDesconocido[0][criterioOrden] !== null">
+        Lugar desconocido: {{ datosLugarDesconocido[0][criterioOrden] }}
       </div>
     </div>
   </div>
@@ -113,8 +130,8 @@ function actualizarDatos() {
     padding: 1em;
     background-color: #0041bf;
     color: white;
-    font-size: 1em;
-    width: 28%;
+    font-size: 0.9em;
+    width: 31%;
     height: fit-content;
     text-align: center;
     padding: 0.5em;
@@ -144,8 +161,7 @@ function actualizarDatos() {
   }
 
   #lista {
-    padding: 2em;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     margin-bottom: 15px;
     column-count: 3;
     column-gap: 10px;
@@ -161,6 +177,12 @@ function actualizarDatos() {
 .dato {
   line-height: 1em;
   display: block;
+  font-size: 0.9em;
+}
+
+#lugarDesconocido {
+  padding: 0px 0px 10px 20px;
+  color: #ef6461;
   font-size: 0.9em;
 }
 </style>
