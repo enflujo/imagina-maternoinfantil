@@ -50,7 +50,7 @@ function desaparecerComida() {
 
   let scrollY;
   let paso =
-    (historiaAlimentacion.getBoundingClientRect().height + historiaAlimentacion.getBoundingClientRect().top) / 21;
+    (historiaAlimentacion.getBoundingClientRect().height + historiaAlimentacion.getBoundingClientRect().top) / 20;
 
   document.addEventListener('scroll', () => {
     scrollY = historiaAlimentacion.getBoundingClientRect().top;
@@ -70,14 +70,20 @@ function mostrarComida() {
   const historiaAlimentacion = document.getElementById('historiaAlimentacion');
   const imagenesComida = document.getElementById('imagenesComida');
   const intro = document.getElementById('intro');
+  const parrafo2 = document.getElementById('comidaParrafo2');
 
-  siVisible(historiaAlimentacion, () => {
+  siVisible(parrafo2, () => {
     imagenesComida.style.visibility = 'visible';
+    imagenesComida.classList.add('animado');
   });
 
-  if (intro.getBoundingClientRect().top > 0) {
+  siVisible(intro, () => {
     imagenesComida.style.visibility = 'hidden';
-  }
+  });
+
+  /*if (intro.getBoundingClientRect().top > 0) {
+    imagenesComida.style.visibility = 'hidden';
+  }*/
 }
 
 function mostrarMadres() {
@@ -86,9 +92,9 @@ function mostrarMadres() {
   const imagenMadres = document.getElementById('imagenMadres');
   const imagenesComida = document.getElementById('imagenesComida');
 
-  siVisible(historiaMadres, () => {
+  siVisible(menuMadres, () => {
     imagenMadres.style.visibility = 'visible';
-    if (!menuMadres.classList.contains('aparecer')) {
+    if (!imagenMadres.classList.contains('aparecer')) {
       imagenMadres.classList.remove('desaparecer');
       imagenMadres.classList.add('aparecer');
       imagenesComida.style.visibility = 'hidden';
@@ -127,35 +133,41 @@ function abrirHistoria(nombre = '') {
       </p>
 
       <div id="menuHistorias">
-        <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion">Alimentación</a>
-        <a href="#historiaMadres" @click="imagenesComida.style.visibility = 'hidden'" class="botonHistoria"
-          >Madres en pandemia</a
+        <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion"
+          ><img src="src\assets\imagenes\iconoAlimentacion.svg" />Alimentación</a
         >
-        <a href="#conclusiones" class="botonHistoria">Algunas conclusiones</a>
+        <a href="#historiaMadres" @click="imagenesComida.style.visibility = 'hidden'" class="botonHistoria"
+          ><img src="src\assets\imagenes\iconoExperiencias.svg" />Madres en pandemia</a
+        >
+        <a href="#conclusiones" class="botonHistoria"
+          ><img src="src\assets\imagenes\iconoAnticoncepcion.svg" />Algunas conclusiones</a
+        >
       </div>
     </div>
     <div class="historia" id="historiaAlimentacion">
-      <div class="columnaIzquierda" id="imagenesComida">
-        <img class="imagen" id="19" src="src/assets/imagenes/comida_capa21.png" />
-        <img class="imagen" id="18" src="src/assets/imagenes/comida_capa20.png" />
-        <img class="imagen" id="17" src="src/assets/imagenes/comida_capa19.png" />
-        <img class="imagen" id="16" src="src/assets/imagenes/comida_capa18.png" />
-        <img class="imagen" id="15" src="src/assets/imagenes/comida_capa17.png" />
-        <img class="imagen" id="14" src="src/assets/imagenes/comida_capa16.png" />
-        <img class="imagen" id="13" src="src/assets/imagenes/comida_capa15.png" />
-        <img class="imagen" id="12" src="src/assets/imagenes/comida_capa14.png" />
-        <img class="imagen" id="11" src="src/assets/imagenes/comida_capa13.png" />
-        <img class="imagen" id="10" src="src/assets/imagenes/comida_capa12.png" />
-        <img class="imagen" id="9" src="src/assets/imagenes/comida_capa11.png" />
-        <img class="imagen" id="8" src="src/assets/imagenes/comida_capa10.png" />
-        <img class="imagen" id="7" src="src/assets/imagenes/comida_capa09.png" />
-        <img class="imagen" id="6" src="src/assets/imagenes/comida_capa08.png" />
-        <img class="imagen" id="5" src="src/assets/imagenes/comida_capa07.png" />
-        <img class="imagen" id="4" src="src/assets/imagenes/comida_capa06.png" />
-        <img class="imagen" id="3" src="src/assets/imagenes/comida_capa05.png" />
-        <img class="imagen" id="2" src="src/assets/imagenes/comida_capa04.png" />
-        <img class="imagen" id="1" src="src/assets/imagenes/comida_capa03.png" />
-        <img class="imagen" id="0" src="src/assets/imagenes/comida_capa02.png" />
+      <div class="columnaIzquierda">
+        <div id="imagenesComida">
+          <img class="imagen" id="19" src="src/assets/imagenes/comida_capa21.png" />
+          <img class="imagen" id="18" src="src/assets/imagenes/comida_capa20.png" />
+          <img class="imagen" id="17" src="src/assets/imagenes/comida_capa19.png" />
+          <img class="imagen" id="16" src="src/assets/imagenes/comida_capa18.png" />
+          <img class="imagen" id="15" src="src/assets/imagenes/comida_capa17.png" />
+          <img class="imagen" id="14" src="src/assets/imagenes/comida_capa16.png" />
+          <img class="imagen" id="13" src="src/assets/imagenes/comida_capa15.png" />
+          <img class="imagen" id="12" src="src/assets/imagenes/comida_capa14.png" />
+          <img class="imagen" id="11" src="src/assets/imagenes/comida_capa13.png" />
+          <img class="imagen" id="10" src="src/assets/imagenes/comida_capa12.png" />
+          <img class="imagen" id="9" src="src/assets/imagenes/comida_capa11.png" />
+          <img class="imagen" id="8" src="src/assets/imagenes/comida_capa10.png" />
+          <img class="imagen" id="7" src="src/assets/imagenes/comida_capa09.png" />
+          <img class="imagen" id="6" src="src/assets/imagenes/comida_capa08.png" />
+          <img class="imagen" id="5" src="src/assets/imagenes/comida_capa07.png" />
+          <img class="imagen" id="4" src="src/assets/imagenes/comida_capa06.png" />
+          <img class="imagen" id="3" src="src/assets/imagenes/comida_capa05.png" />
+          <img class="imagen" id="2" src="src/assets/imagenes/comida_capa04.png" />
+          <img class="imagen" id="1" src="src/assets/imagenes/comida_capa03.png" />
+          <img class="imagen" id="0" src="src/assets/imagenes/comida_capa02.png" />
+        </div>
       </div>
       <div class="columnaDerecha">
         <div class="titulo" id="titulo1">
@@ -171,7 +183,7 @@ function abrirHistoria(nombre = '') {
             <br />
           </p>
 
-          <p>
+          <p id="comidaParrafo2">
             En medio de la pandemia y ante la pérdida de trabajo, algunas mujeres salieron de Bogotá para ir a vivir con
             sus familiares o los familiares de sus parejas en municipios o pueblo donde había más posibilidad de
             trabajar la tierra. Allí cultivaban diferentes alimentos para comer o para intercambiar con vecinos por
@@ -418,21 +430,21 @@ function abrirHistoria(nombre = '') {
             salir con planificación. Sin embargo, no sabemos si haya la posibilidad de decir que no quieren planificar.
           </p>
           <p>
+            Esta conversación suscitó una participación colectiva. En general, para ellas fue tensionante el momento en
+            el que los médicos vinieron a decirles que debían planificar. Los médicos son insistentes y las mujeres se
+            sienten obligadas a decir que quieren planificar. Después de procedimientos invasivos en donde quedan
+            desnudas y con dolor, son presionadas a salir del hospital con algún método de planificación.
+          </p>
+          <p>
             No parece haber discusión médica sobre qué método es mejor según el historial clínico de cada mujer o sobre
             su fisiología. No todos los dispositivos funcionan igual en todos los cuerpos y rondan las sanciones morales
             del personal de la salud en caso de que estas mujeres se nieguen a planificar.
           </p>
           <p>
-            El tema de la planificación suscitó una participación colectiva. Para ellas fue tensionante el momento en el
-            que los médicos vinieron a decirles que debían planificar. Los médicos son insistentes y las mujeres se
-            sienten obligadas a decir que quieren planificar. Después de procedimientos invasivos en donde quedan
-            desnudas y con dolor, son presionadas a salir del hospital con algún método de planificación.
-          </p>
-          <p>
             Para varias mujeres estos métodos de planificación tienen efectos negativos en sus cuerpos o asocian ciertos
-            síntomas a estos implantes y métodos hormonales (dolores de cabeza, dolores en el cuerpo, cargas
-            hormonales). También encuentran una fuerte resistencia en el personal de salud cuando ellas solicitan
-            retirarse los dispositivos.
+            síntomas a los implantes y métodos hormonales (dolores de cabeza, dolores en el cuerpo, cargas hormonales).
+            También encuentran una fuerte resistencia en el personal de salud cuando ellas solicitan retirarse los
+            dispositivos.
           </p>
 
           <h3>Experiencias</h3>
@@ -494,15 +506,29 @@ function abrirHistoria(nombre = '') {
 
     #menuHistorias {
       display: flex;
-      margin: 2em;
-      justify-content: space-between;
+      margin: 2em 2em 2em 8em;
+      justify-content: space-around;
     }
 
     .botonHistoria {
       cursor: pointer;
-      background-color: #0041bf;
-      color: white;
-      padding: 1em;
+      color: #0041bf;
+      font-size: 0.9em;
+      text-align: center;
+      width: 140px;
+      height: 140px;
+    }
+
+    a {
+      color: #0041bf;
+    }
+
+    a:hover {
+      color: #8686be;
+    }
+
+    a:visited {
+      color: #0041bf;
     }
   }
 
@@ -513,6 +539,23 @@ function abrirHistoria(nombre = '') {
     .columnaIzquierda {
       padding: 19em;
       margin: 10em 2em;
+
+      #imagenesComida {
+        opacity: 0;
+
+        &.animado {
+          animation-name: animacionAparecer;
+          animation-duration: 5s;
+          @keyframes animacionAparecer {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        }
+      }
 
       #imagenMadres {
         visibility: hidden;
