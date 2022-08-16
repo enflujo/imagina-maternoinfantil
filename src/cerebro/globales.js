@@ -30,8 +30,8 @@ export const usarCerebroGlobales = defineStore('globales', {
 
     actualizarAño(nuevoAño) {
       if (nuevoAño === this.año) return;
-      this.año = nuevoAño;
       this.definirPorcentajes();
+      this.año = nuevoAño;
     },
 
     cambiarLugar(nombre) {

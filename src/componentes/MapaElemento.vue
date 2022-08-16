@@ -1,215 +1,175 @@
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { colores } from '../utilidades/constantes';
 
-const datosSecciones = reactive([]);
-const datosSanAndres = reactive([]);
-const datosProvidencia = reactive([]);
+const cerebroDatos = usarCerebroDatos();
+const cerebroGlobales = usarCerebroGlobales();
+
 const nombreLugar = ref('');
 const infoNumerador = ref('');
 const infoDenominador = ref('');
 const infoPorcentaje = ref('');
 const infoVisible = ref(false);
-const ancho = ref(0);
-const alto = ref(0);
-const anchoSanAndres = ref(0);
-const altoSanAdres = ref(0);
-const anchoProvidencia = ref(0);
-const altoProvidencia = ref(0);
+const dimsColombia = reactive({ ancho: 0, alto: 0 });
+const dimsSanAndresP = reactive({ ancho: 0, alto: 0 });
 
 const posInfo = reactive({ x: 0, y: 0 });
 const coloresMapa = { fondo: 'white' };
 const mapa = ref();
-const mapearCoordenadas = ref();
-const mapearProvidencia = ref();
-const mapearSanAndres = ref();
 const mapearColor = escalaColores(0, 100, colores[0], colores[1]);
 const sinDatos = ref(false);
 
-const cerebroDatos = usarCerebroDatos();
-const cerebroGlobales = usarCerebroGlobales();
+const datosLugar = ref([]);
+const datosSanAndres = ref([]);
+const datosProvidencia = ref([]);
 
 watch(
   () => cerebroDatos.geojsonLugar,
   (nuevos) => {
-    const { latitudMin, latitudMax, longitudMin, longitudMax } = extremosLugar(nuevos);
-    mapearCoordenadas.value = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
-    actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
-    datosSecciones.splice(0);
+    iniciarDatosLugar(nuevos);
+  }
+);
 
-    nuevos.features.forEach((lugar) => {
-      const { codigo, nombre } = lugar.properties;
+onMounted(() => {
+  if (!cerebroDatos.geojsonLugar || !cerebroDatos.datos) return;
+  iniciarDatosLugar(cerebroDatos.geojsonLugar);
+  actualizarDatos();
+});
 
-      datosSecciones.push({
-        codigo,
-        nombre,
-        datos: [],
-        linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas.value, ancho.value, alto.value),
-        color: 'white',
-      });
+function iniciarDatosLugar(geojson) {
+  const { latitudMin, latitudMax, longitudMin, longitudMax } = extremosLugar(geojson);
+  const mapearCoordenadas = escalaCoordenadas(latitudMin, latitudMax, longitudMin, longitudMax);
+  const respuesta = [];
+
+  actualizarDimension(latitudMin, latitudMax, longitudMin, longitudMax);
+
+  geojson.features.forEach((lugar) => {
+    const { codigo, nombre } = lugar.properties;
+
+    respuesta.push({
+      codigo,
+      nombre,
+      datos: [],
+      linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas, dimsColombia.ancho, dimsColombia.alto),
+      color: coloresMapa.fondo,
     });
-  }
-);
+  });
 
-watch(
-  () => cerebroDatos.geojsonSanAndres,
-  (lugar) => {
-    if (cerebroGlobales.nivel === 'departamentos') {
-      const coordenadasProvidencia = [...lugar.geometry.coordinates[1], ...lugar.geometry.coordinates[2]];
+  datosLugar.value = respuesta;
 
-      const pro = extremosLugar(coordenadasProvidencia);
-      const sa = extremosLugar(lugar.geometry.coordinates[0]);
+  iniciarDatosSanAndres();
+}
 
-      const coordenadasAnchoSanAndres = sa.longitudMax - sa.longitudMin;
-      const coordenadasAltoSanAndres = sa.latitudMax - sa.latitudMin;
-      const coordenadasAnchoProvidencia = pro.longitudMax - pro.longitudMin;
-      const coordenadasAltoProvidencia = pro.latitudMax - pro.latitudMin;
-
-      mapearSanAndres.value = escalaCoordenadas(sa.latitudMin, sa.latitudMax, sa.longitudMin, sa.longitudMax);
-      mapearProvidencia.value = escalaCoordenadas(pro.latitudMin, pro.latitudMax, pro.longitudMin, pro.longitudMax);
-
-      datosSanAndres.splice(0);
-      datosProvidencia.splice(0);
-
-      if (coordenadasAnchoSanAndres > coordenadasAltoSanAndres) {
-        altoSanAdres.value = anchoSanAndres.value * (coordenadasAnchoSanAndres / coordenadasAltoSanAndres);
-      }
-
-      if (coordenadasAnchoProvidencia > coordenadasAltoProvidencia) {
-        altoProvidencia.value = anchoProvidencia.value * (coordenadasAltoProvidencia / coordenadasAnchoProvidencia);
-      } else {
-        anchoProvidencia.value = altoProvidencia.value * (coordenadasAnchoProvidencia / coordenadasAltoProvidencia);
-      }
-
-      const { codigo, nombre } = lugar.properties;
-
-      datosSanAndres.push({
-        codigo,
-        nombre,
-        datos: [],
-        linea: crearLinea(
-          lugar.geometry.coordinates[0],
-          mapearSanAndres.value,
-          anchoSanAndres.value,
-          altoSanAdres.value
-        ),
-        color: coloresMapa.fondo,
-      });
-
-      datosProvidencia.push({
-        codigo,
-        nombre,
-        datos: [],
-        linea: crearLinea(
-          lugar.geometry.coordinates[2],
-          mapearProvidencia.value,
-          anchoProvidencia.value,
-          altoProvidencia.value
-        ),
-        color: coloresMapa.fondo,
-      });
-    }
-  }
-);
-
+watch(() => cerebroDatos.datos, actualizarDatos);
 watch(() => cerebroGlobales.año, actualizarDatos);
 
-watch(
-  () => cerebroDatos.datos,
-  () => {
-    if (!datosSecciones.length) return;
-    actualizarDatos();
+function iniciarDatosSanAndres() {
+  const geojson = cerebroDatos.geojsonSanAndres;
+
+  if (!geojson) return;
+  const sanAndres = [];
+  const providencia = [];
+
+  const { codigo, nombre } = geojson.properties;
+
+  if (cerebroGlobales.nivel === 'departamentos') {
+    const coordenadasProvidencia = [...geojson.geometry.coordinates[1], ...geojson.geometry.coordinates[2]];
+    const coordenadasSanAndres = geojson.geometry.coordinates[0];
+    const pro = extremosLugar(coordenadasProvidencia);
+    const sa = extremosLugar(coordenadasSanAndres);
+    const mapearSanAndres = escalaCoordenadas(sa.latitudMin, sa.latitudMax, sa.longitudMin, sa.longitudMax);
+    const mapearProvidencia = escalaCoordenadas(pro.latitudMin, pro.latitudMax, pro.longitudMin, pro.longitudMax);
+
+    sanAndres.push({
+      codigo,
+      nombre,
+      datos: [],
+      linea: crearLinea(coordenadasSanAndres, mapearSanAndres, dimsSanAndresP.ancho, dimsSanAndresP.alto),
+      color: coloresMapa.fondo,
+    });
+
+    providencia.push({
+      codigo,
+      nombre,
+      datos: [],
+      linea: crearLinea(coordenadasProvidencia, mapearProvidencia, dimsSanAndresP.ancho, dimsSanAndresP.alto),
+      color: coloresMapa.fondo,
+    });
   }
-);
+
+  datosSanAndres.value = sanAndres;
+  datosProvidencia.value = providencia;
+}
+
+function redefinirSanAndresP(seccion, añoSeleccionado) {
+  const d = cerebroDatos.datos.find((obj) => obj.codigo === seccion.codigo);
+  if (!d) return seccion;
+
+  if (!d.datos[añoSeleccionado]) {
+    seccion.color = 'url(#sinInfo)';
+    return seccion;
+  }
+
+  seccion.datos = d.datos;
+  seccion.color = mapearColor(d.datos[añoSeleccionado][2]);
+
+  return seccion;
+}
 
 function actualizarDatos() {
+  if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
 
   sinDatos.value = !datosNacionalesAño;
 
   cerebroDatos.geojsonLugar.features.forEach((lugar, i) => {
-    datosSecciones[i].datos = [];
-    datosSecciones[i].color = coloresMapa.fondo;
+    datosLugar.value[i].datos = [];
+
     const { codigo } = lugar.properties;
-    const datosLugar = cerebroDatos.datos.find((obj) => obj.codigo === codigo);
+    const d = cerebroDatos.datos.find((obj) => obj.codigo === codigo);
 
-    if (!datosLugar) return;
+    if (!d) return;
 
-    if (!datosLugar.datos[añoSeleccionado]) {
-      datosSecciones[i].color = 'url(#sinInfo)';
+    if (!d.datos[añoSeleccionado]) {
+      datosLugar.value[i].color = 'url(#sinInfo)';
       return;
     }
 
-    datosSecciones[i].datos = datosLugar.datos;
-    datosSecciones[i].color = mapearColor(datosLugar.datos[añoSeleccionado][2]);
+    datosLugar.value[i].datos = d.datos;
+    datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
   });
 
-  // Colorear San Andrés
-  datosSanAndres.color = coloresMapa.fondo;
-
-  let datosSanAndresActualizados;
-
   if (cerebroGlobales.nivel === 'departamentos') {
-    datosSanAndresActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88');
-  } else if (cerebroGlobales.nivel === 'municipios') {
-    datosSanAndresActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88001');
+    datosSanAndres.value = datosSanAndres.value.map((d) => redefinirSanAndresP(d, añoSeleccionado));
+    datosProvidencia.value = datosProvidencia.value.map((d) => redefinirSanAndresP(d, añoSeleccionado));
   }
-
-  datosSanAndres.datos = datosSanAndresActualizados.datos;
-
-  if (!datosSanAndres || !datosSanAndres.datos[cerebroGlobales.año]) {
-    return;
-  }
-
-  datosSanAndres.color = mapearColor(datosSanAndres.datos[cerebroGlobales.año][2]);
-
-  // Colorear Providencia
-  datosProvidencia.color = coloresMapa.fondo;
-
-  let datosProvidenciaActualizados;
-
-  if (cerebroGlobales.nivel === 'departamentos') {
-    datosProvidenciaActualizados = datosSanAndresActualizados;
-  } else if (cerebroGlobales.nivel === 'municipios') {
-    datosProvidenciaActualizados = cerebroDatos.datos.find((obj) => obj.codigo === '88564');
-  }
-
-  datosProvidencia.datos = datosProvidenciaActualizados.datos;
-
-  if (!datosProvidencia || !datosProvidencia.datos[cerebroGlobales.año]) {
-    return;
-  }
-
-  datosProvidencia.color = mapearColor(datosProvidencia.datos[cerebroGlobales.año][2]);
 }
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
-  ancho.value = window.innerWidth;
-  alto.value = window.innerHeight / 1.4;
+  let ancho = window.innerWidth;
+  let alto = window.innerHeight / 1.4;
 
   const coordenadasAncho = longitudMax - longitudMin;
   const coordenadasAlto = latitudMax - latitudMin;
 
   // Revisa las proporciones del mapa para que no se deforme
   if (coordenadasAncho > coordenadasAlto) {
-    alto.value = ancho.value * (coordenadasAlto / coordenadasAncho);
+    alto = ancho * (coordenadasAlto / coordenadasAncho);
   } else {
-    ancho.value = alto.value * (coordenadasAncho / coordenadasAlto);
+    ancho = alto * (coordenadasAncho / coordenadasAlto);
   }
 
-  ancho.value = ancho.value | 0;
-  alto.value = alto.value | 0;
+  dimsColombia.ancho = ancho | 0;
+  dimsColombia.alto = alto | 0;
 
-  anchoSanAndres.value = (ancho.value / 20) | 0;
-  altoSanAdres.value = anchoSanAndres.value * 2.5;
-
-  anchoProvidencia.value = (ancho.value / 30) | 0;
-  altoProvidencia.value = anchoProvidencia.value * 2.5;
+  const anchoS = dimsColombia.ancho / 18;
+  dimsSanAndresP.ancho = anchoS | 0;
+  dimsSanAndresP.alto = (anchoS * 2.5) | 0;
 };
 
 function eventoEncima(seccion) {
@@ -217,7 +177,8 @@ function eventoEncima(seccion) {
 
   /* if (cerebroGlobales.nivel === 'departamentos') { */
   if (seccion.codigo === '88') {
-    [numerador, denominador, porcentaje] = datosSanAndres.datos[cerebroGlobales.año];
+    console.log(datosSanAndres);
+    // [numerador, denominador, porcentaje] = datosSanAndres.datos[cerebroGlobales.año];
   } else if (!seccion.datos[cerebroGlobales.año]) return;
   else {
     [numerador, denominador, porcentaje] = seccion.datos[cerebroGlobales.año];
@@ -250,73 +211,97 @@ function eventoClic(seccion, contenedor, evento) {
 </script>
 
 <template>
-  <div id="sanAndresProvidencia">
-    <svg id="mapaSanAndres" :width="anchoSanAndres" :height="altoSanAdres" @mousemove="eventoMovimiento">
+  <div id="contenedorMapa">
+    <svg
+      id="sanAndresProvidencia"
+      :width="dimsSanAndresP.ancho * 3"
+      :height="dimsSanAndresP.alto * 2"
+      @mousemove="eventoMovimiento"
+    >
       <path
         v-for="seccion in datosSanAndres"
         :key="`seccion-${seccion.codigo}`"
+        class="lugar sanAndres"
+        :class="
+          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
+            ? 'activo'
+            : ''
+        "
         :d="seccion.linea"
-        :fill="datosSanAndres.color"
+        :fill="seccion.color"
         :data-nombre="seccion.nombre"
-        stroke-width="0.5px"
         @mouseenter="eventoEncima(seccion)"
         @mouseleave="eventoFuera"
-        @click="cerebroDatos.actualizarDatosLugar(seccion)"
-      ></path>
-    </svg>
+        @click="(e) => eventoClic(seccion, mapa, e)"
+        shape-rendering="geometricPrecision"
+      />
 
-    <svg id="mapaProvidencia" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
       <path
         v-for="seccion in datosProvidencia"
         :key="`seccion-${seccion.codigo}`"
+        class="lugar providencia"
+        :class="
+          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
+            ? 'activo'
+            : ''
+        "
         :d="seccion.linea"
-        :fill="datosProvidencia.color"
+        :fill="seccion.color"
         :data-nombre="seccion.nombre"
-        stroke-width="0.5px"
         @mouseenter="eventoEncima(seccion)"
         @mouseleave="eventoFuera"
-        @click="cerebroDatos.actualizarDatosLugar(seccion)"
-      ></path>
+        @click="(e) => eventoClic(seccion, mapa, e)"
+        shape-rendering="geometricPrecision"
+      />
     </svg>
-  </div>
 
-  <svg id="mapa" ref="mapa" :width="ancho" :height="alto" @mousemove="eventoMovimiento">
-    <defs>
-      <pattern id="sinInfo" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(45)">
-        <line x1="0" y="0" x2="0" y2="3.5" stroke="#46484A" stroke-width="1" />
-      </pattern>
-    </defs>
-    <path
-      v-for="seccion in datosSecciones"
-      :key="`seccion-${seccion.codigo}`"
-      class="lugar"
-      :class="
-        cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre ? 'activo' : ''
-      "
-      :d="seccion.linea"
-      :fill="seccion.color"
-      :data-nombre="seccion.nombre"
-      @mouseenter="eventoEncima(seccion)"
-      @mouseleave="eventoFuera"
-      @click="(e) => eventoClic(seccion, mapa, e)"
-      shape-rendering="geometricPrecision"
-    ></path>
-  </svg>
+    <svg id="mapa" ref="mapa" :width="dimsColombia.ancho" :height="dimsColombia.alto" @mousemove="eventoMovimiento">
+      <defs>
+        <pattern id="sinInfo" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(45)">
+          <line x1="0" y="0" x2="0" y2="3.5" stroke="#46484A" stroke-width="1" />
+        </pattern>
+      </defs>
 
-  <div id="sinDatos" v-if="sinDatos">
-    Este indicador no tiene datos disponibles para el año <span class="resaltar">{{ cerebroGlobales.año }}.</span>
-  </div>
+      <g id="colombia">
+        <path
+          v-for="seccion in datosLugar"
+          :key="`seccion-${seccion.codigo}`"
+          class="lugar"
+          :class="
+            cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
+              ? 'activo'
+              : ''
+          "
+          :d="seccion.linea"
+          :fill="seccion.color"
+          :data-nombre="seccion.nombre"
+          @mouseenter="eventoEncima(seccion)"
+          @mouseleave="eventoFuera"
+          @click="(e) => eventoClic(seccion, mapa, e)"
+          shape-rendering="geometricPrecision"
+        />
+      </g>
+    </svg>
 
-  <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
-    <p id="departamento">{{ nombreLugar }}</p>
-    <p id="numerador">{{ infoNumerador }}</p>
-    <p id="denominador">{{ infoDenominador }}</p>
-    <p id="porcentaje">{{ infoPorcentaje }}</p>
+    <div id="sinDatos" v-if="sinDatos">
+      Este indicador no tiene datos disponibles para el año <span class="resaltar">{{ cerebroGlobales.año }}.</span>
+    </div>
+
+    <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
+      <p id="departamento">{{ nombreLugar }}</p>
+      <p id="numerador">{{ infoNumerador }}</p>
+      <p id="denominador">{{ infoDenominador }}</p>
+      <p id="porcentaje">{{ infoPorcentaje }}</p>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/constantes.scss';
+
+#contenedorMapa {
+  position: relative;
+}
 
 #mapa {
   margin: 0 auto;
@@ -324,13 +309,19 @@ function eventoClic(seccion, contenedor, evento) {
 }
 
 #sanAndresProvidencia {
-  width: 8%;
-  display: flex;
-  justify-content: space-evenly;
   position: absolute;
-  padding: 1em;
-  border: solid 1px cadetblue;
-  margin: 6em 0em 0em 4em;
+  border: 2px solid;
+  padding: 0.5em;
+  left: 50%;
+  transform: translateX(-330%);
+
+  .providencia {
+    transform: translateX(60%) scale(0.8, 0.4);
+  }
+
+  .sanAndres {
+    transform: translateY(20%);
+  }
 }
 
 #mapaProvidencia {

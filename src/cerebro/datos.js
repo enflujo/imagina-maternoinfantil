@@ -15,8 +15,8 @@ export const usarCerebroDatos = defineStore('datos', {
       departamentos: null,
       municipios: null,
     },
-    geojsonLugar: [],
-    geojsonSanAndres: [],
+    geojsonLugar: null,
+    geojsonSanAndres: null,
     años: [],
   }),
 
