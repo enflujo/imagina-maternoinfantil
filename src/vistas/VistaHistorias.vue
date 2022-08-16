@@ -93,20 +93,9 @@ function mostrarMadres() {
   const imagenesComida = document.getElementById('imagenesComida');
 
   siVisible(menuMadres, () => {
-    imagenMadres.style.visibility = 'visible';
     if (!imagenMadres.classList.contains('aparecer')) {
-      imagenMadres.classList.remove('desaparecer');
       imagenMadres.classList.add('aparecer');
-      imagenesComida.style.visibility = 'hidden';
     }
-  });
-
-  siInvisible(historiaMadres, () => {
-    if (!imagenMadres.classList.contains('desaparecer')) {
-      imagenMadres.classList.add('desaparecer');
-      imagenMadres.classList.remove('aparecer');
-    }
-    imagenMadres.style.visibility = 'hidden';
   });
 }
 
@@ -558,7 +547,7 @@ function abrirHistoria(nombre = '') {
       }
 
       #imagenMadres {
-        visibility: hidden;
+        opacity: 0;
       }
 
       .imagen {
@@ -582,7 +571,7 @@ function abrirHistoria(nombre = '') {
 
         &.desaparecer {
           animation-name: animacionDesaparecer;
-          animation-duration: 1s;
+          animation-duration: 4s;
           @keyframes animacionDesaparecer {
             0% {
               opacity: 1;
@@ -656,6 +645,7 @@ function abrirHistoria(nombre = '') {
       width: 28vw;
       margin-left: 10em;
       font-size: 1.1em;
+      padding-right: 2em;
 
       .historiaMujer {
         width: 100%;
