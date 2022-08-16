@@ -1,7 +1,8 @@
 <script setup>
-import { reactive } from 'vue';
+import { ref } from 'vue';
 
-const historiasAbiertas = reactive({ maria: false, claudia: false, raquel: false, camila: false, adriana: false });
+//const historiasAbiertas = reactive({ maria: false, claudia: false, raquel: false, camila: false, adriana: false });
+const historiaAbierta = ref('');
 
 function siVisible(element, callback) {
   new IntersectionObserver((entries, observer) => {
@@ -103,9 +104,12 @@ function mostrarMadres() {
   });
 }
 
-function abrirHistoria(nombre) {
-  historiasAbiertas[nombre] = !historiasAbiertas[nombre];
-  console.log(nombre);
+function abrirHistoria(nombre = '') {
+  if (historiaAbierta.value === nombre) {
+    historiaAbierta.value = '';
+  } else {
+    historiaAbierta.value = nombre;
+  }
 }
 </script>
 
@@ -230,7 +234,7 @@ function abrirHistoria(nombre) {
             <div @click="abrirHistoria('camila')" class="botonMadres">Camila</div>
             <div @click="abrirHistoria('adriana')" class="botonMadres">Adriana</div>
           </div>
-          <div v-if="historiasAbiertas.maria" class="historiaMujer" id="maria">
+          <div v-if="historiaAbierta === 'maria'" class="historiaMujer" id="maria">
             <h3>María</h3>
             <p>
               María es una mujer venezolana no regularizada que llegó a Bogotá con su pareja. Para ella no ha sido claro
@@ -253,7 +257,7 @@ function abrirHistoria(nombre) {
             </p>
             <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria('maria')">***cerrar***</a></div>
           </div>
-          <div v-if="historiasAbiertas.claudia" class="historiaMujer" id="claudia">
+          <div v-if="historiaAbierta === 'claudia'" class="historiaMujer" id="claudia">
             <h3>Claudia</h3>
             <p>
               Claudia tiene treinta y un años y vive en el barrio Cerro Norte en la localidad de Usaquén. Cuenta con
@@ -274,9 +278,9 @@ function abrirHistoria(nombre) {
               En medio del procedimiento tuvo ganas de vomitar, le pusieron una bolsa en la cabeza y le dijeron de podía
               vomitar allí.
             </p>
-            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria('claudia')">***cerrar***</a></div>
+            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria()">***cerrar***</a></div>
           </div>
-          <div v-if="historiasAbiertas.raquel" class="historiaMujer" id="raquel">
+          <div v-if="historiaAbierta === 'raquel'" class="historiaMujer" id="raquel">
             <h3>Raquel</h3>
             <p>
               Raquel lleva cuatro años en Colombia, llegó por la costa a Santa Marta, donde logró regularizarse y
@@ -301,9 +305,9 @@ function abrirHistoria(nombre) {
               hasta que vino un médico que se dio cuenta que estaba infectada, tenía el cuerpo hinchado y había que
               drenarle la herida. Por esta situación, estuvo más días hospitalizada y sin ver a su hija.
             </p>
-            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria('raquel')">***cerrar***</a></div>
+            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria()">***cerrar***</a></div>
           </div>
-          <div v-if="historiasAbiertas.camila" class="historiaMujer" id="camila">
+          <div v-if="historiaAbierta === 'camila'" class="historiaMujer" id="camila">
             <h3>Camila</h3>
             <p>
               Camila tiene dos hijos, el mayor nació antes de la pandemia en la clínica Simón Bolívar, donde recibió una
@@ -333,9 +337,9 @@ function abrirHistoria(nombre) {
               complicaciones surgieron durante la cirugía, pero la ginecóloga le dijo que había tenido que ver con los 3
               días que la hicieron esperar cuando la devolvieron a casa.
             </p>
-            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria('camila')">***cerrar***</a></div>
+            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria()">***cerrar***</a></div>
           </div>
-          <div v-if="historiasAbiertas.adriana" class="historiaMujer" id="adriana">
+          <div v-if="historiaAbierta === 'adriana'" class="historiaMujer" id="adriana">
             <h3>Adriana</h3>
             <p>
               Adriana es una mujer de 21 años, viene de Maracaibo, Venezuela. El día que migró salió de su casa a las
@@ -377,7 +381,7 @@ function abrirHistoria(nombre) {
               había escuchado de otras mujeres que por ser venezolana la trataban mal. La niña nació bien, lloró bien,
               todo estuvo bien a pesar de nacer de 6 meses y medio.
             </p>
-            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria('adriana')">***cerrar***</a></div>
+            <div class="botonCerrar"><a href="#historiaMadres" @click="abrirHistoria()">***cerrar***</a></div>
           </div>
           <div id="separador"></div>
           <div id="nota">*Los nombres fueron cambiados para mantener el anonimato</div>
