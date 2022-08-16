@@ -1,17 +1,15 @@
 <script setup>
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroDatos } from '../cerebro/datos';
-import { reactive, watch, ref, onMounted } from 'vue-demi';
 
 const cerebroDatos = usarCerebroDatos();
-let interpretacion = ref(null);
 
 function reemplazarURLs(texto) {
   if (!texto) return;
   var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
   return texto.replace(urlRegex, function (url) {
     var hyperlink = url;
-    if (!hyperlink.match('^https?:\/\/')) {
+    if (!hyperlink.match('^https?:/')) {
       hyperlink = 'http://' + hyperlink;
     }
     return `<a href="${hyperlink}" target="_blank" > ${url} </a>`;
