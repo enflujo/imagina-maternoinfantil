@@ -31,7 +31,6 @@
   margin-top: 0.4em;
   color: $colorOscuro;
   font-weight: bold;
- // text-transform: uppercase;
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 

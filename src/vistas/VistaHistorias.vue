@@ -655,6 +655,7 @@ function abrirHistoria(nombre = '') {
     .contenido {
       width: 28vw;
       margin-left: 10em;
+      padding-right: 2em;
       font-size: 1.1em;
 
       .historiaMujer {
