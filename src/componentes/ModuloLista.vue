@@ -104,7 +104,7 @@ function actualizarDatos() {
           </li>
         </ul>
       </div>
-      <div id="lugarDesconocido" v-if="datosLugarDesconocido.length">
+      <div id="lugarDesconocido" v-if="datosLugarDesconocido[0][criterioOrden] !== null">
         Lugar desconocido: {{ datosLugarDesconocido[0][criterioOrden] }}
       </div>
     </div>

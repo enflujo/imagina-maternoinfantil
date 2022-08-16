@@ -425,7 +425,7 @@ export default [
     interpretacion:
       'Un valor de 7 quiere decir que ocurrieron 7 defunciones por desnutrición por cada 100.000 niños menores de 5 años. La Convención sobre los Derechos del Niño protege el derecho del niño a la alimentación en el contexto del derecho a la vida, la supervivencia y el desarrollo, a la salud, a la nutrición y a un nivel adecuado de vida. En este sentido, no deberían ocurrir muertes por esta causa en ningún lugar del mundo, no obstante, es una de las primeras causas de mortalidad entre los niños y niñas menores de 5 años. Dentro de las causas más comunes de la desnutrición en menores de 5 años están las condiciones de vida, acceso insuficiente a fuentes de agua potable, familias en condiciones de pobreza y con amplias barreras de acceso a servicios de salud. El bajo peso de la madre durante el embarazo, el bajo peso al nacer, la ausencia o interrupción de la lactancia materna exclusiva y las infecciones parasitarias son factores que se relacionan con la desnutrición en la infancia. Mayor información: Convención sobre los derechos del niño https://www.unicef.org/lac/media/9731/file/PDF%20Convenci%C3%B3n%20sobre%20los%20Derechos%20del%20Ni%C3%B1o.pdf Desnutrición infantil en Colombia: https://blog.fundacionexito.org/desnutricion-infantil-en-colombia-tipos-y-consecuencias ',
     meta: {
-      umbral: 0,
+      umbral: 4.08,
       descripcion:
         'Según el PDSP se esperaba reducir la mortalidad infantil evitable por desnutrición en forma progresiva el 30% en el 2013, 50% en el 2015 y 100% en 2020.',
       tendenciaDeseada: 'abajo',
@@ -489,7 +489,7 @@ export default [
     interpretacion:
       'La sífilis es una infección de transmisión predominantemente sexual. Se transmite de la madre al feto y puede llevar al aborto o complicaciones durante el embarazo en un 80% de las veces. Un valor de 5% indica de 5 de cada 100 gestantes han tenido el diagnóstico de sífilis gestacional en un momento y territorio específicos. Este indicador hace referencia a la detección temprana durante el embarazo (control prenatal), incluso desde la atención preconcepcional (Resolución 3280/ 2016). La importancia de la detección temprana de la sífilis gestacional radica en la disminución de los riesgos en salud para la madre y para el feto. Las complicaciones van desde la muerte perinatal y aborto espontáneo, hasta secuelas en salud de los recién nacidos. Los esfuerzos deben ir dirigidos a la prevención de la transmisión vertical de la gestante al feto a partir de la detección temprana y tratamiento de la infección en la etapa prenatal. Adicionalmente, se deben aumentar los esfuerzos en educación sexual basada en derechos, para en un primer momento, prevenir el contagio de infecciones de transmisión sexual y, en un segundo momento, fomentar sin estigmas el acceso a servicios de salud oportunos.',
     meta: {
-      umbral: 1.0,
+      umbral: 1,
       descripcion:
         'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos. Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%',
       tendenciaDeseada: 'abajo',

@@ -17,6 +17,8 @@ const infoVisible = ref(false);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
+const umbralIndicador = ref(null);
+const tendenciaDeseada = ref(null);
 const posUmbral = reactive({
   y: 0,
   alto: 0,
@@ -33,9 +35,12 @@ watch(
   () => cerebroDatos.indice,
   (indice) => {
     const { umbral, tendenciaDeseada } = fuentes[indice].meta;
+
     const umbralY = convertirEscala(umbral, 0, 100, alturaVis, 0);
     let y = 0;
     let alto = umbralY;
+
+    umbralIndicador.value = umbral;
 
     if (tendenciaDeseada === 'abajo') {
       y = umbralY;
@@ -49,6 +54,9 @@ watch(
 const tieneUmbral = computed(() => fuentes[cerebroDatos.indice].meta.umbral);
 const tendencia = computed(() => fuentes[cerebroDatos.indice].meta.tendenciaDeseada);
 const pasoX = computed(() => (props.ancho / cerebroDatos.años.length) | 0);
+
+tendenciaDeseada.value = tendencia;
+
 const posicionX = (año) => {
   const i = cerebroDatos.años.findIndex((a) => a == año);
   return i * pasoX.value + margenInterna;
@@ -68,6 +76,29 @@ function eventoEncima(porcentaje, evento) {
 
 function eventoFuera() {
   infoVisible.value = false;
+}
+
+function colorFondoDetalle(valor) {
+  let color = '';
+  if (umbralIndicador.value) {
+    if (tendenciaDeseada.value.value === 'abajo') {
+      if (valor > umbralIndicador.value) {
+        color = '#0000a4';
+      } else {
+        color = '#219196';
+      }
+    } else {
+      if (valor <= umbralIndicador.value) {
+        color = '#0000a4';
+      } else {
+        color = '#219196';
+      }
+    }
+  } else {
+    color = '#626363';
+  }
+
+  return color;
 }
 </script>
 
@@ -173,21 +204,28 @@ function eventoFuera() {
     </text>
   </svg>
 
-  <div id="detalle" :style="`opacity:${infoVisible ? 1 : 0};left:${infoX}px;top:${infoY}px`">{{ infoPorcentaje }}%</div>
+  <div
+    id="detalle"
+    :style="`opacity:${infoVisible ? 1 : 0}; background-color:${colorFondoDetalle(
+      infoPorcentaje
+    )}; left:${infoX}px;top:${infoY}px`"
+  >
+    {{ infoPorcentaje }}
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/constantes.scss';
 
 #detalle {
-  background-color: #7fffd4;
-  color: black;
-  font-size: 1em;
+  color: white;
+  font-size: 0.9em;
   width: fit-content;
   position: fixed;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease-in-out;
+  padding: 2px;
 }
 
 svg {
