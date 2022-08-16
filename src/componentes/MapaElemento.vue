@@ -313,8 +313,8 @@ function eventoClic(seccion, contenedor, evento) {
 
 #sanAndresProvidencia {
   position: absolute;
-  border: 2px solid;
-  padding: 0.5em;
+  // border: 2px solid;
+  // padding: 0.5em;
   left: 50%;
   transform: translateX(-330%);
 
@@ -323,7 +323,7 @@ function eventoClic(seccion, contenedor, evento) {
   }
 
   .sanAndres {
-    transform: translateY(20%);
+    transform: translate(5px, 20%);
   }
 }
 
