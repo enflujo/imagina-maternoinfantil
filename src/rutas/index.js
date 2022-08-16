@@ -9,14 +9,18 @@ const router = createRouter({
       name: 'inicio',
       component: VistaTablero,
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue'),
-    // },
+    {
+      path: '/creditos',
+      name: 'creditos',
+      // en función se exporta aparte y el JS se carga sólo cuando se abre la ruta.
+      component: () => import('../vistas/VistaCreditos.vue'),
+    },
+    {
+      path: '/historias',
+      name: 'historias',
+      // en función se exporta aparte y el JS se carga sólo cuando se abre la ruta.
+      component: () => import('../vistas/VistaHistorias.vue'),
+    },
   ],
 });
 

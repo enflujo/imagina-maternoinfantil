@@ -16,6 +16,12 @@ export const extremosLugar = (geojson) => {
         extraer(areas);
       });
     });
+  } else if (geojson.type === 'Feature') {
+    geojson.geometry.coordinates.forEach((area) => {
+      area.forEach((n) => {
+        extraer(n);
+      });
+    });
   } else if (typeof geojson === 'object') {
     geojson.forEach((area) => {
       extraer(area);

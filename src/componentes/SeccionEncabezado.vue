@@ -1,23 +1,11 @@
-<script setup>
-import { usarCerebroGlobales } from '../cerebro/globales';
-const cerebroGlobales = usarCerebroGlobales();
-
-function mostrarCreditos() {
-  const creditos = document.getElementById('creditos');
-  cerebroGlobales.mostrarCreditos = !cerebroGlobales.mostrarCreditos;
-  if (cerebroGlobales.mostrarCreditos === true) {
-    creditos.style.visibility = 'visible';
-  } else {
-    creditos.style.visibility = 'hidden';
-  }
-}
-</script>
+<script setup></script>
 
 <template>
   <header id="encabezado">
     <div id="contenedor">
-      <h1 class="elementoMenu">Salud Maternoinfantil en Colombia</h1>
-      <h1 class="elementoMenu" @click="mostrarCreditos">Créditos</h1>
+      <router-link to="/" class="tituloProyecto elementoMenu">Salud Maternoinfantil en Colombia</router-link>
+      <router-link to="/creditos" class="elementoMenu">Créditos</router-link>
+      <router-link to="/historias" class="elementoMenu">Historias</router-link>
     </div>
   </header>
 </template>
@@ -38,15 +26,22 @@ function mostrarCreditos() {
 }
 
 .elementoMenu {
-  cursor: pointer;
+  font-size: 1.3em;
+  padding: 0.2em 1em 0 1em;
+  margin-top: 0.7em;
+  color: $colorOscuro;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
-h1 {
-  font-size: 1.3em;
-  color: $colorOscuro;
+.tituloProyecto {
   border-right: 2px solid $colorBlanco;
   padding: 0.2em 1em 0 2em;
-  margin-top: 0.7em;
 }
 
 // Teléfonos horizontal

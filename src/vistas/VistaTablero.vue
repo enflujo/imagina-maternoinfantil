@@ -12,7 +12,6 @@ import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
-import Creditos from '../componentes/CreditosElemento.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -21,6 +20,7 @@ const cerebroDatos = usarCerebroDatos();
 
 onMounted(() => {
   actualizarDims();
+  cerebroGlobales.cambiarNivel();
   window.addEventListener('resize', actualizarDims);
 });
 
@@ -44,15 +44,12 @@ function mostrarFichaTecnica() {
 }
 
 function actualizarDims() {
-  anchoDerecha.value = seccionDerecha.value.clientWidth - 10;
+  anchoDerecha.value = seccionDerecha.value.clientWidth;
 }
-
-cerebroGlobales.cambiarNivel();
 </script>
 
 <template>
   <div id="contenedorGeneral">
-    <Creditos />
     <div id="seccionIzquierda">
       <MenuIndicadores />
       <FichaTecnica />
@@ -138,14 +135,13 @@ cerebroGlobales.cambiarNivel();
 }
 
 #seccionCentral {
-  width: 50vw;
+  width: 40vw;
 }
 
 #seccionDerecha {
-  // margin-top: 100px;
   position: relative;
-  width: 30vw;
-  margin-right: 50px;
+  width: 40vw;
+  margin-right: 30px;
 }
 
 #menuVistaLugar {
