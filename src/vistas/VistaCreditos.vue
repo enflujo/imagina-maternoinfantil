@@ -1,22 +1,6 @@
-<script setup>
-import { usarCerebroGlobales } from '../cerebro/globales';
-const cerebroGlobales = usarCerebroGlobales();
-
-function cerrarCreditos() {
-  const creditos = document.getElementById('creditos');
-  cerebroGlobales.mostrarCreditos = !cerebroGlobales.mostrarCreditos;
-  if (cerebroGlobales.mostrarCreditos === true) {
-    creditos.style.visibility = 'visible';
-  } else {
-    creditos.style.visibility = 'hidden';
-  }
-}
-</script>
-
 <template>
   <div id="creditos">
     <h1>Créditos</h1>
-    <div id="cerrar" @click="cerrarCreditos">X</div>
 
     <div class="seccion">
       <h2 class="titulo">Investigación principal:</h2>
@@ -97,42 +81,41 @@ function cerrarCreditos() {
     </div>
   </div>
 </template>
-
 <style lang="scss" scoped>
 @import '../assets/constantes.scss';
 
 #creditos {
-  visibility: hidden;
-  position: absolute;
+  // visibility: hidden;
+  // position: absolute;
   width: 90vw;
-  height: 87vh;
-  margin: 1% 5%;
-  background-color: $colorBlanco;
-  opacity: 0.97;
-  z-index: 99;
+  // height: 87vh;
+  margin: 5em;
+  // background-color: $colorBlanco;
+  // opacity: 0.97;
+  // z-index: 99;
   padding: 2em;
   color: #0041bf;
-  border: solid;
-  box-shadow: 0px 0px 5px 2px #4e4e4e;
-  border-radius: 15px;
-  overflow-y: scroll;
+  // border: solid;
+  // box-shadow: 0px 0px 5px 2px #4e4e4e;
+  // border-radius: 15px;
+  // overflow-y: scroll;
 
-  #cerrar {
-    position: absolute;
-    right: 3%;
-    top: 3%;
-    font-size: 1.2em;
-    cursor: pointer;
-    background-color: white;
-    border: solid 1px;
-    border-radius: 50%;
-    height: 1.4em;
-    width: 1.4em;
-    justify-content: center;
-    text-align: center;
-    padding-top: 0.1em;
-    font-weight: bold;
-  }
+  // #cerrar {
+  //   position: absolute;
+  //   right: 3%;
+  //   top: 3%;
+  //   font-size: 1.2em;
+  //   cursor: pointer;
+  //   background-color: white;
+  //   border: solid 1px;
+  //   border-radius: 50%;
+  //   height: 1.4em;
+  //   width: 1.4em;
+  //   justify-content: center;
+  //   text-align: center;
+  //   padding-top: 0.1em;
+  //   font-weight: bold;
+  // }
 
   .seccion {
     margin-top: 2em;

@@ -1,14 +1,7 @@
-<script setup>
-function cerrarCuali() {
-  const historiasCuali = document.getElementById('cuali');
-  historiasCuali.style.visibility = 'hidden';
-}
-</script>
-
 <template>
   <div id="cuali">
     <h1>Historias de pandemia</h1>
-    <div id="cerrar" @click="cerrarCuali">X</div>
+
     <p>
       En mayo y junio de 2022 se llevó a cabo una indagación cualitativa en las ciudades de Bogotá y Cúcuta. En este
       ejercicio participaron mujeres colombianas y venezolanas (regularizadas, no regularizadas y pendulares) que
@@ -289,38 +282,14 @@ function cerrarCuali() {
 @import '../assets/constantes.scss';
 
 #cuali {
-  visibility: hidden;
-  position: absolute;
-  width: 90vw;
-  height: 87vh;
-  margin: 1% 5%;
-  padding: 4em 5em;
+  width: 100vw;
+  padding: 6em 5em;
   background-color: $colorBlanco;
-  opacity: 0.97;
-  z-index: 99;
+
   color: #0041bf;
-  border: solid;
-  box-shadow: 0px 0px 5px 2px #4e4e4e;
-  border-radius: 15px;
-  overflow-y: scroll;
 
   h1 {
     color: #8686be;
-  }
-
-  #cerrar {
-    position: absolute;
-    right: 3%;
-    top: 3%;
-    font-size: 1em;
-    cursor: pointer;
-    border: solid 1px;
-    border-radius: 50%;
-    height: 1.4em;
-    width: 1.4em;
-    justify-content: center;
-    text-align: center;
-    padding-top: 0.1em;
   }
 
   .historia {
