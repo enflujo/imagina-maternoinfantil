@@ -24,6 +24,8 @@ export const usarCerebroGlobales = defineStore('globales', {
     async cambiarNivel(valor = this.nivel) {
       const cerebroDatos = usarCerebroDatos();
       this.nivel = valor;
+      this.lugarSeleccionado = null;
+      cerebroDatos.datosLugar = [];
       await cerebroDatos.cargarGeojson();
       await cerebroDatos.cambiarIndicador(cerebroDatos.indice, true);
     },
