@@ -4,8 +4,9 @@
   <header id="encabezado">
     <div id="contenedor">
       <router-link to="/" class="tituloProyecto elementoMenu">Salud Maternoinfantil en Colombia</router-link>
-      <router-link to="/creditos" class="elementoMenu">Créditos</router-link>
+
       <router-link to="/historias" class="elementoMenu">Historias</router-link>
+      <router-link to="/creditos" class="elementoMenu">Créditos</router-link>
     </div>
   </header>
 </template>
