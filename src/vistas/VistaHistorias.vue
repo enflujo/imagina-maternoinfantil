@@ -43,6 +43,7 @@ function scroll() {
   desaparecerComida();
   mostrarComida();
   mostrarMadres();
+  mostrarHospital();
 }
 
 function desaparecerComida() {
@@ -95,6 +96,17 @@ function mostrarMadres() {
   siVisible(menuMadres, () => {
     if (!imagenMadres.classList.contains('aparecer')) {
       imagenMadres.classList.add('aparecer');
+    }
+  });
+}
+
+function mostrarHospital() {
+  const planificacion = document.getElementById('planificacion');
+  const imagenHospital = document.getElementById('imagenHospital');
+
+  siVisible(planificacion, () => {
+    if (!imagenHospital.classList.contains('aparecer')) {
+      imagenHospital.classList.add('aparecer');
     }
   });
 }
@@ -166,9 +178,9 @@ function abrirHistoria(nombre = '') {
         <div class="contenido">
           <p>
             La comida no siempre estuvo presenten de la misma forma en la experiencia de estas mujeres. En algunos
-            casos, no faltó comida por las ayudas que recibían de organizaciones o familiares. Sin embargo, cuando este
-            mercado empezaba a agotarse días antes de que llegara el siguiente, se reducían las porciones, la cantidad
-            de comidas o los productos de los platos.
+            casos, gracias a las ayudas que recibían de organizaciones o familiares, no faltó comida. Sin embargo,
+            cuando este mercado empezaba a agotarse días antes de que llegara el siguiente, se reducían las porciones,
+            la cantidad de comidas o los productos de los platos.
             <br />
           </p>
 
@@ -391,7 +403,9 @@ function abrirHistoria(nombre = '') {
     </div>
 
     <div class="historia" id="conclusiones">
-      <div class="columnaIzquierda"></div>
+      <div class="columnaIzquierda">
+        <img id="imagenHospital" class="imagen" src="src/assets/imagenes/servicio-hospitalario.png" />
+      </div>
       <div class="columnaDerecha">
         <div class="titulo">
           <h2>3. Algunas conclusiones de la investigación cualitativa</h2>
@@ -411,7 +425,7 @@ function abrirHistoria(nombre = '') {
             encontrado para acceder a los sistemas de salud.
           </p>
 
-          <h3>Planificación</h3>
+          <h3 id="planificacion">Planificación</h3>
           <p>
             El tema de la planificación es complejo porque, según las narrativas de las mujeres, son procedimientos
             estandarizados que se deben realizar sobre sus cuerpos después del parto. Como ellas señalan, en los centros
@@ -504,8 +518,7 @@ function abrirHistoria(nombre = '') {
       color: #0041bf;
       font-size: 0.9em;
       text-align: center;
-      width: 140px;
-      height: 140px;
+      width: 110px;
     }
 
     a {
@@ -534,11 +547,15 @@ function abrirHistoria(nombre = '') {
 
         &.animado {
           animation-name: animacionAparecer;
-          animation-duration: 5s;
+          animation-duration: 30s;
           @keyframes animacionAparecer {
             0% {
               opacity: 0;
             }
+            50% {
+              opacity: 1;
+            }
+
             100% {
               opacity: 1;
             }
@@ -548,6 +565,44 @@ function abrirHistoria(nombre = '') {
 
       #imagenMadres {
         opacity: 0;
+        position: fixed;
+        top: 1em;
+        left: 8em;
+
+        &.aparecer {
+          animation-name: animacionAparecer;
+          animation-duration: 15s;
+          @keyframes animacionAparecer {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+        }
+      }
+
+      #imagenHospital {
+        opacity: 0;
+        &.aparecer {
+          animation-name: animacionAparecer;
+          animation-duration: 15s;
+          @keyframes animacionAparecer {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+        }
       }
 
       .imagen {
@@ -555,19 +610,7 @@ function abrirHistoria(nombre = '') {
         position: fixed;
         bottom: 0;
         left: 0vw;
-
-        &.aparecer {
-          animation-name: animacionAparecer;
-          animation-duration: 5s;
-          @keyframes animacionAparecer {
-            0% {
-              opacity: 0;
-            }
-            100% {
-              opacity: 1;
-            }
-          }
-        }
+        opacity: 1;
 
         &.desaparecer {
           animation-name: animacionDesaparecer;
