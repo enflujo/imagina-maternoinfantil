@@ -64,7 +64,8 @@ function abrir(evento) {
   transition: all 0.2s ease-in-out;
   transform: translateX(-100%);
   border-radius: 0 10px 10px 0;
-  overflow: auto;
+  overflow-x: clip;
+  overflow-y: scroll;
 
   &.visible {
     transform: translateX(0);
