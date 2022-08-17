@@ -126,7 +126,7 @@ function actualizarDatos() {
           <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
             <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
               <span class="contenedorInfo">
-                <h4>{{ dato.lugarNombre }}</h4>
+                <h4 class="nombreLugar">{{ dato.lugarNombre }}</h4>
                 <div class="numeros">
                   <h3>{{ dato.porcentaje }}</h3>
                   <div class="operacion">
@@ -230,10 +230,7 @@ function actualizarDatos() {
   #lista {
     padding: 20px 20px 0px 20px;
     margin-bottom: 15px;
-    column-count: 2;
-    column-gap: 1em;
     width: 35vw;
-    height: fit-content;
 
     li {
       margin-bottom: 3px;
@@ -242,8 +239,9 @@ function actualizarDatos() {
 }
 
 .dato {
-  display: block;
-  font-size: 0.9em;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 39px;
 
   h4 {
     text-transform: uppercase;
@@ -254,6 +252,16 @@ function actualizarDatos() {
   .contenedorInfo {
     display: flex;
     justify-content: space-between;
+    font-size: 0.95em;
+
+    .nombreLugar {
+      height: 45px;
+      max-height: 58px;
+      overflow: clip;
+      margin-bottom: 6px;
+      padding-top: 4%;
+      width: 144px;
+    }
   }
 
   .numeros {
@@ -262,7 +270,8 @@ function actualizarDatos() {
     align-items: center;
 
     h3 {
-      margin-right: 2em;
+      margin-right: 1em;
+      padding-bottom: 0.1em;
     }
   }
 
@@ -282,7 +291,6 @@ function actualizarDatos() {
     height: 4px;
     width: 100%;
     border-top: #0041bf dashed 1px;
-    background-color: none;
   }
 
   .lineaLlena {
