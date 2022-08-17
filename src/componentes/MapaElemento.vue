@@ -173,16 +173,10 @@ const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) =
 };
 
 function eventoEncima(seccion) {
-  let [numerador, denominador, porcentaje] = [0, 0, 0];
+  const datosAño = seccion.datos[cerebroGlobales.año];
+  if (!datosAño) return;
 
-  /* if (cerebroGlobales.nivel === 'departamentos') { */
-  if (seccion.codigo === '88') {
-    console.log(datosSanAndres);
-    // [numerador, denominador, porcentaje] = datosSanAndres.datos[cerebroGlobales.año];
-  } else if (!seccion.datos[cerebroGlobales.año]) return;
-  else {
-    [numerador, denominador, porcentaje] = seccion.datos[cerebroGlobales.año];
-  }
+  const [numerador, denominador, porcentaje] = datosAño;
 
   infoVisible.value = true;
   nombreLugar.value = seccion.nombre;
@@ -313,8 +307,6 @@ function eventoClic(seccion, contenedor, evento) {
 
 #sanAndresProvidencia {
   position: absolute;
-  // border: 2px solid;
-  // padding: 0.5em;
   left: 50%;
   transform: translateX(-330%);
 
@@ -344,9 +336,10 @@ function eventoClic(seccion, contenedor, evento) {
 
 #informacion {
   position: fixed;
-  color: rgb(239, 100, 97);
+  color: $colorOscuro;
   font-size: 0.85em;
   font-family: $fuenteTexto;
+  border: 2px solid $colorOscuro;
   padding: 0.5em;
   opacity: 0;
   transition: opacity 0.23s ease-out;
