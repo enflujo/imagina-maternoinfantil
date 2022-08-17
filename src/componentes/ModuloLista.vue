@@ -30,6 +30,12 @@ function elegirOrden(criterio) {
   actualizarDatos();
 }
 
+function ordenarDatos() {
+  datosOrdenados.reverse();
+
+  console.log(datosOrdenados);
+}
+
 function actualizarDatos() {
   datosOrdenados.splice(0);
   datosLugarDesconocido.splice(0);
@@ -76,22 +82,43 @@ function actualizarDatos() {
   <div v-if="datosOrdenados.length > 0" id="modulo">
     <span>Ordenar por: </span>
     <span id="menuOrden">
-      <span
-        class="botonOrden"
-        :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
-        @click="elegirOrden('porcentaje')"
-      >
-        {{ fuentes[cerebroDatos.indice].tipo }}</span
-      >
-      <span class="botonOrden" :class="criterioOrden === 'numerador' ? 'activo' : ''" @click="elegirOrden('numerador')"
-        >numerador</span
-      >
-      <span
-        class="botonOrden"
-        :class="criterioOrden === 'denominador' ? 'activo' : ''"
-        @click="elegirOrden('denominador')"
-        >denominador</span
-      >
+      <span class="seccionMenu">
+        <h4>ANALÍTICO</h4>
+        <span class="botonOrden" :class="criterioOrden === 'decada' ? 'activo' : ''" @click="elegirOrden('decada')">
+          2010 vs. 2020
+        </span>
+
+        <span class="botonOrden" :class="criterioOrden === 'pandemia' ? 'activo' : ''" @click="elegirOrden('pandemia')">
+          2019 vs. 2020
+        </span>
+      </span>
+
+      <div id="separador"></div>
+      <span class="seccionMenu">
+        <h4>INFORMATIVO</h4>
+        <span
+          class="botonOrden"
+          :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
+          @click="elegirOrden('porcentaje')"
+        >
+          {{ fuentes[cerebroDatos.indice].tipo }}</span
+        >
+        <span
+          class="botonOrden"
+          :class="criterioOrden === 'numerador' ? 'activo' : ''"
+          @click="elegirOrden('numerador')"
+          >numerador</span
+        >
+        <span
+          class="botonOrden"
+          :class="criterioOrden === 'denominador' ? 'activo' : ''"
+          @click="elegirOrden('denominador')"
+          >denominador</span
+        >
+      </span>
+      <span class="botonesOrdenar">
+        <span @click="ordenarDatos()">↑↓</span>
+      </span>
     </span>
     <div id="contenedor">
       <div id="lista">
@@ -115,26 +142,50 @@ function actualizarDatos() {
 @import '@/assets/constantes.scss';
 
 #modulo {
-  margin-top: 2em;
+  margin: 4em 0em;
   font-family: $fuenteTexto;
   color: #0041bf;
 
   #menuOrden {
+    margin: 1em 0em;
     display: flex;
-    justify-content: space-between;
-    margin: 5px auto;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+
+  #separador {
+    background-color: #0041bf;
+    height: 2px;
+    width: 100%;
+  }
+
+  .seccionMenu {
+    display: flex;
+    justify-content: flex-start;
+
+    h4 {
+      padding-top: 1em;
+    }
+  }
+
+  .botonesOrdenar {
+    cursor: pointer;
+    border: 2px solid #0041bf;
+    width: fit-content;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #83e9cb;
+    }
   }
 
   .botonOrden {
     cursor: pointer;
-    padding: 1em;
     background-color: #0041bf;
     color: white;
-    font-size: 0.9em;
-    width: 31%;
-    height: fit-content;
-    text-align: center;
-    padding: 0.5em;
+    padding: 0.5em 0.9em;
+    margin: 0.5em 1.5em 0.4em;
 
     &:hover {
       opacity: 0.6;
