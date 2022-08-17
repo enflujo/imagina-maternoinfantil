@@ -68,7 +68,7 @@ function desaparecerComida() {
 }
 
 function mostrarComida() {
-  const historiaAlimentacion = document.getElementById('historiaAlimentacion');
+  // const historiaAlimentacion = document.getElementById('historiaAlimentacion');
   const imagenesComida = document.getElementById('imagenesComida');
   const intro = document.getElementById('intro');
   const parrafo2 = document.getElementById('comidaParrafo2');
@@ -88,10 +88,10 @@ function mostrarComida() {
 }
 
 function mostrarMadres() {
-  const historiaMadres = document.getElementById('historiaMadres');
+  // const historiaMadres = document.getElementById('historiaMadres');
   const menuMadres = document.getElementById('menuMadres');
   const imagenMadres = document.getElementById('imagenMadres');
-  const imagenesComida = document.getElementById('imagenesComida');
+  // const imagenesComida = document.getElementById('imagenesComida');
 
   siVisible(menuMadres, () => {
     if (!imagenMadres.classList.contains('aparecer')) {

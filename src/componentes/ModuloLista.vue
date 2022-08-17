@@ -156,7 +156,7 @@ function actualizarDatos() {
 @import '@/assets/constantes.scss';
 
 #modulo {
-  margin: 4em 0em;
+  margin: 1em 0em;
   font-family: $fuenteTexto;
   color: #0041bf;
 
@@ -165,6 +165,7 @@ function actualizarDatos() {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    font-size: 0.8em;
   }
 
   #separador {
