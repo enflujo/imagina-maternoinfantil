@@ -17,7 +17,7 @@
 #encabezado {
   height: $tamañoEncabezado;
   width: 100vw;
-  background-color: $colorFondoClaro2;
+  background-color: $colorBlanco;
   top: 0;
   z-index: 10;
 }
@@ -27,9 +27,9 @@
 }
 
 .elementoMenu {
-  font-size: 1.3em;
+  font-size: 1.0em;
   padding: 0.2em 1em 0 1em;
-  margin-top: 0.7em;
+  margin-top: 0.4em;
   color: $colorOscuro;
   font-weight: bold;
   text-decoration: none;
