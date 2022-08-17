@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 
-//const historiasAbiertas = reactive({ maria: false, claudia: false, raquel: false, camila: false, adriana: false });
 const historiaAbierta = ref('');
 
 function siVisible(element, callback) {
@@ -44,6 +43,7 @@ function scroll() {
   mostrarComida();
   mostrarMadres();
   mostrarHospital();
+  mostrarAmamantar();
 }
 
 function desaparecerComida() {
@@ -85,6 +85,26 @@ function mostrarComida() {
   /*if (intro.getBoundingClientRect().top > 0) {
     imagenesComida.style.visibility = 'hidden';
   }*/
+}
+
+function mostrarAmamantar() {
+  // const historiaMadres = document.getElementById('historiaMadres');
+  const parrafo2 = document.getElementById('comidaParrafo2');
+  const imagenAmamantando = document.getElementById('imagenAmamantando');
+  const historiaAlimentacion = document.getElementById('historiaAlimentacion');
+  // const imagenesComida = document.getElementById('imagenesComida');
+
+  siVisible(historiaAlimentacion, () => {
+    if (!imagenAmamantando.classList.contains('aparecer')) {
+      imagenAmamantando.classList.add('aparecer');
+    }
+  });
+
+  siInvisible(parrafo2, () => {
+    if (!imagenAmamantando.classList.contains('desaparecer')) {
+      imagenAmamantando.classList.add('desaparecer');
+    }
+  });
 }
 
 function mostrarMadres() {
@@ -147,7 +167,8 @@ function abrirHistoria(nombre = '') {
     </div>
     <div class="historia" id="historiaAlimentacion">
       <div class="columnaIzquierda">
-        <div id="imagenesComida">
+        <img id="imagenAmamantando" class="imagen" src="src/assets/imagenes/madre-amamantando.png" />
+        <!-- <div id="imagenesComida">
           <img class="imagen" id="19" src="src/assets/imagenes/comida_capa21.png" />
           <img class="imagen" id="18" src="src/assets/imagenes/comida_capa20.png" />
           <img class="imagen" id="17" src="src/assets/imagenes/comida_capa19.png" />
@@ -168,7 +189,7 @@ function abrirHistoria(nombre = '') {
           <img class="imagen" id="2" src="src/assets/imagenes/comida_capa04.png" />
           <img class="imagen" id="1" src="src/assets/imagenes/comida_capa03.png" />
           <img class="imagen" id="0" src="src/assets/imagenes/comida_capa02.png" />
-        </div>
+        </div> -->
       </div>
       <div class="columnaDerecha">
         <div class="titulo" id="titulo1">
@@ -558,6 +579,29 @@ function abrirHistoria(nombre = '') {
 
             100% {
               opacity: 1;
+            }
+          }
+        }
+      }
+
+      #imagenAmamantando {
+        opacity: 0;
+        position: fixed;
+        top: 1em;
+        left: 8em;
+
+        &.aparecer {
+          animation-name: animacionAparecer;
+          animation-duration: 7s;
+          @keyframes animacionAparecer {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
             }
           }
         }
