@@ -1,10 +1,18 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+import { usarCerebroDatos } from '../../cerebro/datos';
+import fuentes from '../../utilidades/fuentes';
+
+const cerebroDatos = usarCerebroDatos();
+
+const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
+</script>
 
 <template>
   <ul id="leyenda">
     <li id="lineaNacional"><span>Nacional</span><span class="ejemplo"></span></li>
     <li id="lineaLugar"><span>Lugar Seleccionado</span><span class="ejemplo"></span></li>
-    <li id="lineaMeta"><span>Meta</span><span class="ejemplo"></span></li>
+    <li id="lineaMeta" v-if="tieneMeta"><span>Meta</span><span class="ejemplo"></span></li>
   </ul>
 </template>
 

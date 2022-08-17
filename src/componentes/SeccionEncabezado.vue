@@ -27,7 +27,7 @@
 }
 
 .elementoMenu {
-  font-size: 1.0em;
+  font-size: 1em;
   padding: 0.2em 1em 0 1em;
   margin-top: 0.4em;
   color: $colorOscuro;
