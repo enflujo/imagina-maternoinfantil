@@ -125,11 +125,25 @@ function actualizarDatos() {
         <ul class="dato">
           <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
             <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
-              {{ dato.lugarNombre }}:
-              {{ dato[criterioOrden] }}
+              <span class="contenedorInfo">
+                <h4>{{ dato.lugarNombre }}</h4>
+                <div class="numeros">
+                  <h3>{{ dato.porcentaje }}</h3>
+                  <div class="operacion">
+                    {{ dato.numerador }}
+                    <div class="divisor"></div>
+                    {{ dato.denominador }}
+                  </div>
+                </div>
+              </span>
+              <div class="lineaVacia">
+                <div class="lineaLlena" :style="`width:${(dato.numerador / dato.denominador) * 100}%`"></div>
+              </div>
             </span>
           </li>
         </ul>
+        <!-- <div id="columnaIzquierda"></div>
+        <div id="columnaDerecha"></div> -->
       </div>
       <div id="lugarDesconocido" v-if="datosLugarDesconocido[0] && datosLugarDesconocido[0][criterioOrden] !== null">
         Lugar desconocido: {{ datosLugarDesconocido[0][criterioOrden] }}
@@ -176,7 +190,8 @@ function actualizarDatos() {
     font-weight: bold;
 
     &:hover {
-      background-color: #83e9cb;
+      background-color: white;
+      color: #0041bf;
     }
   }
 
@@ -214,9 +229,9 @@ function actualizarDatos() {
   #lista {
     padding: 20px 20px 0px 20px;
     margin-bottom: 15px;
-    column-count: 3;
-    column-gap: 10px;
-    width: 29vw;
+    column-count: 2;
+    column-gap: 1em;
+    width: 35vw;
     height: fit-content;
 
     li {
@@ -226,9 +241,59 @@ function actualizarDatos() {
 }
 
 .dato {
-  line-height: 1em;
   display: block;
   font-size: 0.9em;
+
+  h4 {
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 0.5em 0em;
+  }
+
+  .contenedorInfo {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .numeros {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    h3 {
+      margin-right: 2em;
+    }
+  }
+
+  .operacion {
+    width: 4em;
+    font-size: 0.7em;
+    text-align: right;
+  }
+
+  .divisor {
+    height: 1px;
+    width: 100%;
+    background-color: #0041bf;
+  }
+
+  .lineaVacia {
+    height: 4px;
+    width: 100%;
+    border-top: #0041bf dashed 1px;
+    background-color: none;
+  }
+
+  .lineaLlena {
+    height: 0px;
+    width: 68%;
+    border: #258b51 solid 3px;
+    margin-bottom: 11px;
+    position: relative;
+    top: -4px;
+    left: -1px;
+    border-radius: 1px;
+  }
 }
 
 #lugarDesconocido {
