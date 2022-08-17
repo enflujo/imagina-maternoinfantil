@@ -1,15 +1,22 @@
 <script setup>
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
+import { ref } from 'vue';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
+
+const mostrarMenu = ref(false);
+
+function abrirMenu() {
+  mostrarMenu.value = !mostrarMenu.value;
+}
 </script>
 
 <template>
   <nav>
-    <span class="boton cuadro desplegable">{{ cerebroGlobales.año }}</span>
-    <ul id="menuAños">
+    <span @click="abrirMenu()" class="boton cuadro desplegable">{{ cerebroGlobales.año }}</span>
+    <ul id="menuAños" :style="`display:${mostrarMenu ? 'block' : 'none'}`">
       <li
         v-for="n in cerebroDatos.años"
         :key="n"
@@ -38,6 +45,7 @@ nav {
     position: absolute;
     top: 2em;
     width: 100%;
+    z-index: 2;
   }
 
   &:hover #menuAños {
