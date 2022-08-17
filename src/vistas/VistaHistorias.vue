@@ -1,8 +1,55 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 //const historiasAbiertas = reactive({ maria: false, claudia: false, raquel: false, camila: false, adriana: false });
 const historiaAbierta = ref('');
+const contenedor = ref();
+const historia1 = ref();
+const historia2 = ref();
+const yAnterior = ref(0);
+const yActual = ref(0);
+const direccion = ref(null);
+const observador = new IntersectionObserver((historias) => {
+  historias.forEach((historia) => {
+    const visible = historia.isIntersecting;
+
+    if (visible) {
+      historia.target.classList.add('visible');
+    } else {
+      historia.target.classList.remove('visible');
+    }
+  });
+});
+
+onMounted(() => {
+  observador.observe(historia1.value);
+  observador.observe(historia2.value);
+  document.addEventListener('scroll', actualizarPosiciones);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('scroll', actualizarPosiciones);
+});
+
+function actualizarPosiciones() {
+  const posicionY = window.pageYOffset;
+
+  if (yActual.value === posicionY) return;
+
+  if (posicionY > yAnterior.value) direccion.value = 'bajando';
+  else if (posicionY < yAnterior.value) direccion.value = 'subiendo';
+
+  yAnterior.value = yActual.value;
+  yActual.value = posicionY;
+
+  if (historia1.value.classList.contains('visible')) {
+    const dimsContenido = historia1.value.getBoundingClientRect();
+
+    const pasoY = dimsContenido.height / 19;
+
+    console.log(posicionY, pasoY, dimsContenido);
+  }
+}
 
 function siVisible(element, callback) {
   new IntersectionObserver((entries, observer) => {
@@ -68,7 +115,7 @@ function desaparecerComida() {
 }
 
 function mostrarComida() {
-  const historiaAlimentacion = document.getElementById('historiaAlimentacion');
+  // const historiaAlimentacion = document.getElementById('historiaAlimentacion');
   const imagenesComida = document.getElementById('imagenesComida');
   const intro = document.getElementById('intro');
   const parrafo2 = document.getElementById('comidaParrafo2');
@@ -88,10 +135,10 @@ function mostrarComida() {
 }
 
 function mostrarMadres() {
-  const historiaMadres = document.getElementById('historiaMadres');
+  // const historiaMadres = document.getElementById('historiaMadres');
   const menuMadres = document.getElementById('menuMadres');
   const imagenMadres = document.getElementById('imagenMadres');
-  const imagenesComida = document.getElementById('imagenesComida');
+  // const imagenesComida = document.getElementById('imagenesComida');
 
   siVisible(menuMadres, () => {
     if (!imagenMadres.classList.contains('aparecer')) {
@@ -121,7 +168,7 @@ function abrirHistoria(nombre = '') {
 </script>
 
 <template>
-  <div id="cuali" @mouseover="scroll()">
+  <div id="cuali" ref="contenedor">
     <div id="intro">
       <h1 class="titulo">Narrativas de la pandemia</h1>
       <h3 class="subtitulo">Cómo se afectó la vida de las madres en la pandemia</h3>
@@ -145,7 +192,7 @@ function abrirHistoria(nombre = '') {
         >
       </div>
     </div>
-    <div class="historia" id="historiaAlimentacion">
+    <div class="historia" id="historiaAlimentacion" ref="historia1">
       <div class="columnaIzquierda">
         <div id="imagenesComida">
           <img class="imagen" id="19" src="src/assets/imagenes/comida_capa21.png" />
@@ -170,6 +217,7 @@ function abrirHistoria(nombre = '') {
           <img class="imagen" id="0" src="src/assets/imagenes/comida_capa02.png" />
         </div>
       </div>
+
       <div class="columnaDerecha">
         <div class="titulo" id="titulo1">
           <h2>1. Si hay arroz, hay comida</h2>
@@ -219,7 +267,7 @@ function abrirHistoria(nombre = '') {
       </div>
     </div>
 
-    <div class="historia" id="historiaMadres">
+    <div class="historia" id="historiaMadres" ref="historia2">
       <div class="columnaIzquierda">
         <img id="imagenMadres" class="imagen" src="src/assets/imagenes/madres_migrantes.png" />
       </div>
@@ -486,12 +534,12 @@ function abrirHistoria(nombre = '') {
 
   #intro {
     width: 100vw;
+    min-height: 98vh;
     padding-left: 26vw;
     z-index: 2;
     position: relative;
     background: radial-gradient(#f2f2f2, #f2f2f200);
     padding-right: 31vw;
-    padding-top: 2em;
 
     p {
       padding-left: 10em;
@@ -535,14 +583,16 @@ function abrirHistoria(nombre = '') {
   }
 
   .historia {
-    display: grid;
-    grid-template-columns: 39vw 30vw;
-
     .columnaIzquierda {
-      padding: 19em;
-      margin: 10em 2em;
+      opacity: 0;
+      width: 50vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease-in-out;
 
       #imagenesComida {
+<<<<<<< Updated upstream
         opacity: 0;
 
         &.animado {
@@ -611,115 +661,184 @@ function abrirHistoria(nombre = '') {
         bottom: 0;
         left: 0vw;
         opacity: 1;
+=======
+        img {
+          position: absolute;
+          width: 61%;
+          height: auto;
+          transform: translate(30%, 50%);
 
-        &.desaparecer {
-          animation-name: animacionDesaparecer;
-          animation-duration: 4s;
-          @keyframes animacionDesaparecer {
-            0% {
-              opacity: 1;
-            }
-            100% {
-              opacity: 0;
-            }
-          }
+          transition: opacity 2s ease-in;
         }
       }
     }
+>>>>>>> Stashed changes
+
+    &.visible {
+      .columnaIzquierda {
+        opacity: 1;
+      }
+    }
+
     .columnaDerecha {
       width: 42vw;
-      margin: 6em 4em;
+      margin: 6em 8vw 6em auto;
       padding-bottom: 4em;
-      background-color: #e5eeed;
-    }
-
-    .titulo {
-      margin-bottom: -1em;
-      color: #8686be;
-      font-size: 1.2em;
-      padding: 2em 3em;
-
-      &.animado {
-        animation-name: animacionTitulo;
-        animation-duration: 2s;
-        @keyframes animacionTitulo {
-          0% {
-            margin-left: -8vw;
-          }
-          100% {
-            margin-left: 0vw;
-          }
-        }
-      }
-
-      .subtitulo {
-        font-size: 1em;
-      }
-
-      h2 {
-        font-style: italic;
-        color: #8686be;
-      }
-
-      h3,
-      h4 {
-        color: #8686be;
-      }
-    }
-
-    p {
-      margin-block: 1em;
-    }
-
-    #menuMadres {
-      display: flex;
-      justify-content: space-between;
-      margin: 4em 0em 2em -6em;
-    }
-    .botonMadres {
-      cursor: pointer;
-      background-color: #0041bf;
-      color: white;
-      padding: 0.7em;
-      margin: 5px;
-    }
-
-    .contenido {
-      width: 28vw;
-      margin-left: 10em;
-      padding-right: 2em;
-      font-size: 1.1em;
-      padding-right: 2em;
-
-      .historiaMujer {
-        width: 100%;
-      }
-      h3 {
-        color: #8686be;
-      }
-
-      .botonCerrar {
-        font-size: 0.8em;
-        margin-bottom: 2em;
-      }
-    }
-
-    .testimonio {
-      font-style: italic;
-      color: #8686be;
-      margin: 2em;
-    }
-
-    #separador {
-      height: 1px;
-      width: 100%;
-      background-color: #0041bf;
-    }
-
-    #nota {
-      font-size: 0.6em;
-      margin: 2em 0em;
+      // background-color: #e5eeed;
     }
   }
+
+  // .historia {
+  //   display: grid;
+  //   grid-template-columns: 39vw 30vw;
+
+  //   .columnaIzquierda {
+  //     padding: 19em;
+  //     margin: 10em 2em;
+
+  //     #imagenesComida {
+  //       opacity: 0;
+
+  //       &.animado {
+  //         animation-name: animacionAparecer;
+  //         animation-duration: 5s;
+  //         @keyframes animacionAparecer {
+  //           0% {
+  //             opacity: 0;
+  //           }
+  //           100% {
+  //             opacity: 1;
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     #imagenMadres {
+  //       opacity: 0;
+  //     }
+
+  //     .imagen {
+  //       width: 38vw;
+  //       position: fixed;
+  //       bottom: 0;
+  //       left: 0vw;
+
+  //       &.aparecer {
+  //         animation-name: animacionAparecer;
+  //         animation-duration: 5s;
+  //         @keyframes animacionAparecer {
+  //           0% {
+  //             opacity: 0;
+  //           }
+  //           100% {
+  //             opacity: 1;
+  //           }
+  //         }
+  //       }
+
+  //       &.desaparecer {
+  //         animation-name: animacionDesaparecer;
+  //         animation-duration: 4s;
+  //         @keyframes animacionDesaparecer {
+  //           0% {
+  //             opacity: 1;
+  //           }
+  //           100% {
+  //             opacity: 0;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+
+  .titulo {
+    margin-bottom: -1em;
+    color: #8686be;
+    font-size: 1.2em;
+    padding: 2em 3em;
+
+    &.animado {
+      animation-name: animacionTitulo;
+      animation-duration: 2s;
+
+      @keyframes animacionTitulo {
+        0% {
+          margin-left: -8vw;
+        }
+        100% {
+          margin-left: 0vw;
+        }
+      }
+    }
+
+    .subtitulo {
+      font-size: 1em;
+    }
+
+    h2 {
+      font-style: italic;
+      color: #8686be;
+    }
+
+    h3,
+    h4 {
+      color: #8686be;
+    }
+  }
+
+  p {
+    margin-block: 1.5em;
+  }
+
+  #menuMadres {
+    display: flex;
+    justify-content: space-between;
+    margin: 4em 0em 2em -6em;
+  }
+  .botonMadres {
+    cursor: pointer;
+    background-color: #0041bf;
+    color: white;
+    padding: 0.7em;
+    margin: 5px;
+  }
+
+  .contenido {
+    width: 28vw;
+    margin-left: 10em;
+    padding-right: 2em;
+    font-size: 1.1em;
+    padding-right: 2em;
+
+    .historiaMujer {
+      width: 100%;
+    }
+    h3 {
+      color: #8686be;
+    }
+
+    .botonCerrar {
+      font-size: 0.8em;
+      margin-bottom: 2em;
+    }
+  }
+
+  .testimonio {
+    font-style: italic;
+    color: #8686be;
+    margin: 2em;
+  }
+
+  #separador {
+    height: 1px;
+    width: 100%;
+    background-color: #0041bf;
+  }
+
+  #nota {
+    font-size: 0.6em;
+    margin: 2em 0em;
+  }
+  // }
 }
 </style>
