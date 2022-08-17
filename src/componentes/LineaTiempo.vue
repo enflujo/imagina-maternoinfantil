@@ -5,6 +5,7 @@ import { usarCerebroGlobales } from '../cerebro/globales';
 import { convertirEscala } from '../utilidades/ayudas';
 import fuentes from '../utilidades/fuentes';
 import LineaDatos from './LineaDeTiempo/LineaDatos.vue';
+import Leyenda from './LineaDeTiempo/LeyendaElemento.vue';
 
 const props = defineProps({
   ancho: Number,
@@ -130,8 +131,9 @@ function textoPuntoY(i) {
 <template>
   <section id="lineaDeTiempo">
     <header>
-      <h3 v-if="cerebroGlobales.lugarSeleccionado">{{ cerebroGlobales.lugarSeleccionado.nombre }}</h3>
+      <h3>{{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}</h3>
 
+      <Leyenda />
       <p id="descripcionY">{{ fuentes[cerebroDatos.indice].nombreEjeY }}</p>
     </header>
 
@@ -289,6 +291,14 @@ function textoPuntoY(i) {
 
 <style lang="scss" scoped>
 @import '@/assets/constantes.scss';
+
+#lineaDeTiempo {
+  position: relative;
+}
+
+h3 {
+  margin: 0.3em 0;
+}
 
 #detalle {
   color: white;
