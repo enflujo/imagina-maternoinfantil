@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
 import iconoAnticoncepcion from '../assets/imgs/iconoAnticoncepcion.svg';
+import madreAmamantando from '../assets/imgs/madre-amamantando.png';
+import madresMigrantes from '../assets/imgs/madres_migrantes.png';
+import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 
 const historiaAbierta = ref('');
 
@@ -168,7 +171,7 @@ function abrirHistoria(nombre = '') {
     </div>
     <div class="historia" id="historiaAlimentacion">
       <div class="columnaIzquierda">
-        <img id="imagenAmamantando" class="imagen" :src="'/public/imgs/madre-amamantando.png'" />
+        <img id="imagenAmamantando" class="imagen" :src="madreAmamantando" />
         <!-- <div id="imagenesComida">
           <img class="imagen" id="19" :src="'/public/imgs/comida_capa21.png'" />
           <img class="imagen" id="18" src="src/assets/imagenes/comida_capa20.png" />
@@ -243,7 +246,7 @@ function abrirHistoria(nombre = '') {
 
     <div class="historia" id="historiaMadres">
       <div class="columnaIzquierda">
-        <img id="imagenMadres" class="imagen" :src="'/public/imgs/madres_migrantes.png'" />
+        <img id="imagenMadres" class="imagen" :src="madresMigrantes" />
       </div>
       <div class="columnaDerecha">
         <div class="titulo" id="titulo2">
@@ -426,7 +429,7 @@ function abrirHistoria(nombre = '') {
 
     <div class="historia" id="conclusiones">
       <div class="columnaIzquierda">
-        <img id="imagenHospital" class="imagen" :src="'/public/imgs/servicio-hospitalario.png'" />
+        <img id="imagenHospital" class="imagen" :src="servicioHospitalario" />
       </div>
       <div class="columnaDerecha">
         <div class="titulo">
