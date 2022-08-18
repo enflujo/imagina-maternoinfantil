@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
+import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
+import iconoAnticoncepcion from '../assets/imgs/iconoAnticoncepcion.svg';
 
 const historiaAbierta = ref('');
 
@@ -155,14 +158,12 @@ function abrirHistoria(nombre = '') {
 
       <div id="menuHistorias">
         <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion"
-          ><img :src="'/public/imgs/iconoAlimentacion.svg'" />Alimentación</a
+          ><img :src="iconoAlimentacion" />Alimentación</a
         >
         <a href="#historiaMadres" @click="imagenesComida.style.visibility = 'hidden'" class="botonHistoria"
-          ><img :src="'/public/imgs/iconoExperiencias.svg'" />Madres en pandemia</a
+          ><img :src="iconoExperiencias" />Madres en pandemia</a
         >
-        <a href="#conclusiones" class="botonHistoria"
-          ><img :src="'/public/imgs/iconoAnticoncepcion.svg'" />Algunas conclusiones</a
-        >
+        <a href="#conclusiones" class="botonHistoria"><img :src="iconoAnticoncepcion" />Algunas conclusiones</a>
       </div>
     </div>
     <div class="historia" id="historiaAlimentacion">
