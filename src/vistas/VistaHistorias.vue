@@ -155,21 +155,21 @@ function abrirHistoria(nombre = '') {
 
       <div id="menuHistorias">
         <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion"
-          ><img src="src\assets\imagenes\iconoAlimentacion.svg" />Alimentación</a
+          ><img :src="'/public/imgs/iconoAlimentacion.svg'" />Alimentación</a
         >
         <a href="#historiaMadres" @click="imagenesComida.style.visibility = 'hidden'" class="botonHistoria"
-          ><img src="src\assets\imagenes\iconoExperiencias.svg" />Madres en pandemia</a
+          ><img :src="'/public/imgs/iconoExperiencias.svg'" />Madres en pandemia</a
         >
         <a href="#conclusiones" class="botonHistoria"
-          ><img src="src\assets\imagenes\iconoAnticoncepcion.svg" />Algunas conclusiones</a
+          ><img :src="'/public/imgs/iconoAnticoncepcion.svg'" />Algunas conclusiones</a
         >
       </div>
     </div>
     <div class="historia" id="historiaAlimentacion">
       <div class="columnaIzquierda">
-        <img id="imagenAmamantando" class="imagen" src="src/assets/imagenes/madre-amamantando.png" />
+        <img id="imagenAmamantando" class="imagen" :src="'/public/imgs/madre-amamantando.png'" />
         <!-- <div id="imagenesComida">
-          <img class="imagen" id="19" src="src/assets/imagenes/comida_capa21.png" />
+          <img class="imagen" id="19" :src="'/public/imgs/comida_capa21.png'" />
           <img class="imagen" id="18" src="src/assets/imagenes/comida_capa20.png" />
           <img class="imagen" id="17" src="src/assets/imagenes/comida_capa19.png" />
           <img class="imagen" id="16" src="src/assets/imagenes/comida_capa18.png" />
@@ -242,7 +242,7 @@ function abrirHistoria(nombre = '') {
 
     <div class="historia" id="historiaMadres">
       <div class="columnaIzquierda">
-        <img id="imagenMadres" class="imagen" src="src/assets/imagenes/madres_migrantes.png" />
+        <img id="imagenMadres" class="imagen" :src="'/public/imgs/madres_migrantes.png'" />
       </div>
       <div class="columnaDerecha">
         <div class="titulo" id="titulo2">
@@ -425,7 +425,7 @@ function abrirHistoria(nombre = '') {
 
     <div class="historia" id="conclusiones">
       <div class="columnaIzquierda">
-        <img id="imagenHospital" class="imagen" src="src/assets/imagenes/servicio-hospitalario.png" />
+        <img id="imagenHospital" class="imagen" :src="'/public/imgs/servicio-hospitalario.png'" />
       </div>
       <div class="columnaDerecha">
         <div class="titulo">
