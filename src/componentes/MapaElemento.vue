@@ -329,7 +329,7 @@ function eventoClic(seccion) {
 }
 
 #mapa {
-  margin: 0 auto;
+  margin: 3em auto;
   display: block;
 }
 

@@ -13,6 +13,7 @@ import Guardaescobas from '../componentes/SeccionGuardaescobas.vue';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
+import FrasesCuali from '../componentes/FrasesCuali.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -85,6 +86,7 @@ function actualizarDims() {
 
       <Mapa />
       <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
+      <FrasesCuali />
     </div>
 
     <div id="seccionDerecha" ref="seccionDerecha">
