@@ -42,11 +42,20 @@ function reemplazarURLs(texto) {
         <div class="tituloSeccion">Fuente del denominador</div>
         <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteDenominador }}</div>
 
+         <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="tituloSeccion">Códigos CIE-10</div>
+
+        <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="informacion">
+             Atenciones por consulta para los códigos CIE-10:
+           <li v-for="codigo in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${codigo}`">
+            {{ codigo }}
+          </li> 
+        </div>
+
         <div class="tituloSeccion">Nivel de desagregación</div>
         <div class="informacion">
-          <p v-for="nivel in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${nivel}`">
+          <li v-for="nivel in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${nivel}`">
             {{ nivel }}
-          </p>
+          </li>
         </div>
 
         <div class="tituloSeccion" @click="mostrarTexto(fuentes[cerebroDatos.indiceActual].interpretacion)">
@@ -72,13 +81,13 @@ function reemplazarURLs(texto) {
 @import '@/assets/constantes.scss';
 
 #fichaTecnica {
-  width: 30%;
+  width: 42%;
   height: 80%;
   background-color: #55efa1;
   z-index: 99;
   position: absolute;
-  top: 170px;
-  left: 33vw;
+  top: 180px;
+  left: 28vw;
   border: 25px solid #55efa1;
   border-radius: 15px;
   visibility: hidden;
@@ -108,10 +117,10 @@ function reemplazarURLs(texto) {
       text-align: center;
       text-transform: uppercase;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1em;
       display: flex;
       align-items: center;
-      padding: 1em;
+      padding: 0.8em;
       border: 3px solid #0041bf;
       border-top: 0;
       text-align: left;

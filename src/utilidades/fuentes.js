@@ -12,6 +12,7 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos a término que pesaron menos de 2499 gramos',
     fuenteDenominador: 'CUBO INDICADORES EEVV: Nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
@@ -38,6 +39,7 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos cuyas madres tuvieron 4 o más controles prenatales',
     fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Edad de la madre'],
@@ -47,7 +49,7 @@ export default [
     meta: {
       umbral: 95,
       descripcion:
-        'Según el Plan decenal de salud pública el 95% de las mujeres gestantes deben tener 4 o más controles prenatales. Según la meta de ODS para 2030, el 93% de las gestantes deben tener 4 o más controles prenatales.',
+        'Según el Plan decenal de salud pública el 95% de las mujeres gestantes deben tener 4 o más controles prenatales. Según la meta de los Objetivos de Desarrollo Sostenible, para 2030 el 93% de las gestantes deben tener 4 o más controles prenatales.',
       tendenciaDeseada: 'arriba',
     },
     limitacion: '',
@@ -66,6 +68,7 @@ export default [
       'CUBO INDICADORES EEVV: Nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 años o más',
     fuenteDenominador: 'CUBO INDICADORES EEVV: Nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Edad de la madre'],
@@ -92,6 +95,7 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos que nacieron en instituciones de salud',
     fuenteDenominador: 'CUBO INDICADORES EEVV: Nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Edad de la madre'],
@@ -100,7 +104,7 @@ export default [
       'Un valor de 98% indica que 98 partos de cada 100 nacimientos en un lugar y momento específico ocurren en instituciones de salud. La atención institucional del parto es una de las medidas básicas para disminuir la mortalidad materna y perinatal. No obstante, el parto debe ser atendido en condiciones de calidad y con personal entrenado para que se disminuya la posibilidad de complicaciones en el momento del alumbramiento. Las 24 horas posteriores al nacimiento son vitales tanto para la madre como para el bebé, por ello, es importante que durante esas horas reciban seguimiento y atención médica. Recientemente la Corte Constitucional reconoció la partería como un saber ancestral y patrimonial. Existe un deber constitucional y legal de integrar la partería como forma de medicina ancestral al Sistema General de Seguridad Social en Salud. Las parteras constituyen una fuente de educación sexual y planificación familiar en zonas en donde el acceso a los servicios de salud es muy limitado. Mas información: Sentencia T-128-22 https://www.corteconstitucional.gov.co/noticia.php?Corte-Constitucional-reconoce-la-parter%C3%ADa-como-saber-ancestral-y-patrimonio-cultural-de-la-Naci%C3%B3n,-exhorta-al-Ministerio-de-Salud-a-integrar-a-las-parteras-al-Sistema-de-Seguridad-Social-en-Salud-y-al-Congreso-a-legislar-sobre-este-tema-9274 ',
     meta: {
       umbral: null,
-      descripcion: 'No existe una meta definida',
+      descripcion: 'No existe una meta definida.',
       tendenciaDeseada: 'arriba',
     },
     limitacion: '',
@@ -118,6 +122,7 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos que nacieron por cesárea',
     fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Edad de la madre'],
@@ -126,7 +131,7 @@ export default [
       'Un valor de 17% indica que 17 de cada 100 nacidos vivos han sido partos atendidos por cesárea, en un momento y territorio determinados. La cesárea solo debe ocurrir cuando se encuentra justificada desde el punto de vista médico para disminuir el riesgo de complicaciones y muerte de la gestante y el recién nacido. En situaciones como el parto prolongado o el sufrimiento fetal está recomendada la cesárea. Un informe de la Organización Mundial de la Salud reportó que 1 de cada 5 partos se realiza por cesárea. La cesárea es un procedimiento quirúrgico que puede conllevar a riesgos como todos los procedimientos de este tipo, y más si no es necesario. Mayor información: https://www.who.int/news/item/16-06-2021-caesarean-section-rates-continue-to-rise-amid-growing-inequalities-in-access Epidemia de cesáreas en Colombia: https://repositorio.uniandes.edu.co/bitstream/handle/1992/59067/Trabajo%20de%20grado_Epidemia%20de%20ces%c3%a1reas%20en%20Colombia_A%20De%20la%20Torre_FINAL.pdf?sequence=3&isAllowed=y',
     meta: {
       umbral: null,
-      descripcion: 'No existe una meta clara, ya que depende de situaciones particulares',
+      descripcion: 'No existe una meta definida, ya que depende de situaciones particulares.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -141,9 +146,10 @@ export default [
     tipo: 'proporción',
     calculo:
       'Número de nacidos vivos en niñas menores de 14 años o menos / Total de nacidos vivos en el mismo periodo de tiempo y territorio',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos de madres menores de 14 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Grupos de edad'],
@@ -152,7 +158,8 @@ export default [
       'Un valor de 15% indica que ocurrieron 15 nacimientos en madres menores de 14 años por cada 100 nacidos vivos, en un territorio y momento específicos. Este indicador se relaciona con la “Proporción de nacidos vivos en mujeres menores de 15 años cuyo padre es mayor 4 o más años”. Las relaciones sexuales con menores de 14 años son un delito, el reporte ante las autoridades competentes es un deber ciudadano para garantizar la atención y acompañamientos oportunos de la menor.',
     meta: {
       umbral: 15,
-      descripcion: 'La meta según PDSP es reducir la proporción de gestantes adolescentes al 15% al nivel nacional.',
+      descripcion:
+        'La meta según Plan Decenal de Salud Pública es reducir la proporción de gestantes adolescentes al 15% al nivel nacional.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -167,18 +174,20 @@ export default [
     tipo: 'proporción',
     calculo:
       'Número de nacidos vivos en niñas de 14 a 17 años / Total de nacidos vivos en el mismo periodo de tiempo y territorio',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Nacidos vivos de madres de 14 a 17 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Grupos de edad'],
     serieDisponible: [],
     interpretacion:
-      'Un valor de 15% indica que ocurrieron 15 nacimientos en madres menores de 14 años por cada 100 nacidos vivos, en un territorio y momento específicos. La prevención del embarazo en la adolescencia es una responsabilidad compartida. En primer lugar, la educación sexual y reproductiva es fundamental, no solamente para que los adolescentes tengan relaciones sexuales seguras y accedan a métodos de planificación, sino para que puedan tomar decisiones informadas y consientes sobre sus propios cuerpos. En segundo lugar, una educación sexual con enfoque de género puede garantizar que se ejerzan menos violencias dentro de las relaciones sexuales y sentimentales y que las personas que son violentadas de alguna forma, puedan identificar con más facilidad los canales de atención, apoyo y denuncia. Tanto las instituciones educativas, como los centros de salud y las familias, deben fomentar la creación de redes de apoyo y comunicación para que las niñas y adolescentes en estado de embarazo no sean revictimizadas. Además, las redes de apoyo pueden aumentar la probabilidad de que esas niñas y adolescentes permanezcan en lugares seguros y lejos de los círculos de violencia. Las relaciones sexuales con menores de 14 años son un delito, el reporte ante las autoridades competentes es un deber ciudadano para garantizar la atención y acompañamientos oportunos de la menor. ',
+      'Un valor de 15% indica que ocurrieron 15 nacimientos en madres menores de entre 14 y 17 años por cada 100 nacidos vivos, en un territorio y momento específicos. La prevención del embarazo en la adolescencia es una responsabilidad compartida. En primer lugar, la educación sexual y reproductiva es fundamental, no solamente para que los adolescentes tengan relaciones sexuales seguras y accedan a métodos de planificación, sino para que puedan tomar decisiones informadas y consientes sobre sus propios cuerpos. En segundo lugar, una educación sexual con enfoque de género puede garantizar que se ejerzan menos violencias dentro de las relaciones sexuales y sentimentales y que las personas que son violentadas de alguna forma, puedan identificar con más facilidad los canales de atención, apoyo y denuncia. Tanto las instituciones educativas, como los centros de salud y las familias, deben fomentar la creación de redes de apoyo y comunicación para que las niñas y adolescentes en estado de embarazo no sean revictimizadas. Además, las redes de apoyo pueden aumentar la probabilidad de que esas niñas y adolescentes permanezcan en lugares seguros y lejos de los círculos de violencia. Las relaciones sexuales con menores de 14 años son un delito, el reporte ante las autoridades competentes es un deber ciudadano para garantizar la atención y acompañamientos oportunos de la menor. ',
     meta: {
       umbral: 15,
-      descripcion: 'La meta según PDSP es reducir la proporción de gestantes adolescentes al 15%',
+      descripcion:
+        'La meta según Plan Decenal de Salud Pública es reducir la proporción de gestantes adolescentes al 15%.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -192,9 +201,10 @@ export default [
     grupo: 'Salud sexual y reproductiva',
     tipo: 'razón',
     calculo: 'Muertes maternas durante un año / Nacidos vivos durante el mismo periodo',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes maternas',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100000, descripcion: 'Por 100.000 nacidos vivos' },
+    codigosCIE10: [],
     nombreEjeY: 'Muertes por cada 100.000 nacidos vivos',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud', 'Grupos de edad'],
@@ -204,7 +214,7 @@ export default [
     meta: {
       umbral: 45,
       descripcion:
-        'Ninguna muerte materna es aceptable, sin embargo, de acuerdo con el Plan Decenal de Salud pública, los casos anuales no deben superar 150 muertes en el país. Meta ODS: A 2030 se reducirá a 32 la mortalidad materna por cada 100.000 nacidos vivos',
+        'Ninguna muerte materna es aceptable, sin embargo, de acuerdo con el Plan Decenal de Salud pública, los casos anuales no deben superar 150 muertes en el país. El CONPES 140 de 2011 definió las metas y estrategias del país para el logro del objetivo, estableciendo como meta nacional reducir la razón de mortalidad materna a 45 muertes maternas por 100.000 nacidos vivos. Según los Objetivos de Desarrollo Sostenible a 2030, se reducirá a 32 la mortalidad materna por cada 100.000 nacidos vivos.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -219,9 +229,10 @@ export default [
     tipo: 'tasa',
     calculo:
       'Número de nacidos vivos en mujeres de 10 a 14 años / Total de mujeres entre 10 y 14 años en un periodo y territorio específicos',
-    fuenteNumerador: '',
-    fuenteDenominador: '',
+    fuenteNumerador: 'CUBO INDICADORES EEVV',
+    fuenteDenominador: 'CUBO INDICADORES EEVV',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 mujeres' },
+    codigosCIE10: [],
     nombreEjeY: 'Nacidos vivos por cada 1000 mujeres',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Deparftamental y Municipal', 'Etnia', 'Régimen de aseguramiento en salud'],
@@ -231,7 +242,7 @@ export default [
     meta: {
       umbral: 61,
       descripcion:
-        'Debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15-19 años para Colombia. ODS A 2030 A 46 por 1.000 mujeres de 15 a 19 ',
+        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 10 a 14 años para Colombia. De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -249,16 +260,17 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 mujeres' },
+    codigosCIE10: [],
     nombreEjeY: 'Nacidos vivos por cada 1000 mujeres',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de aseguramiento en salud'],
     serieDisponible: [],
     interpretacion:
-      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 14 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
+      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
     meta: {
       umbral: 61,
       descripcion:
-        'Debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15-19 años para Colombia. ODS A 2030 A 46 por 1.000 mujeres de 15 a 19 ',
+        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 10 a 19 años para Colombia. De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -276,16 +288,17 @@ export default [
     fuenteNumerador: 'CUBO INDICADORES EEVV',
     fuenteDenominador: 'CUBO INDICADORES EEVV',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 mujeres' },
+    codigosCIE10: [],
     nombreEjeY: 'Nacidos vivos por cada 1000 mujeres',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion:
-      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 14 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
+      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 15 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
     meta: {
       umbral: 61,
       descripcion:
-        'Debería estar por debajo de 61 nacimientos por cada 1000 mujeres de 15 a 19 años para Colombia. ODS A 2030 por debajo de 46 nacimientos por 1.000 mujeres de 15 a 19',
+        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15 a 19 años para Colombia. De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -300,10 +313,11 @@ export default [
     tipo: 'tasa',
     calculo:
       'Número de muertes de menores de 5 años en un periodo y territorio específicos / Número de nacidos vivos en el mismo periodo y territorio',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes en menores de 5 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 nacimientos' },
-    nombreEjeY: 'Muertes por cada 1000 nacimientos',
+    codigosCIE10: [],
+    nombreEjeY: 'Tasa de mortalidad en menores de 5 años por 1000 NV',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
@@ -312,7 +326,7 @@ export default [
     meta: {
       umbral: 15,
       descripcion:
-        'A 2021 se habrá disminuido la mortalidad nacional en la niñez a 15 por 1000 nacidos vivos o menos. ODS: A 2030 A 15 por 1000',
+        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad nacional en la niñez a 15 x1000 nacidos vivos o menos. Según los Objetivos de Desarrollo Sostenible se habrá reducido a 15 por 1.000 nacidos vivos en el año 2030.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -327,10 +341,11 @@ export default [
     tipo: 'tasa',
     calculo:
       'Número de muertes de menores de 1 año en un periodo y territorio específicos / Número de nacidos vivos en el mismo periodo y territorio',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes de 1 año',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 nacimientos' },
-    nombreEjeY: 'Muertes por cada 1000 nacimientos',
+    codigosCIE10: [],
+    nombreEjeY: 'Tasa de mortalidad en menores de 1 año por 1000 NV',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
@@ -339,7 +354,7 @@ export default [
     meta: {
       umbral: 12,
       descripcion:
-        'A 2021 se habrá disminuido la mortalidad infantil nacional ajustada a 12 o menos por cada 1000 nacidos vivos. ODS 2030 a 14 por cada 1000',
+        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad infantil nacional ajustada a 12 por 1.000 nacidos vivos o menos. Según los Objetivos de Desarrollo Sostenible se habrá reducido a 14 por 1.000 nacidos vivos en el año 2030.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -353,10 +368,11 @@ export default [
     grupo: 'Infantil',
     tipo: 'tasa',
     calculo: 'Número de muertes por IRA en menores de 5 años / Número total de menores de 5 años',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes por IRA en menores de 5 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Total de nacidos vivos',
     unidadDeMedida: { valor: 100000, descripcion: 'Por 100.000 menores de 5 años' },
-    nombreEjeY: 'Muertes por cada 100.000 menores de 5 años',
+    codigosCIE10: [],
+    nombreEjeY: 'Tasa de mortalidad por IRA en menores de 5 años por 100.000 menores de 5 años',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
@@ -365,7 +381,7 @@ export default [
     meta: {
       umbral: 8.9,
       descripcion:
-        'A 2021, se logra la reducción progresiva de la mortalidad por Infección Respiratoria Aguda (incluida Neumonía), buscando llegar a una mortalidad por Neumonía de menos de 8,9 casos por cada 100.000 menores de cinco años.',
+        'De acuerdo con el Plan Decenal de Salud Pública, a 2021, se logra la reducción progresiva de la mortalidad por Infección Respiratoria Aguda (incluida Neumonía), buscando llegar a una mortalidad por Neumonía de menos de 8,9 casos por cada 100.000 menores de cinco años.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -379,9 +395,10 @@ export default [
     grupo: 'Infantil',
     tipo: 'tasa',
     calculo: 'Número de muertes por EDA en menores de 5 años / Número total de menores de 5 años',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes por EDA en menores de 5 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Población de menores de 5 años',
     unidadDeMedida: { valor: 100000, descripcion: 'Por 100.000 menores de 5 años' },
+    codigosCIE10: [],
     nombreEjeY: 'Muertes por cada 100.000 menores de 5 años',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
@@ -391,7 +408,7 @@ export default [
     meta: {
       umbral: null,
       descripcion:
-        'No existe una meta definida como tal. A 2021, se cuenta con el diseño, implementación y desarrollo progresivo de planes y programas territoriales de promoción y prevención de las enfermedades transmitidas por agua, suelo y alimentos',
+        'No existe una meta definida como tal. Según el Plan Decenal de Salud Pública, a 2021, se debe contar con el diseño, implementación y desarrollo progresivo de planes y programas territoriales de promoción y prevención de las enfermedades transmitidas por agua, suelo y alimentos.',
       tendenciaDeseada: 'abajo',
     },
     limitacion: '',
@@ -406,9 +423,11 @@ export default [
     tipo: 'tasa',
     calculo:
       'Número de casos de muerte perinatal en un periodo de tiempo / Total de nacidos vivos + muertes fetales en el mismo periodo de tiempo',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador:
+      'CUBO INDICADORES EEVV: Muertes perinatales (desde semana de gestación 22 hasta los 7 días del nacimiento)',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Nacimientos + defunciones fetales a semana 22 de gestación',
     unidadDeMedida: { valor: 1000, descripcion: 'Por 1000 nacimientos' },
+    codigosCIE10: [],
     nombreEjeY: 'Muertes por cada 1000 nacimientos',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Edad', 'Sexo', 'Régimen de Salud'],
@@ -432,9 +451,10 @@ export default [
     grupo: 'Infantil',
     tipo: 'tasa',
     calculo: 'Número de muertes por desnutrición en menores de 5 años / Número total de menores de 5 años',
-    fuenteNumerador: 'CUBO INDICADORES EEVV',
-    fuenteDenominador: 'CUBO INDICADORES EEVV',
+    fuenteNumerador: 'CUBO INDICADORES EEVV: Muertes por DNT en menores de 5 años',
+    fuenteDenominador: 'CUBO INDICADORES EEVV: Población de menores de 5 años',
     unidadDeMedida: { valor: 100000, descripcion: 'Por 100.000 menores de 5 años' },
+    codigosCIE10: [],
     nombreEjeY: 'Muertes por cada 100.000 menores de 5 años',
     fichaTecnica: { descripcion: '', parametros: [] },
     nivelDesagregacion: ['Departamental y Municipal'],
@@ -463,6 +483,11 @@ export default [
       'CUBOS SISPRO RIPS: Número de personas atendidas para las atenciones de salud definidas según CIE-10',
     fuenteDenominador: 'CUBOS SISPRO RIPS: Total de niños menores de 5 años atendidos.',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [
+      'Z00: examen médico general',
+      'Z001: control de salud de rutina del niño',
+      'Z002: examen durante el periodo de crecimiento rápido en la infancia',
+    ],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: {
       descripcion: 'Atenciones por consulta para los códigos CIE-10: ',
@@ -498,6 +523,7 @@ export default [
       'CUBOS SISPRO RIPS: Número de personas atendidas para las atenciones de salud definidas según CIE-10',
     fuenteDenominador: 'CUBOS SISPRO RIPS: Total de gestantes atendidas.',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: ['O981: sífilis que complica el embarazo, el parto y el puerperio'],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: {
       descripcion: 'Atenciones por consulta para los códigos CIE-10: ',
@@ -510,18 +536,18 @@ export default [
     meta: {
       umbral: 1,
       descripcion:
-        'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos. Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%',
+        'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos. Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%.',
       tendenciaDeseada: 'abajo',
     },
     limitacion:
-      'Esta información depende de la especificidad con la cual el personal de salud diligencia los RIPS. En este caso puntual se analiza la información del código O981 y no se incluyeron otros como O983 otras infecciones con un modo de transmisión predominantemente sexual que complican el embarazo, parto y puerperio.',
+      'Esta información depende de la especificidad con la cual el personal de salud diligencia los RIPS. En este caso puntual se analiza la información del código O981, sin incluir otros como el O983 otras infecciones con un modo de transmisión predominantemente sexual que complican el embarazo, parto y puerperio.',
   },
   {
     nombreTabla: 'trasmision sexual',
     nombreArchivo: 'trasmision-sexual',
     nombreIndicador: 'Proporción de personas atendidas por infecciones predominantemente sexuales',
     definicion:
-      'Se refiere a la proporción de personas que fueron atendidas en consulta por infecciones de transmisión sexual en un momento y territorio específico.',
+      'Se refiere a la proporción de personas que fueron atendidas en consulta por infecciones de transmisión sexual en un momento y territorio específico. Excluye los diagnósticos de sífilis congénita y VIH.',
     grupo: 'Salud sexual y reproductiva',
     tipo: 'proporción',
     calculo:
@@ -530,6 +556,16 @@ export default [
       'CUBOS SISPRO RIPS: Número de personas atendidas para las atenciones de salud definidas según CIE-10',
     fuenteDenominador: 'CUBOS SISPRO RIPS: Total de personas atendidas.',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [
+      'A51.0-A51.9: Sífilis precoz',
+      'A52.0-A52.9: Sífilis tardía',
+      'A53.0-A53.9 Sífilis no especificada',
+      'A54.0-A54.9: Infección gonocócica no especificada',
+      'A55-A56-A56.8: Infecciones por Clamidias',
+      'A57-A58-A59: Chancro blando, granuloma inguinal, tricomoniasis',
+      'A60-A60.9: Infección anogenital debida a virus del herpes [herpes simple]',
+      'A63.0-A63.8-A64: Otras enfermedades de transmisión sexual y las no especificadas',
+    ],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: {
       descripcion: 'Atenciones por consulta para los códigos CIE-10:(Excluye VIH y sífilis congénita)',
@@ -547,7 +583,7 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de Salud'],
     serieDisponible: [],
     interpretacion:
-      'Un valor de 15% indica que 15 de cada 100 personas ha sido atendida por alguna infección de este tipo. Según la información de la que se dispone actualmente, más de 30 bacterias, virus y parásitos diferentes se transmiten por contacto sexual. De acuerdo con la OMS los preservativos utilizados de manera correcta y sistemática protegen eficazmente estas infecciones y el VIH, siendo la educación sexual el primer paso para prevenirlas. Estas infecciones de transmisión predominantemente sexual pueden tener consecuencias para la salud en las personas, pueden generar complicaciones durante el embarazo, llevar a la infertilidad, aumentar la probabilidad de transmisión del VIH. En Colombia, la sexualidad es considerada como “una dimensión prioritaria en el curso de vida de las personas”. En razón a lo anterior, el esfuerzo institucional debe ir encaminado a que las personas experimenten esta dimensión desde un enfoque de derechos sexuales y reproductivos, garantizando no solo el acceso a servicios de salud de manera oportuna, sino a educación sexual no estigmatizante, con enfoque de género, diferencial y de reconocimiento de la diversidad. Para que los individuos, plenamente informados, gocen de una sexualidad sana, segura, digna y responsable. Fuente: Sexualidad, derechos sexuales y derechos reproductivos. Minsalud. Páginas - Sexualidad, derechos sexuales y derechos reproductivos (minsalud.gov.co) Más información en: https://www.who.int/es/news-room/fact-sheets/detail/sexually-transmitted-infections-(stis)',
+      'Un valor de 15% indica que 15 de cada 100 personas han sido atendidas por alguna infección de este tipo. Según la información de la que se dispone actualmente, más de 30 bacterias, virus y parásitos diferentes se transmiten por contacto sexual. De acuerdo con la OMS los preservativos utilizados de manera correcta y sistemática protegen eficazmente de estas infecciones y del VIH, siendo la educación sexual el primer paso para prevenirlas. Estas infecciones de transmisión predominantemente sexual pueden tener consecuencias para la salud en las personas, generar complicaciones durante el embarazo, llevar a la infertilidad, aumentar la probabilidad de transmisión del VIH. En Colombia, la sexualidad es considerada como “una dimensión prioritaria en el curso de vida de las personas”. En razón a lo anterior, el esfuerzo institucional debe ir encaminado a que las personas experimenten esta dimensión desde un enfoque de derechos sexuales y reproductivos, garantizando no solo el acceso a servicios de salud de manera oportuna, sino a educación sexual no estigmatizante, con enfoque de género, diferencial y de reconocimiento de la diversidad. Para que los individuos, plenamente informados, gocen de una sexualidad sana, segura, digna y responsable. Fuente: Sexualidad, derechos sexuales y derechos reproductivos. Minsalud. Páginas - Sexualidad, derechos sexuales y derechos reproductivos (minsalud.gov.co) Más información en: https://www.who.int/es/news-room/fact-sheets/detail/sexually-transmitted-infections-(stis)',
     meta: {
       umbral: null,
       descripcion: 'No existe una meta específica sobre este tipo de infecciones excepto para VIH y sífilis congénita.',
@@ -569,6 +605,7 @@ export default [
       'CUBOS SISPRO RIPS: Número de personas atendidas para las atenciones de salud definidas según CIE-10',
     fuenteDenominador: 'CUBOS SISPRO RIPS: Total de personas atendidas. ',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: ['T74.0: Negligencia o abandono, confirmados', 'T74.9 Malos tratos no especificados, confirmados'],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: {
       descripcion: 'Atenciones por consulta para los códigos CIE-10',
@@ -601,6 +638,15 @@ export default [
       'CUBOS SISPRO RIPS: Número de personas atendidas para las atenciones de salud definidas según CIE-10',
     fuenteDenominador: 'CUBOS SISPRO RIPS: Total de personas atendidas',
     unidadDeMedida: { valor: 100, descripcion: 'Por 100 (%)' },
+    codigosCIE10: [
+      'Z300: consejo y asesoramiento general sobre la anticoncepción',
+      'Z301: inserción de dispositivo anticonceptivo (intrauterino)',
+      'Z302: esterilización',
+      'Z304: supervisión del uso de drogas anticonceptivas',
+      'Z305: supervisión del uso de dispositivo anticonceptivo (intrauterino)',
+      'Z308: otras atenciones especificadas para la anticoncepción',
+      'Z309: asistencia para la anticoncepción, no especificada',
+    ],
     nombreEjeY: 'Porcentaje (%)',
     fichaTecnica: { descripcion: 'Atenciones por consulta para los códigos CIE-10', parametros: ['', '', ''] },
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
@@ -610,7 +656,7 @@ export default [
     meta: {
       umbral: 80,
       descripcion:
-        'De acuerdo con el Plan Decenal de Salud Pública 2012-2021, el 80% de las mujeres entre 15-19 años deberán hacer uso de métodos anticonceptivos modernos. Es importante anotar que en la meta no se hace referencia a los hombres quienes también hacen uso de los métodos anticonceptivos. La encuesta nacional de demografía y salud del año 2015 indicó que: “Solo el 10.5 % de hombres independientemente de su estatus conyugal y actividad sexual reportan haber hablado sobre anticoncepción con un profesional de salud". De allí la importancia de repensar las intervenciones para que también se incluyan a los hombres en temas de salud sexual y reproductiva. Meta ODS: De aquí a 2030, garantizar el acceso universal a los servicios de salud sexual y reproductiva, incluidos los de planificación familiar, información y educación, y la integración de la salud reproductiva en las estrategias y los programas nacionales',
+        'De acuerdo con el Plan Decenal de Salud Pública 2012-2021, el 80% de las mujeres entre 15-19 años deberán hacer uso de métodos anticonceptivos modernos. Es importante anotar que en la meta no se hace referencia a los hombres quienes también hacen uso de los métodos anticonceptivos. La encuesta nacional de demografía y salud del año 2015 indicó que: “Solo el 10.5 % de hombres independientemente de su estatus conyugal y actividad sexual reportan haber hablado sobre anticoncepción con un profesional de salud". De allí la importancia de repensar las intervenciones para que también se incluyan a los hombres en temas de salud sexual y reproductiva. Según los Objetivos de Desarrollo Sostenible, a 2030 se debe garantizar el acceso universal a los servicios de salud sexual y reproductiva, incluidos los de planificación familiar, información y educación, y la integración de la salud reproductiva en las estrategias y los programas nacionales',
       tendenciaDeseada: 'arriba',
     },
     limitacion:
