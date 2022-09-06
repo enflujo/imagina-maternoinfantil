@@ -266,7 +266,11 @@ export default [
     nivelDesagregacion: ['Deparftamental y Municipal', 'Etnia', 'Régimen de aseguramiento en salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 14 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
+      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 14 años en un momento y territorio dado.',
+      'Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad.',
+      'Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido. Puede aumentar el riesgo de complicaciones e incluso de muerte, ya sea de la madre o del recién nacido.',
+      'Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual.',
+      '*Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
     ],
     meta: {
       umbral: 61,
@@ -297,12 +301,15 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de aseguramiento en salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
+      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 10 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad.',
+      'Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual.',
+      '*Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
     ],
     meta: {
       umbral: 61,
       descripcion: [
-        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 10 a 19 años para Colombia. De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
+        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 10 a 19 años para Colombia.',
+        'De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -327,12 +334,15 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 15 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad. Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual. *Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
+      'Un valor de 20 indica que hubo 20 nacimientos por cada 1.000 mujeres de 15 a 19 años en un momento y territorio dado. Este grupo de indicadores miden de forma indirecta el acceso a los servicios de salud, en especial de los servicios de salud sexual y reproductiva en estos grupos de edad.',
+      'Un embarazo a temprana edad trae consecuencias sociales y biológicas para la madre y el recién nacido ya que puede aumentar el riesgo de complicaciones e incluso la muerte ya sea de la madre o el recién nacido. Para entender y actuar sobre el embarazo adolescente se deben identificar las brechas territoriales, socioeconómicas y poblacionales, así como las asimetrías en el acceso y la calidad de la información. Adicionalmente, es importante construir infraestructuras que fortalezcan los procesos de visibilidad de casos para poder tener una estimación real de las dimensiones del embarazo en la niñez y la adolescencia, así como mejorar el acceso y la calidad de la educación sexual.',
+      '*Fuente: UNFPA. Fecundidad en la niñez y la adolescencia en Colombia, 2022. Mayor información: https://colombia.unfpa.org/sites/default/files/pub-pdf/fecundidad_en_la_ninez_y_adolescencia_cesar_cristancho_dane_unfpa.pdf',
     ],
     meta: {
       umbral: 61,
       descripcion: [
-        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15 a 19 años para Colombia. De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
+        'De acuerdo con el Plan Decenal de Salud Pública debería estar por debajo de 61 nacimientos por cada 1.000 mujeres de 15 a 19 años para Colombia.',
+        'De acuerdo con los Objetivos de Desarrollo Sostenible debería estar por debajo de 46 nacimientos por 1.000 mujeres de 10 a 14 para el año 2030.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -357,12 +367,14 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 60, indica que murieron 60 niños menores de 5 años por cada 1.000 nacidos vivos en un momento y territorio específico. La mortalidad en menores de 5 años es un reflejo directo de las desigualdades sociales y económicas de un país. Por ejemplo, en países como Honduras o Haití los niños del 20% de la población más pobre tienen al menos el doble de probabilidad de morir antes de los 5 años, en comparación con los niños cuyas familias tienen mayores niveles de ingresos. Esto tiene que ver con la calidad de vida y el acceso afectivos a servicios de salud de calidad, así como también los niveles educativos de las personas cuidadoras.',
+      'Un valor de 60, indica que murieron 60 niños menores de 5 años por cada 1.000 nacidos vivos en un momento y territorio específico.',
+      'La mortalidad en menores de 5 años es un reflejo directo de las desigualdades sociales y económicas de un país. Por ejemplo, en países como Honduras o Haití los niños del 20% de la población más pobre tienen al menos el doble de probabilidad de morir antes de los 5 años, en comparación con los niños cuyas familias tienen mayores niveles de ingresos. Esto tiene que ver con la calidad de vida y el acceso afectivos a servicios de salud de calidad, así como también los niveles educativos de las personas cuidadoras.',
     ],
     meta: {
       umbral: 15,
       descripcion: [
-        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad nacional en la niñez a 15 x1000 nacidos vivos o menos. Según los Objetivos de Desarrollo Sostenible se habrá reducido a 15 por 1.000 nacidos vivos en el año 2030.',
+        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad nacional en la niñez a 15 x1000 nacidos vivos o menos.',
+        'Según los Objetivos de Desarrollo Sostenible se habrá reducido a 15 por 1.000 nacidos vivos en el año 2030.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -387,12 +399,14 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Este es quizás uno de los indicadores más sensibles respecto al estado de salud de una población porque hace referencia a la mortalidad en los recién nacidos hasta el primer año de edad. Un valor de 12, indica que murieron 12 menores de 1 año por cada 1.000 nacidos vivos en un momentos y territorio específicos. La mortalidad en el primer año de vida está asociado a factores biológicos, ambientales, socioeconómicos, de los servicios de salud, así como, de las condiciones de salud durante el embarazo. También se asocia con la pobreza, la exclusión social y el limitado acceso al saneamiento básico, acceso al agua potable, alcantarillado.',
+      'Este es quizás uno de los indicadores más sensibles respecto al estado de salud de una población porque hace referencia a la mortalidad en los recién nacidos hasta el primer año de edad. Un valor de 12, indica que murieron 12 menores de 1 año por cada 1.000 nacidos vivos en un momentos y territorio específicos.',
+      'La mortalidad en el primer año de vida está asociado a factores biológicos, ambientales, socioeconómicos, de los servicios de salud, así como de las condiciones de salud durante el embarazo. También se asocia con la pobreza, la exclusión social y el limitado acceso al saneamiento básico, acceso al agua potable, alcantarillado.',
     ],
     meta: {
       umbral: 12,
       descripcion: [
-        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad infantil nacional ajustada a 12 por 1.000 nacidos vivos o menos. Según los Objetivos de Desarrollo Sostenible se habrá reducido a 14 por 1.000 nacidos vivos en el año 2030.',
+        'De acuerdo con el Plan Decenal de Salud pública, a 2021 se habrá disminuido la mortalidad infantil nacional ajustada a 12 por 1.000 nacidos vivos o menos.',
+        'Según los Objetivos de Desarrollo Sostenible se habrá reducido a 14 por 1.000 nacidos vivos en el año 2030.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -416,7 +430,9 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 3 indica que murieron 3 niños por infección respiratoria aguda por cada 100.000 niños menores de 5 años en un momento y territorio dados.Las infecciones respiratorias agudas son causa de muerte en niños y niñas menores de 5 años alrededor del mundo, especialmente en aquellas regiones apartadas y con limitado acceso a educación, saneamiento y servicios de salud de calidad. Las infecciones del tracto respiratorio (alto y bajo) son causadas por diferentes microorganismos, pudiendo causar desde resfriados comunes hasta neumonías que pueden comprometer la vida. Una adecuada nutrición, contar con el esquema de vacunación completo y conocer los signos de alarma de una infección respiratoria, son elementos básicos para evitar la mortalidad por esta causa, que en la mayoría de los casos es completamente prevenible. Información sobre mensajes clave: https://www.minsalud.gov.co/CC/Campanas/plegable-ira.pdf',
+      'Un valor de 3 indica que murieron 3 niños por infección respiratoria aguda por cada 100.000 niños menores de 5 años en un momento y territorio dados.',
+      'Las infecciones respiratorias agudas son causa de muerte en niños y niñas menores de 5 años alrededor del mundo, especialmente en aquellas regiones apartadas y con limitado acceso a educación, saneamiento y servicios de salud de calidad. Las infecciones del tracto respiratorio (alto y bajo) son causadas por diferentes microorganismos, pudiendo causar desde resfriados comunes hasta neumonías que pueden comprometer la vida. Una adecuada nutrición, contar con el esquema de vacunación completo y conocer los signos de alarma de una infección respiratoria, son elementos básicos para evitar la mortalidad por esta causa, que en la mayoría de los casos es completamente prevenible.',
+      'Información sobre mensajes clave: https://www.minsalud.gov.co/CC/Campanas/plegable-ira.pdf',
     ],
     meta: {
       umbral: 8.9,
@@ -445,12 +461,16 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 11 indica que ocurrieron 11 muertes por diarrea por cada 100.000 niños menores de 5 años en un momento y territorio determinados. La mortalidad por enfermedades diarreicas es la segunda causa de muerte a nivel mundial en los niños y niñas y es una causa de mortalidad prevenible. Durante 2019 ocurrieron más de 319.000 defunciones en niños y niñas por esta causa en el mundo. Las condiciones de vida, saneamiento básico y el acceso al agua potable son claves para evitar la propagación de estas enfermedades muchas veces transmitidas por el agua o alimentos contaminados. La desnutrición y la inmunosupresión también aumentan el riesgo de padecer enfermedades diarreicas. La lactancia materna exclusiva, el acceso al agua potable, adecuado lavado de manos, vacunación contra rotavirus son algunas de las formas de prevención. Más información en: https://www.who.int/es/news-room/fact-sheets/detail/diarrhoeal-disease',
+      'Un valor de 11 indica que ocurrieron 11 muertes por diarrea por cada 100.000 niños menores de 5 años en un momento y territorio determinados.',
+      'La mortalidad por enfermedades diarreicas es la segunda causa de muerte a nivel mundial en los niños y niñas, y es una causa de mortalidad prevenible.',
+      'Durante 2019 ocurrieron más de 319.000 defunciones en niños y niñas por esta causa en el mundo. Las condiciones de vida, saneamiento básico y el acceso al agua potable son claves para evitar la propagación de estas enfermedades muchas veces transmitidas por el agua o alimentos contaminados. La desnutrición y la inmunosupresión también aumentan el riesgo de padecer enfermedades diarreicas. La lactancia materna exclusiva, el acceso al agua potable, adecuado lavado de manos, vacunación contra rotavirus son algunas de las formas de prevención.',
+      'Más información en: https://www.who.int/es/news-room/fact-sheets/detail/diarrhoeal-disease',
     ],
     meta: {
       umbral: null,
       descripcion: [
-        'No existe una meta definida como tal. Según el Plan Decenal de Salud Pública, a 2021, se debe contar con el diseño, implementación y desarrollo progresivo de planes y programas territoriales de promoción y prevención de las enfermedades transmitidas por agua, suelo y alimentos.',
+        'No existe una meta definida como tal.',
+        'Según el Plan Decenal de Salud Pública, a 2021, se debe contar con el diseño, implementación y desarrollo progresivo de planes y programas territoriales de promoción y prevención de las enfermedades transmitidas por agua, suelo y alimentos.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -476,7 +496,9 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Edad', 'Sexo', 'Régimen de Salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 12 indica que ocurrieron 12 muertes perinatales por cada 1000 nacimientos. La mortalidad perinatal se relaciona con la atención prenatal, el acceso a los servicios de salud, las condiciones sociales y biológicas de la persona gestante. Además, es uno de los indicadores que más afecta la mortalidad en menores de 1 año. Una de las causas más frecuentes es un inadecuado desarrollo del feto, infecciones recurrentes durante el embarazo, diabetes gestacional, preeclampsia. Mayor información: https://cdn.who.int/media/docs/default-source/mca-documents/poner-fin-a-las-muertes-neonatales-y-fetales-prevenibles-para-2030d1b0f0d3-2c1c-49fa-a042-4960fe7029db.pdf?sfvrsn=6125b499_1',
+      'Un valor de 12 indica que ocurrieron 12 muertes perinatales por cada 1000 nacimientos.',
+      'La mortalidad perinatal se relaciona con la atención prenatal, el acceso a los servicios de salud, las condiciones sociales y biológicas de la persona gestante. Además, es uno de los indicadores que más afecta la mortalidad en menores de 1 año. Una de las causas más frecuentes es un inadecuado desarrollo del feto, infecciones recurrentes durante el embarazo, diabetes gestacional, preeclampsia.',
+      'Mayor información: https://cdn.who.int/media/docs/default-source/mca-documents/poner-fin-a-las-muertes-neonatales-y-fetales-prevenibles-para-2030d1b0f0d3-2c1c-49fa-a042-4960fe7029db.pdf?sfvrsn=6125b499_1',
     ],
     meta: {
       umbral: 12,
@@ -505,7 +527,11 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 7 quiere decir que ocurrieron 7 defunciones por desnutrición por cada 100.000 niños menores de 5 años. La Convención sobre los Derechos del Niño protege el derecho del niño a la alimentación en el contexto del derecho a la vida, la supervivencia y el desarrollo, a la salud, a la nutrición y a un nivel adecuado de vida. En este sentido, no deberían ocurrir muertes por esta causa en ningún lugar del mundo, no obstante, es una de las primeras causas de mortalidad entre los niños y niñas menores de 5 años. Dentro de las causas más comunes de la desnutrición en menores de 5 años están las condiciones de vida, acceso insuficiente a fuentes de agua potable, familias en condiciones de pobreza y con amplias barreras de acceso a servicios de salud. El bajo peso de la madre durante el embarazo, el bajo peso al nacer, la ausencia o interrupción de la lactancia materna exclusiva y las infecciones parasitarias son factores que se relacionan con la desnutrición en la infancia. Mayor información: Convención sobre los derechos del niño https://www.unicef.org/lac/media/9731/file/PDF%20Convenci%C3%B3n%20sobre%20los%20Derechos%20del%20Ni%C3%B1o.pdf Desnutrición infantil en Colombia: https://blog.fundacionexito.org/desnutricion-infantil-en-colombia-tipos-y-consecuencias ',
+      'Un valor de 7 quiere decir que ocurrieron 7 defunciones por desnutrición por cada 100.000 niños menores de 5 años.',
+      'La Convención sobre los Derechos del Niño protege el derecho del niño a la alimentación en el contexto del derecho a la vida, la supervivencia y el desarrollo, a la salud, a la nutrición y a un nivel adecuado de vida. En este sentido, no deberían ocurrir muertes por esta causa en ningún lugar del mundo, no obstante, es una de las primeras causas de mortalidad entre los niños y niñas menores de 5 años.',
+      'Dentro de las causas más comunes de la desnutrición en menores de 5 años están las condiciones de vida, acceso insuficiente a fuentes de agua potable, familias en condiciones de pobreza y con amplias barreras de acceso a servicios de salud. El bajo peso de la madre durante el embarazo, el bajo peso al nacer, la ausencia o interrupción de la lactancia materna exclusiva y las infecciones parasitarias son factores que se relacionan con la desnutrición en la infancia.',
+      'Mayor información: Convención sobre los derechos del niño https://www.unicef.org/lac/media/9731/file/PDF%20Convenci%C3%B3n%20sobre%20los%20Derechos%20del%20Ni%C3%B1o.pdf',
+      'Desnutrición infantil en Colombia: https://blog.fundacionexito.org/desnutricion-infantil-en-colombia-tipos-y-consecuencias ',
     ],
     meta: {
       umbral: 4.08,
@@ -547,7 +573,9 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de Salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 35% indica que 35 de cada 100 niños y niñas menores de 5 años han consultado a los servicios de control de rutina. Identificar tempranamente las alteraciones que afectan el desarrollo de los niños y niñas es muy importante, puesto que permite llevar a cabo un conjunto de intervenciones para la gestión del riesgo y el cuidado de la salud en este momento tan importante de la vida. Los primeros 5 años de vida son cruciales para el desarrollo de una vida saludable durante la adultez. Para incrementar la proporción de población menor de 5 años que es atendida por controles de rutina, es necesario dirigir los esfuerzos para ampliar el acceso a información no tecnificada a las personas responsables del cuidado. Esto quiere decir, que es fundamental que las y los cuidadores puedan acceder a información clave sobre los controles necesarios rutinarios, los signos de alarma y el desarrollo esperado según los grupos de edad. Adicionalmente, es fundamental la creación de estrategias para que los grupos poblacionales más vulnerables; que viven en condiciones de pobreza, viven en áreas geográficas rurales a grandes distancias de centros de salud y con dificultades de acceso o grupos étnicos, puedan acceder a los servicios de salud necesarios.',
+      'Un valor de 35% indica que 35 de cada 100 niños y niñas menores de 5 años han consultado a los servicios de control de rutina.',
+      'Identificar tempranamente las alteraciones que afectan el desarrollo de los niños y niñas es muy importante, puesto que permite llevar a cabo un conjunto de intervenciones para la gestión del riesgo y el cuidado de la salud en este momento tan importante de la vida.',
+      'Los primeros 5 años de vida son cruciales para el desarrollo de una vida saludable durante la adultez. Para incrementar la proporción de población menor de 5 años que es atendida por controles de rutina, es necesario dirigir los esfuerzos para ampliar el acceso a información no tecnificada a las personas responsables del cuidado. Esto quiere decir, que es fundamental que las y los cuidadores puedan acceder a información clave sobre los controles necesarios rutinarios, los signos de alarma y el desarrollo esperado según los grupos de edad. Adicionalmente, es fundamental la creación de estrategias para que los grupos poblacionales más vulnerables, que viven en condiciones de pobreza, en áreas geográficas rurales a grandes distancias de centros de salud y con dificultades de acceso o grupos étnicos, puedan acceder a los servicios de salud necesarios.',
     ],
     meta: {
       umbral: null,
@@ -581,12 +609,16 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de Salud'],
     serieDisponible: [],
     interpretacion: [
-      'La sífilis es una infección de transmisión predominantemente sexual. Se transmite de la madre al feto y puede llevar al aborto o complicaciones durante el embarazo en un 80% de las veces. Un valor de 5% indica de 5 de cada 100 gestantes han tenido el diagnóstico de sífilis gestacional en un momento y territorio específicos. Este indicador hace referencia a la detección temprana durante el embarazo (control prenatal), incluso desde la atención preconcepcional (Resolución 3280/ 2016). La importancia de la detección temprana de la sífilis gestacional radica en la disminución de los riesgos en salud para la madre y para el feto. Las complicaciones van desde la muerte perinatal y aborto espontáneo, hasta secuelas en salud de los recién nacidos. Los esfuerzos deben ir dirigidos a la prevención de la transmisión vertical de la gestante al feto a partir de la detección temprana y tratamiento de la infección en la etapa prenatal. Adicionalmente, se deben aumentar los esfuerzos en educación sexual basada en derechos, para en un primer momento, prevenir el contagio de infecciones de transmisión sexual y, en un segundo momento, fomentar sin estigmas el acceso a servicios de salud oportunos.',
+      'La sífilis es una infección de transmisión predominantemente sexual. Se transmite de la madre al feto y puede llevar al aborto o complicaciones durante el embarazo en un 80% de las veces. Un valor de 5% indica de 5 de cada 100 gestantes han tenido el diagnóstico de sífilis gestacional en un momento y territorio específicos.',
+      'Este indicador hace referencia a la detección temprana durante el embarazo (control prenatal), incluso desde la atención preconcepcional (Resolución 3280/ 2016).',
+      'La importancia de la detección temprana de la sífilis gestacional radica en la disminución de los riesgos en salud para la madre y para el feto. Las complicaciones van desde la muerte perinatal y aborto espontáneo, hasta secuelas en la salud de los recién nacidos. Los esfuerzos deben ir dirigidos a la prevención de la transmisión vertical de la gestante al feto a partir de la detección temprana y tratamiento de la infección en la etapa prenatal.',
+      'Adicionalmente, se deben aumentar los esfuerzos en educación sexual basada en derechos, para en un primer momento, prevenir el contagio de infecciones de transmisión sexual y, en un segundo momento, fomentar sin estigmas el acceso a servicios de salud oportunos.',
     ],
     meta: {
       umbral: 1,
       descripcion: [
-        'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos. Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%.',
+        'La Organización Panamericana de la Salud (OPS) ha propuesto la meta de eliminar la sífilis congénita como problema de salud pública llevando la incidencia a 0,5 casos o menos, incluidos los mortinatos, por 1.000 nacidos.',
+        'Para lograr esta meta, es necesario que se detecten y traten más de 95% de las gestantes infectadas, con lo que se logrará reducir la prevalencia de sífilis durante la gestación a menos de 1,0%.',
       ],
       tendenciaDeseada: 'abajo',
     },
@@ -634,7 +666,11 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de Salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 15% indica que 15 de cada 100 personas han sido atendidas por alguna infección de este tipo. Según la información de la que se dispone actualmente, más de 30 bacterias, virus y parásitos diferentes se transmiten por contacto sexual. De acuerdo con la OMS los preservativos utilizados de manera correcta y sistemática protegen eficazmente de estas infecciones y del VIH, siendo la educación sexual el primer paso para prevenirlas. Estas infecciones de transmisión predominantemente sexual pueden tener consecuencias para la salud en las personas, generar complicaciones durante el embarazo, llevar a la infertilidad, aumentar la probabilidad de transmisión del VIH. En Colombia, la sexualidad es considerada como “una dimensión prioritaria en el curso de vida de las personas”. En razón a lo anterior, el esfuerzo institucional debe ir encaminado a que las personas experimenten esta dimensión desde un enfoque de derechos sexuales y reproductivos, garantizando no solo el acceso a servicios de salud de manera oportuna, sino a educación sexual no estigmatizante, con enfoque de género, diferencial y de reconocimiento de la diversidad. Para que los individuos, plenamente informados, gocen de una sexualidad sana, segura, digna y responsable. Fuente: Sexualidad, derechos sexuales y derechos reproductivos. Minsalud. Páginas - Sexualidad, derechos sexuales y derechos reproductivos (minsalud.gov.co) Más información en: https://www.who.int/es/news-room/fact-sheets/detail/sexually-transmitted-infections-(stis)',
+      'Un valor de 15% indica que 15 de cada 100 personas han sido atendidas por alguna infección de este tipo.',
+      'Según la información de la que se dispone actualmente, más de 30 bacterias, virus y parásitos diferentes se transmiten por contacto sexual. De acuerdo con la OMS los preservativos utilizados de manera correcta y sistemática protegen eficazmente de estas infecciones y del VIH, siendo la educación sexual el primer paso para prevenirlas. Estas infecciones de transmisión predominantemente sexual pueden tener consecuencias para la salud en las personas, generar complicaciones durante el embarazo, llevar a la infertilidad, aumentar la probabilidad de transmisión del VIH. En Colombia, la sexualidad es considerada como “una dimensión prioritaria en el curso de vida de las personas”.',
+      'En razón a lo anterior, el esfuerzo institucional debe ir encaminado a que las personas experimenten esta dimensión desde un enfoque de derechos sexuales y reproductivos, garantizando no solo el acceso a servicios de salud de manera oportuna, sino a educación sexual no estigmatizante, con enfoque de género, diferencial y de reconocimiento de la diversidad. Para que los individuos, plenamente informados, gocen de una sexualidad sana, segura, digna y responsable.',
+      'Fuente: Sexualidad, derechos sexuales y derechos reproductivos. Minsalud. Páginas - Sexualidad, derechos sexuales y derechos reproductivos - https://minsalud.gov.co',
+      'Más información en: https://www.who.int/es/news-room/fact-sheets/detail/sexually-transmitted-infections-(stis)',
     ],
     meta: {
       umbral: null,
@@ -668,17 +704,20 @@ export default [
     nivelDesagregacion: ['Departamental y Municipal', 'Etnia', 'Régimen de salud'],
     serieDisponible: [],
     interpretacion: [
-      'Un valor de 5% significa que 5 de cada 100 personas en un territorio y momento específico fueron atendidas por maltrato. Es importante identificar en la población este tipo de conductas y prevenir la violencia en todas sus formas. Toda persona en quien se documente violencia interpersonal, basada en género y/o en el marco del conflicto armado, deberá ser tamizada para identificar problemas mentales, trastornos mentales, consumo de sustancias psicoactivas y epilepsia. Las personas víctimas de violencias deberán ser consideradas como una población priorizada para las intervenciones ofrecidas en el marco de esta Ruta Integral de Atención en Salud (Lineamientos RIA Salud Mental https://www.minsalud.gov.co/Anexos_Normatividad_Nuevo/Anexo%20t%C3%A9cnico%2001%20Lineamientos%20Salud%20Mental.pdf).',
+      'Un valor de 5% significa que 5 de cada 100 personas en un territorio y momento específico fueron atendidas por maltrato.',
+      'Es importante identificar en la población este tipo de conductas y prevenir la violencia en todas sus formas. Toda persona en quien se documente violencia interpersonal, basada en género y/o en el marco del conflicto armado, deberá ser tamizada para identificar problemas mentales, trastornos mentales, consumo de sustancias psicoactivas y epilepsia. Las personas víctimas de violencias deberán ser consideradas como una población priorizada para las intervenciones ofrecidas en el marco de esta Ruta Integral de Atención en Salud.',
+      'Lineamientos RIA Salud Mental https://www.minsalud.gov.co/Anexos_Normatividad_Nuevo/Anexo%20t%C3%A9cnico%2001%20Lineamientos%20Salud%20Mental.pdf',
     ],
     meta: {
       umbral: 100,
       descripcion: [
-        'Ninguna persona debe ser víctima del maltrato. Según el Plan decenal de salud pública, para el año 2022, el 100% de las víctimas de violencias de género y violencias sexuales identificadas deben recibir una atención integral de los sectores de salud, protección y justicia para la restitución de los derechos que les han sido vulnerados. Para el año 2022, el 100% de las EAPB en coordinación con las Secretarías Departamentales y Municipales de Salud, deben contar con una red integrada de servicios para víctimas de violencias de género y violencias sexuales.',
+        'Ninguna persona debe ser víctima del maltrato. Según el Plan decenal de salud pública, para el año 2022 el 100% de las víctimas de violencias de género y violencias sexuales identificadas deben recibir una atención integral de los sectores de salud, protección y justicia para la restitución de los derechos que les han sido vulnerados.',
+        'Para el año 2022, el 100% de las EAPB en coordinación con las Secretarías Departamentales y Municipales de Salud, deben contar con una red integrada de servicios para víctimas de violencias de género y violencias sexuales.',
       ],
       tendenciaDeseada: 'abajo',
     },
     limitacion:
-      'Este es un indicador que puede estar sub-registrado en la medida en que no siempre se relacionan este tipo de diagnósticos durante una consulta de servicios de salud.',
+      'Este es un indicador que puede estar sub-registrado, en la medida en que no siempre se relacionan este tipo de diagnósticos durante una consulta de servicios de salud.',
   },
   {
     nombreTabla: 'asesoria anticoncepcion',
@@ -714,7 +753,9 @@ export default [
     meta: {
       umbral: 80,
       descripcion: [
-        'De acuerdo con el Plan Decenal de Salud Pública 2012-2021, el 80% de las mujeres entre 15-19 años deberán hacer uso de métodos anticonceptivos modernos. Es importante anotar que en la meta no se hace referencia a los hombres quienes también hacen uso de los métodos anticonceptivos. La encuesta nacional de demografía y salud del año 2015 indicó que: “Solo el 10.5 % de hombres independientemente de su estatus conyugal y actividad sexual reportan haber hablado sobre anticoncepción con un profesional de salud". De allí la importancia de repensar las intervenciones para que también se incluyan a los hombres en temas de salud sexual y reproductiva. Según los Objetivos de Desarrollo Sostenible, a 2030 se debe garantizar el acceso universal a los servicios de salud sexual y reproductiva, incluidos los de planificación familiar, información y educación, y la integración de la salud reproductiva en las estrategias y los programas nacionales',
+        'De acuerdo con el Plan Decenal de Salud Pública 2012-2021, el 80% de las mujeres entre 15-19 años deberán hacer uso de métodos anticonceptivos modernos.',
+        'Es importante anotar que en la meta no se hace referencia a los hombres, quienes también hacen uso de los métodos anticonceptivos. La encuesta nacional de demografía y salud del año 2015 indicó que: “Solo el 10.5 % de hombres independientemente de su estatus conyugal y actividad sexual reportan haber hablado sobre anticoncepción con un profesional de salud". De allí la importancia de repensar las intervenciones para que también se incluyan los hombres en temas de salud sexual y reproductiva.',
+        'Según los Objetivos de Desarrollo Sostenible, a 2030 se debe garantizar el acceso universal a los servicios de salud sexual y reproductiva, incluidos los de planificación familiar, información y educación, y la integración de la salud reproductiva en las estrategias y los programas nacionales.',
       ],
       tendenciaDeseada: 'arriba',
     },
