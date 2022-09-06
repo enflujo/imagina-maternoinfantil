@@ -284,7 +284,9 @@ function textoPuntoY(i) {
     </div>
 
     <footer>
-      <p id="descripcionMeta">{{ fuentes[cerebroDatos.indice].meta.descripcion }}</p>
+      <div id="descripcionMeta">
+        <p v-for="meta in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${meta}`">{{ meta }}</p>
+      </div>
     </footer>
   </section>
 </template>
