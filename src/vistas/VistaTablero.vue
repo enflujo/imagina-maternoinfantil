@@ -12,6 +12,7 @@ import fuentes from '../utilidades/fuentes';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
+import Guardaescobas from '../componentes/Guardaescobas.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -90,6 +91,7 @@ function actualizarDims() {
       <ModuloLista />
     </div>
   </div>
+  <Guardaescobas />
 </template>
 
 <style lang="scss" scoped>
