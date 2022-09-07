@@ -21,7 +21,7 @@ const infoY = ref(null);
 const umbralIndicador = ref(null);
 const tendenciaDeseada = ref(null);
 const posUmbral = reactive({ y: 0, alto: 0 });
-const colores = { lineaNal: '#219196' };
+const colores = { lineaNal: '#0042BA' };
 const dimsVis = {
   alto: 250,
   altoVis: 0,
@@ -94,7 +94,7 @@ function colorFondoDetalle(valor) {
       if (valor > umbralIndicador.value) {
         color = '#0000a4';
       } else {
-        color = '#219196';
+        color = '##27F7BA';
       }
     } else {
       if (valor <= umbralIndicador.value) {
@@ -131,7 +131,7 @@ function textoPuntoY(i) {
 <template>
   <section id="lineaDeTiempo">
     <header>
-      <h3>{{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}</h3>
+      <h3 id="nombreLugar">{{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}</h3>
 
       <Leyenda />
       <p id="descripcionY">{{ fuentes[cerebroDatos.indice].nombreEjeY }}</p>
@@ -140,13 +140,13 @@ function textoPuntoY(i) {
     <svg :width="props.ancho" :height="dimsVis.alto">
       <defs>
         <linearGradient id="arriba" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
-          <stop offset="100%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
+          <stop offset="0%" style="stop-color: rgb(39, 247, 186); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: rgb(39, 247, 186); stop-opacity: 1" />
         </linearGradient>
 
         <linearGradient id="abajo" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" style="stop-color: rgb(81, 231, 186); stop-opacity: 1" />
-          <stop offset="100%" style="stop-color: rgb(35, 150, 115); stop-opacity: 1" />
+          <stop offset="0%" style="stop-color: rgb(39, 247, 186); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: rgb(39, 247, 146); stop-opacity: 1" />
         </linearGradient>
 
         <pattern id="sinInfo" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(45)">
@@ -268,7 +268,7 @@ function textoPuntoY(i) {
         :posicionX="posicionX"
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
-        color="black"
+        color="#B569D6"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />
@@ -300,6 +300,14 @@ function textoPuntoY(i) {
 
 h3 {
   margin: 0.3em 0;
+}
+
+#nombreLugar {
+  color: $colorOscuro;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
 }
 
 #detalle {
@@ -347,8 +355,8 @@ svg {
   }
 
   .añoActual {
-    stroke: $colorMenuClaro;
-    stroke-width: 5;
+    stroke: $colorOscuro;
+    stroke-width: 4;
     opacity: 0.6;
   }
 
@@ -373,15 +381,17 @@ svg {
   color: $colorOscuro;
   font-size: 13px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 #descripcionMeta {
   // color: rgb(20, 99, 20);
-  border: 2px solid rgb(35, 150, 115);
+  border: 2px solid #27F7BA;
   background-color: $colorBlanco;
-  padding: 0.3em 1em;
+  padding: 1em 1.5em;
   text-align: center;
-  margin-top: 1em;
+  color: #0042bf;
+  margin-top: 2em;
   margin-left: 30px;
 }
 </style>

@@ -156,7 +156,7 @@ function actualizarDatos() {
 @import '@/assets/constantes.scss';
 
 #modulo {
-  margin: 1em 0em;
+  margin: 2em 1em;
   font-family: $fuenteTexto;
   color: #0041bf;
 
@@ -177,6 +177,8 @@ function actualizarDatos() {
   .seccionMenu {
     display: flex;
     justify-content: flex-start;
+    //margin-top: 0.5em;
+    padding: 0.1em;
 
     h4 {
       padding-top: 1em;
