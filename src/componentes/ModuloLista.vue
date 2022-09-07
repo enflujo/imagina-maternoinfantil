@@ -116,12 +116,12 @@ function actualizarDatos() {
           >denominador</span
         >
       </span>
-      <span class="botonesOrdenar">
-        <span @click="ordenarDatos()">↑↓</span>
-      </span>
     </span>
     <div id="contenedor">
       <div id="lista">
+        <span class="botonesOrdenar">
+          <span @click="ordenarDatos()">↑↓</span>
+        </span>
         <ul class="dato">
           <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
             <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
@@ -191,6 +191,8 @@ function actualizarDatos() {
     width: fit-content;
     border-radius: 5px;
     font-weight: bold;
+    position: relative;
+    right: -105%;
 
     &:hover {
       background-color: white;
@@ -227,6 +229,8 @@ function actualizarDatos() {
     border-radius: 15px;
     color: #0041bf;
     margin-bottom: 20px;
+    scrollbar-color: #0041bf white;
+    scrollbar-width: auto;
   }
 
   #lista {
@@ -244,6 +248,7 @@ function actualizarDatos() {
   display: grid;
   grid-template-columns: 50% 50%;
   column-gap: 39px;
+  margin-top: 1.5em;
 
   h4 {
     text-transform: uppercase;
