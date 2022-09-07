@@ -90,13 +90,13 @@ function reemplazarURLs(texto) {
 @import '@/assets/constantes.scss';
 
 #fichaTecnica {
-  width: 42%;
+  width: 35%;
   height: 80%;
   background-color: #55efa1;
   z-index: 99;
   position: absolute;
   top: 180px;
-  left: 28vw;
+  left: 22vw;
   border: 25px solid #55efa1;
   border-radius: 15px;
   visibility: hidden;
