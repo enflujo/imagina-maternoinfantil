@@ -192,7 +192,7 @@ function actualizarDatos() {
     border-radius: 5px;
     font-weight: bold;
     position: relative;
-    right: -105%;
+    right: -100%;
 
     &:hover {
       background-color: white;
