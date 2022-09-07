@@ -97,7 +97,8 @@ function actualizarDims() {
 
 #contenedorGeneral {
   display: flex;
-  margin-top: $tamañoEncabezado;
+  margin-top: calc($tamañoEncabezado + 30px);
+  margin-right: 0.1em;
 }
 
 .nivel {

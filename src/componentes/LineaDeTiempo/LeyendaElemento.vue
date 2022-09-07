@@ -28,6 +28,7 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
   position: absolute;
   right: 0;
   top: 0;
+  color: $colorOscuro;
 }
 
 li {
@@ -53,7 +54,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #219196;
+      background-color: #0042bf;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -63,7 +64,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #219196;
+      background-color: #0042bf;
       display: inline-block;
     }
   }
@@ -76,7 +77,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: black;
+      background-color: #B569D6;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -86,7 +87,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: black;
+      background-color: #B569D6;
       display: inline-block;
     }
   }
@@ -99,8 +100,8 @@ li {
       display: inline-block;
       width: 23px;
       height: 10px;
-      background: rgb(81, 231, 186);
-      background: linear-gradient(0deg, rgb(35, 150, 115) 0%, rgb(81, 231, 186) 100%);
+      background: $colorVerdeResaltado;
+     // background: linear-gradient(0deg, rgb(35, 150, 115) 0%, rgb(81, 231, 186) 100%);
       vertical-align: middle;
       margin-top: -2px;
     }
