@@ -9,6 +9,7 @@ import LineaTiempo from '../componentes/LineaTiempo.vue';
 import ModuloLista from '../componentes/ModuloLista.vue';
 import FichaTecnica from '../componentes/FichaTecnica.vue';
 import fuentes from '../utilidades/fuentes';
+import Guardaescobas from '../componentes/GuardaEscobas.vue';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
@@ -90,6 +91,7 @@ function actualizarDims() {
       <ModuloLista />
     </div>
   </div>
+  <Guardaescobas />
 </template>
 
 <style lang="scss" scoped>
