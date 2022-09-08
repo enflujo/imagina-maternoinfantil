@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+defineProps({
+  clase: String,
+});
+</script>
 
 <template>
-  <footer id="guardaescobas">
+  <footer id="guardaescobas" :class="clase ? clase : ''">
     <a href="https://www.fundacionexito.org/" target="_blank"
       ><img class="logo" src="../assets/imgs/logo_f_exito.svg"
     /></a>
@@ -20,6 +24,10 @@
   padding: 1em;
   z-index: 999999;
   background-color: rgba($colorFondoClaro, 0.75);
+
+  &.historia {
+    background-color: rgba($colorFondoHistorias, 0.75);
+  }
 }
 
 .logo {

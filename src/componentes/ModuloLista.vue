@@ -32,8 +32,6 @@ function elegirOrden(criterio) {
 
 function ordenarDatos() {
   datosOrdenados.reverse();
-
-  console.log(datosOrdenados);
 }
 
 function actualizarDatos() {
