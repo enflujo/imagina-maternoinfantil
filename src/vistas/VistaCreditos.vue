@@ -89,38 +89,11 @@
 @import '../assets/constantes.scss';
 
 #creditos {
-  // visibility: hidden;
-  // position: absolute;
   width: 45vw;
-  // height: 87vh;
   margin: 5em;
-  // background-color: $colorBlanco;
-  // opacity: 0.97;
-  // z-index: 99;
   padding: 2em;
-  color: #0041bf;
+  color: $colorOscuro;
   text-align: justify;
-  // border: solid;
-  // box-shadow: 0px 0px 5px 2px #4e4e4e;
-  // border-radius: 15px;
-  // overflow-y: scroll;
-
-  // #cerrar {
-  //   position: absolute;
-  //   right: 3%;
-  //   top: 3%;
-  //   font-size: 1.2em;
-  //   cursor: pointer;
-  //   background-color: white;
-  //   border: solid 1px;
-  //   border-radius: 50%;
-  //   height: 1.4em;
-  //   width: 1.4em;
-  //   justify-content: center;
-  //   text-align: center;
-  //   padding-top: 0.1em;
-  //   font-weight: bold;
-  // }
 
   .seccion {
     margin-top: 4em;
@@ -144,7 +117,7 @@
 }
 
 #logos {
-  padding: 4em 1em 0em 1em;
+  padding: 3em 1em 0em 1em;
   z-index: 999999;
   background-color: rgba($colorFondoClaro, 0.75);
 
@@ -154,7 +127,22 @@
 }
 
 .logo {
-  height: 36px;
+  height: 60px;
   margin: 0 2em;
+}
+
+a,
+a:link {
+  text-decoration: none;
+  color: lighten($colorOscuro, 20%);
+  transition: color 0.15s ease-in-out;
+
+  &:hover {
+    color: lighten($colorOscuro, 40%);
+  }
+}
+
+ul {
+  margin-left: 1.1em;
 }
 </style>
