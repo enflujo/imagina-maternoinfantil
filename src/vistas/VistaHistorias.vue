@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
 import iconoAnticoncepcion from '../assets/imgs/iconoAnticoncepcion.svg';
@@ -8,6 +7,7 @@ import madresMigrantes from '../assets/imgs/madres_migrantes.png';
 import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 import madreHija from '../assets/imgs/madre-hija.png';
 import bebeMama from '../assets/imgs/bebe-mama.png';
+import GuardaEscobas from '../componentes/GuardaEscobas.vue';
 </script>
 
 <template>
@@ -327,6 +327,8 @@ import bebeMama from '../assets/imgs/bebe-mama.png';
       </div>
     </div>
   </div>
+
+  <GuardaEscobas clase="historia" />
 </template>
 
 <style lang="scss" scoped>
@@ -338,7 +340,7 @@ import bebeMama from '../assets/imgs/bebe-mama.png';
 
 #cuali {
   padding: 6em 5em;
-  background: linear-gradient(180deg, #0041bf 0%, #f2f2f2 5%);
+  background: linear-gradient(180deg, #0041bf 0%, $colorFondoHistorias 5%);
   font-size: 1.1em;
   overflow-x: clip;
   color: #0041bf;

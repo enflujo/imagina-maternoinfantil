@@ -77,7 +77,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #B569D6;
+      background-color: #b569d6;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -87,7 +87,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #B569D6;
+      background-color: #b569d6;
       display: inline-block;
     }
   }
@@ -101,7 +101,7 @@ li {
       width: 23px;
       height: 10px;
       background: $colorVerdeResaltado;
-     // background: linear-gradient(0deg, rgb(35, 150, 115) 0%, rgb(81, 231, 186) 100%);
+      // background: linear-gradient(0deg, rgb(35, 150, 115) 0%, rgb(81, 231, 186) 100%);
       vertical-align: middle;
       margin-top: -2px;
     }
