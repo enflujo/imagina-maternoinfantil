@@ -1,30 +1,29 @@
 <script setup></script>
 
 <template>
-  <div id="guardaescobas">
-    <img class="logo" src="../assets/imgs/logo_f_exito.svg" />
+  <footer id="guardaescobas">
+    <a href="https://www.fundacionexito.org/" target="_blank"
+      ><img class="logo" src="../assets/imgs/logo_f_exito.svg"
+    /></a>
     <img class="logo" src="../assets/imgs/logo_andes_imagina.svg" />
-    <img class="logo" src="../assets/imgs/logo_enflujo.svg" />
-  </div>
+    <a href="https://enflujo.com" target="_blank"><img class="logo" src="../assets/imgs/logo_enflujo.svg" /></a>
+  </footer>
 </template>
 
 <style lang="scss" scoped>
 @import '../assets/constantes.scss';
 
 #guardaescobas {
-  display: flex;
-  height: 100px;
-  width: 100vw;
-  position: relative;
-  left: 0px;
+  position: fixed;
+  right: 0;
   bottom: 0px;
-  justify-content: flex-start;
-  padding: 2em;
-  margin-top: 2em;
+  padding: 1em;
+  z-index: 999999;
+  background-color: rgba($colorFondoClaro, 0.75);
 }
 
 .logo {
   height: 36px;
-  margin: 0em 2em;
+  margin: 0 2em;
 }
 </style>
