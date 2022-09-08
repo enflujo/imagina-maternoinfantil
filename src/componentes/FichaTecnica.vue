@@ -3,18 +3,17 @@ import fuentes from '../utilidades/fuentes';
 import { usarCerebroDatos } from '../cerebro/datos';
 
 const cerebroDatos = usarCerebroDatos();
+const urlsAEnlacesHTML = (valor) => {
+  const urls = valor.match(/(((ftp|https?):\/\/)[-\w@:%_+.~#?,&//=A-zÀ-ú]+)/g);
 
-function reemplazarURLs(texto) {
-  if (!texto) return;
-  var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
-  return texto.replace(urlRegex, function (url) {
-    var hyperlink = url;
-    if (!hyperlink.match('^https?:/')) {
-      hyperlink = 'http://' + hyperlink;
-    }
-    return `<a href="${hyperlink}" target="_blank" > ${url} </a>`;
-  });
-}
+  if (urls) {
+    urls.forEach((url) => {
+      valor = valor.replace(url, `<a href="${url}" target="_blank">${url}</a>`);
+    });
+  }
+
+  return valor;
+};
 </script>
 
 <template>
@@ -48,14 +47,14 @@ function reemplazarURLs(texto) {
 
         <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="informacion">
           Atenciones por consulta para los códigos CIE-10:
-          <li v-for="codigo in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${codigo}`">
+          <li v-for="(codigo, i) in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${i}`">
             {{ codigo }}
           </li>
         </div>
 
         <div class="tituloSeccion">Nivel de desagregación</div>
         <div class="informacion">
-          <li v-for="nivel in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${nivel}`">
+          <li v-for="(nivel, i) in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${i}`">
             {{ nivel }}
           </li>
         </div>
@@ -66,14 +65,14 @@ function reemplazarURLs(texto) {
 
         <div class="informacion">
           <p
-            v-for="parrafo in fuentes[cerebroDatos.indiceActual].interpretacion"
-            :key="`parrafo${parrafo[0]}`"
-            v-html="reemplazarURLs(parrafo)"
+            v-for="(parrafo, i) in fuentes[cerebroDatos.indiceActual].interpretacion"
+            :key="`parrafo${i}`"
+            v-html="urlsAEnlacesHTML(parrafo)"
           ></p>
         </div>
         <div class="tituloSeccion">Meta</div>
         <div class="informacion">
-          <p v-for="meta in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${meta}`">{{ meta }}</p>
+          <p v-for="(meta, i) in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${i}`">{{ meta }}</p>
         </div>
         <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="tituloSeccion">
           Limitaciones del indicador
@@ -91,19 +90,19 @@ function reemplazarURLs(texto) {
 
 #fichaTecnica {
   width: 35%;
-  height: 80%;
-  background-color: #55efa1;
+  max-height: 80%;
+  background-color: $colorVerdeResaltado;
   z-index: 99;
   position: absolute;
   top: 180px;
   left: 22vw;
-  border: 25px solid #55efa1;
+  border: 25px solid $colorVerdeResaltado;
   border-radius: 15px;
   visibility: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   #titulo {
-    background-color: #0041bf;
+    background-color: $colorOscuro;
     color: white;
     display: block;
     border-radius: 15px 15px 0 0;
@@ -118,7 +117,7 @@ function reemplazarURLs(texto) {
     height: 82%;
     display: grid;
     grid-template-columns: 38% 62%;
-    color: #0041bf;
+    color: $colorOscuro;
     font-family: $fuenteTexto;
     height: fit-content;
 
@@ -130,18 +129,22 @@ function reemplazarURLs(texto) {
       display: flex;
       align-items: center;
       padding: 0.8em;
-      border: 3px solid #0041bf;
+      border: 3px solid $colorOscuro;
       border-top: 0;
       text-align: left;
     }
 
     .informacion {
-      border: 3px solid #0041bf;
+      border: 3px solid $colorOscuro;
       border-left: 0px;
       border-top: 0;
       padding: 1em;
       overflow-wrap: break-word;
     }
   }
+}
+
+p {
+  margin-bottom: 1em;
 }
 </style>

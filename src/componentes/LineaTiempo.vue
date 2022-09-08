@@ -131,7 +131,9 @@ function textoPuntoY(i) {
 <template>
   <section id="lineaDeTiempo">
     <header>
-      <h3 id="nombreLugar">{{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}</h3>
+      <h3 id="nombreLugar">
+        {{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}
+      </h3>
 
       <Leyenda />
       <p id="descripcionY">{{ fuentes[cerebroDatos.indice].nombreEjeY }}</p>
@@ -386,10 +388,10 @@ svg {
 
 #descripcionMeta {
   // color: rgb(20, 99, 20);
-  border: 2px solid #27F7BA;
+  border: 2px solid #27f7ba;
   background-color: $colorBlanco;
   padding: 1em 1.5em;
-  text-align: center;
+  // text-align: center;
   color: #0042bf;
   margin-top: 2em;
   margin-left: 30px;

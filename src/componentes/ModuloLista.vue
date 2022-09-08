@@ -122,6 +122,7 @@ function actualizarDatos() {
         <span class="botonesOrdenar">
           <span @click="ordenarDatos()">↑↓</span>
         </span>
+
         <ul class="dato">
           <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
             <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
