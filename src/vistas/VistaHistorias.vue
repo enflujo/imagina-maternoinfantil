@@ -337,7 +337,6 @@ import bebeMama from '../assets/imgs/bebe-mama.png';
 }
 
 #cuali {
-  width: 100vw;
   padding: 6em 5em;
   background: linear-gradient(180deg, #0041bf 0%, #f2f2f2 5%);
   font-size: 1.1em;
