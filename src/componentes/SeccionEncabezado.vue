@@ -3,7 +3,7 @@
 <template>
   <header id="encabezado">
     <div id="contenedor">
-      <img id="favicon" src="../assets/imgs/cargador.png" />
+      <img id="favicon" src="../assets/imgs/cargador.png" alt="Salud Maternoinfantil en Colombia" />
       <div class="tituloProyecto elementoMenu">Salud Maternoinfantil en Colombia</div>
       <router-link to="/" class="elementoMenu">Tablero</router-link>
       <router-link to="/historias" class="elementoMenu">Historias</router-link>

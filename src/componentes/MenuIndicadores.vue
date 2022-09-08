@@ -36,8 +36,8 @@ function abrir(evento) {
 
     <div id="contenedorIndicadores" ref="contenedor">
       <span class="cerrar" @click="cerrar">X</span>
+      <h2>Indicadores</h2>
       <ul id="menuIndicadores" class="contenedorMenu">
-        <h2>Indicadores</h2>
         <li
           v-for="(indicador, i) in fuentes"
           @click="cerebroDatos.cambiarIndicador(i)"
@@ -80,8 +80,10 @@ function abrir(evento) {
 }
 
 h2 {
+  color: $colorBlanco;
   border-bottom: 2px solid $colorBlanco;
   padding-bottom: 0.5em;
+  padding-top: 1em;
   margin-bottom: 1em;
   margin-left: 1.5em;
 }
