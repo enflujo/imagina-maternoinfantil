@@ -99,7 +99,7 @@ function actualizarDims() {
 
 #contenedorGeneral {
   display: flex;
-  margin-top: calc($tamañoEncabezado + 30px);
+  margin-top: $tamañoEncabezado;
   margin-right: 0.1em;
 }
 
