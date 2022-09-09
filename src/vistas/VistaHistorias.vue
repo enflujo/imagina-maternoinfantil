@@ -13,18 +13,18 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 <template>
   <div id="cuali">
     <div id="menuHistorias">
-      <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion"
-        ><img :src="iconoAlimentacion" />
-        <h2>Alimentación</h2></a
-      >
-      <a href="#historiaMadres" class="botonHistoria"
-        ><img :src="iconoExperiencias" />
-        <h2>Madres en pandemia</h2></a
-      >
-      <a href="#conclusiones" class="botonHistoria"
-        ><img :src="iconoAnticoncepcion" />
-        <h2>Conclusiones</h2></a
-      >
+      <a href="#historiaAlimentacion" class="botonHistoria">
+        <img :src="iconoAlimentacion" alt="Icono Alimentación." />
+        <span>Alimentación</span>
+      </a>
+      <a href="#historiaMadres" class="botonHistoria">
+        <img :src="iconoExperiencias" alt="Icono Madres en Pandemia." />
+        <span>Madres en pandemia</span>
+      </a>
+      <a href="#conclusiones" class="botonHistoria">
+        <img :src="iconoAnticoncepcion" alt="Icono conclusiones." />
+        <span>Conclusiones</span>
+      </a>
     </div>
 
     <div id="tituloGeneral">
@@ -33,7 +33,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     </div>
 
     <div id="intro">
-      <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" /></div>
+      <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." /></div>
       <div class="seccionDerecha">
         <p>
           En mayo y junio de 2022 se llevó a cabo una indagación cualitativa en las ciudades de
@@ -76,7 +76,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </p>
       </div>
       <div class="seccionDerecha">
-        <img class="imagen" :src="madreAmamantando" />
+        <img class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
         <p>
           Con respecto a la comida hay diferencias regionales. Por ejemplo, algunas mujeres que estuvieron en la costa
           cuentan que hay más presencia de plátano o yuca. En cambio, quienes se quedaron en Bogotá o municipios
@@ -168,7 +168,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </div>
 
         <div>
-          <img id="imagenMadres" class="imagen" :src="madreHija" />
+          <img id="imagenMadres" class="imagen" :src="madreHija" alt="Madre con tapabocas mirando preocupada." />
         </div>
 
         <div class="historiaMujer" id="camila">
@@ -204,7 +204,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </div>
       </div>
       <div class="seccionDerecha">
-        <img id="imagenMadres" class="imagen" :src="madresMigrantes" />
+        <img id="imagenMadres" class="imagen" :src="madresMigrantes" alt="Madres migrantes cargando a sus bebés." />
 
         <div class="historiaMujer" id="claudia">
           <h3>Claudia</h3>
@@ -326,7 +326,12 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </p>
       </div>
       <div class="seccionDerecha">
-        <img id="imagenHospital" class="imagen" :src="servicioHospitalario" />
+        <img
+          id="imagenHospital"
+          class="imagen"
+          :src="servicioHospitalario"
+          alt="Doctora haciendo examen a una madre embarazada."
+        />
       </div>
     </div>
   </div>
@@ -389,18 +394,17 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
       display: flex;
       margin: 5px 0;
       text-decoration: none;
+      align-items: center;
+      border: 1px solid transparent;
 
       img {
         width: 65px;
       }
 
-      h2 {
-        top: 36%;
-        position: relative;
-        height: fit-content;
+      span {
         width: 60%;
         color: white;
-        font-size: 1.2em;
+        font-size: 1.5em;
         padding: 0;
         display: none;
       }
@@ -408,7 +412,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
     .botonHistoria:hover {
       opacity: 1;
-      border: solid #5afead 1px;
+      border: 1px solid #5afead;
     }
   }
 
@@ -575,7 +579,8 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         img {
           width: 80px;
         }
-        h2 {
+
+        span {
           display: block;
         }
       }
