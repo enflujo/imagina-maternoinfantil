@@ -21,11 +21,13 @@ defineProps({
 
 #guardaescobas {
   position: fixed;
-  right: 0;
+  right: 10%;
   bottom: 0px;
-  padding: 1em;
+  padding: 0.6em;
   z-index: 999999;
   background-color: rgba($colorFondoClaro, 0.75);
+  display: flex;
+  justify-content: space-around;
 
   &.historia {
     background-color: rgba($colorFondoHistorias, 0.75);
@@ -33,7 +35,38 @@ defineProps({
 }
 
 .logo {
-  height: 36px;
-  margin: 0 2em;
+  height: 8vw;
+  margin: 0 8%;
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  .logo {
+    height: 4vw;
+  }
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+  .logo {
+    height: 4vw;
+  }
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  .logo {
+    height: 4vw;
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #guardaescobas {
+    right: 0px;
+    padding: 1em;
+  }
+
+  .logo {
+    height: 36px;
+    margin: 0 2em;
+  }
 }
 </style>

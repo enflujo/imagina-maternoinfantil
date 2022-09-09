@@ -15,21 +15,21 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     <div id="menuHistorias">
       <a href="#historiaAlimentacion" class="botonHistoria" id="botonAlimentacion"
         ><img :src="iconoAlimentacion" />
-        <p class="texto">Alimentación</p></a
+        <h2>Alimentación</h2></a
       >
       <a href="#historiaMadres" class="botonHistoria"
         ><img :src="iconoExperiencias" />
-        <p class="texto">Madres en pandemia</p></a
+        <h2>Madres en pandemia</h2></a
       >
       <a href="#conclusiones" class="botonHistoria"
         ><img :src="iconoAnticoncepcion" />
-        <p class="texto">Algunas conclusiones</p></a
+        <h2>Conclusiones</h2></a
       >
     </div>
 
     <div id="tituloGeneral">
       <h1 class="titulo">Narrativas de la pandemia</h1>
-      <h3 class="subtitulo">Cómo se afectó la vida de las madres durante la pandemia del COVID-19</h3>
+      <h2 class="subtitulo">Cómo se afectó la vida de las madres durante la pandemia del COVID-19</h2>
     </div>
 
     <div id="intro">
@@ -112,7 +112,10 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
           ventanas abiertas en plena noche.
         </p>
-        <p>A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia*.</p>
+        <p>
+          A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia<a href="#parrafoNota"> *</a
+          >.
+        </p>
 
         <div class="historiaMujer" id="maria">
           <h3>María</h3>
@@ -257,7 +260,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
             trabajar, entonces, le dieron medicamentos para retener a la bebé y que naciera en la semana 36. Volvió a su
             casa.
           </p>
-          <p>
+          <p id="parrafoNota">
             Cuando cumplió 36 semanas se levantó con muchos dolores y se fue en moto para San Sebastián. En el hospital
             le preguntaron si iba a control, Adriana no quería decir que le dolía porque esto implicaba que le hicieran
             un tacto y le resultaba incómodo. Fue al baño y se asustó porque sentía que tenía algo afuera. Cuando la
@@ -269,7 +272,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           </p>
         </div>
         <div id="separador"></div>
-        <div id="nota">*Los nombres fueron cambiados para mantener el anonimato</div>
+        <a href="#historiaMadres" id="nota">*Los nombres fueron cambiados para mantener el anonimato</a>
       </div>
     </div>
 
@@ -291,7 +294,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           encontrado para acceder a los sistemas de salud.
         </p>
 
-        <h3 id="planificacion">Planificación</h3>
+        <h3>Planificación</h3>
         <p>
           El tema de la planificación es complejo porque, según las narrativas de las mujeres, son procedimientos
           estandarizados que se deben realizar sobre sus cuerpos después del parto. Como ellas señalan, en los centros
@@ -332,6 +335,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 </template>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @import '../assets/constantes.scss';
 
 .negrita {
@@ -339,21 +343,30 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 }
 
 #cuali {
-  padding: 6em 5em;
-  background: linear-gradient(180deg, #0041bf 0%, $colorFondoHistorias 5%);
+  padding: 1em 0em;
+  background: linear-gradient(180deg, $colorOscuro 0%, $colorFondoHistorias 1%);
   font-size: 1.1em;
-  overflow-x: clip;
-  color: #0041bf;
-  font-size: 1.1em;
+  color: $colorOscuro;
 
-  h1,
-  h2 {
+  h1 {
     color: #f2f2f2;
   }
 
-  h3 {
+  h2 {
     padding: 1.5em 0em 0.5em 0em;
-    color: #0041bf;
+    color: $colorOscuro;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:visited {
+      color: color.scale($colorOscuro, $lightness: 10%);
+    }
+  }
+
+  a:hover {
+    color: $colorMenuClaro;
   }
 
   #menuHistorias {
@@ -363,26 +376,39 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     position: fixed;
     right: 0%;
     top: 40%;
+    width: 15%;
+    z-index: 99;
 
     .botonHistoria {
       cursor: pointer;
       color: white;
       font-size: 0.9em;
       text-align: center;
-      background: #0041bf;
+      background: $colorOscuro;
+      opacity: 0.7;
       display: flex;
       margin: 5px 0;
+      text-decoration: none;
 
       img {
-        width: 80px;
+        width: 65px;
       }
 
-      .texto {
+      h2 {
         top: 36%;
         position: relative;
         height: fit-content;
         width: 60%;
+        color: white;
+        font-size: 1.2em;
+        padding: 0;
+        display: none;
       }
+    }
+
+    .botonHistoria:hover {
+      opacity: 1;
+      border: solid #5afead 1px;
     }
   }
 
@@ -391,7 +417,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
     .titulo {
       color: #f2f2f2;
-      font-size: 2.9em;
+      font-size: 2em;
       line-height: 0.8em;
     }
 
@@ -399,77 +425,59 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
       margin-bottom: 1em;
       font-style: italic;
       font-size: 1.2em;
-      width: 30%;
     }
   }
 
   .seccionIzquierda {
-    width: 75%;
-    margin-left: 5vw;
+    width: 78%;
+    margin-left: 4vw;
 
     .tituloHistoria {
-      color: #0041bf;
+      color: $colorOscuro;
     }
   }
 
   .seccionDerecha {
-    width: 45%;
-    margin: 3em 10em;
-
-    p {
-      width: 30vw;
-    }
+    width: 78%;
+    margin-left: 4vw;
   }
 
   #intro {
-    width: 100vw;
     z-index: 2;
-    position: relative;
-    padding: 2em 25vw 0em 4vw;
-    display: flex;
 
     p {
       padding-bottom: 2em;
       font-size: 1.1em;
     }
 
-    a {
-      color: #0041bf;
-    }
-
-    a:hover {
-      color: #8686be;
-    }
-
-    a:visited {
-      color: #0041bf;
-    }
-
     img {
-      width: 30vw;
+      width: 70vw;
+      margin-bottom: 1em;
     }
   }
 
   .historia {
-    display: grid;
-    grid-template-columns: 39vw 30vw;
-    margin-top: 8em;
+    margin-top: 5em;
 
     img {
-      width: 30vw;
-      margin: 5em 0em;
+      width: 90vw;
+      margin: 2em 0em;
     }
 
     p {
       margin-bottom: 1em;
     }
 
+    h3 {
+      margin-top: 2em;
+    }
+
     .testimonio {
       font-style: italic;
       color: #6600bf9a;
-      margin: 4em 2em;
-      font-size: 1.3em;
-      padding: 2em;
+      margin: 3em 0em;
+      font-size: 1.2em;
+      padding: 1.5em;
       background-color: #ffffffcc;
       border-radius: 15px;
     }
@@ -477,7 +485,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     #separador {
       height: 1px;
       width: 100%;
-      background-color: #0041bf;
+      background-color: $colorOscuro;
     }
 
     #nota {
@@ -488,6 +496,137 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
   .historiaMujer {
     margin-top: 4em;
+  }
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  #cuali {
+    #menuHistorias {
+      width: 6%;
+
+      .botonHistoria {
+        font-size: 0.7em;
+        img {
+          width: 70px;
+        }
+      }
+    }
+    #tituloGeneral {
+      .subtitulo {
+        width: 65%;
+      }
+    }
+  }
+}
+
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+  #cuali {
+    background: linear-gradient(180deg, $colorOscuro 0%, $colorFondoHistorias 2%);
+    #menuHistorias {
+      width: 6%;
+
+      .botonHistoria {
+        font-size: 0.7em;
+        img {
+          width: 70px;
+        }
+      }
+    }
+    #tituloGeneral {
+      .subtitulo {
+        width: 65%;
+      }
+    }
+  }
+}
+
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  #cuali {
+    #menuHistorias {
+      width: 6%;
+
+      .botonHistoria {
+        img {
+          width: 70px;
+        }
+      }
+    }
+    #tituloGeneral {
+      .subtitulo {
+        width: 65%;
+      }
+    }
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #cuali {
+    padding: 5em 0em;
+    background: linear-gradient(180deg, $colorOscuro 0%, $colorFondoHistorias 5%);
+
+    #menuHistorias {
+      right: 0%;
+      width: fit-content;
+
+      .botonHistoria {
+        img {
+          width: 80px;
+        }
+        h2 {
+          display: block;
+        }
+      }
+    }
+
+    #tituloGeneral {
+      .titulo {
+        font-size: 2.9em;
+      }
+
+      .subtitulo {
+        width: 40%;
+      }
+    }
+    .seccionIzquierda {
+      width: 30vw;
+      margin-left: 3vw;
+    }
+
+    .seccionDerecha {
+      width: 32vw;
+      margin: 4em 4vw;
+    }
+
+    #intro {
+      width: 100vw;
+      position: relative;
+      padding: 7em 25vw 0em 4vw;
+      display: flex;
+
+      img {
+        width: 30vw;
+      }
+    }
+
+    .historia {
+      display: grid;
+      grid-template-columns: 39vw 30vw;
+
+      img {
+        width: 30vw;
+        margin: 5em 0em;
+      }
+
+      .testimonio {
+        margin: 3em 0em;
+        font-size: 1.2em;
+        padding: 1.5em;
+        border-radius: 15px;
+      }
+    }
   }
 }
 </style>
