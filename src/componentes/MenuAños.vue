@@ -1,21 +1,36 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
-import { ref } from 'vue';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
+const contenedor = ref(null);
 
 const mostrarMenu = ref(false);
 
 function abrirMenu() {
   mostrarMenu.value = !mostrarMenu.value;
 }
+
+onMounted(() => {
+  document.body.addEventListener('click', clicFuera);
+});
+
+onUnmounted(() => {
+  document.body.removeEventListener('click', clicFuera);
+});
+
+function clicFuera(evento) {
+  if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
+    mostrarMenu.value = false;
+  }
+}
 </script>
 
 <template>
-  <nav>
-    <span @click="abrirMenu()" class="boton cuadro desplegable">{{ cerebroGlobales.año }}</span>
+  <nav ref="contenedor">
+    <span @click="abrirMenu" class="boton cuadro desplegable">{{ cerebroGlobales.año }}</span>
     <ul id="menuAños" :style="`display:${mostrarMenu ? 'block' : 'none'}`">
       <li
         v-for="n in cerebroDatos.años"

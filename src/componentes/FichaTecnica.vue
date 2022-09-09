@@ -1,85 +1,74 @@
 <script setup>
 import fuentes from '../utilidades/fuentes';
 import { usarCerebroDatos } from '../cerebro/datos';
+import { urlsAEnlacesHTML } from '../utilidades/ayudas';
+import { ref } from 'vue';
 
 const cerebroDatos = usarCerebroDatos();
-const urlsAEnlacesHTML = (valor) => {
-  const urls = valor.match(/(((ftp|https?):\/\/)[-\w@:%_+.~#?,&//=A-zÀ-ú]+)/g);
+const contenedor = ref(null);
+defineProps({
+  mostrar: Boolean,
+});
 
-  if (urls) {
-    urls.forEach((url) => {
-      valor = valor.replace(url, `<a href="${url}" target="_blank">${url}</a>`);
-    });
-  }
-
-  return valor;
-};
+defineExpose({ contenedor });
 </script>
 
 <template>
-  <div>
-    <div id="fichaTecnica">
-      <span id="titulo">
-        <h2>{{ fuentes[cerebroDatos.indiceActual].nombreIndicador }}</h2>
-      </span>
-      <div id="contenido">
-        <div class="tituloSeccion">Definición</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].definicion }}</div>
+  <div id="fichaTecnica" ref="contenedor" :style="`display:${mostrar ? 'block' : 'none'}`">
+    <h3 id="titulo">{{ fuentes[cerebroDatos.indiceActual].nombreIndicador }}</h3>
 
-        <div class="tituloSeccion">Grupo</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].grupo }}</div>
+    <div id="contenido">
+      <h4>Definición</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].definicion }}</div>
 
-        <div class="tituloSeccion">Metodología de cálculo</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].calculo }}</div>
+      <h4>Grupo</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].grupo }}</div>
 
-        <div class="tituloSeccion">Unidad de medida</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].unidadDeMedida.descripcion }}</div>
+      <h4>Metodología de cálculo</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].calculo }}</div>
 
-        <div class="tituloSeccion">Fuente del numerador</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteNumerador }}</div>
+      <h4>Unidad de medida</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].unidadDeMedida.descripcion }}</div>
 
-        <div class="tituloSeccion">Fuente del denominador</div>
-        <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteDenominador }}</div>
+      <h4>Fuente del numerador</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteNumerador }}</div>
 
-        <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="tituloSeccion">
-          Códigos CIE-10
-        </div>
+      <h4>Fuente del denominador</h4>
+      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteDenominador }}</div>
 
-        <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="informacion">
-          Atenciones por consulta para los códigos CIE-10:
-          <li v-for="(codigo, i) in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${i}`">
-            {{ codigo }}
-          </li>
-        </div>
+      <h4 v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0">Códigos CIE-10</h4>
 
-        <div class="tituloSeccion">Nivel de desagregación</div>
-        <div class="informacion">
-          <li v-for="(nivel, i) in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${i}`">
-            {{ nivel }}
-          </li>
-        </div>
+      <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="informacion">
+        Atenciones por consulta para los códigos CIE-10:
+        <li v-for="(codigo, i) in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${i}`">
+          {{ codigo }}
+        </li>
+      </div>
 
-        <div class="tituloSeccion" @click="mostrarTexto(fuentes[cerebroDatos.indiceActual].interpretacion)">
-          Cómo se interpreta
-        </div>
+      <h4>Nivel de desagregación</h4>
+      <div class="informacion">
+        <li v-for="(nivel, i) in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${i}`">
+          {{ nivel }}
+        </li>
+      </div>
 
-        <div class="informacion">
-          <p
-            v-for="(parrafo, i) in fuentes[cerebroDatos.indiceActual].interpretacion"
-            :key="`parrafo${i}`"
-            v-html="urlsAEnlacesHTML(parrafo)"
-          ></p>
-        </div>
-        <div class="tituloSeccion">Meta</div>
-        <div class="informacion">
-          <p v-for="(meta, i) in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${i}`">{{ meta }}</p>
-        </div>
-        <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="tituloSeccion">
-          Limitaciones del indicador
-        </div>
-        <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="informacion">
-          {{ fuentes[cerebroDatos.indiceActual].limitacion }}
-        </div>
+      <h4>Cómo se interpreta</h4>
+      <div class="informacion">
+        <p
+          v-for="(parrafo, i) in fuentes[cerebroDatos.indiceActual].interpretacion"
+          :key="`parrafo${i}`"
+          v-html="urlsAEnlacesHTML(parrafo)"
+        ></p>
+      </div>
+
+      <h4>Meta</h4>
+      <div class="informacion">
+        <p v-for="(meta, i) in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${i}`">{{ meta }}</p>
+      </div>
+
+      <h4 v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''">Limitaciones del indicador</h4>
+      <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="informacion">
+        {{ fuentes[cerebroDatos.indiceActual].limitacion }}
       </div>
     </div>
   </div>
@@ -98,7 +87,6 @@ const urlsAEnlacesHTML = (valor) => {
   left: 22vw;
   border: 25px solid $colorVerdeResaltado;
   border-radius: 15px;
-  visibility: hidden;
   overflow-y: auto;
 
   #titulo {
@@ -109,7 +97,7 @@ const urlsAEnlacesHTML = (valor) => {
     justify-content: center;
     padding: 5% 5%;
     text-align: center;
-    font-size: 0.95em;
+    font-size: 1.5em;
   }
 
   #contenido {
@@ -121,7 +109,7 @@ const urlsAEnlacesHTML = (valor) => {
     font-family: $fuenteTexto;
     height: fit-content;
 
-    .tituloSeccion {
+    h4 {
       text-align: center;
       text-transform: uppercase;
       font-weight: bold;

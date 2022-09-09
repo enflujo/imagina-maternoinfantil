@@ -119,6 +119,7 @@
 </template>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @import '../assets/constantes.scss';
 
 h2 {
@@ -175,12 +176,13 @@ header {
 a,
 a:link {
   text-decoration: none;
-  color: lighten($colorOscuro, 20%);
+
+  color: color.scale($colorOscuro, $lightness: 20%);
   transition: color 0.15s ease-in-out;
   font-weight: bold;
 
   &:hover {
-    color: lighten($colorOscuro, 40%);
+    color: color.scale($colorOscuro, $lightness: 40%);
   }
 }
 
