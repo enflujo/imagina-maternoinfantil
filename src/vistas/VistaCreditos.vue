@@ -1,113 +1,151 @@
 <template>
-  <div id="creditos">
-    <h1>Créditos</h1>
+  <main id="creditos">
+    <header>
+      <h1>Créditos</h1>
 
-    <div class="seccion" id="primerParrafo">
-      Este proyecto fue financiado por la
-      <span class="negrita"><a href="https://www.fundacionexito.org/" target="_blank">Fundación Éxito</a></span
-      >, y desarrollado por
-      <span class="negrita">IMAGINA - Centro para la promoción del bienestar de la infancia y adolescencia</span> en
-      colaboración con el
-      <span class="negrita"><a href="https://enflujo.com/" target="_blank">Laboratorio EnFlujo</a></span> en la
-      Universidad de Los Andes de Bogotá, Colombia.
+      <p>
+        Este proyecto fue financiado por la
+        <span class="negrita"><a href="https://www.fundacionexito.org/" target="_blank">Fundación Éxito</a></span
+        >, y desarrollado por
+        <span class="negrita">IMAGINA - Centro para la promoción del bienestar de la infancia y adolescencia</span> en
+        colaboración con el
+        <span class="negrita"><a href="https://enflujo.com/" target="_blank">Laboratorio EnFlujo</a></span> en la
+        Universidad de Los Andes de Bogotá, Colombia.
+      </p>
+
       <div id="logos" :class="clase ? clase : ''">
-        <a href="https://www.fundacionexito.org/" target="_blank"
-          ><img class="logo" src="../assets/imgs/logo_f_exito.svg"
-        /></a>
+        <a href="https://www.fundacionexito.org/" target="_blank">
+          <img class="logo" src="../assets/imgs/logo_f_exito.svg" />
+        </a>
+
         <img class="logo" src="../assets/imgs/logo_andes_imagina.svg" />
-        <a href="https://enflujo.com" target="_blank"><img class="logo" src="../assets/imgs/logo_enflujo.svg" /></a>
+
+        <a href="https://enflujo.com" target="_blank">
+          <img class="logo" src="../assets/imgs/logo_enflujo.svg" />
+        </a>
       </div>
-    </div>
+    </header>
 
-    <div class="seccion">
-      <h2 class="titulo">Investigadores</h2>
-      <ul>
-        <li type="circle">
-          Tatiana Andia, PhD - Profesora Asociada, Departamento de Sociología Universidad de Los Andes
-        </li>
-        <li type="circle">
-          Catalina González, PhD - Profesora Asociada, Facultad de Medicina Universidad de Los Andes
-        </li>
-        <li type="circle">
-          Juan Camilo González, PhD - Profesor Asistente, Centro de Estudios en Periodismo y Facultad de Artes y
-          Humanidades Universidad de Los Andes
-        </li>
-        <li type="circle">
-          Arturo Harker, PhD - Director Centro IMAGINA y Profesor Asociado, Escuela de Gobierno Universidad de Los Andes
-        </li>
-        <li type="circle">
-          Sandra Martínez, PhD - Investigadora Posdoctoral, Facultad de Medicina Universidad de Los Andes
-        </li>
-        <li type="circle">Carlos Rincón, MsC - Investigador Centro IMAGINA Universidad de Los Andes</li>
-      </ul>
-    </div>
+    <section>
+      <h2>Investigadores</h2>
 
-    <div class="seccion">
-      <h2 class="titulo">Asistentes de investigación</h2>
       <ul>
-        <li type="circle">Natalia Córdoba Flechas</li>
-        <li type="circle">Luis Esteban Díaz Jerez</li>
-        <li type="circle">David Madinger</li>
-        <li type="circle">Santiago Muñoz Vergara</li>
-        <li type="circle">Samuel Pérez Castiblanco</li>
-      </ul>
-    </div>
-
-    <div class="seccion">
-      <h2 class="titulo">Programación y desarrollo web</h2>
-      <ul>
-        <li type="circle">
-          Juan Camilo González - <a href="https://enflujo.com/" target="_blank">Laboratorio EnFlujo</a>
+        <li>
+          <a href="https://cienciassociales.uniandes.edu.co/profesores/tatiana-andia/" target="_blank" rel="external"
+            >Tatiana Andia</a
+          >, PhD - Profesora Asociada, Departamento de Sociología Universidad de Los Andes
         </li>
-        <li type="circle">
-          Antonia Bustamante Robledo - <a href="https://enflujo.com/" target="_blank">Laboratorio EnFlujo</a>
+        <li>
+          <a href="https://academia.uniandes.edu.co/AcademyCv/cgonzalez" target="_blank" rel="external"
+            >Catalina González</a
+          >, PhD - Profesora Asociada, Facultad de Medicina Universidad de Los Andes
+        </li>
+        <li>
+          <a href="https://enflujo.com/equipo/juan-camilo-gonzalez" target="_blank" rel="external"
+            >Juan Camilo González</a
+          >, PhD - Profesor Asistente, Centro de Estudios en Periodismo y Facultad de Artes y Humanidades Universidad de
+          Los Andes
+        </li>
+        <li>
+          <a href="https://academia.uniandes.edu.co/AcademyCv/a.harker" target="_blank" rel="external">Arturo Harker</a
+          >, PhD - Director Centro IMAGINA y Profesor Asociado, Escuela de Gobierno Universidad de Los Andes
+        </li>
+        <li>
+          <a
+            href="https://colev.uniandes.edu.co/en/about-us/our-team/16-our-team/104-sandra-martinez"
+            target="_blank"
+            rel="external"
+            >Sandra Martínez</a
+          >
+          , PhD - Investigadora Posdoctoral, Facultad de Medicina Universidad de Los Andes
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/carlowrp/?trk=people_directory&originalSubdomain=co"
+            target="_balnk"
+            rel="external"
+            >Carlos Rincón</a
+          >, MsC - Investigador Centro IMAGINA Universidad de Los Andes
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="seccion">
-      <h2 class="titulo">Diseño</h2>
+    <section>
+      <h2>Asistentes de investigación</h2>
       <ul>
-        <li type="circle">
-          Julián Camilo García - <a href="https://enflujo.com/" target="_blank">Laboratorio EnFlujo</a>
+        <li>Natalia Córdoba Flechas</li>
+        <li>Luis Esteban Díaz Jerez</li>
+        <li>David Madinger</li>
+        <li>Santiago Muñoz Vergara</li>
+        <li>Samuel Pérez Castiblanco</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Programación y desarrollo web</h2>
+      <ul>
+        <li>
+          <a href="https://enflujo.com/equipo/juan-camilo-gonzalez" target="_blank" rel="external"
+            >Juan Camilo González</a
+          >
+        </li>
+        <li>
+          <a href="https://enflujo.com/equipo/antonia-bustamante" target="_blank" rel="external"
+            >Antonia Bustamante Robledo</a
+          >
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="seccion">
-      <h2 class="titulo">Colaboración</h2>
+    <section>
+      <h2>Diseño</h2>
       <ul>
-        <li type="circle">Paula Salazar</li>
-        <li type="circle">Issabella Rozo</li>
-        <li type="circle">Gabriela Gil Yusty</li>
-        <li type="circle">María José León</li>
+        <li>
+          <a href="https://enflujo.com/equipo/julian-garcia" target="_blank" rel="external">Julián Camilo García</a>
+        </li>
       </ul>
-    </div>
-  </div>
+    </section>
+
+    <section>
+      <h2>Colaboración</h2>
+      <ul>
+        <li>Paula Alejandra Salazar</li>
+        <li>Issabella Rozo</li>
+        <li>Gabriela Gil Yusty</li>
+        <li>María José León</li>
+      </ul>
+    </section>
+  </main>
 </template>
+
 <style lang="scss" scoped>
 @import '../assets/constantes.scss';
 
 #creditos {
-  width: 45vw;
-  margin: 5em;
-  padding: 2em;
+  padding: 2em 2em 10em 2em;
   color: $colorOscuro;
   text-align: justify;
+}
 
-  .seccion {
-    margin-top: 4em;
+section {
+  margin-top: 4em;
 
-    .titulo {
-      margin-bottom: 1em;
-    }
-
-    li {
-      margin-top: 0.5em;
-    }
+  h2 {
+    margin-bottom: 1em;
   }
 
-  #primerParrafo {
+  li {
+    margin-top: 0.5em;
+    list-style-type: circle;
+  }
+}
+
+header {
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  p {
     font-size: 1.2em;
   }
 }
@@ -117,9 +155,11 @@
 }
 
 #logos {
-  padding: 3em 1em 0em 1em;
-  z-index: 999999;
   background-color: rgba($colorFondoClaro, 0.75);
+  margin-top: 3em;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 
   &.historia {
     background-color: rgba($colorFondoHistorias, 0.75);
@@ -127,8 +167,7 @@
 }
 
 .logo {
-  height: 60px;
-  margin: 0 2em;
+  height: 35px;
 }
 
 a,
@@ -136,6 +175,7 @@ a:link {
   text-decoration: none;
   color: lighten($colorOscuro, 20%);
   transition: color 0.15s ease-in-out;
+  font-weight: bold;
 
   &:hover {
     color: lighten($colorOscuro, 40%);
@@ -144,5 +184,31 @@ a:link {
 
 ul {
   margin-left: 1.1em;
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  .logo {
+    height: 45px;
+  }
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+  #creditos {
+    margin: 5em;
+  }
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  .logo {
+    height: 50px;
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #creditos {
+    width: 50vw;
+    max-width: 900px;
+  }
 }
 </style>
