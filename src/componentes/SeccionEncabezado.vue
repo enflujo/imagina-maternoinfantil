@@ -1,14 +1,17 @@
-<script setup></script>
-
 <template>
   <header id="encabezado">
-    <div id="contenedor">
-      <img id="favicon" src="../assets/imgs/cargador.png" alt="Salud Maternoinfantil en Colombia" />
-      <div class="tituloProyecto elementoMenu">Salud Maternoinfantil en Colombia</div>
-      <router-link to="/" class="elementoMenu">Tablero</router-link>
-      <router-link to="/historias" class="elementoMenu">Historias</router-link>
-      <router-link to="/creditos" class="elementoMenu">Créditos</router-link>
-    </div>
+    <nav>
+      <router-link id="nombreProyecto" to="/">
+        <img id="logo" src="../assets/imgs/logo.svg" alt="Logo de Salud Maternoinfantil en Colombia" />
+        <h1 class="tituloProyecto">Salud Maternoinfantil en Colombia</h1>
+      </router-link>
+
+      <ul>
+        <li><router-link to="/" class="elementoMenu">Tablero</router-link></li>
+        <li><router-link to="/historias" class="elementoMenu">Historias</router-link></li>
+        <li><router-link to="/creditos" class="elementoMenu">Créditos</router-link></li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -23,39 +26,52 @@
   z-index: 10;
 }
 
-#contenedor {
+#nombreProyecto {
+  display: flex;
+  align-items: center;
+  padding: 0 1em 0 0;
+  border-right: 2px solid #0042bf;
+  height: $tamañoEncabezado;
+}
+
+nav {
   display: flex;
 }
 
-#favicon {
-  height: 47px;
-  position: relative;
-  top: -4px;
-  margin-left: 2em;
+#logo {
+  height: 23px;
+  margin: 0 0 0 20px;
 }
 
-.elementoMenu {
-  font-size: 1em;
-  padding: 0.2em 1em 0 3em;
-  margin-top: 0.4em;
-  color: $colorOscuro;
+a,
+a:link {
   font-weight: bold;
   text-decoration: none;
-  transition: all 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
+  color: $colorOscuro;
 
   &:hover {
     opacity: 0.6;
   }
 }
 
-.tituloProyecto {
-  border-right: 2px solid #0042bf;
-  padding: 0.2em 2em 0 1em;
-  height: fit-content;
-  margin-right: 3em;
+.elementoMenu {
+  font-size: 1em;
+  // padding: 0.2em 1em 0 3em;
+  margin: 10px;
+}
 
-  &:hover {
-    opacity: 1;
+.tituloProyecto {
+  display: none;
+  font-size: 1.1em;
+}
+
+ul {
+  display: flex;
+  margin: 8px 0 0 5px;
+
+  .router-link-exact-active {
+    border-bottom: 1px solid $colorOscuro;
   }
 }
 
@@ -64,6 +80,10 @@
 }
 // Pantallas medianas (Tablets)
 @media (min-width: $minTablet) {
+  .tituloProyecto {
+    display: block;
+    margin-left: 1em;
+  }
 }
 // Dispositivos grandes y pantallas medianas
 @media (min-width: $minPantalla) {
