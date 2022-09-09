@@ -1,7 +1,7 @@
 <template>
   <main id="creditos">
     <header>
-      <h1>Créditos</h1>
+      <h2>Créditos</h2>
 
       <p>
         Este proyecto fue financiado por la
@@ -27,7 +27,7 @@
     </header>
 
     <section>
-      <h2>Investigadores</h2>
+      <h3>Investigadores</h3>
 
       <ul>
         <li>
@@ -71,7 +71,7 @@
     </section>
 
     <section>
-      <h2>Asistentes de investigación</h2>
+      <h3>Asistentes de investigación</h3>
       <ul>
         <li>Natalia Córdoba Flechas</li>
         <li>Luis Esteban Díaz Jerez</li>
@@ -82,7 +82,7 @@
     </section>
 
     <section>
-      <h2>Programación y desarrollo web</h2>
+      <h3>Programación y desarrollo web</h3>
       <ul>
         <li>
           <a href="https://enflujo.com/equipo/juan-camilo-gonzalez" target="_blank" rel="external"
@@ -98,7 +98,7 @@
     </section>
 
     <section>
-      <h2>Diseño</h2>
+      <h3>Diseño</h3>
       <ul>
         <li>
           <a href="https://enflujo.com/equipo/julian-garcia" target="_blank" rel="external">Julián Camilo García</a>
@@ -107,7 +107,7 @@
     </section>
 
     <section>
-      <h2>Colaboración</h2>
+      <h3>Colaboración</h3>
       <ul>
         <li>Paula Alejandra Salazar</li>
         <li>Issabella Rozo</li>
@@ -121,6 +121,16 @@
 <style lang="scss" scoped>
 @import '../assets/constantes.scss';
 
+h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
 #creditos {
   padding: 2em 2em 10em 2em;
   color: $colorOscuro;
@@ -130,10 +140,6 @@
 section {
   margin-top: 4em;
 
-  h2 {
-    margin-bottom: 1em;
-  }
-
   li {
     margin-top: 0.5em;
     list-style-type: circle;
@@ -141,10 +147,6 @@ section {
 }
 
 header {
-  h1 {
-    margin-bottom: 1em;
-  }
-
   p {
     font-size: 1.2em;
   }

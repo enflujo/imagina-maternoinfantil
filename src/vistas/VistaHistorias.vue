@@ -7,7 +7,7 @@ import madresMigrantes from '../assets/imgs/madres_migrantes.png';
 import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 import madreHija from '../assets/imgs/madre-hija.png';
 import bebeMama from '../assets/imgs/bebe-mama.png';
-import GuardaEscobas from '../componentes/GuardaEscobas.vue';
+import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 </script>
 
 <template>
