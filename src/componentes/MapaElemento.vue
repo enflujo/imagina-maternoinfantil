@@ -265,7 +265,7 @@ function eventoClic(seccion, contenedor, evento) {
           :key="`seccion-${seccion.codigo}`"
           class="lugar"
           :class="
-            cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
+            cerebroGlobales.lugarSeleccionado && seccion.codigo === cerebroGlobales.lugarSeleccionado.codigo
               ? 'activo'
               : ''
           "
