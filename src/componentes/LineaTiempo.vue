@@ -396,4 +396,17 @@ svg {
   margin-top: 2em;
   margin-left: 30px;
 }
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+}
 </style>

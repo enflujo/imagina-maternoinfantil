@@ -78,14 +78,15 @@ defineExpose({ contenedor });
 @import '@/assets/constantes.scss';
 
 #fichaTecnica {
-  width: 35%;
   max-height: 80%;
   background-color: $colorVerdeResaltado;
   z-index: 99;
   position: absolute;
-  top: 180px;
-  left: 22vw;
-  border: 25px solid $colorVerdeResaltado;
+  top: 120px;
+  width: 95vw;
+  left: 1.5vw;
+  border: 15px solid $colorVerdeResaltado;
+
   border-radius: 15px;
   overflow-y: auto;
 
@@ -134,5 +135,24 @@ defineExpose({ contenedor });
 
 p {
   margin-bottom: 1em;
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #fichaTecnica {
+    width: 35%;
+    top: 180px;
+    left: 22vw;
+    border: 25px solid $colorVerdeResaltado;
+  }
 }
 </style>

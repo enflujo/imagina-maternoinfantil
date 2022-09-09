@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import './constantes';
 @import './normalizar';
 
@@ -24,5 +25,13 @@
   &.activo {
     background-color: $colorOscuro;
     color: $colorBlanco;
+  }
+
+  &:hover {
+    background-color: color.scale($colorOscuro, $lightness: 90%);
+
+    &.activo {
+      background-color: color.scale($colorOscuro, $lightness: 10%);
+    }
   }
 }

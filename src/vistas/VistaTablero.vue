@@ -101,8 +101,8 @@ function actualizarDims() {
 
 #contenedorGeneral {
   display: flex;
-  margin-top: $tamañoEncabezado;
   margin-right: 0.1em;
+  flex-direction: column;
 }
 
 .nivel {
@@ -110,20 +110,14 @@ function actualizarDims() {
 }
 
 #filtros {
-  margin: 1em;
+  margin: 0 1em;
   display: flex;
+  flex-wrap: wrap;
 
   #indicadorSeleccionado {
-    position: relative;
-    color: #0041bf;
-    width: 50%;
-    margin-left: 1em;
-    background-color: white;
-    padding: 1em;
-    border: 3px solid #0041bf;
-
     h3 {
       font-size: 1em;
+      display: none;
     }
   }
 }
@@ -132,9 +126,7 @@ function actualizarDims() {
   width: 1.5em;
   height: 1.5em;
   position: absolute;
-  transform: translate(-50%, 50%);
-  right: 0;
-  bottom: 0;
+  right: 1em;
   border-radius: 50%;
   background-color: white;
   border: 2px solid $colorOscuro;
@@ -148,18 +140,72 @@ function actualizarDims() {
 }
 
 #seccionCentral {
-  width: 40vw;
+  width: 95vw;
 }
 
 #seccionDerecha {
   position: relative;
-  width: 40vw;
-  margin-right: 30px;
+  width: 96vw;
+  margin-left: 1vw;
+  margin-right: 0;
 }
 
 #menuVistaLugar {
   display: flex;
   margin-left: 1em;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #contenedorGeneral {
+    flex-direction: row;
+    margin-top: $tamañoEncabezado;
+  }
+
+  #filtros {
+    margin: 1em;
+    flex-wrap: nowrap;
+    #indicadorSeleccionado {
+      position: relative;
+      color: #0041bf;
+      margin-left: 1em;
+      background-color: white;
+      padding: 1em;
+      border: 3px solid #0041bf;
+
+      h3 {
+        display: block;
+      }
+    }
+  }
+
+  #seccionCentral {
+    width: 40vw;
+  }
+
+  #seccionDerecha {
+    width: 40vw;
+    margin-right: 30px;
+  }
+
+  #masInfo {
+    transform: translate(-50%, 50%);
+    right: 0;
+    bottom: 0;
+  }
+
+  #menuVistaLugar {
+    flex-direction: column;
+  }
 }
 </style>

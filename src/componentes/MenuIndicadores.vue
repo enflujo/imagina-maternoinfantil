@@ -32,7 +32,7 @@ function abrir(evento) {
 
 <template>
   <aside>
-    <button id="mostrarIndicadores" @click="abrir">Indicadores</button>
+    <span id="mostrarIndicadores" class="boton" @click="abrir">Indicadores</span>
 
     <div id="contenedorIndicadores" ref="contenedor">
       <span class="cerrar" @click="cerrar">X</span>
@@ -77,6 +77,12 @@ function abrir(evento) {
   overflow: auto;
   margin: 0;
   width: 80vw;
+}
+
+#mostrarIndicadores {
+  margin: 0.5em 1em;
+  display: block;
+  width: 50vw;
 }
 
 h2 {
