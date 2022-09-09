@@ -62,7 +62,6 @@ nav {
   background-color: $colorOscuro;
   color: $colorBlanco;
   border-bottom: 2px solid $colorBlanco;
-  // padding-right: 1.7em;
   transition: all 0.15s ease-in;
 
   &:hover {
