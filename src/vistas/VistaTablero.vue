@@ -18,29 +18,29 @@ const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
+const mostrarFicha = ref(false);
+const ficha = ref(null);
 
 onMounted(() => {
   actualizarDims();
   cerebroGlobales.cambiarNivel();
   window.addEventListener('resize', actualizarDims);
+  document.body.addEventListener('click', clicFuera);
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', actualizarDims);
+  document.body.removeEventListener('click', clicFuera);
 });
 
-function mostrarFichaTecnica() {
-  const fichaTecnica = document.getElementById('fichaTecnica');
-  const botonFicha = document.getElementById('masInfo');
+const mostrarFichaTecnica = (evento) => {
+  evento.stopPropagation();
+  mostrarFicha.value = !mostrarFicha.value;
+};
 
-  cerebroGlobales.mostrarFicha = !cerebroGlobales.mostrarFicha;
-
-  if (cerebroGlobales.mostrarFicha === true) {
-    fichaTecnica.style.visibility = 'visible';
-    botonFicha.innerText = 'X';
-  } else {
-    fichaTecnica.style.visibility = 'hidden';
-    botonFicha.innerText = '?';
+function clicFuera(evento) {
+  if (!(ficha.value.contenedor === evento.target || ficha.value.contenedor.contains(evento.target))) {
+    mostrarFicha.value = false;
   }
 }
 
@@ -53,10 +53,11 @@ function actualizarDims() {
   <div id="contenedorGeneral">
     <div id="seccionIzquierda">
       <MenuIndicadores />
-      <FichaTecnica />
     </div>
 
     <div id="seccionCentral">
+      <FichaTecnica ref="ficha" :mostrar="mostrarFicha" />
+
       <div id="filtros">
         <MenuAños />
         <ul id="menuVistaLugar">
@@ -76,10 +77,10 @@ function actualizarDims() {
           </li>
         </ul>
 
-        <h2 v-if="cerebroDatos" id="indicadorSeleccionado">
-          {{ fuentes[cerebroDatos.indice].nombreIndicador }}
-          <div @click="mostrarFichaTecnica" id="masInfo">?</div>
-        </h2>
+        <div v-if="cerebroDatos" id="indicadorSeleccionado">
+          <h3>{{ fuentes[cerebroDatos.indice].nombreIndicador }}</h3>
+          <span id="masInfo" ref="masInfo" @click="mostrarFichaTecnica">{{ mostrarFicha ? 'X' : '?' }}</span>
+        </div>
       </div>
 
       <Mapa />
@@ -95,6 +96,7 @@ function actualizarDims() {
 </template>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @import '@/assets/constantes.scss';
 
 #contenedorGeneral {
@@ -114,26 +116,34 @@ function actualizarDims() {
   #indicadorSeleccionado {
     position: relative;
     color: #0041bf;
-    font-size: 1em;
     width: 50%;
     margin-left: 1em;
     background-color: white;
     padding: 1em;
     border: 3px solid #0041bf;
 
-    #masInfo {
-      width: 1.5em;
-      height: 1.5em;
-      position: absolute;
-      right: 8%;
-      bottom: -15%;
-      border-radius: 50%;
-      background-color: white;
-      border: 1px solid #0041bf;
-      text-align: center;
-      padding-top: 0.11em;
-      cursor: pointer;
+    h3 {
+      font-size: 1em;
     }
+  }
+}
+
+#masInfo {
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid $colorOscuro;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.scale($colorOscuro, $lightness: 90%);
   }
 }
 
