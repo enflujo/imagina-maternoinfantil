@@ -42,6 +42,8 @@ onMounted(definirUmbral);
 const tieneUmbral = computed(() => fuentes[cerebroDatos.indice].meta.umbral);
 const tendencia = computed(() => fuentes[cerebroDatos.indice].meta.tendenciaDeseada);
 const pasoX = computed(() => ((props.ancho - dimsVis.inicioX) / cerebroDatos.años.length) | 0);
+const cortarAño = computed(() => pasoX.value < 40);
+const añoRecortado = (valor) => valor.toString().substring(2);
 
 tendenciaDeseada.value = tendencia;
 
@@ -124,8 +126,6 @@ function textoPuntoY(i) {
 
   return respuesta;
 }
-
-// const añoRecortado = (valor) => valor.toString().substring(2);
 </script>
 
 <template>
@@ -192,7 +192,7 @@ function textoPuntoY(i) {
         :y="dimsVis.base + 16"
         @click="cerebroGlobales.actualizarAño(anno)"
       >
-        {{ anno }}
+        {{ cortarAño ? añoRecortado(anno) : anno }}
       </text>
 
       <text class="nombreEje" x="0" :y="dimsVis.base + 14">Año</text>
