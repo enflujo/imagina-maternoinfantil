@@ -146,7 +146,8 @@ function actualizarDims() {
 #seccionDerecha {
   position: relative;
   width: 96vw;
-  margin-left: 1vw;
+  padding-right: 1em;
+  margin-left: 3vw;
   margin-right: 0;
 }
 

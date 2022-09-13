@@ -168,7 +168,7 @@ function textoPuntoY(i) {
         class="lineaMarco"
         :x1="dimsVis.marcoIz"
         :y1="dimsVis.base"
-        :x2="props.ancho"
+        :x2="ancho - pasoX"
         :y2="dimsVis.base"
         shape-rendering="crispEdges"
       />
@@ -204,7 +204,7 @@ function textoPuntoY(i) {
         class="lineaDivision"
         :x1="dimsVis.marcoIz"
         :y1="alturaEjeY(i)"
-        :x2="props.ancho"
+        :x2="ancho - pasoX"
         :y2="alturaEjeY(i)"
         shape-rendering="crispEdges"
       />
@@ -237,7 +237,7 @@ function textoPuntoY(i) {
         class="umbral"
         :x="dimsVis.marcoIz"
         :y="posUmbral.y"
-        :width="ancho"
+        :width="ancho - pasoX - dimsVis.marcoIz"
         :height="posUmbral.alto"
         :fill="`url(#${tendencia})`"
       />
