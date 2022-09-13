@@ -145,10 +145,10 @@ function actualizarDims() {
 
 #seccionDerecha {
   position: relative;
-  width: 96vw;
-  padding-right: 1em;
+  width: 93vw;
   margin-left: 3vw;
   margin-right: 0;
+  padding-bottom: 4em;
 }
 
 #menuVistaLugar {
@@ -197,6 +197,7 @@ function actualizarDims() {
   #seccionDerecha {
     width: 40vw;
     margin-right: 30px;
+    padding-right: 0;
   }
 
   #masInfo {
