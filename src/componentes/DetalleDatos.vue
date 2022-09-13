@@ -1,13 +1,20 @@
 <script setup>
+import { usarCerebroGlobales } from '../cerebro/globales';
+
 defineProps({
   dato: Object,
 });
+
+const cerebroGlobales = usarCerebroGlobales();
 </script>
 
 <template>
-  <h4 class="nombreLugar">{{ dato.lugarNombre }}</h4>
+  <h3 class="nombreLugar">
+    {{ dato.lugarNombre }} <span v-if="cerebroGlobales.nivel === 'municipios'"> {{ dato.codigoDepto }}</span>
+  </h3>
+
   <div class="numeros">
-    <h3>{{ dato.porcentaje }}</h3>
+    <h4>{{ dato.porcentaje }}</h4>
     <div class="operacion">
       {{ dato.numerador }}
       <div class="divisor"></div>
@@ -28,16 +35,16 @@ defineProps({
   column-gap: 39px;
   margin-top: 1.5em;
 
-  h4 {
+  h3 {
     text-transform: uppercase;
     width: fit-content;
     padding: 0.5em 0em;
+    font-size: 0.95em;
   }
 
   .contenedorInfo {
     display: flex;
     justify-content: space-between;
-    font-size: 0.95em;
 
     .nombreLugar {
       height: 45px;
@@ -54,7 +61,7 @@ defineProps({
     justify-content: flex-end;
     align-items: center;
 
-    h3 {
+    h4 {
       margin-right: 1em;
       padding-bottom: 0.1em;
     }

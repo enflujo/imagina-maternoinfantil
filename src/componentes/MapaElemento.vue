@@ -5,14 +5,12 @@ import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayud
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { colores } from '../utilidades/constantes';
+import DetalleDatos from './DetalleDatos.vue';
 
 const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
 
-const nombreLugar = ref('');
-const infoNumerador = ref('');
-const infoDenominador = ref('');
-const infoPorcentaje = ref('');
+const infoDetalle = reactive({ lugarNombre: '', codigoDepto: 0, numerador: 0, denominador: 0, porcentaje: 0 });
 const infoVisible = ref(false);
 const dimsColombia = reactive({ ancho: 0, alto: 0 });
 const dimsSanAndresP = reactive({ ancho: 0, alto: 0 });
@@ -179,10 +177,13 @@ function eventoEncima(seccion) {
   const [numerador, denominador, porcentaje] = datosAño;
 
   infoVisible.value = true;
-  nombreLugar.value = seccion.nombre;
-  infoNumerador.value = `${numerador} de`;
-  infoDenominador.value = denominador;
-  infoPorcentaje.value = `${porcentaje.toFixed(2)}`;
+
+  // Agregar datos para mostrar detalle en hover
+  infoDetalle.lugarNombre = seccion.nombre;
+  infoDetalle.codigoDepto = seccion.codigo.slice(0, 2);
+  infoDetalle.numerador = numerador;
+  infoDetalle.denominador = denominador;
+  infoDetalle.porcentaje = porcentaje.toFixed(2);
 }
 
 function eventoFuera() {
@@ -285,10 +286,11 @@ function eventoClic(seccion, contenedor, evento) {
     </div>
 
     <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
-      <p id="departamento">{{ nombreLugar }}</p>
+      <DetalleDatos :dato="infoDetalle" />
+      <!--   <p id="departamento">{{ nombreLugar }}</p>
       <p id="numerador">{{ infoNumerador }}</p>
       <p id="denominador">{{ infoDenominador }}</p>
-      <p id="porcentaje">{{ infoPorcentaje }}</p>
+      <p id="porcentaje">{{ infoPorcentaje }}</p> -->
     </div>
   </div>
 </template>
