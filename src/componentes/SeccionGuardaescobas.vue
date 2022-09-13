@@ -21,12 +21,12 @@ defineProps({
 
 #guardaescobas {
   position: fixed;
-  right: 10%;
   bottom: 0px;
   padding: 0.6em;
   z-index: 999999;
   background-color: rgba($colorFondoClaro, 0.75);
   display: flex;
+  width: 100%;
   justify-content: space-around;
 
   &.historia {
@@ -35,37 +35,29 @@ defineProps({
 }
 
 .logo {
-  height: 8vw;
+  height: 36px;
   margin: 0 8%;
 }
 
 // Teléfonos horizontal
 @media (min-width: $minCelular) {
-  .logo {
-    height: 4vw;
-  }
 }
 // Pantallas medianas (Tablets)
 @media (min-width: $minTablet) {
-  .logo {
-    height: 4vw;
-  }
 }
 // Dispositivos grandes y pantallas medianas
 @media (min-width: $minPantalla) {
-  .logo {
-    height: 4vw;
-  }
 }
 // Pantallas grandes
 @media (min-width: $minPantallaGrande) {
   #guardaescobas {
     right: 0px;
     padding: 1em;
+    right: 0;
+    width: auto;
   }
 
   .logo {
-    height: 36px;
     margin: 0 2em;
   }
 }
