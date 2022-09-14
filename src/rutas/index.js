@@ -21,6 +21,12 @@ const router = createRouter({
       // en función se exporta aparte y el JS se carga sólo cuando se abre la ruta.
       component: () => import('../vistas/VistaHistorias.vue'),
     },
+    {
+      path: '/datos',
+      name: 'datos',
+      // en función se exporta aparte y el JS se carga sólo cuando se abre la ruta.
+      component: () => import('../vistas/VistaDatos.vue'),
+    },
   ],
 });
 

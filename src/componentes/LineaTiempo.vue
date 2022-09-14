@@ -313,7 +313,7 @@ h3 {
 }
 
 #detalle {
-  color: white;
+  color: $colorOscuro;
   font-size: 0.9em;
   width: fit-content;
   position: fixed;
