@@ -3,24 +3,30 @@ import { usarCerebroGlobales } from '../cerebro/globales';
 
 defineProps({
   dato: Object,
+  esLista: {
+    default: true,
+    type: Boolean,
+  },
 });
 
 const cerebroGlobales = usarCerebroGlobales();
 </script>
 
 <template>
-  <h3 class="nombreLugar">
-    {{ dato.lugarNombre }} <span v-if="cerebroGlobales.nivel === 'municipios'"> {{ dato.codigoDepto }}</span>
-  </h3>
-
-  <div class="numeros">
-    <h4>{{ dato.porcentaje }}</h4>
-    <div class="operacion">
-      {{ dato.numerador }}
-      <div class="divisor"></div>
-      {{ dato.denominador }}
+  <span class="datosLugar">
+    <p class="nombreLugar">
+      {{ dato.lugarNombre }}
+    </p>
+    <p class="nombreDepto" v-if="cerebroGlobales.nivel === 'municipios' && !esLista">{{ dato.departamento }}</p>
+    <div class="numeros">
+      <h4>{{ dato.porcentaje }}</h4>
+      <div class="operacion">
+        {{ dato.numerador }}
+        <div class="divisor"></div>
+        {{ dato.denominador }}
+      </div>
     </div>
-  </div>
+  </span>
   <div class="lineaVacia">
     <div class="lineaLlena" :style="`width:${(dato.numerador / dato.denominador) * 100}%`"></div>
   </div>
@@ -30,36 +36,20 @@ const cerebroGlobales = usarCerebroGlobales();
 @import '@/assets/constantes.scss';
 
 .dato {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  column-gap: 39px;
-  margin-top: 1.5em;
-
-  h3 {
-    text-transform: uppercase;
-    width: fit-content;
-    padding: 0.5em 0em;
-    font-size: 0.95em;
-  }
-
-  .contenedorInfo {
+  .datosLugar {
     display: flex;
-    justify-content: space-between;
-
-    .nombreLugar {
-      height: 45px;
-      max-height: 58px;
-      overflow: clip;
-      margin-bottom: 6px;
-      padding-top: 4%;
-      width: 144px;
-    }
+    margin: 0.6em 0;
+  }
+  .nombreLugar {
+    text-transform: uppercase;
+    font-size: 0.95em;
+    width: 50%;
   }
 
   .numeros {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    width: 50%;
 
     h4 {
       margin-right: 1em;
@@ -95,5 +85,10 @@ const cerebroGlobales = usarCerebroGlobales();
     left: -1px;
     border-radius: 1px;
   }
+}
+
+.nombreDepto {
+  text-transform: uppercase;
+  font-size: 0.9em;
 }
 </style>
