@@ -113,11 +113,15 @@ function actualizarDims() {
   margin: 0 1em;
   display: flex;
   flex-wrap: wrap;
+  color: #0041bf;
+  text-transform: uppercase;
+  font-weight: 600;
 
   #indicadorSeleccionado {
     h3 {
       font-size: 1em;
       display: none;
+      text-transform: none;
     }
   }
 }
@@ -141,6 +145,8 @@ function actualizarDims() {
 
 #seccionCentral {
   width: 95vw;
+  margin-top: 0.8em;
+  margin-left: 0.7em;
 }
 
 #seccionDerecha {
@@ -149,6 +155,7 @@ function actualizarDims() {
   margin-left: 3vw;
   margin-right: 0;
   padding-bottom: 4em;
+  margin-top: 1em;
 }
 
 #menuVistaLugar {
