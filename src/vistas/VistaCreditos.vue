@@ -13,7 +13,7 @@
         Universidad de Los Andes de Bogotá, Colombia.
       </p>
 
-      <div id="logos" :class="clase ? clase : ''">
+      <div id="logos">
         <a href="https://www.fundacionexito.org/" target="_blank">
           <img class="logo" src="../assets/imgs/logo_f_exito.svg" />
         </a>
