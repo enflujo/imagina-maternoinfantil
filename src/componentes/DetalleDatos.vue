@@ -40,10 +40,12 @@ const cerebroGlobales = usarCerebroGlobales();
     display: flex;
     margin: 0.6em 0;
   }
+
   .nombreLugar {
     text-transform: uppercase;
     font-size: 0.95em;
     width: 50%;
+    font-weight: bold;
   }
 
   .numeros {
