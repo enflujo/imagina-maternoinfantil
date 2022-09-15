@@ -5,12 +5,14 @@ import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayud
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { colores } from '../utilidades/constantes';
-import DetalleDatos from './DetalleDatos.vue';
 
 const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
 
-const infoDetalle = reactive({ lugarNombre: '', departamento: '', numerador: 0, denominador: 0, porcentaje: 0 });
+const nombreLugar = ref('');
+const infoNumerador = ref('');
+const infoDenominador = ref('');
+const infoPorcentaje = ref('');
 const infoVisible = ref(false);
 const dimsColombia = reactive({ ancho: 0, alto: 0 });
 const dimsSanAndresP = reactive({ ancho: 0, alto: 0 });
@@ -177,22 +179,10 @@ function eventoEncima(seccion) {
   const [numerador, denominador, porcentaje] = datosAño;
 
   infoVisible.value = true;
-
-  // Agregar datos para mostrar detalle en hover
-  infoDetalle.lugarNombre = seccion.nombre;
-
-  infoDetalle.numerador = numerador;
-  infoDetalle.denominador = denominador;
-  infoDetalle.porcentaje = porcentaje.toFixed(2);
-
-  if (cerebroGlobales.nivel === 'municipios') {
-    const codigoDpto = seccion.codigo.slice(0, 2);
-    const { properties } = cerebroDatos._cache.departamentos.features.find(
-      (obj) => obj.properties.codigo == codigoDpto
-    );
-    const nombre = properties.nombre;
-    infoDetalle.departamento = nombre ? nombre : '';
-  }
+  nombreLugar.value = seccion.nombre;
+  infoNumerador.value = `${numerador} de`;
+  infoDenominador.value = denominador;
+  infoPorcentaje.value = `${porcentaje.toFixed(2)}`;
 }
 
 function eventoFuera() {
@@ -295,7 +285,10 @@ function eventoClic(seccion, contenedor, evento) {
     </div>
 
     <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
-      <DetalleDatos :dato="infoDetalle" :esLista="false" />
+      <p id="departamento">{{ nombreLugar }}</p>
+      <p id="numerador">{{ infoNumerador }}</p>
+      <p id="denominador">{{ infoDenominador }}</p>
+      <p id="porcentaje">{{ infoPorcentaje }}</p>
     </div>
   </div>
 </template>
