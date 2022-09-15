@@ -60,7 +60,7 @@ function construirLinea() {
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    fill: $colorMenuClaro;
+    fill: $colorFondoClaro;
     filter: drop-shadow(0 0 2px $colorMenuClaro);
   }
 }
