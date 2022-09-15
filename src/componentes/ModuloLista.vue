@@ -268,5 +268,6 @@ function actualizarDatos() {
   padding: 0px 0px 10px 20px;
   color: #ef6461;
   font-size: 0.9em;
+  margin: 1em;
 }
 </style>
