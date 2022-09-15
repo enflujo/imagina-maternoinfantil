@@ -185,12 +185,20 @@ function eventoEncima(seccion) {
   infoDetalle.denominador = denominador;
   infoDetalle.porcentaje = porcentaje.toFixed(2);
 
+  let nombre = '';
+
   if (cerebroGlobales.nivel === 'municipios') {
     const codigoDpto = seccion.codigo.slice(0, 2);
-    const { properties } = cerebroDatos._cache.departamentos.features.find(
-      (obj) => obj.properties.codigo == codigoDpto
-    );
-    const nombre = properties.nombre;
+
+    if (codigoDpto !== '88') {
+      const { properties } = cerebroDatos._cache.departamentos.features.find(
+        (obj) => obj.properties.codigo == codigoDpto
+      );
+
+      nombre = properties.nombre;
+    } else {
+      nombre = '';
+    }
     infoDetalle.departamento = nombre ? nombre : '';
   }
 }
@@ -206,7 +214,6 @@ function eventoMovimiento(evento) {
 
 function eventoClic(seccion, contenedor, evento) {
   // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-
   if (contenedor) {
     const elemento = evento.target;
     contenedor.append(elemento);
@@ -294,7 +301,11 @@ function eventoClic(seccion, contenedor, evento) {
       Este indicador no tiene datos disponibles para el año <span class="resaltar">{{ cerebroGlobales.año }}.</span>
     </div>
 
-    <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
+    <div
+      class="vistaMapa"
+      id="informacion"
+      :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`"
+    >
       <DetalleDatos :dato="infoDetalle" :esLista="false" />
     </div>
   </div>
