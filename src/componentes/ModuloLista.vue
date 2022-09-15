@@ -192,7 +192,6 @@ function actualizarDatos() {
   .seccionMenu {
     display: flex;
     justify-content: flex-start;
-    //margin-top: 0.5em;
     padding: 0.1em;
 
     h4 {
@@ -203,12 +202,13 @@ function actualizarDatos() {
   .botonesOrdenar {
     cursor: pointer;
     border: 2px solid #0041bf;
-    width: fit-content;
     border-radius: 5px;
     font-weight: bold;
     position: relative;
     left: 5%;
     top: 5%;
+    display: block;
+    width: fit-content;
 
     &:hover {
       background-color: white;
@@ -222,9 +222,11 @@ function actualizarDatos() {
     color: white;
     padding: 0.5em 0.9em;
     margin: 0.5em 1.5em 0.4em;
+    border: solid 2px #0041bf;
 
     &:hover {
       opacity: 0.6;
+      border: solid 2px transparent;
     }
 
     &.activo {
@@ -243,7 +245,7 @@ function actualizarDatos() {
     border: solid 2px #0041bf;
     border-radius: 15px;
     color: #0041bf;
-    margin-bottom: 20px;
+    margin-bottom: 6em;
     scrollbar-color: #0041bf white;
     scrollbar-width: auto;
   }

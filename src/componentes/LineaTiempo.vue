@@ -375,11 +375,9 @@ svg {
 }
 
 #descripcionMeta {
-  // color: rgb(20, 99, 20);
   border: 2px solid #27f7ba;
   background-color: $colorBlanco;
   padding: 1em 1.5em;
-  // text-align: center;
   color: #0042bf;
   margin-top: 2em;
   margin-left: 30px;
