@@ -60,6 +60,7 @@ const cerebroGlobales = usarCerebroGlobales();
   font-size: 0.95em;
   width: 50%;
   font-weight: bold;
+  margin-right: 1em;
 }
 
 .numeros {
