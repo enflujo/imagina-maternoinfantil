@@ -266,7 +266,7 @@ function textoPuntoY(i) {
 
     <!-- DETALLE VALOR INDICADOR (al pasar el ratón sobre un punto) -->
     <div
-      class="detalle"
+      id="detalle"
       :style="`opacity:${infoVisible ? 1 : 0}; left:${infoX}px;top:${infoY}px; color:${colores.numero}`"
     >
       {{ infoPorcentaje }}
