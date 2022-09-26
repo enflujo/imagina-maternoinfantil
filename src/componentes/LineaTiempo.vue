@@ -41,7 +41,7 @@ onMounted(definirUmbral);
 
 const tieneUmbral = computed(() => fuentes[cerebroDatos.indice].meta.umbral);
 const tendencia = computed(() => fuentes[cerebroDatos.indice].meta.tendenciaDeseada);
-const pasoX = computed(() => ((props.ancho - dimsVis.inicioX) / cerebroDatos.años.length) | 0);
+const pasoX = computed(() => ((props.ancho - dimsVis.inicioX) / (cerebroDatos.años.length - 1) - 1.1) | 0);
 const cortarAño = computed(() => pasoX.value < 40);
 const añoRecortado = (valor) => valor.toString().substring(2);
 
@@ -156,7 +156,7 @@ function textoPuntoY(i) {
         class="lineaMarco"
         :x1="dimsVis.marcoIz"
         :y1="dimsVis.base"
-        :x2="props.ancho"
+        :x2="ancho"
         :y2="dimsVis.base"
         shape-rendering="crispEdges"
       />
@@ -192,7 +192,7 @@ function textoPuntoY(i) {
         class="lineaDivision"
         :x1="dimsVis.marcoIz"
         :y1="alturaEjeY(i)"
-        :x2="props.ancho"
+        :x2="ancho"
         :y2="alturaEjeY(i)"
         shape-rendering="crispEdges"
       />
@@ -299,7 +299,8 @@ h3 {
   letter-spacing: -0.4px;
 }
 
-.detalle {
+#detalle {
+  color: $colorOscuro;
   font-size: 0.9em;
   width: fit-content;
   position: fixed;

@@ -122,7 +122,6 @@ h3 {
 #creditos {
   padding: 2em 2em 10em 2em;
   color: $colorOscuro;
-  text-align: justify;
 }
 
 section {
