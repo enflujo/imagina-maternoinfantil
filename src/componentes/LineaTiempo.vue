@@ -21,7 +21,7 @@ const infoY = ref(null);
 const umbralIndicador = ref(null);
 const tendenciaDeseada = ref(null);
 const posUmbral = reactive({ y: 0, alto: 0 });
-const colores = { lineaNal: '#0042BA' };
+const colores = { lineaNal: '#0042BA', lineaLugar: '#B569D6', numero: '' };
 const dimsVis = {
   alto: 250,
   altoVis: 0,
@@ -77,39 +77,27 @@ function definirUmbral() {
   posUmbral.alto = alto;
 }
 
+/* Definir detalle del valor del indicador al pasar el mouse 
+sobre un punto de la línea de tiempo */
 function eventoEncima(porcentaje, evento) {
+  const info = fuentes[cerebroDatos.indice];
+
   infoX.value = evento.pageX - 10;
   infoY.value = evento.pageY - 30;
   infoVisible.value = true;
-  infoPorcentaje.value = porcentaje;
+
+  if (info.tipo === 'proporción') {
+    infoPorcentaje.value = `${porcentaje}%`;
+  } else {
+    infoPorcentaje.value = porcentaje;
+  }
+
+  // Definir color del número según la línea a la que pertenece
+  colores.numero = evento.target.attributes.fill.value;
 }
 
 function eventoFuera() {
   infoVisible.value = false;
-}
-
-function colorFondoDetalle(valor) {
-  let color = '';
-
-  if (umbralIndicador.value) {
-    if (tendenciaDeseada.value === 'abajo') {
-      if (valor > umbralIndicador.value) {
-        color = '#0000a4';
-      } else {
-        color = '##27F7BA';
-      }
-    } else {
-      if (valor <= umbralIndicador.value) {
-        color = '#0000a4';
-      } else {
-        color = '#219196';
-      }
-    }
-  } else {
-    color = '#626363';
-  }
-
-  return color;
 }
 
 function textoPuntoY(i) {
@@ -270,17 +258,16 @@ function textoPuntoY(i) {
         :posicionX="posicionX"
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
-        color="#B569D6"
+        :color="colores.lineaLugar"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />
     </svg>
 
+    <!-- DETALLE VALOR INDICADOR (al pasar el ratón sobre un punto) -->
     <div
-      id="detalle"
-      :style="`opacity:${infoVisible ? 1 : 0}; background-color:${colorFondoDetalle(
-        infoPorcentaje
-      )}; left:${infoX}px;top:${infoY}px`"
+      class="detalle"
+      :style="`opacity:${infoVisible ? 1 : 0}; left:${infoX}px;top:${infoY}px; color:${colores.numero}`"
     >
       {{ infoPorcentaje }}
     </div>
@@ -321,6 +308,8 @@ h3 {
   pointer-events: none;
   transition: opacity 0.25s ease-in-out;
   padding: 2px;
+  background-color: $colorBlanco;
+  font-weight: bold;
 }
 
 svg {
@@ -387,11 +376,9 @@ svg {
 }
 
 #descripcionMeta {
-  // color: rgb(20, 99, 20);
   border: 2px solid #27f7ba;
   background-color: $colorBlanco;
   padding: 1em 1.5em;
-  // text-align: center;
   color: #0042bf;
   margin-top: 2em;
   margin-left: 30px;

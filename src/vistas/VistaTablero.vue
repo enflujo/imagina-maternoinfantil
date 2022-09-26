@@ -101,7 +101,6 @@ function actualizarDims() {
 
 #contenedorGeneral {
   display: flex;
-  margin-right: 0.1em;
   flex-direction: column;
 }
 

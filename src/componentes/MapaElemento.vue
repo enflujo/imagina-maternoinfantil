@@ -5,14 +5,12 @@ import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayud
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { colores } from '../utilidades/constantes';
+import DetalleDatos from './DetalleDatos.vue';
 
 const cerebroDatos = usarCerebroDatos();
 const cerebroGlobales = usarCerebroGlobales();
 
-const nombreLugar = ref('');
-const infoNumerador = ref('');
-const infoDenominador = ref('');
-const infoPorcentaje = ref('');
+const infoDetalle = reactive({ lugarNombre: '', departamento: '', numerador: 0, denominador: 0, porcentaje: 0 });
 const infoVisible = ref(false);
 const dimsColombia = reactive({ ancho: 0, alto: 0 });
 const dimsSanAndresP = reactive({ ancho: 0, alto: 0 });
@@ -179,10 +177,30 @@ function eventoEncima(seccion) {
   const [numerador, denominador, porcentaje] = datosAño;
 
   infoVisible.value = true;
-  nombreLugar.value = seccion.nombre;
-  infoNumerador.value = `${numerador} de`;
-  infoDenominador.value = denominador;
-  infoPorcentaje.value = `${porcentaje.toFixed(2)}`;
+
+  // Agregar datos para mostrar detalle en hover
+  infoDetalle.lugarNombre = seccion.nombre;
+
+  infoDetalle.numerador = numerador;
+  infoDetalle.denominador = denominador;
+  infoDetalle.porcentaje = porcentaje.toFixed(2);
+
+  let nombre = '';
+
+  if (cerebroGlobales.nivel === 'municipios') {
+    const codigoDpto = seccion.codigo.slice(0, 2);
+
+    if (codigoDpto !== '88') {
+      const { properties } = cerebroDatos._cache.departamentos.features.find(
+        (obj) => obj.properties.codigo == codigoDpto
+      );
+
+      nombre = properties.nombre;
+    } else {
+      nombre = '';
+    }
+    infoDetalle.departamento = nombre ? nombre : '';
+  }
 }
 
 function eventoFuera() {
@@ -196,7 +214,6 @@ function eventoMovimiento(evento) {
 
 function eventoClic(seccion, contenedor, evento) {
   // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-
   if (contenedor) {
     const elemento = evento.target;
     contenedor.append(elemento);
@@ -284,11 +301,12 @@ function eventoClic(seccion, contenedor, evento) {
       Este indicador no tiene datos disponibles para el año <span class="resaltar">{{ cerebroGlobales.año }}.</span>
     </div>
 
-    <div id="informacion" :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`">
-      <p id="departamento">{{ nombreLugar }}</p>
-      <p id="numerador">{{ infoNumerador }}</p>
-      <p id="denominador">{{ infoDenominador }}</p>
-      <p id="porcentaje">{{ infoPorcentaje }}</p>
+    <div
+      class="vistaMapa"
+      id="informacion"
+      :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`"
+    >
+      <DetalleDatos :dato="infoDetalle" :esLista="false" />
     </div>
   </div>
 </template>

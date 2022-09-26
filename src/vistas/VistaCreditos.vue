@@ -13,7 +13,7 @@
         Universidad de Los Andes de Bogotá, Colombia.
       </p>
 
-      <div id="logos" :class="clase ? clase : ''">
+      <div id="logos">
         <a href="https://www.fundacionexito.org/" target="_blank">
           <img class="logo" src="../assets/imgs/logo_f_exito.svg" />
         </a>
@@ -82,12 +82,10 @@
     </section>
 
     <section>
-      <h3>Programación y desarrollo web</h3>
+      <h3>Diseño y desarrollo web</h3>
       <ul>
         <li>
-          <a href="https://enflujo.com/equipo/juan-camilo-gonzalez" target="_blank" rel="external"
-            >Juan Camilo González</a
-          >
+          <a href="https://enflujo.com/equipo/julian-garcia" target="_blank" rel="external">Julián Camilo García</a>
         </li>
         <li>
           <a href="https://enflujo.com/equipo/antonia-bustamante" target="_blank" rel="external"
@@ -95,19 +93,8 @@
           >
         </li>
       </ul>
-    </section>
 
-    <section>
-      <h3>Diseño</h3>
-      <ul>
-        <li>
-          <a href="https://enflujo.com/equipo/julian-garcia" target="_blank" rel="external">Julián Camilo García</a>
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>Colaboración</h3>
+      <p>Con la colaboración de:</p>
       <ul>
         <li>Paula Alejandra Salazar</li>
         <li>Issabella Rozo</li>
@@ -143,6 +130,10 @@ section {
   li {
     margin-top: 0.5em;
     list-style-type: circle;
+  }
+
+  p {
+    margin: 2em 0em;
   }
 }
 

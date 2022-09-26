@@ -3,11 +3,14 @@ import { ref, reactive, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import fuentes from '../utilidades/fuentes';
+import DetalleDatos from './DetalleDatos.vue';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
 let datosOrdenados = reactive([]);
+let datosOrdenadosIzq = reactive([]);
+let datosOrdenadosDer = reactive([]);
 let datosLugarDesconocido = reactive([]);
 let criterioOrden = ref('porcentaje');
 
@@ -32,6 +35,22 @@ function elegirOrden(criterio) {
 
 function ordenarDatos() {
   datosOrdenados.reverse();
+  dividirDatos();
+}
+
+function dividirDatos() {
+  // Vaciar listas
+  datosOrdenadosIzq.splice(0);
+  datosOrdenadosDer.splice(0);
+
+  // Dividir datos en dos columnas
+  for (let i = 0; i < datosOrdenados.length; i++) {
+    if ((i + 2) % 2 == 0) {
+      datosOrdenadosIzq.push(datosOrdenados[i]);
+    } else {
+      datosOrdenadosDer.push(datosOrdenados[i]);
+    }
+  }
 }
 
 function actualizarDatos() {
@@ -73,6 +92,8 @@ function actualizarDatos() {
   });
 
   datosOrdenados.sort(comparar);
+
+  dividirDatos();
 }
 </script>
 
@@ -116,33 +137,28 @@ function actualizarDatos() {
       </span>
     </span>
     <div id="contenedor">
+      <span class="botonesOrdenar">
+        <span @click="ordenarDatos()">↑↓</span>
+      </span>
       <div id="lista">
-        <span class="botonesOrdenar">
-          <span @click="ordenarDatos()">↑↓</span>
-        </span>
-
-        <ul class="dato">
-          <li v-for="dato in datosOrdenados" :key="`lugar${dato}`">
-            <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
-              <span class="contenedorInfo">
-                <h4 class="nombreLugar">{{ dato.lugarNombre }}</h4>
-                <div class="numeros">
-                  <h3>{{ dato.porcentaje }}</h3>
-                  <div class="operacion">
-                    {{ dato.numerador }}
-                    <div class="divisor"></div>
-                    {{ dato.denominador }}
-                  </div>
-                </div>
+        <div class="columna">
+          <ul class="dato">
+            <li v-for="(dato, i) in datosOrdenadosIzq" :key="`lugar${i}`">
+              <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
+                <DetalleDatos :dato="dato" />
               </span>
-              <div class="lineaVacia">
-                <div class="lineaLlena" :style="`width:${(dato.numerador / dato.denominador) * 100}%`"></div>
-              </div>
-            </span>
-          </li>
-        </ul>
-        <!-- <div id="columnaIzquierda"></div>
-        <div id="columnaDerecha"></div> -->
+            </li>
+          </ul>
+        </div>
+        <div class="columna">
+          <ul class="dato">
+            <li v-for="(dato, i) in datosOrdenadosDer" :key="`lugar${i}`">
+              <span v-if="dato.lugarNombre !== null && dato.lugarNombre !== 'Lugar desconocido'">
+                <DetalleDatos :dato="dato" />
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
       <div id="lugarDesconocido" v-if="datosLugarDesconocido[0] && datosLugarDesconocido[0][criterioOrden] !== null">
         Lugar desconocido: {{ datosLugarDesconocido[0][criterioOrden] }}
@@ -176,7 +192,6 @@ function actualizarDatos() {
   .seccionMenu {
     display: flex;
     justify-content: flex-start;
-    //margin-top: 0.5em;
     padding: 0.1em;
 
     h4 {
@@ -187,11 +202,13 @@ function actualizarDatos() {
   .botonesOrdenar {
     cursor: pointer;
     border: 2px solid #0041bf;
-    width: fit-content;
     border-radius: 5px;
     font-weight: bold;
     position: relative;
-    right: -100%;
+    left: 5%;
+    top: 5%;
+    display: block;
+    width: fit-content;
 
     &:hover {
       background-color: white;
@@ -205,9 +222,11 @@ function actualizarDatos() {
     color: white;
     padding: 0.5em 0.9em;
     margin: 0.5em 1.5em 0.4em;
+    border: solid 2px #0041bf;
 
     &:hover {
       opacity: 0.6;
+      border: solid 2px transparent;
     }
 
     &.activo {
@@ -223,91 +242,27 @@ function actualizarDatos() {
     height: 40vh;
     min-height: fit-content;
     overflow-y: scroll;
-    overflow-x: clip;
     border: solid 2px #0041bf;
     border-radius: 15px;
     color: #0041bf;
-    margin-bottom: 20px;
+    margin-bottom: 6em;
     scrollbar-color: #0041bf white;
     scrollbar-width: auto;
   }
 
   #lista {
-    padding: 20px 20px 0px 20px;
+    padding: 35px 0px;
     margin-bottom: 15px;
-    width: 35vw;
+    display: flex;
+    justify-content: space-around;
 
     li {
       margin-bottom: 3px;
     }
-  }
-}
 
-.dato {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  column-gap: 39px;
-  margin-top: 1.5em;
-
-  h4 {
-    text-transform: uppercase;
-    width: fit-content;
-    padding: 0.5em 0em;
-  }
-
-  .contenedorInfo {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.95em;
-
-    .nombreLugar {
-      height: 45px;
-      max-height: 58px;
-      overflow: clip;
-      margin-bottom: 6px;
-      padding-top: 4%;
-      width: 144px;
+    .columna {
+      width: 40%;
     }
-  }
-
-  .numeros {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    h3 {
-      margin-right: 1em;
-      padding-bottom: 0.1em;
-    }
-  }
-
-  .operacion {
-    width: 4em;
-    font-size: 0.7em;
-    text-align: right;
-  }
-
-  .divisor {
-    height: 1px;
-    width: 100%;
-    background-color: #0041bf;
-  }
-
-  .lineaVacia {
-    height: 4px;
-    width: 100%;
-    border-top: #0041bf dashed 1px;
-  }
-
-  .lineaLlena {
-    height: 0px;
-    width: 68%;
-    border: #258b51 solid 3px;
-    margin-bottom: 11px;
-    position: relative;
-    top: -4px;
-    left: -1px;
-    border-radius: 1px;
   }
 }
 
@@ -315,5 +270,6 @@ function actualizarDatos() {
   padding: 0px 0px 10px 20px;
   color: #ef6461;
   font-size: 0.9em;
+  margin: 1em;
 }
 </style>
