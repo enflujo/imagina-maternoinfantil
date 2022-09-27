@@ -99,7 +99,6 @@ function actualizarDatos() {
 </script>
 
 <template>
-  <Buscador />
   <div v-if="datosOrdenados.length > 0" id="modulo">
     <span>Ordenar por: </span>
     <span id="menuOrden">
