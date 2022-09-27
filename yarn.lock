@@ -936,6 +936,11 @@ minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
+minisearch@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/minisearch/-/minisearch-5.0.0.tgz#0febfaa381422ed558e157f5855319136155a181"
+  integrity sha512-VEwBhl8aFtc2UG2XmP7a4XaZxVfNhe7GvB2W/ZRGbLL3P3LbBhkoOezBWsMqG8Mr5VonqXAMRWth79XXKja1bQ==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
