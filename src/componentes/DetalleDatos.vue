@@ -1,5 +1,6 @@
 <script setup>
 import { usarCerebroGlobales } from '../cerebro/globales';
+import { usarCerebroDatos } from '../cerebro/datos';
 
 defineProps({
   dato: Object,
@@ -10,12 +11,22 @@ defineProps({
 });
 
 const cerebroGlobales = usarCerebroGlobales();
+const cerebroDatos = usarCerebroDatos();
+
+function elegir(lugar) {
+  const lugarSeleccionado = cerebroDatos.datos.find((obj) => obj.nombre === lugar);
+
+  // Cambiar lugar seleccionado
+  cerebroDatos.actualizarDatosLugar(lugarSeleccionado);
+}
 </script>
 
 <template>
   <span class="datosLugar">
     <div class="nombreLugar">
-      <p :class="cerebroGlobales.nivel === 'municipios' ? '' : 'nivelDepto'">{{ dato.lugarNombre }}</p>
+      <p :class="cerebroGlobales.nivel === 'municipios' ? '' : 'nivelDepto'" @click="elegir(dato.lugarNombre)">
+        {{ dato.lugarNombre }}
+      </p>
       <p class="nombreDepto" v-if="cerebroGlobales.nivel === 'municipios' && !esLista">{{ dato.departamento }}</p>
     </div>
 
@@ -39,6 +50,7 @@ const cerebroGlobales = usarCerebroGlobales();
 .dato {
   .nombreLugar {
     text-transform: uppercase;
+    cursor: pointer;
   }
 }
 

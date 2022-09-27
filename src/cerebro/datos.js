@@ -19,6 +19,7 @@ export const usarCerebroDatos = defineStore('datos', {
     geojsonSanAndres: null,
     años: [],
     valorMax: 0,
+    lugarSeleccionado: null,
   }),
 
   getters: {
@@ -140,6 +141,8 @@ export const usarCerebroDatos = defineStore('datos', {
         codigo: datos.codigo,
         nombre: datos.nombre || cerebroGlobales.lugarSeleccionado.nombre,
       };
+
+      this.lugarSeleccionado = datos.codigo;
 
       this.datosLugar = Object.keys(datos.datos).map((anno) => {
         const [numerador, denominador, porcentaje] = datos.datos[anno];

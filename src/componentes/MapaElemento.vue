@@ -23,11 +23,22 @@ const sinDatos = ref(false);
 const datosLugar = ref([]);
 const datosSanAndres = ref([]);
 const datosProvidencia = ref([]);
+const lugaresColombia = ref(null);
 
 watch(
   () => cerebroDatos.geojsonLugar,
   (nuevos) => {
     iniciarDatosLugar(nuevos);
+  }
+);
+
+watch(
+  () => cerebroDatos.lugarSeleccionado,
+  (codigo) => {
+    if (mapa.value) {
+      const elemento = lugaresColombia.value.find((elemento) => elemento.id === codigo);
+      mapa.value.append(elemento);
+    }
   }
 );
 
@@ -214,10 +225,6 @@ function eventoMovimiento(evento) {
 
 function eventoClic(seccion, contenedor, evento) {
   // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-  if (contenedor) {
-    const elemento = evento.target;
-    contenedor.append(elemento);
-  }
 
   // Cambiar lugar
   cerebroDatos.actualizarDatosLugar(seccion);
@@ -279,6 +286,8 @@ function eventoClic(seccion, contenedor, evento) {
       <g id="colombia">
         <path
           v-for="seccion in datosLugar"
+          ref="lugaresColombia"
+          :id="seccion.codigo"
           :key="`seccion-${seccion.codigo}`"
           class="lugar"
           :class="
