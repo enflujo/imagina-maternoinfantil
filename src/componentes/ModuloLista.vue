@@ -4,7 +4,6 @@ import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import fuentes from '../utilidades/fuentes';
 import DetalleDatos from './DetalleDatos.vue';
-import Buscador from './Buscador.vue';
 
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();

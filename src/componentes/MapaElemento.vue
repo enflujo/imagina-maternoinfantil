@@ -223,9 +223,7 @@ function eventoMovimiento(evento) {
   posInfo.y = evento.pageY;
 }
 
-function eventoClic(seccion, contenedor, evento) {
-  // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-
+function eventoClic(seccion) {
   // Cambiar lugar
   cerebroDatos.actualizarDatosLugar(seccion);
 }
@@ -300,7 +298,7 @@ function eventoClic(seccion, contenedor, evento) {
           :data-nombre="seccion.nombre"
           @mouseenter="eventoEncima(seccion)"
           @mouseleave="eventoFuera"
-          @click="(e) => eventoClic(seccion, mapa, e)"
+          @click="(e) => eventoClic(seccion)"
           shape-rendering="geometricPrecision"
         />
       </g>
@@ -325,7 +323,7 @@ function eventoClic(seccion, contenedor, evento) {
 
 #contenedorMapa {
   position: relative;
-  margin-left:12vw;
+  margin-left: 12vw;
   margin-top: 4vh;
   margin-bottom: 3vh;
 }

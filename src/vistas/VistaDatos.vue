@@ -4,20 +4,17 @@
       <h2>Datos para descarga</h2>
 
       <p>
-        Aquí se encuentran los datos en bruto para descarga directa. A través del menú selecciona el indicador cuyos datos quieres obtener. Los datos están disponibles en <span class="negrita">.xlsx</span> o <span class="negrita">.zip</span> 
+        Aquí se encuentran los datos en bruto para descarga directa. A través del menú selecciona el indicador cuyos
+        datos quieres obtener. Los datos están disponibles en <span class="negrita">.xlsx</span> o
+        <span class="negrita">.zip</span>
       </p>
 
       <div id="boton" :class="clase ? clase : ''">
-      
         <a href="https://enflujo.com" target="_blank">
           <img class="boton" src="../assets/imgs/bajada.svg" />
         </a>
       </div>
-    
     </header>
-
-    
-   
   </main>
 </template>
 
@@ -28,13 +25,13 @@
 h2 {
   font-size: 2em;
   margin-bottom: 1em;
-  letter-spacing: -0.5px
+  letter-spacing: -0.5px;
 }
 
 h3 {
   font-size: 1.5em;
   margin-bottom: 1em;
-  letter-spacing: -0.5px
+  letter-spacing: -0.5px;
 }
 
 #datos {
@@ -48,7 +45,6 @@ section {
   li {
     margin-top: 0.5em;
     list-style-type: circle;
-
   }
 }
 
