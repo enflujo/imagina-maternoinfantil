@@ -22,9 +22,13 @@ function elegir(lugar) {
 </script>
 
 <template>
-  <span class="datosLugar">
+  <div
+    class="datosLugar"
+    :class="dato.lugarCodigo == cerebroDatos.lugarSeleccionado ? 'activo' : null"
+    @click="elegir(dato.lugarNombre)"
+  >
     <div class="nombreLugar">
-      <p :class="cerebroGlobales.nivel === 'municipios' ? '' : 'nivelDepto'" @click="elegir(dato.lugarNombre)">
+      <p :class="cerebroGlobales.nivel === 'municipios' ? '' : 'nivelDepto'">
         {{ dato.lugarNombre }}
       </p>
       <p class="nombreDepto" v-if="cerebroGlobales.nivel === 'municipios' && !esLista">{{ dato.departamento }}</p>
@@ -38,7 +42,8 @@ function elegir(lugar) {
         {{ dato.denominador }}
       </div>
     </div>
-  </span>
+  </div>
+
   <div class="lineaVacia">
     <div class="lineaLlena" :style="`width:${(dato.numerador / dato.denominador) * 100}%`"></div>
   </div>
@@ -50,7 +55,6 @@ function elegir(lugar) {
 .dato {
   .nombreLugar {
     text-transform: uppercase;
-    cursor: pointer;
   }
 }
 
@@ -66,6 +70,12 @@ function elegir(lugar) {
   display: flex;
   flex-direction: column;
   margin: 0.6em 0;
+
+  &:hover,
+  &.activo {
+    cursor: pointer;
+    background-color: rgba($cargadorColor2, 0.3);
+  }
 }
 
 .nombreLugar {
