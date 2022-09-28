@@ -6,6 +6,7 @@ import { usarCerebroDatos } from '../cerebro/datos';
 
 const lugares = ref([]);
 const lugar = ref('');
+const nombreLugar = ref('');
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
@@ -48,29 +49,11 @@ const departamentos = [
 ];
 
 function buscar(texto) {
+  nombreLugar.value = texto;
   const respuesta = fuzzysort.go(texto, departamentos, { key: 'nombre' });
 
-  if ((texto = '')) {
-    lugares.value = [];
-  }
-
-  /*  const primeraLetra = lugar[0];
-  console.log(primeraLetra);
-  lugares.value = resultado.sort((a, b) => {
-    if (a[0] >= primeraLetra) {
-      return -1;
-    }
-
-    if (a[0] <= primeraLetra) {
-      return 1;
-    }
-    return 0;
-  }); */
   if (respuesta.length) {
-    const lugarEncontrado = respuesta[0].target.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log(respuesta);
     lugares.value = respuesta;
-    lugar.value = lugarEncontrado;
   }
 }
 
@@ -81,13 +64,14 @@ function elegirDeLista(lugar) {
   if (lugarSeleccionado) {
     // Cambiar lugar seleccionado
     cerebroDatos.actualizarDatosLugar(lugarSeleccionado);
+    nombreLugar.value = lugarSeleccionado.nombre;
   }
 }
 </script>
 
 <template>
   <div id="buscador">
-    <input type="text" @input="buscar(texto)" v-model="texto" placeholder="Búsqueda por lugar" />
+    <input type="search" @input="buscar(nombreLugar)" v-model="nombreLugar" placeholder="Búsqueda por lugar" />
     <ul v-for="lugar in lugares" :key="lugar">
       <li @click="elegirDeLista(lugar.target)" id="lugarLista">{{ lugar.target }}</li>
     </ul>
@@ -110,18 +94,6 @@ function elegirDeLista(lugar) {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: $colorOscuro;
     opacity: 1; /* Firefox */
-    font-weight: $fuentePesoNegrita;
-  }
-
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $colorOscuro;
-    font-weight: $fuentePesoNegrita;
-  }
-
-  ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: $colorOscuro;
     font-weight: $fuentePesoNegrita;
   }
 
