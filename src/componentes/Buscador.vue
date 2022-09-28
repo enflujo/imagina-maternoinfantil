@@ -1,7 +1,6 @@
 <script setup>
-import { ref, reactive } from 'vue-demi';
-//import FuzzySearch from 'fuzzy-search';
-import MiniSearch from 'minisearch';
+import { ref } from 'vue-demi';
+import fuzzysort from 'fuzzysort';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
 
@@ -49,20 +48,11 @@ const departamentos = [
 ];
 
 function buscar(texto) {
-  lugares.value = [];
-  cerebroGlobales.lugarSeleccionado = lugar;
+  const respuesta = fuzzysort.go(texto, departamentos, { key: 'nombre' });
 
-  const buscador = new MiniSearch({
-    fields: ['nombre'],
-    searchOptions: {
-      fuzzy: 0.5,
-    },
-    tokenize: (string, _fieldName) => string.split('-'),
-  });
-
-  buscador.addAll(departamentos);
-
-  const respuesta = buscador.search(texto);
+  if ((texto = '')) {
+    lugares.value = [];
+  }
 
   /*  const primeraLetra = lugar[0];
   console.log(primeraLetra);
@@ -77,29 +67,29 @@ function buscar(texto) {
     return 0;
   }); */
   if (respuesta.length) {
-    const lugarMinuscula = respuesta[0].terms[0];
-    const lugarMayuscula = lugarMinuscula.charAt(0).toUpperCase() + lugarMinuscula.slice(1);
-
+    const lugarEncontrado = respuesta[0].target.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    console.log(respuesta);
     lugares.value = respuesta;
-    lugar.value = lugarMayuscula;
+    lugar.value = lugarEncontrado;
   }
+}
 
-  const lugarSeleccionado = cerebroDatos.datos.find((obj) => obj.nombre === lugar.value);
+function elegirDeLista(lugar) {
+  lugares.value = [];
+  const lugarSeleccionado = cerebroDatos.datos.find((obj) => obj.nombre === lugar);
 
   if (lugarSeleccionado) {
     // Cambiar lugar seleccionado
     cerebroDatos.actualizarDatosLugar(lugarSeleccionado);
   }
 }
-
-function elegirDeLista(lugar) {}
 </script>
 
 <template>
   <div id="buscador">
-    <input @input="buscar(texto)" v-model="texto" placeholder="Búsqueda por lugar" />
+    <input type="text" @input="buscar(texto)" v-model="texto" placeholder="Búsqueda por lugar" />
     <ul v-for="lugar in lugares" :key="lugar">
-      <li id="lugarLista">{{ lugar.terms[0] }}</li>
+      <li @click="elegirDeLista(lugar.target)" id="lugarLista">{{ lugar.target }}</li>
     </ul>
   </div>
 </template>
@@ -137,6 +127,7 @@ function elegirDeLista(lugar) {}
 
   #lugarLista {
     padding: 0.1em 0.2em;
+    cursor: pointer;
   }
 }
 </style>

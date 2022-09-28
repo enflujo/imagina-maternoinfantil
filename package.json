@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@enflujo/alquimia": "^0.0.1",
-    "minisearch": "^5.0.0",
+    "fuzzysort": "^2.0.1",
     "pinia": "^2.0.18",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
