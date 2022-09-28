@@ -140,6 +140,7 @@ function actualizarDatos() {
       <span class="botonesOrdenar">
         <span @click="ordenarDatos()">↑↓</span>
       </span>
+
       <div id="lista">
         <div class="columna">
           <ul class="dato">
@@ -150,6 +151,7 @@ function actualizarDatos() {
             </li>
           </ul>
         </div>
+
         <div class="columna">
           <ul class="dato">
             <li v-for="(dato, i) in datosOrdenadosDer" :key="`lugar${i}`">
@@ -160,6 +162,7 @@ function actualizarDatos() {
           </ul>
         </div>
       </div>
+
       <div id="lugarDesconocido" v-if="datosLugarDesconocido[0] && datosLugarDesconocido[0][criterioOrden] !== null">
         Lugar desconocido: {{ datosLugarDesconocido[0][criterioOrden] }}
       </div>

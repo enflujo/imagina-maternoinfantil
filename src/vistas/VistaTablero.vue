@@ -10,6 +10,7 @@ import ModuloLista from '../componentes/ModuloLista.vue';
 import FichaTecnica from '../componentes/FichaTecnica.vue';
 import fuentes from '../utilidades/fuentes';
 import Guardaescobas from '../componentes/SeccionGuardaescobas.vue';
+import Buscador from '../componentes/BuscadorLugares.vue';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
@@ -56,6 +57,7 @@ function actualizarDims() {
     </div>
 
     <div id="seccionCentral">
+      <Buscador />
       <FichaTecnica ref="ficha" :mostrar="mostrarFicha" />
 
       <div id="filtros">
