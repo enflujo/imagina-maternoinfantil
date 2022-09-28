@@ -20,7 +20,9 @@ function buscar(texto) {
 // Elegir un lugar de la lista
 function elegirDeLista(lugar) {
   lugares.value = [];
-  const lugarSeleccionado = cerebroDatos.datos.find((obj) => obj.nombre === lugar);
+
+  // Buscar el lugar que coincida con el código del lugar seleccionado
+  const lugarSeleccionado = cerebroDatos.datos.find((obj) => obj.codigo === lugar);
 
   if (lugarSeleccionado) {
     // Cambiar lugar seleccionado
@@ -34,7 +36,7 @@ function elegirDeLista(lugar) {
   <div id="buscador">
     <input type="search" @input="buscar(nombreLugar)" v-model="nombreLugar" placeholder="Búsqueda por lugar" />
     <ul v-for="lugar in lugares" :key="lugar">
-      <li @click="elegirDeLista(lugar.target)" id="lugarLista">{{ lugar.target }}</li>
+      <li @click="elegirDeLista(lugar.obj.codigo)" id="lugarLista">{{ lugar.target }}</li>
     </ul>
   </div>
 </template>
