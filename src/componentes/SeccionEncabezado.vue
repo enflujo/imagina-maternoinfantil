@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   padding: 0 1.5em 0 0;
-  border-right:1.8px solid #0042bf;
+  border-right: 1.8px solid #0042bf;
   height: $tamañoEncabezado;
 }
 
@@ -53,7 +53,7 @@ a:link {
 
   &:hover {
     //opacity: 0.6;
-    color: #0AE6A2;
+    color: #0ae6a2;
   }
 }
 

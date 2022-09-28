@@ -23,11 +23,22 @@ const sinDatos = ref(false);
 const datosLugar = ref([]);
 const datosSanAndres = ref([]);
 const datosProvidencia = ref([]);
+const lugaresColombia = ref(null);
 
 watch(
   () => cerebroDatos.geojsonLugar,
   (nuevos) => {
     iniciarDatosLugar(nuevos);
+  }
+);
+
+watch(
+  () => cerebroDatos.lugarSeleccionado,
+  (codigo) => {
+    if (mapa.value) {
+      const elemento = lugaresColombia.value.find((elemento) => elemento.id === codigo);
+      mapa.value.append(elemento);
+    }
   }
 );
 
@@ -212,13 +223,7 @@ function eventoMovimiento(evento) {
   posInfo.y = evento.pageY;
 }
 
-function eventoClic(seccion, contenedor, evento) {
-  // Mover elemento (<path>) al final para que la línea se vea encima de todos los otros elementos.
-  if (contenedor) {
-    const elemento = evento.target;
-    contenedor.append(elemento);
-  }
-
+function eventoClic(seccion) {
   // Cambiar lugar
   cerebroDatos.actualizarDatosLugar(seccion);
 }
@@ -279,6 +284,8 @@ function eventoClic(seccion, contenedor, evento) {
       <g id="colombia">
         <path
           v-for="seccion in datosLugar"
+          ref="lugaresColombia"
+          :id="seccion.codigo"
           :key="`seccion-${seccion.codigo}`"
           class="lugar"
           :class="
@@ -291,7 +298,7 @@ function eventoClic(seccion, contenedor, evento) {
           :data-nombre="seccion.nombre"
           @mouseenter="eventoEncima(seccion)"
           @mouseleave="eventoFuera"
-          @click="(e) => eventoClic(seccion, mapa, e)"
+          @click="(e) => eventoClic(seccion)"
           shape-rendering="geometricPrecision"
         />
       </g>
@@ -316,7 +323,7 @@ function eventoClic(seccion, contenedor, evento) {
 
 #contenedorMapa {
   position: relative;
-  margin-left:12vw;
+  margin-left: 12vw;
   margin-top: 4vh;
   margin-bottom: 3vh;
 }
