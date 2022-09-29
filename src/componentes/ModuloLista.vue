@@ -101,8 +101,8 @@ function actualizarDatos() {
   <div v-if="datosOrdenados.length > 0" id="modulo">
     <span>Ordenar por: </span>
     <span id="menuOrden">
+      <h4>ANALÍTICO</h4>
       <span class="seccionMenu">
-        <h4>ANALÍTICO</h4>
         <span class="botonOrden" :class="criterioOrden === 'decada' ? 'activo' : ''" @click="elegirOrden('decada')">
           2010 vs. 2020
         </span>
@@ -113,8 +113,8 @@ function actualizarDatos() {
       </span>
 
       <div id="separador"></div>
+      <h4>INFORMATIVO</h4>
       <span class="seccionMenu">
-        <h4>INFORMATIVO</h4>
         <span
           class="botonOrden"
           :class="criterioOrden === 'porcentaje' ? 'activo' : ''"
@@ -180,26 +180,24 @@ function actualizarDatos() {
 
   #menuOrden {
     margin: 1em 0em;
-    display: flex;
+    display: block;
     justify-content: space-around;
     flex-direction: column;
-    font-size: 0.8em;
+    font-size: 0.9em;
+    width: fit-content;
   }
 
   #separador {
     background-color: #0041bf;
     height: 2px;
     width: 100%;
+    margin-bottom: 1em;
   }
 
   .seccionMenu {
     display: flex;
     justify-content: flex-start;
-    padding: 0.1em;
-
-    h4 {
-      padding-top: 1em;
-    }
+    margin: 0.3em 0em;
   }
 
   .botonesOrdenar {
@@ -223,8 +221,8 @@ function actualizarDatos() {
     cursor: pointer;
     background-color: #0041bf;
     color: white;
-    padding: 0.5em 0.9em;
-    margin: 0.5em 1.5em 0.4em;
+    padding: 0.3em 0.5em;
+    margin: 0.1em 0.4em 0.4em 0em;
     border: solid 2px #0041bf;
 
     &:hover {
@@ -274,5 +272,38 @@ function actualizarDatos() {
   color: #ef6461;
   font-size: 0.9em;
   margin: 1em;
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  #modulo {
+    .botonOrden {
+      margin: 0.1em 1.4em 0.4em 0em;
+    }
+  }
+  // Pantallas medianas (Tablets)
+  @media (min-width: $minTablet) {
+    #modulo {
+      .botonOrden {
+        margin: 0.1em 1.4em 0.4em 0em;
+      }
+    }
+  }
+  // Dispositivos grandes y pantallas medianas
+  @media (min-width: $minPantalla) {
+    #modulo {
+      .botonOrden {
+        margin: 0.1em 1.4em 0.4em 0em;
+      }
+    }
+  }
+  // Pantallas grandes
+  @media (min-width: $minPantallaGrande) {
+    #modulo {
+      .botonOrden {
+        margin: 0.1em 1.4em 0.4em 0em;
+      }
+    }
+  }
 }
 </style>

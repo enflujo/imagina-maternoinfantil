@@ -82,7 +82,10 @@ function abrir(evento) {
 #mostrarIndicadores {
   margin: 0.5em 1em;
   display: block;
-  width: 50vw;
+  width: fit-content;
+  position: relative;
+  top: 52px;
+  left: 9px;
 }
 
 h2 {
