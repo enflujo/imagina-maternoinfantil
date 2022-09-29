@@ -376,7 +376,7 @@ svg {
 }
 
 #descripcionMeta {
-  border: 2px solid #27f7ba;
+  border: 2px solid $colorVerdeResaltado;
   background-color: $colorBlanco;
   padding: 1em 1.5em;
   color: #0042bf;
