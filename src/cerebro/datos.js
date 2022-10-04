@@ -10,6 +10,7 @@ export const usarCerebroDatos = defineStore('datos', {
     cargandoDatos: false,
     datos: [],
     datosNacionales: [],
+    datosEtnia: [],
     datosLugar: [],
     _cache: {
       departamentos: null,
@@ -20,6 +21,7 @@ export const usarCerebroDatos = defineStore('datos', {
     años: [],
     valorMax: 0,
     lugarSeleccionado: null,
+    etniaSeleccionada: null,
   }),
 
   getters: {
@@ -140,6 +142,37 @@ export const usarCerebroDatos = defineStore('datos', {
       cerebroGlobales.lugarSeleccionado = {
         codigo: datos.codigo,
         nombre: datos.nombre || cerebroGlobales.lugarSeleccionado.nombre,
+      };
+
+      console.log('da', datos);
+
+      /* cerebroGlobales.etniaSeleccionada = {
+        codigo: datos.codigo,
+        nombre: datos.nombre || cerebroGlobales.etniaSeleccionada.nombre,
+      }; */
+
+      this.lugarSeleccionado = datos.codigo;
+
+      this.datosLugar = Object.keys(datos.datos).map((anno) => {
+        const [numerador, denominador, porcentaje] = datos.datos[anno];
+
+        return {
+          anno: anno,
+          numerador,
+          denominador,
+          porcentaje,
+        };
+      });
+    },
+
+    actualizarDatosEtnia(datos) {
+      const cerebroGlobales = usarCerebroGlobales();
+
+      //console.log('da', datos);
+
+      cerebroGlobales.etniaSeleccionada = {
+        codigo: datos.codigo,
+        nombre: datos.nombre || cerebroGlobales.etniaSeleccionada.nombre,
       };
 
       this.lugarSeleccionado = datos.codigo;
