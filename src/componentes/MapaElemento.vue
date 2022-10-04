@@ -357,7 +357,7 @@ function eventoClic(seccion) {
   transition: fill 0.3s ease-out;
 
   &.activo {
-    stroke: #fd8348;
+    stroke: $colorSeleccionMapa;
     stroke-width: 2;
   }
 }

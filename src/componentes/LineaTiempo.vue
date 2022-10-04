@@ -21,7 +21,7 @@ const infoY = ref(null);
 const umbralIndicador = ref(null);
 const tendenciaDeseada = ref(null);
 const posUmbral = reactive({ y: 0, alto: 0 });
-const colores = { lineaNal: '#0042BA', lineaLugar: '#B569D6', numero: '' };
+const colores = { lineaNal: '#0042BA', lineaLugar: '#b02fba', numero: '' };
 const dimsVis = {
   alto: 250,
   altoVis: 0,

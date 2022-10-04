@@ -77,7 +77,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #b569d6;
+      background-color: $colorSeleccionMapa;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -87,7 +87,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #b569d6;
+      background-color: $colorSeleccionMapa;
       display: inline-block;
     }
   }
