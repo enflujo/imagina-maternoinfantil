@@ -35,7 +35,7 @@ const dimsVis = {
 dimsVis.altoVis = dimsVis.alto - dimsVis.marcoAbajo - dimsVis.margenArriba;
 dimsVis.base = dimsVis.alto - dimsVis.marcoAbajo;
 dimsVis.inicioX = dimsVis.marcoIz + dimsVis.margenIz;
-
+console.log(cerebroDatos.datos)
 watch(() => cerebroDatos.indice, definirUmbral);
 onMounted(definirUmbral);
 
