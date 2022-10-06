@@ -1,6 +1,6 @@
 export default [
   {
-    nombreTabla: 'NACIDOS VIVOS BAJO PESO',
+    archivoDescarga: 'EEVV - PORCENTAJE NACIDOS VIVOS BAJO PESO',
     nombreArchivo: 'nacidos-bajo-peso',
     nombreIndicador: 'Proporción de nacidos vivos a término con bajo peso al nacer',
     definicion:
@@ -29,7 +29,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'NACIDOS VIVOS 4 CONS PRENATAL',
+    archivoDescarga: 'EEVV - PORCENTAJE NACIDOS VIVOS 4 CONS PRENATAL',
     nombreArchivo: 'nacidos-4-controles-prenatales',
     nombreIndicador: 'Proporción de nacidos vivos con 4 o más controles prenatales',
     definicion:
@@ -61,7 +61,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'NACIDOS VIVOS <15 PAPA 4',
+    archivoDescarga: 'EEVV - PORCENTAJE NACIDOS VIVOS MENOR15 PAPA 4',
     nombreArchivo: 'nacidos-menores15-padre4',
     nombreIndicador: 'Proporción de nacidos vivos de madres menores de 15 años cuyo padre es mayor 4 años o más',
     definicion:
@@ -91,7 +91,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'PARTOS INSTITUCIONALES',
+    archivoDescarga: 'EEVV - PORCENTAJE PARTOS INSTITUCIONALES',
     nombreArchivo: 'partos-institucionales',
     nombreIndicador: 'Proporción de partos institucionales',
     definicion:
@@ -121,7 +121,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'PARTOS POR CESAREA',
+    archivoDescarga: 'EEVV - PORCENTAJE PARTOS POR CESAREA',
     nombreArchivo: 'partos-cesarea',
     nombreIndicador: 'Proporción de partos por cesárea',
     definicion:
@@ -151,7 +151,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'NACIDOS DE <14 AÑOS',
+    archivoDescarga: 'EEVV - PROPORCION NACIDOS DE MENORES 14',
     nombreArchivo: 'nacidos-menores14',
     nombreIndicador: 'Proporción de nacidos vivos hijos de niñas menores de 14 años',
     definicion:
@@ -182,7 +182,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'PROP NACIDOS DE MUJ 14 A 17',
+    archivoDescarga: 'EEVV - PROPORCION NACIDOS DE MUJERES 14 A 17',
     nombreArchivo: 'nacidos-mujeres14-17',
     nombreIndicador: 'Proporción de nacidos vivos hijos de mujeres de 14 a 17 años',
     definicion:
@@ -214,7 +214,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'RAZON MORT MATERNA 1 AÑO',
+    archivoDescarga: 'EEVV - RAZON MORTALIDAD MATERNA 1',
     nombreArchivo: 'mortalidad-materna1',
     nombreIndicador: 'Razón de mortalidad materna a 1 año',
     definicion:
@@ -248,7 +248,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'FECUNDIDAD 10 A 14 AÑOS',
+    archivoDescarga: 'EEVV - TASA FECUNDIDAD MUJERES 10 A 14',
     nombreArchivo: 'fecundidad-10-14',
     nombreIndicador: 'Tasa específica de fecundidad en mujeres de 10 a 14 años',
     definicion:
@@ -283,7 +283,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'FECUNDIDAD 10 A 19 AÑOS',
+    archivoDescarga: 'EEVV - TASA FECUNDIDAD MUJERES 10 A 19',
     nombreArchivo: 'fecundidad-10-19',
     nombreIndicador: 'Tasa específica de fecundidad en mujeres de 10 a 19 años',
     definicion:
@@ -316,7 +316,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'FECUNDIDAD 15 A 19 AÑOS',
+    archivoDescarga: 'EEVV - TASA FECUNDIDAD MUJERES 15 A 19',
     nombreArchivo: 'fecundidad-15-19',
     nombreIndicador: 'Tasa específica de fecundidad en mujeres de 15 a 19 años',
     definicion:
@@ -349,7 +349,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD EN LA NIÑEZ',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD NINEZ',
     nombreArchivo: 'mortalidad-ninez',
     nombreIndicador: 'Tasa de mortalidad en menores de 5 años',
     definicion:
@@ -381,7 +381,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD EN < 1 AÑO',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD MENORES 1',
     nombreArchivo: 'mortalidad-menor1',
     nombreIndicador: 'Tasa de mortalidad en menores de 1 año (mortalidad infantil)',
     definicion:
@@ -413,7 +413,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD < 5IRA',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD MENORES 5 IRA',
     nombreArchivo: 'mortalidad-5ira',
     nombreIndicador: 'Tasa de mortalidad por Infección Respiratoria Aguda (IRA) en menores de 5 años',
     definicion:
@@ -444,7 +444,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD < 5EDA',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD MENORES 5 EDA',
     nombreArchivo: 'mortalidad-5eda',
     nombreIndicador: 'Tasa de mortalidad por Enfermedad Diarreica Aguda (EDA) en menores de 5 años',
     definicion:
@@ -477,7 +477,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD PERINATAL',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD PERINATAL',
     nombreArchivo: 'mortalidad-perinatal',
     nombreIndicador: 'Tasa de mortalidad perinatal',
     definicion:
@@ -510,7 +510,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'MORTALIDAD DESNUTRICI< 5',
+    archivoDescarga: 'EEVV - TASA MORTALIDAD DESNUTRICIÓN MENORES 5',
     nombreArchivo: 'mortalidad-desnutricion',
     nombreIndicador: 'Tasa de mortalidad en menores de 5 años por desnutrición',
     definicion:
@@ -543,7 +543,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'control < 5 años',
+    archivoDescarga: 'RIPS - PORCENTAJE CONTROLES MENORES 5',
     nombreArchivo: 'control-5',
     nombreIndicador: 'Proporción de población menor de 5 años que es atendida para controles de rutina del niño o niña',
     definicion:
@@ -587,7 +587,7 @@ export default [
     limitacion: 'Con la información disponible no es posible conocer cuántas veces asistió al año una misma persona.',
   },
   {
-    nombreTabla: 'sifilis',
+    archivoDescarga: 'RIPS - PORCENTAJE GESTANTES SIFILIS',
     nombreArchivo: 'sifilis',
     nombreIndicador: 'Proporción de gestantes atendidas por sífilis gestacional',
     definicion:
@@ -626,7 +626,7 @@ export default [
       'Esta información depende de la especificidad con la cual el personal de salud diligencia los RIPS. En este caso puntual se analiza la información del código O981, sin incluir otros como el O983 otras infecciones con un modo de transmisión predominantemente sexual que complican el embarazo, parto y puerperio.',
   },
   {
-    nombreTabla: 'trasmision sexual',
+    archivoDescarga: 'RIPS - PORCENTAJE TRANSMISION SEXUAL',
     nombreArchivo: 'trasmision-sexual',
     nombreIndicador: 'Proporción de personas atendidas por infecciones predominantemente sexuales',
     definicion:
@@ -682,7 +682,7 @@ export default [
     limitacion: '',
   },
   {
-    nombreTabla: 'maltrato',
+    archivoDescarga: 'RIPS - PORCENTAJE MALTRATO',
     nombreArchivo: 'maltrato',
     nombreIndicador: 'Proporción de personas que fueron atendidas por síndromes de maltrato.',
     definicion:
@@ -720,7 +720,7 @@ export default [
       'Este es un indicador que puede estar sub-registrado, en la medida en que no siempre se relacionan este tipo de diagnósticos durante una consulta de servicios de salud.',
   },
   {
-    nombreTabla: 'asesoria anticoncepcion',
+    archivoDescarga: 'RIPS - PORCENTAJE ASESORIA ANTICONCEPCION',
     nombreArchivo: 'asesoria-anticoncepcion',
     nombreIndicador: 'Proporción de personas que consultaron por servicios de anticoncepción',
     definicion:

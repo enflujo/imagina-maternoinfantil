@@ -1,3 +1,8 @@
+<script setup>
+import { rutaBase } from '../utilidades/constantes';
+import fuentes from '../utilidades/fuentes';
+</script>
+
 <template>
   <main id="datos">
     <header>
@@ -8,6 +13,15 @@
         datos quieres obtener. Los datos están disponibles en <span class="negrita">.xlsx</span> o
         <span class="negrita">.zip</span>
       </p>
+
+      <div id="indicadores">
+        <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
+          <div class="columna nombre">{{ fuente.nombreIndicador }}</div>
+          <div class="columna enlace">
+            <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>.zip</a>
+          </div>
+        </div>
+      </div>
 
       <div id="boton" :class="clase ? clase : ''">
         <a href="https://enflujo.com" target="_blank">
