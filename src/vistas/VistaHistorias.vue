@@ -462,6 +462,8 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
   .historia {
     margin-top: 5em;
+    line-height: 21px;
+    //letter-spacing: 0px;
 
     img {
       width: 90vw;
@@ -474,6 +476,10 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
     h3 {
       margin-top: 2em;
+      margin-bottom: 1em;
+      margin-right: 3em;
+      line-height: 25px;
+      margin-left: 2;
     }
 
     .testimonio {
@@ -597,12 +603,16 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     }
     .seccionIzquierda {
       width: 30vw;
-      margin-left: 3vw;
+      margin-left: 10vw;
+      padding-right: 3em;
+      padding-left: 2em;
     }
 
     .seccionDerecha {
-      width: 32vw;
-      margin: 4em 4vw;
+      width: 30vw;
+      margin: 6em 4vw;
+      padding-right: 6em;
+      padding-left: 1em;
     }
 
     #intro {
@@ -619,6 +629,8 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     .historia {
       display: grid;
       grid-template-columns: 39vw 30vw;
+      margin-left:6em;
+      
 
       img {
         width: 30vw;
