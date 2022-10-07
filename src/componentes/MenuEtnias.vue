@@ -36,11 +36,11 @@ function clicFuera(evento) {
       <li
         v-for="etnia in etnias"
         :key="etnia"
-        @click="cerebroGlobales.actualizarEtnia(etnia)"
+        @click="cerebroGlobales.actualizarEtnia(etnia.codigo)"
         class="opcionEtnia cuadro"
         :class="etnia === cerebroGlobales.etniaSeleccionada ? 'actual' : ''"
       >
-        {{ etnia }}
+        {{ etnia.nombre }}
       </li>
     </ul>
   </nav>
@@ -54,7 +54,7 @@ nav {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 120px;
+  width: fit-content;
 
   #menuEtnias {
     display: none;
@@ -62,6 +62,8 @@ nav {
     top: 2em;
     width: 100%;
     z-index: 2;
+    text-transform: none;
+    width: inherit;
   }
 
   &:hover #menuEtnias {
@@ -74,7 +76,7 @@ nav {
   cursor: pointer;
 }
 
-.opcionAño {
+.opcionEtnia {
   background-color: $colorOscuro;
   color: $colorBlanco;
   border-bottom: 2px solid $colorBlanco;

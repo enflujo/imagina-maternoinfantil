@@ -14,7 +14,6 @@ import Buscador from '../componentes/BuscadorLugares.vue';
 
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { usarCerebroDatos } from '../cerebro/datos';
-import MenuEtnias from '../componentes/MenuEtnias.vue';
 
 const anchoDerecha = ref(0);
 const seccionDerecha = ref(null);
@@ -79,7 +78,7 @@ function actualizarDims() {
             Municipios
           </li>
         </ul>
-        <MenuEtnias />
+
         <div v-if="cerebroDatos" id="indicadorSeleccionado">
           <h3>{{ fuentes[cerebroDatos.indice].nombreIndicador }}</h3>
           <span id="masInfo" ref="masInfo" @click="mostrarFichaTecnica">{{ mostrarFicha ? 'X' : '?' }}</span>
@@ -122,13 +121,13 @@ function actualizarDims() {
   color: #0041bf;
   text-transform: uppercase;
   font-weight: 600;
+}
 
-  #indicadorSeleccionado {
-    h3 {
-      font-size: 1em;
-      display: none;
-      text-transform: none;
-    }
+#indicadorSeleccionado {
+  h3 {
+    font-size: 1em;
+    display: none;
+    text-transform: none;
   }
 }
 

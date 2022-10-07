@@ -38,6 +38,12 @@ export const usarCerebroGlobales = defineStore('globales', {
       this.año = nuevoAño;
     },
 
+    actualizarEtnia(nuevaEtnia) {
+      if (nuevaEtnia == this.etnia) return;
+      this.definirPorcentajes();
+      this.etniaSeleccionada = nuevaEtnia;
+    },
+
     cambiarLugar(nombre) {
       this.lugarSeleccionado = nombre;
     },
