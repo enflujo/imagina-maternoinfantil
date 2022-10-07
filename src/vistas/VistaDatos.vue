@@ -1,6 +1,17 @@
 <script setup>
+import { onMounted } from 'vue';
 import { rutaBase } from '../utilidades/constantes';
 import fuentes from '../utilidades/fuentes';
+
+onMounted(async () => {
+  // Este archivo lo generamos en el tally, se debe actualizar el archivo en la bodega cuando cambien los datos.
+  const pesos = await fetch(`${rutaBase}/maternoinfantil/pesosArchivos.json`).then((respuesta) => respuesta.json());
+  fuentes.forEach((fuente) => {
+    const peso = pesos[fuente.archivoDescarga];
+    // Agregar el peso del archivo a cada fuente para tener esta información disponible en el bucle del html.
+    fuente.pesoArchivo = peso;
+  });
+});
 </script>
 
 <template>
@@ -16,14 +27,17 @@ import fuentes from '../utilidades/fuentes';
 
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
-          <div class="columna nombre">{{ fuente.nombreIndicador }}</div>
-          <div class="columna enlace">
+          <p class="columna enlace">
             <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>.zip</a>
-          </div>
+          </p>
+          <p class="columna peso">{{ fuente.pesoArchivo }}</p>
+          <p class="columna ficha">Ficha Técnica</p>
+
+          <p class="columna nombre">{{ fuente.nombreIndicador }}</p>
         </div>
       </div>
 
-      <div id="boton" :class="clase ? clase : ''">
+      <div id="boton">
         <a href="https://enflujo.com" target="_blank">
           <img class="boton" src="../assets/imgs/bajada.svg" />
         </a>
@@ -35,6 +49,24 @@ import fuentes from '../utilidades/fuentes';
 <style lang="scss" scoped>
 @use 'sass:color';
 @import '../assets/constantes.scss';
+
+#indicadores {
+  width: 50vw;
+
+  .indicador {
+    display: flex;
+    margin: 0.3em 0;
+    border: 1px dotted;
+  }
+
+  .columna {
+    padding: 0.5em;
+  }
+
+  .nombre {
+    font-weight: bold;
+  }
+}
 
 h2 {
   font-size: 2em;
