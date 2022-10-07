@@ -6,6 +6,7 @@ import { convertirEscala } from '../utilidades/ayudas';
 import fuentes from '../utilidades/fuentes';
 import LineaDatos from './LineaDeTiempo/LineaDatos.vue';
 import Leyenda from './LineaDeTiempo/LeyendaElemento.vue';
+import MenuEtnias from '../componentes/MenuEtnias.vue';
 
 const props = defineProps({
   ancho: Number,
@@ -35,7 +36,7 @@ const dimsVis = {
 dimsVis.altoVis = dimsVis.alto - dimsVis.marcoAbajo - dimsVis.margenArriba;
 dimsVis.base = dimsVis.alto - dimsVis.marcoAbajo;
 dimsVis.inicioX = dimsVis.marcoIz + dimsVis.margenIz;
-console.log(cerebroDatos.datos)
+
 watch(() => cerebroDatos.indice, definirUmbral);
 onMounted(definirUmbral);
 
@@ -122,8 +123,9 @@ function textoPuntoY(i) {
       <h3 id="nombreLugar">
         {{ cerebroGlobales.lugarSeleccionado ? cerebroGlobales.lugarSeleccionado.nombre : 'Colombia' }}
       </h3>
-
+      <MenuEtnias />
       <Leyenda />
+
       <p id="descripcionY">{{ fuentes[cerebroDatos.indice].nombreEjeY }}</p>
     </header>
 

@@ -64,8 +64,6 @@ function iniciarDatosLugar(geojson) {
       datos: [],
       linea: crearLinea(lugar.geometry.coordinates, mapearCoordenadas, dimsColombia.ancho, dimsColombia.alto),
       color: coloresMapa.fondo,
-      datosEtnia: [],
-      colorEtnia: coloresMapa.fondo,
     });
   });
 
@@ -100,8 +98,6 @@ function iniciarDatosSanAndres() {
       datos: [],
       linea: crearLinea(coordenadasSanAndres, mapearSanAndres, dimsSanAndresP.ancho, dimsSanAndresP.alto),
       color: coloresMapa.fondo,
-      datosEtnia: [],
-      colorEtnia: coloresMapa.fondo,
     });
 
     providencia.push({
@@ -110,8 +106,6 @@ function iniciarDatosSanAndres() {
       datos: [],
       linea: crearLinea(coordenadasProvidencia, mapearProvidencia, dimsSanAndresP.ancho, dimsSanAndresP.alto),
       color: coloresMapa.fondo,
-      datosEtnia: [],
-      colorEtnia: coloresMapa.fondo,
     });
   }
 
@@ -140,7 +134,6 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
 function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
-  const etniaSeleccionada = cerebroGlobales.etniaSeleccionada;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
   const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores[0], colores[1]);
 
@@ -158,24 +151,14 @@ function actualizarDatos() {
       datosLugar.value[i].color = 'url(#sinInfo)';
       return;
     }
-    // ACA VAMOS PROCESANDO DATOS DE ETNIA
-    console.log(d.etnias);
+
     datosLugar.value[i].datos = d.datos;
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
-    datosLugar.value[i].datosEtnia = d.etnias;
-    if (etniaSeleccionada) {
-      datosLugar.value[i].colorEtnia = mapearColor(d.etnias[etniaSeleccionada][añoSeleccionado][2]);
-    }
   });
 
   if (cerebroGlobales.nivel === 'departamentos') {
     datosSanAndres.value = datosSanAndres.value.map((d) => redefinirSanAndresP(d, añoSeleccionado, mapearColor));
     datosProvidencia.value = datosProvidencia.value.map((d) => redefinirSanAndresP(d, añoSeleccionado, mapearColor));
-  }
-
-  if (cerebroGlobales.nivel === 'municipios') {
-    datosLugar.value[i].datosEtnia = null;
-    datosLugar.value[i].colorEtnia = null;
   }
 }
 
