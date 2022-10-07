@@ -27,21 +27,22 @@ onMounted(async () => {
 
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
-          <p class="columna enlace">
-            <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>.zip</a>
-          </p>
-          <p class="columna peso">{{ fuente.pesoArchivo }}</p>
           <p class="columna ficha">Ficha Técnica</p>
 
-          <p class="columna nombre">{{ fuente.nombreIndicador }}</p>
+          <p class="columna enlace">
+            <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>
+              <span class="nombre">{{ fuente.nombreIndicador + ' ' }}</span>
+              <span class="peso">({{ fuente.pesoArchivo }})</span>
+            </a>
+          </p>
         </div>
       </div>
 
-      <div id="boton">
+      <!-- <div id="boton">
         <a href="https://enflujo.com" target="_blank">
           <img class="boton" src="../assets/imgs/bajada.svg" />
         </a>
-      </div>
+      </div> -->
     </header>
   </main>
 </template>
@@ -52,6 +53,7 @@ onMounted(async () => {
 
 #indicadores {
   width: 50vw;
+  margin-top: 2em;
 
   .indicador {
     display: flex;
@@ -64,7 +66,11 @@ onMounted(async () => {
   }
 
   .nombre {
-    font-weight: bold;
+    font-weight: normal;
+  }
+
+  .ficha {
+    cursor: pointer;
   }
 }
 
