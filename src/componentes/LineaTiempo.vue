@@ -3,6 +3,7 @@ import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { convertirEscala } from '../utilidades/ayudas';
+import { colores } from '../utilidades/constantes';
 import fuentes from '../utilidades/fuentes';
 import LineaDatos from './LineaDeTiempo/LineaDatos.vue';
 import Leyenda from './LineaDeTiempo/LeyendaElemento.vue';
@@ -22,9 +23,6 @@ const infoY = ref(null);
 const umbralIndicador = ref(null);
 const tendenciaDeseada = ref(null);
 const posUmbral = reactive({ y: 0, alto: 0 });
-
-const colores = { lineaNal: '#0042BA', lineaLugar: '#b02fba', numero: '' };
-
 const dimsVis = {
   alto: 250,
   altoVis: 0,
@@ -263,6 +261,18 @@ function textoPuntoY(i) {
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
         :color="colores.lineaLugar"
+        @eventoEncima="eventoEncima"
+        @eventoFuera="eventoFuera"
+      />
+
+      <!-- LINEA DATOS ETNIA -->
+      <LineaDatos
+        v-if="cerebroDatos.datosEtnia.length"
+        :datos="cerebroDatos.datosEtnia"
+        :posicionX="posicionX"
+        :posicionY="posicionY"
+        :alturaVis="dimsVis.altoVis"
+        :color="colores.lineaEtnia"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />

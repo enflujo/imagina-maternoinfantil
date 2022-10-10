@@ -7,6 +7,7 @@ import { etnias } from '../utilidades/constantes';
 const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 const contenedor = ref(null);
+const tituloEtnia = ref('');
 
 const mostrarMenu = ref(false);
 
@@ -27,16 +28,25 @@ function clicFuera(evento) {
     mostrarMenu.value = false;
   }
 }
+
+function actualizarEtnia(etnia) {
+  cerebroGlobales.actualizarEtnia(etnia.codigo);
+  // TODO: Cómo actualizar los datos del lugar al hacer click en la lista de etnias?
+  //cerebroDatos.actualizarDatosLugar(cerebroDatos.datos);
+  tituloEtnia.value = etnia.nombre;
+}
 </script>
 
 <template>
   <nav ref="contenedor">
-    <span @click="abrirMenu" class="boton cuadro desplegable">Etnias</span>
+    <span @click="abrirMenu" class="boton cuadro desplegable" id="titulo">{{
+      tituloEtnia ? tituloEtnia : 'Graficar datos por etnia'
+    }}</span>
     <ul id="menuEtnias" :style="`display:${mostrarMenu ? 'block' : 'none'}`">
       <li
         v-for="etnia in etnias"
         :key="etnia"
-        @click="cerebroGlobales.actualizarEtnia(etnia.codigo)"
+        @click="actualizarEtnia(etnia)"
         class="opcionEtnia cuadro"
         :class="etnia === cerebroGlobales.etniaSeleccionada ? 'actual' : ''"
       >
@@ -55,6 +65,7 @@ nav {
   flex-direction: column;
   position: relative;
   width: fit-content;
+  margin-bottom: 1em;
 
   #menuEtnias {
     display: none;
@@ -72,7 +83,7 @@ nav {
 }
 
 .cuadro {
-  padding: 0.3em 1.5em 0.3em;
+  padding: 0.3em 1.5em 0.3em 0.5em;
   cursor: pointer;
 }
 
