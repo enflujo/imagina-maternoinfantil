@@ -1,5 +1,13 @@
 export const rutaBase = 'https://enflujo.com/bodega';
-export const colores = ['#BEEFED', '#0042BF'];
+export const colores = {
+  mapaCero: '#BEEFED',
+  mapaCien: '#0042BF',
+  lineaNal: '#0042ba',
+  lineaLugar: '#b86ad8',
+  //TODO: Definir color
+  lineaEtnia: '#f5af08',
+  numero: '',
+};
 export const etnias = [
   { codigo: 1, nombre: 'Indígena' },
   { codigo: 2, nombre: 'ROM - Gitano' },

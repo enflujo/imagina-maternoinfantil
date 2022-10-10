@@ -44,8 +44,8 @@ export const usarCerebroGlobales = defineStore('globales', {
       this.etniaSeleccionada = nuevaEtnia;
     },
 
-    cambiarLugar(nombre) {
-      this.lugarSeleccionado = nombre;
+    cambiarLugar(lugar) {
+      this.lugarSeleccionado = lugar.codigo;
     },
   },
 });

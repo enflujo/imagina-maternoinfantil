@@ -74,6 +74,7 @@ function iniciarDatosLugar(geojson) {
 
 watch(() => cerebroDatos.datos, actualizarDatos);
 watch(() => cerebroGlobales.año, actualizarDatos);
+watch(() => cerebroGlobales.etniaSeleccionada, actualizarDatos);
 
 function iniciarDatosSanAndres() {
   const geojson = cerebroDatos.geojsonSanAndres;
@@ -134,8 +135,9 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
 function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
+  const etniaSeleccionada = cerebroGlobales.etniaSeleccionada;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
-  const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores[0], colores[1]);
+  const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores.mapaCero, colores.mapaCien);
 
   sinDatos.value = !datosNacionalesAño;
 
@@ -153,6 +155,7 @@ function actualizarDatos() {
     }
 
     datosLugar.value[i].datos = d.datos;
+    datosLugar.value[i].etnias = d.etnias[etniaSeleccionada];
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
   });
 
