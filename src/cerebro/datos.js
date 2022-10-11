@@ -163,16 +163,18 @@ export const usarCerebroDatos = defineStore('datos', {
     actualizarDatosEtnia(datos) {
       const cerebroGlobales = usarCerebroGlobales();
       if (cerebroGlobales.etniaSeleccionada) {
-        this.datosEtnia = Object.keys(datos.etnias[cerebroGlobales.etniaSeleccionada]).map((anno) => {
-          const [numerador, denominador, porcentaje] = datos.etnias[cerebroGlobales.etniaSeleccionada][anno];
+        if (datos.etnias) {
+          this.datosEtnia = Object.keys(datos.etnias[cerebroGlobales.etniaSeleccionada]).map((anno) => {
+            const [numerador, denominador, porcentaje] = datos.etnias[cerebroGlobales.etniaSeleccionada][anno];
 
-          return {
-            anno: anno,
-            numerador,
-            denominador,
-            porcentaje,
-          };
-        });
+            return {
+              anno: anno,
+              numerador,
+              denominador,
+              porcentaje,
+            };
+          });
+        }
       }
     },
   },
