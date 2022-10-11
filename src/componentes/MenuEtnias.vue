@@ -24,8 +24,10 @@ onUnmounted(() => {
 });
 
 function clicFuera(evento) {
-  if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
-    mostrarMenu.value = false;
+  if (cerebroGlobales.nivel === 'departamentos') {
+    if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
+      mostrarMenu.value = false;
+    }
   }
 }
 
@@ -42,7 +44,7 @@ function actualizarEtnia(etnia) {
 </script>
 
 <template>
-  <nav ref="contenedor">
+  <nav ref="contenedor" v-if="cerebroGlobales.nivel === 'departamentos'">
     <span @click="abrirMenu" class="boton cuadro desplegable" id="titulo">{{
       tituloEtnia ? tituloEtnia : 'Mostrar línea por etnia'
     }}</span>

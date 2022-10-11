@@ -157,6 +157,10 @@ function actualizarDatos() {
     datosLugar.value[i].datos = d.datos;
     datosLugar.value[i].etnias = d.etnias;
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
+
+    if (cerebroGlobales.nivel === 'municipios') {
+      cerebroGlobales.actualizarEtnia(0);
+    }
   });
 
   if (cerebroGlobales.nivel === 'departamentos') {
