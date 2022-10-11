@@ -33,14 +33,18 @@ function actualizarEtnia(etnia) {
   cerebroGlobales.actualizarEtnia(etnia.codigo);
   // TODO: Cómo actualizar los datos del lugar al hacer click en la lista de etnias?
   //cerebroDatos.actualizarDatosLugar(cerebroDatos.datos);
-  tituloEtnia.value = etnia.nombre;
+  if (etnia.codigo === 0) {
+    tituloEtnia.value = 'Mostrar línea por etnia';
+  } else {
+    tituloEtnia.value = etnia.nombre;
+  }
 }
 </script>
 
 <template>
   <nav ref="contenedor">
     <span @click="abrirMenu" class="boton cuadro desplegable" id="titulo">{{
-      tituloEtnia ? tituloEtnia : 'Graficar datos por etnia'
+      tituloEtnia ? tituloEtnia : 'Mostrar línea por etnia'
     }}</span>
     <ul id="menuEtnias" :style="`display:${mostrarMenu ? 'block' : 'none'}`">
       <li

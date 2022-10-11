@@ -155,7 +155,7 @@ function actualizarDatos() {
     }
 
     datosLugar.value[i].datos = d.datos;
-    datosLugar.value[i].etnias = d.etnias[etniaSeleccionada];
+    datosLugar.value[i].etnias = d.etnias;
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
   });
 

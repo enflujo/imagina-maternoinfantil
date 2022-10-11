@@ -161,13 +161,10 @@ export const usarCerebroDatos = defineStore('datos', {
     },
 
     actualizarDatosEtnia(datos) {
-      console.log('etnia actualizada');
       const cerebroGlobales = usarCerebroGlobales();
-
-      this.etniaSeleccionada = cerebroGlobales.etniaSeleccionada;
-      if (this.etniaSeleccionada)
-        this.datosEtnia = Object.keys(datos.etnias).map((anno) => {
-          const [numerador, denominador, porcentaje] = datos.etnias[anno];
+      if (cerebroGlobales.etniaSeleccionada) {
+        this.datosEtnia = Object.keys(datos.etnias[cerebroGlobales.etniaSeleccionada]).map((anno) => {
+          const [numerador, denominador, porcentaje] = datos.etnias[cerebroGlobales.etniaSeleccionada][anno];
 
           return {
             anno: anno,
@@ -176,6 +173,7 @@ export const usarCerebroDatos = defineStore('datos', {
             porcentaje,
           };
         });
+      }
     },
   },
 });

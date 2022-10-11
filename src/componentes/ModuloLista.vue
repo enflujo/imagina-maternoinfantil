@@ -17,7 +17,6 @@ let criterioOrden = ref('porcentaje');
 watch(() => cerebroGlobales.año, actualizarDatos);
 watch(() => cerebroDatos.indice, actualizarDatos);
 watch(() => cerebroDatos.datos, actualizarDatos);
-watch(() => cerebroDatos.etniaSeleccionada, actualizarDatos);
 
 function comparar(a, b) {
   const criterio = criterioOrden.value;
