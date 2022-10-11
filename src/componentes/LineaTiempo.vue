@@ -266,8 +266,9 @@ function textoPuntoY(i) {
       />
 
       <!-- LINEA DATOS ETNIA -->
+
       <LineaDatos
-        v-if="cerebroDatos.datosEtnia.length"
+        v-if="cerebroDatos.datosEtnia.length && cerebroGlobales.etniaSeleccionada !== 0"
         :datos="cerebroDatos.datosEtnia"
         :posicionX="posicionX"
         :posicionY="posicionY"

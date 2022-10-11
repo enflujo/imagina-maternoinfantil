@@ -11,7 +11,38 @@ const radioPuntos = 4;
 
 function construirLinea() {
   let linea = '';
+  let añoInicial = 2005;
+  let paso = 0;
 
+  props.datos.forEach((instancia, i) => {
+    const x = props.posicionX(instancia.anno);
+    // POR HACER! acá toca cambiar los valores cuando no es porcentaje
+    const y = props.posicionY(instancia.porcentaje);
+
+    if (i === 0) {
+      linea += `M${x} ${y}`;
+    } else {
+      if (añoInicial + i == instancia.anno) {
+        linea += ` L${x} ${y}`;
+        paso = i;
+      } else {
+        if ((i = paso)) {
+          linea += `M${x} ${y}`;
+          añoInicial += paso;
+        } else {
+          linea += ` L${x} ${y}`;
+        }
+      }
+    }
+  });
+
+  return linea;
+}
+
+/* function construirLinea() {
+  let linea = '';
+
+  console.log(props.datos);
   props.datos.forEach((instancia, i) => {
     const x = props.posicionX(instancia.anno);
     // POR HACER! acá toca cambiar los valores cuando no es porcentaje
@@ -25,7 +56,7 @@ function construirLinea() {
   });
 
   return linea;
-}
+} */
 </script>
 
 <template>
