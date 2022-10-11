@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { usarCerebroDatos } from '../cerebro/datos';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { etnias } from '../utilidades/constantes';
@@ -10,6 +10,14 @@ const contenedor = ref(null);
 const tituloEtnia = ref('');
 
 const mostrarMenu = ref(false);
+const nombreEtniaSeleccionada = computed(() => {
+  if (cerebroGlobales.etniaSeleccionada) {
+    if (cerebroGlobales.etniaSeleccionada.codigo !== 0) {
+      return cerebroGlobales.etniaSeleccionada.nombre;
+    }
+  }
+  return 'Mostrar línea por etnia';
+});
 
 function abrirMenu() {
   mostrarMenu.value = !mostrarMenu.value;
@@ -32,22 +40,14 @@ function clicFuera(evento) {
 }
 
 function actualizarEtnia(etnia) {
-  cerebroGlobales.actualizarEtnia(etnia.codigo);
+  cerebroGlobales.actualizarEtnia(etnia);
   // TODO: Cómo actualizar los datos del lugar al hacer click en la lista de etnias?
-  //cerebroDatos.actualizarDatosLugar(cerebroDatos.datos);
-  if (etnia.codigo === 0) {
-    tituloEtnia.value = 'Mostrar línea por etnia';
-  } else {
-    tituloEtnia.value = etnia.nombre;
-  }
 }
 </script>
 
 <template>
   <nav ref="contenedor" v-if="cerebroGlobales.nivel === 'departamentos'">
-    <span @click="abrirMenu" class="boton cuadro desplegable" id="titulo">{{
-      tituloEtnia ? tituloEtnia : 'Mostrar línea por etnia'
-    }}</span>
+    <span @click="abrirMenu" class="boton cuadro desplegable" id="titulo">{{ nombreEtniaSeleccionada }}</span>
     <ul id="menuEtnias" :style="`display:${mostrarMenu ? 'block' : 'none'}`">
       <li
         v-for="etnia in etnias"
@@ -70,8 +70,9 @@ nav {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: fit-content;
-  margin-bottom: 1em;
+  width: 210px;
+  margin-bottom: 4em;
+  max-height: 1em;
 
   #menuEtnias {
     display: none;
@@ -80,7 +81,6 @@ nav {
     width: 100%;
     z-index: 2;
     text-transform: none;
-    width: inherit;
   }
 
   &:hover #menuEtnias {
