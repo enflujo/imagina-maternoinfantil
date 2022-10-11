@@ -19,19 +19,12 @@ function construirLinea() {
     // POR HACER! acá toca cambiar los valores cuando no es porcentaje
     const y = props.posicionY(instancia.porcentaje);
 
-    console.log(añoInicial, instancia.anno);
-
-    if (i === 0) {
+    if (i === 0 || instancia.anno != añoInicial) {
       linea += `M${x} ${y}`;
+      paso = instancia.anno - añoInicial;
+      añoInicial += paso;
     } else {
-      if (añoInicial == instancia.anno) {
-        linea += ` L${x} ${y}`;
-        paso = i;
-      } else {
-        linea += `M${x} ${y}`;
-        paso = instancia.anno - añoInicial;
-        añoInicial += paso;
-      }
+      linea += ` L${x} ${y}`;
     }
     añoInicial += 1;
   });
