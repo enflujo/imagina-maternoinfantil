@@ -75,6 +75,7 @@ function iniciarDatosLugar(geojson) {
 watch(() => cerebroDatos.datos, actualizarDatos);
 watch(() => cerebroGlobales.año, actualizarDatos);
 watch(() => cerebroGlobales.etniaSeleccionada, actualizarDatos);
+watch(() => cerebroGlobales.nivel, actualizarDatos);
 
 function iniciarDatosSanAndres() {
   const geojson = cerebroDatos.geojsonSanAndres;
@@ -155,7 +156,7 @@ function actualizarDatos() {
     }
 
     datosLugar.value[i].datos = d.datos;
-    datosLugar.value[i].etnias = d.etnias;
+    datosLugar.value[i].etnias = d.etnias ? d.etnias : [];
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
 
     if (cerebroGlobales.nivel === 'municipios') {

@@ -268,12 +268,23 @@ function textoPuntoY(i) {
       <!-- LINEA DATOS ETNIA -->
 
       <LineaDatos
-        v-if="cerebroDatos.datosEtnia.length && cerebroGlobales.etniaSeleccionada !== 0"
-        :datos="cerebroDatos.datosEtnia"
+        v-if="cerebroDatos.datosNacionalesEtniaSeleccionada.length"
+        :datos="cerebroDatos.datosNacionalesEtniaSeleccionada"
         :posicionX="posicionX"
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
         :color="colores.lineaEtnia"
+        @eventoEncima="eventoEncima"
+        @eventoFuera="eventoFuera"
+      />
+
+      <LineaDatos
+        v-if="cerebroDatos.datosDepartamentoEtniaSeleccionada.length"
+        :datos="cerebroDatos.datosDepartamentoEtniaSeleccionada"
+        :posicionX="posicionX"
+        :posicionY="posicionY"
+        :alturaVis="dimsVis.altoVis"
+        color="red"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />

@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue';
 import { usarCerebroDatos } from '../../cerebro/datos';
+import { usarCerebroGlobales } from '../../cerebro/globales';
 import fuentes from '../../utilidades/fuentes';
 
 const cerebroDatos = usarCerebroDatos();
+const cerebroGlobales = usarCerebroGlobales();
 
 const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 </script>
@@ -11,7 +13,10 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 <template>
   <ul id="leyenda">
     <li id="lineaNacional"><span>Nacional</span><span class="ejemplo"></span></li>
-    <li id="lineaLugar"><span>Lugar Seleccionado</span><span class="ejemplo"></span></li>
+    <li id="lineaLugar"><span>Lugar seleccionado</span><span class="ejemplo"></span></li>
+    <li id="lineaEtnia" v-if="cerebroGlobales.nivel === 'departamentos'">
+      <span>Etnia seleccionada</span><span class="ejemplo"></span>
+    </li>
     <li id="lineaMeta" v-if="tieneMeta"><span>Meta</span><span class="ejemplo"></span></li>
   </ul>
 </template>
@@ -54,7 +59,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #0042bf;
+      background-color: $colorLineaNacional;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -64,7 +69,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #0042bf;
+      background-color: $colorLineaNacional;
       display: inline-block;
     }
   }
@@ -77,7 +82,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #b569d6;
+      background-color: $colorLugarSeleccionado;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -87,7 +92,30 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #b569d6;
+      background-color: $colorLugarSeleccionado;
+      display: inline-block;
+    }
+  }
+}
+
+#lineaEtnia {
+  .ejemplo {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 3px;
+      background-color: $colorEtniaSeleccionada;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: $colorEtniaSeleccionada;
       display: inline-block;
     }
   }

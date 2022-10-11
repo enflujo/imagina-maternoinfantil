@@ -39,13 +39,13 @@ export const usarCerebroGlobales = defineStore('globales', {
     },
 
     actualizarEtnia(nuevaEtnia) {
+      const cerebroDatos = usarCerebroDatos();
       if (nuevaEtnia == this.etniaSeleccionada) return;
-      this.definirPorcentajes();
       this.etniaSeleccionada = nuevaEtnia;
-    },
 
-    cambiarLugar(lugar) {
-      this.lugarSeleccionado = lugar.codigo;
+      if (nuevaEtnia.codigo !== 0) {
+        cerebroDatos.actualizarDatosEtnia();
+      }
     },
   },
 });
