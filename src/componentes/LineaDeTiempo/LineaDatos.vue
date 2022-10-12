@@ -31,25 +31,6 @@ function construirLinea() {
 
   return linea;
 }
-
-/* function construirLinea() {
-  let linea = '';
-
-  console.log(props.datos);
-  props.datos.forEach((instancia, i) => {
-    const x = props.posicionX(instancia.anno);
-    // POR HACER! acá toca cambiar los valores cuando no es porcentaje
-    const y = props.posicionY(instancia.porcentaje);
-
-    if (i === 0) {
-      linea += `M${x} ${y}`;
-    } else {
-      linea += ` L${x} ${y}`;
-    }
-  });
-
-  return linea;
-} */
 </script>
 
 <template>

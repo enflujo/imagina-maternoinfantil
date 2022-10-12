@@ -24,7 +24,6 @@ export const usarCerebroDatos = defineStore('datos', {
     años: [],
     valorMax: 0,
     lugarSeleccionado: null,
-    etniaSeleccionada: null,
   }),
 
   getters: {
@@ -103,6 +102,10 @@ export const usarCerebroDatos = defineStore('datos', {
 
         this.datosEtniasNacionales = nacionalEtnias;
 
+        if (cerebroGlobales.etniaSeleccionada) {
+          this.actualizarDatosEtnia(cerebroGlobales.etniaSeleccionada);
+        }
+
         const años = [];
         for (let i = +añoMin; i <= +añoMax; i++) {
           años.push(i);
@@ -127,6 +130,10 @@ export const usarCerebroDatos = defineStore('datos', {
         //     }
         //   }
         // }
+
+        /*  if (cerebroGlobales.etniaSeleccionada) {
+          cerebroGlobales.actualizarEtnia(cerebroGlobales.etniaSeleccionada);
+        } */
 
         if (cerebroGlobales.lugarSeleccionado) {
           const dLugar = datosIndicador.find((obj) => obj.codigo === cerebroGlobales.lugarSeleccionado.codigo);

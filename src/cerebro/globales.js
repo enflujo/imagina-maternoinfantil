@@ -9,7 +9,7 @@ export const usarCerebroGlobales = defineStore('globales', {
     nivel: 'departamentos',
     año: 2005,
     lugarSeleccionado: null,
-    etniaSeleccionada: null,
+    etniaSeleccionada: 0,
     mostrarCreditos: false,
   }),
 
@@ -25,7 +25,7 @@ export const usarCerebroGlobales = defineStore('globales', {
       const cerebroDatos = usarCerebroDatos();
       this.nivel = valor;
       this.lugarSeleccionado = null;
-      this.etniaSeleccionada = null;
+      this.etniaSeleccionada = 0;
       cerebroDatos.datosLugar = [];
       cerebroDatos.datosEtnia = [];
       await cerebroDatos.cargarGeojson();

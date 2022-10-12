@@ -33,8 +33,10 @@ onUnmounted(() => {
 
 function clicFuera(evento) {
   if (cerebroGlobales.nivel === 'departamentos') {
-    if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
-      mostrarMenu.value = false;
+    if (contenedor) {
+      if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
+        mostrarMenu.value = false;
+      }
     }
   }
 }
