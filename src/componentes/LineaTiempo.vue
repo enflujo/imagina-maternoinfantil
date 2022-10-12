@@ -268,23 +268,32 @@ function textoPuntoY(i) {
       <!-- LINEA DATOS ETNIA -->
 
       <LineaDatos
-        v-if="cerebroDatos.datosNacionalesEtniaSeleccionada.length"
+        v-if="
+          cerebroGlobales.nivel === 'departamentos' &&
+          cerebroDatos.datosNacionalesEtniaSeleccionada.length &&
+          cerebroGlobales.etniaSeleccionada.codigo !== 0
+        "
         :datos="cerebroDatos.datosNacionalesEtniaSeleccionada"
         :posicionX="posicionX"
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
-        :color="colores.lineaEtnia"
+        :color="colores.lineaEtniaNacional"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />
 
       <LineaDatos
-        v-if="cerebroDatos.datosDepartamentoEtniaSeleccionada.length"
+        v-if="
+          cerebroGlobales.nivel === 'departamentos' &&
+          cerebroDatos.datosDepartamentoEtniaSeleccionada &&
+          cerebroDatos.datosDepartamentoEtniaSeleccionada.length &&
+          cerebroGlobales.etniaSeleccionada.codigo !== 0
+        "
         :datos="cerebroDatos.datosDepartamentoEtniaSeleccionada"
         :posicionX="posicionX"
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
-        color="red"
+        :color="colores.lineaEtniaLugar"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />

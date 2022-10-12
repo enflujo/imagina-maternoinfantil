@@ -14,8 +14,11 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
   <ul id="leyenda">
     <li id="lineaNacional"><span>Nacional</span><span class="ejemplo"></span></li>
     <li id="lineaLugar"><span>Lugar seleccionado</span><span class="ejemplo"></span></li>
-    <li id="lineaEtnia" v-if="cerebroGlobales.nivel === 'departamentos'">
-      <span>Etnia seleccionada</span><span class="ejemplo"></span>
+    <li id="lineaEtniaNacional" v-if="cerebroGlobales.nivel == 'departamentos'">
+      <span>Etnia (nacional)</span><span class="ejemplo"></span>
+    </li>
+    <li id="lineaEtniaLugar" v-if="cerebroGlobales.nivel == 'departamentos'">
+      <span>Etnia (depto)</span><span class="ejemplo"></span>
     </li>
     <li id="lineaMeta" v-if="tieneMeta"><span>Meta</span><span class="ejemplo"></span></li>
   </ul>
@@ -98,14 +101,14 @@ li {
   }
 }
 
-#lineaEtnia {
+#lineaEtniaNacional {
   .ejemplo {
     &::after {
       content: '';
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: $colorEtniaSeleccionada;
+      background-color: $colorEtniaNacional;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -115,7 +118,30 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: $colorEtniaSeleccionada;
+      background-color: $colorEtniaNacional;
+      display: inline-block;
+    }
+  }
+}
+
+#lineaEtniaLugar {
+  .ejemplo {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 3px;
+      background-color: $colorEtniaLugar;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: $colorEtniaLugar;
       display: inline-block;
     }
   }

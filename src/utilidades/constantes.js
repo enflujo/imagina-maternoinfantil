@@ -5,7 +5,8 @@ export const colores = {
   lineaNal: '#0042ba',
   lineaLugar: '#b86ad8',
   //TODO: Definir color
-  lineaEtnia: '#f5af08',
+  lineaEtniaNacional: '#f5af08',
+  lineaEtniaLugar: '#f50008',
   numero: '',
 };
 export const etnias = [
