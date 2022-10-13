@@ -103,7 +103,7 @@ export const usarCerebroDatos = defineStore('datos', {
         this.datosEtniasNacionales = nacionalEtnias;
 
         if (cerebroGlobales.etniaSeleccionada) {
-          this.actualizarDatosEtnia(cerebroGlobales.etniaSeleccionada);
+          this.actualizarDatosEtnia();
         }
 
         const años = [];
@@ -205,10 +205,10 @@ export const usarCerebroDatos = defineStore('datos', {
         };
       });
 
-      this.actualizarDatosEtnia(datos);
+      this.actualizarDatosEtnia();
     },
 
-    actualizarDatosEtnia(datos) {
+    actualizarDatosEtnia() {
       const cerebroGlobales = usarCerebroGlobales();
       if (cerebroGlobales.etniaSeleccionada) {
         // Acá se pinta la línea nacional de etnia
