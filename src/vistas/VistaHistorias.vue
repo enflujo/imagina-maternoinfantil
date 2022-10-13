@@ -601,7 +601,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     }
 
     .seccionDerecha {
-      width: 32vw;
+      width: 28vw;
       margin: 4em 4vw;
     }
 
@@ -619,6 +619,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     .historia {
       display: grid;
       grid-template-columns: 39vw 30vw;
+      margin-left: 6em;
 
       img {
         width: 30vw;
