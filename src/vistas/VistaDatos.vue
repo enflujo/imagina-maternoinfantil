@@ -1,7 +1,8 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { rutaBase } from '../utilidades/constantes';
 import fuentes from '../utilidades/fuentes';
+import FichaTecnica from '../componentes/FichaTecnica.vue';
 
 onMounted(async () => {
   // Este archivo lo generamos en el tally, se debe actualizar el archivo en la bodega cuando cambien los datos.
@@ -12,6 +13,25 @@ onMounted(async () => {
     fuente.pesoArchivo = peso;
   });
 });
+
+const mostrarFicha = ref(false);
+const indicador = ref(null);
+const ficha = ref(null);
+/* const mostrarFichaTecnica = (evento) => {
+  evento.stopPropagation();
+  mostrarFicha.value = !mostrarFicha.value;
+}; */
+
+function mostrarFichaTecnica(i) {
+  indicador.value = i;
+  mostrarFicha.value = !mostrarFicha.value;
+}
+
+function clicFuera(evento) {
+  if (!(ficha.value.contenedor === evento.target || ficha.value.contenedor.contains(evento.target))) {
+    mostrarFicha.value = false;
+  }
+}
 </script>
 
 <template>
@@ -25,9 +45,11 @@ onMounted(async () => {
         <span class="negrita">.zip</span>
       </p>
 
+      <FichaTecnica ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="indicador" />
+
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
-          <p class="columna ficha">Ficha Técnica</p>
+          <span class="columna ficha" @click="mostrarFichaTecnica(i)">Ficha Técnica </span>
 
           <p class="columna enlace">
             <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>
@@ -71,6 +93,11 @@ onMounted(async () => {
 
   .ficha {
     cursor: pointer;
+  }
+
+  #fichaTecnica {
+    position: relative;
+    width: 100%;
   }
 }
 
@@ -141,6 +168,23 @@ a:link {
 
 ul {
   margin-left: 1.1em;
+}
+
+#masInfo {
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  right: 1em;
+  border-radius: 50%;
+  color: black;
+  border: 2px solid $colorOscuro;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.scale($colorOscuro, $lightness: 90%);
+  }
 }
 
 // Teléfonos horizontal

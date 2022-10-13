@@ -58,7 +58,7 @@ function actualizarDims() {
 
     <div id="seccionCentral">
       <Buscador />
-      <FichaTecnica ref="ficha" :mostrar="mostrarFicha" />
+      <FichaTecnica ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="cerebroDatos.indiceActual" />
 
       <div id="filtros">
         <MenuAños />

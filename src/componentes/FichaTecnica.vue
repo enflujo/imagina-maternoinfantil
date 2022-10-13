@@ -8,6 +8,7 @@ const cerebroDatos = usarCerebroDatos();
 const contenedor = ref(null);
 defineProps({
   mostrar: Boolean,
+  indiceIndicador: null,
 });
 
 defineExpose({ contenedor });
@@ -15,39 +16,39 @@ defineExpose({ contenedor });
 
 <template>
   <div id="fichaTecnica" ref="contenedor" :style="`display:${mostrar ? 'block' : 'none'}`">
-    <h3 id="titulo">{{ fuentes[cerebroDatos.indiceActual].nombreIndicador }}</h3>
+    <h3 id="titulo">{{ fuentes[indiceIndicador].nombreIndicador }}</h3>
 
     <div id="contenido">
       <h4>Definición</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].definicion }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].definicion }}</div>
 
       <h4>Grupo</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].grupo }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].grupo }}</div>
 
       <h4>Metodología de cálculo</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].calculo }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].calculo }}</div>
 
       <h4>Unidad de medida</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].unidadDeMedida.descripcion }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].unidadDeMedida.descripcion }}</div>
 
       <h4>Fuente del numerador</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteNumerador }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].fuenteNumerador }}</div>
 
       <h4>Fuente del denominador</h4>
-      <div class="informacion">{{ fuentes[cerebroDatos.indiceActual].fuenteDenominador }}</div>
+      <div class="informacion">{{ fuentes[indiceIndicador].fuenteDenominador }}</div>
 
-      <h4 v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0">Códigos CIE-10</h4>
+      <h4 v-if="fuentes[indiceIndicador].codigosCIE10.length > 0">Códigos CIE-10</h4>
 
-      <div v-if="fuentes[cerebroDatos.indiceActual].codigosCIE10.length > 0" class="informacion">
+      <div v-if="fuentes[indiceIndicador].codigosCIE10.length > 0" class="informacion">
         Atenciones por consulta para los códigos CIE-10:
-        <li v-for="(codigo, i) in fuentes[cerebroDatos.indiceActual].codigosCIE10" :key="`codigo${i}`">
+        <li v-for="(codigo, i) in fuentes[indiceIndicador].codigosCIE10" :key="`codigo${i}`">
           {{ codigo }}
         </li>
       </div>
 
       <h4>Nivel de desagregación</h4>
       <div class="informacion">
-        <li v-for="(nivel, i) in fuentes[cerebroDatos.indiceActual].nivelDesagregacion" :key="`nivel${i}`">
+        <li v-for="(nivel, i) in fuentes[indiceIndicador].nivelDesagregacion" :key="`nivel${i}`">
           {{ nivel }}
         </li>
       </div>
@@ -55,7 +56,7 @@ defineExpose({ contenedor });
       <h4>Cómo se interpreta</h4>
       <div class="informacion">
         <p
-          v-for="(parrafo, i) in fuentes[cerebroDatos.indiceActual].interpretacion"
+          v-for="(parrafo, i) in fuentes[indiceIndicador].interpretacion"
           :key="`parrafo${i}`"
           v-html="urlsAEnlacesHTML(parrafo)"
         ></p>
@@ -63,12 +64,12 @@ defineExpose({ contenedor });
 
       <h4>Meta</h4>
       <div class="informacion">
-        <p v-for="(meta, i) in fuentes[cerebroDatos.indiceActual].meta.descripcion" :key="`meta${i}`">{{ meta }}</p>
+        <p v-for="(meta, i) in fuentes[indiceIndicador].meta.descripcion" :key="`meta${i}`">{{ meta }}</p>
       </div>
 
-      <h4 v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''">Limitaciones del indicador</h4>
-      <div v-if="fuentes[cerebroDatos.indiceActual].limitacion !== ''" class="informacion">
-        {{ fuentes[cerebroDatos.indiceActual].limitacion }}
+      <h4 v-if="fuentes[indiceIndicador].limitacion !== ''">Limitaciones del indicador</h4>
+      <div v-if="fuentes[indiceIndicador].limitacion !== ''" class="informacion">
+        {{ fuentes[indiceIndicador].limitacion }}
       </div>
     </div>
   </div>
