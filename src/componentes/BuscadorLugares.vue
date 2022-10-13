@@ -57,7 +57,7 @@ function elegirDeLista(lugar) {
 @use 'sass:color';
 @import '@/assets/constantes.scss';
 #buscador {
-  margin: 3em 0em 0em 1em;
+  margin: 3em 0em 0.5em 1em;
   border: $colorOscuro solid 2px;
   width: fit-content;
   font-family: $fuenteTexto;

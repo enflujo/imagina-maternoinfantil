@@ -21,10 +21,11 @@
 
 #encabezado {
   height: $tamañoEncabezado;
-  width: 100vw;
+  width: 100%;
   background-color: $colorBlanco;
   top: 0;
   z-index: 10;
+  position: fixed;
 }
 
 #nombreProyecto {
@@ -37,6 +38,7 @@
 
 nav {
   display: flex;
+  justify-content: space-around;
 }
 
 #logo {
@@ -59,9 +61,7 @@ a:link {
 
 .elementoMenu {
   font-size: 1em;
-  // padding: 0.2em 1em 0 3em;
   margin: 4px;
-  margin-left: 20px;
 }
 
 .tituloProyecto {
@@ -80,21 +80,42 @@ ul {
 
 // Teléfonos horizontal
 @media (min-width: $minCelular) {
+  nav {
+    justify-content: flex-start;
+  }
+  .elementoMenu {
+    margin: 20px;
+  }
 }
 // Pantallas medianas (Tablets)
 @media (min-width: $minTablet) {
+  nav {
+    justify-content: flex-start;
+  }
   .tituloProyecto {
     display: block;
     margin-left: 1em;
   }
+  .elementoMenu {
+    margin: 20px;
+  }
 }
 // Dispositivos grandes y pantallas medianas
 @media (min-width: $minPantalla) {
+  nav {
+    justify-content: flex-start;
+  }
+  .elementoMenu {
+    margin: 20px;
+  }
 }
 // Pantallas grandes
 @media (min-width: $minPantallaGrande) {
-  #encabezado {
-    position: fixed;
-  }
+}
+nav {
+  justify-content: flex-start;
+}
+.elementoMenu {
+  margin: 20px;
 }
 </style>

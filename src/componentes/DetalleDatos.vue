@@ -24,7 +24,7 @@ function elegir(lugar) {
 <template>
   <div
     class="datosLugar"
-    :class="dato.lugarCodigo == cerebroDatos.lugarSeleccionado ? 'activo' : null"
+    :class="dato.lugarCodigo == cerebroDatos.lugarSeleccionado && esLista ? 'activo' : null"
     @click="elegir(dato.lugarNombre)"
   >
     <div class="nombreLugar">
