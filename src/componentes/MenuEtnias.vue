@@ -1,14 +1,10 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import { usarCerebroDatos } from '../cerebro/datos';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { usarCerebroGlobales } from '../cerebro/globales';
 import { etnias } from '../utilidades/constantes';
 
 const cerebroGlobales = usarCerebroGlobales();
-const cerebroDatos = usarCerebroDatos();
 const contenedor = ref(null);
-const tituloEtnia = ref('');
-
 const mostrarMenu = ref(false);
 const nombreEtniaSeleccionada = computed(() => {
   if (cerebroGlobales.etniaSeleccionada) {
@@ -33,7 +29,7 @@ onUnmounted(() => {
 
 function clicFuera(evento) {
   if (cerebroGlobales.nivel === 'departamentos') {
-    if (contenedor) {
+    if (contenedor.value) {
       if (!(contenedor.value === evento.target || contenedor.value.contains(evento.target))) {
         mostrarMenu.value = false;
       }

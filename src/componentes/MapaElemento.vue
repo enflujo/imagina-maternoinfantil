@@ -136,7 +136,6 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
 function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
-  const etniaSeleccionada = cerebroGlobales.etniaSeleccionada;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
   const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores.mapaCero, colores.mapaCien);
 
