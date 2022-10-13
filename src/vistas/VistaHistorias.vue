@@ -629,8 +629,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     .historia {
       display: grid;
       grid-template-columns: 39vw 30vw;
-      margin-left:6em;
-      
+      margin-left: 6em;
 
       img {
         width: 30vw;
