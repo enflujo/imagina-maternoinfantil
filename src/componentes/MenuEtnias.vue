@@ -43,7 +43,6 @@ function clicFuera(evento) {
 
 function actualizarEtnia(etnia) {
   cerebroGlobales.actualizarEtnia(etnia);
-  // TODO: Cómo actualizar los datos del lugar al hacer click en la lista de etnias?
 }
 </script>
 

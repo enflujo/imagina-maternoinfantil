@@ -219,30 +219,7 @@ export const usarCerebroDatos = defineStore('datos', {
             this.datosDepartamentoEtniaSeleccionada =
               datosDepartamento.etnias[cerebroGlobales.etniaSeleccionada.codigo];
           }
-          // if (cerebroGlobales.nivel === 'departamentos') {
-          //   const año = cerebroGlobales.año;
-          //   const lugarSeleccionado = cerebroGlobales.lugarSeleccionado.codigo;
-          //   console.log(año, lugarSeleccionado);
-          // }
         }
-
-        // if (cerebroGlobales.nivel === 'departamentos') {
-        //   if (datos.etnias) {
-        //     this.datosEtnia = Object.keys(datos.etnias[cerebroGlobales.etniaSeleccionada]).map((anno) => {
-        //       const [numerador, denominador, porcentaje] = datos.etnias[cerebroGlobales.etniaSeleccionada][anno];
-
-        //       return {
-        //         anno: anno,
-        //         numerador,
-        //         denominador,
-        //         porcentaje,
-        //       };
-        //     });
-        //   }
-        // } else {
-        //   cerebroGlobales.etniaSeleccionada = 0;
-        //   this.datosEtnia = [];
-        // }
       }
     },
   },

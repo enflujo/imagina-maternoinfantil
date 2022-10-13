@@ -202,7 +202,6 @@ function eventoEncima(seccion) {
 
   // Agregar datos para mostrar detalle en hover
   infoDetalle.lugarNombre = seccion.nombre;
-
   infoDetalle.numerador = numerador;
   infoDetalle.denominador = denominador;
   infoDetalle.porcentaje = porcentaje.toFixed(2);

@@ -270,6 +270,8 @@ function textoPuntoY(i) {
       <LineaDatos
         v-if="
           cerebroGlobales.nivel === 'departamentos' &&
+          cerebroGlobales.etniaSeleccionada &&
+          cerebroDatos.datosNacionalesEtniaSeleccionada &&
           cerebroDatos.datosNacionalesEtniaSeleccionada.length &&
           cerebroGlobales.etniaSeleccionada.codigo !== 0
         "
