@@ -12,9 +12,7 @@ const pesos = ref([]);
 
 onMounted(async () => {
   // Este archivo lo generamos en el tally, se debe actualizar el archivo en la bodega cuando cambien los datos.
-  const datosPesos = await fetch(`${rutaBase}/maternoinfantil/pesosArchivos.json`).then((respuesta) =>
-    respuesta.json()
-  );
+  const datosPesos = await fetch(`${rutaBase}/pesosArchivos.json`).then((respuesta) => respuesta.json());
 
   fuentes.forEach((fuente) => {
     pesos.value.push(datosPesos[fuente.archivoDescarga]);
@@ -60,7 +58,7 @@ function clicFuera(evento) {
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
           <p class="columna enlace">
-            <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>
+            <a :href="`${rutaBase}/${fuente.archivoDescarga}.zip`" download>
               <span class="nombre">{{ fuente.nombreIndicador + ' ' }}</span>
               <span class="peso">({{ pesos[i] }})</span>
               <img class="iconoDescarga" :src="iconoDescarga" alt="Icono Descarga" />
