@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue';
 import { usarCerebroDatos } from '../../cerebro/datos';
+import { usarCerebroGlobales } from '../../cerebro/globales';
 import fuentes from '../../utilidades/fuentes';
 
 const cerebroDatos = usarCerebroDatos();
+const cerebroGlobales = usarCerebroGlobales();
 
 const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 </script>
@@ -11,7 +13,13 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 <template>
   <ul id="leyenda">
     <li id="lineaNacional"><span>Nacional</span><span class="ejemplo"></span></li>
-    <li id="lineaLugar"><span>Lugar Seleccionado</span><span class="ejemplo"></span></li>
+    <li id="lineaLugar"><span>Lugar seleccionado</span><span class="ejemplo"></span></li>
+    <li id="lineaEtniaNacional" v-if="cerebroGlobales.nivel == 'departamentos'">
+      <span>Etnia (nacional)</span><span class="ejemplo"></span>
+    </li>
+    <li id="lineaEtniaLugar" v-if="cerebroGlobales.nivel == 'departamentos'">
+      <span>Etnia (depto)</span><span class="ejemplo"></span>
+    </li>
     <li id="lineaMeta" v-if="tieneMeta"><span>Meta</span><span class="ejemplo"></span></li>
   </ul>
 </template>
@@ -22,12 +30,12 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 #leyenda {
   font-size: 0.7em;
   border: 2px solid $colorOscuro;
-  width: 180px;
+  width: 46vw;
   background-color: $colorBlanco;
   padding: 0.3em;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
+  left: 51%;
+  top: -18px;
   color: $colorOscuro;
 }
 
@@ -54,7 +62,7 @@ li {
       display: inline-block;
       width: 15px;
       height: 3px;
-      background-color: #0042bf;
+      background-color: $colorLineaNacional;
       vertical-align: middle;
       margin-top: -2px;
     }
@@ -64,7 +72,7 @@ li {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: #0042bf;
+      background-color: $colorLineaNacional;
       display: inline-block;
     }
   }
@@ -93,6 +101,52 @@ li {
   }
 }
 
+#lineaEtniaNacional {
+  .ejemplo {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 3px;
+      background-color: $colorEtniaNacional;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: $colorEtniaNacional;
+      display: inline-block;
+    }
+  }
+}
+
+#lineaEtniaLugar {
+  .ejemplo {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 3px;
+      background-color: $colorEtniaLugar;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: $colorEtniaLugar;
+      display: inline-block;
+    }
+  }
+}
+
 #lineaMeta {
   .ejemplo {
     &::after {
@@ -105,6 +159,35 @@ li {
       vertical-align: middle;
       margin-top: -2px;
     }
+  }
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  #leyenda {
+    width: 180px;
+  }
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+  #leyenda {
+    width: 180px;
+    left: 76%;
+  }
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  #leyenda {
+    width: 180px;
+    left: 67%;
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #leyenda {
+    width: 180px;
+    left: 67%;
+    top: -18px;
   }
 }
 </style>

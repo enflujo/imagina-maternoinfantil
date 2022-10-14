@@ -24,6 +24,10 @@ const datosLugar = ref([]);
 const datosSanAndres = ref([]);
 const datosProvidencia = ref([]);
 const lugaresColombia = ref(null);
+const hayLugarSeleccionado = ref(false);
+
+const claseLugar = (seccion) =>
+  cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre ? 'activo' : '';
 
 watch(
   () => cerebroDatos.geojsonLugar,
@@ -74,6 +78,8 @@ function iniciarDatosLugar(geojson) {
 
 watch(() => cerebroDatos.datos, actualizarDatos);
 watch(() => cerebroGlobales.año, actualizarDatos);
+watch(() => cerebroGlobales.etniaSeleccionada, actualizarDatos);
+watch(() => cerebroGlobales.nivel, actualizarDatos);
 
 function iniciarDatosSanAndres() {
   const geojson = cerebroDatos.geojsonSanAndres;
@@ -128,11 +134,14 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
   return seccion;
 }
 
+/***
+ * Actualiza los datos al seleccionar un lugar del mapa
+ */
 function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
   const añoSeleccionado = cerebroGlobales.año;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
-  const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores[0], colores[1]);
+  const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores.mapaCero, colores.mapaCien);
 
   sinDatos.value = !datosNacionalesAño;
 
@@ -150,7 +159,12 @@ function actualizarDatos() {
     }
 
     datosLugar.value[i].datos = d.datos;
+    datosLugar.value[i].etnias = d.etnias ? d.etnias : [];
     datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
+
+    if (cerebroGlobales.nivel === 'municipios') {
+      cerebroGlobales.actualizarEtnia(0);
+    }
   });
 
   if (cerebroGlobales.nivel === 'departamentos') {
@@ -191,7 +205,6 @@ function eventoEncima(seccion) {
 
   // Agregar datos para mostrar detalle en hover
   infoDetalle.lugarNombre = seccion.nombre;
-
   infoDetalle.numerador = numerador;
   infoDetalle.denominador = denominador;
   infoDetalle.porcentaje = porcentaje.toFixed(2);
@@ -223,9 +236,22 @@ function eventoMovimiento(evento) {
   posInfo.y = evento.pageY;
 }
 
+/***
+ * Cambiar lugar seleccionado haciendo clic en el mapa
+ */
 function eventoClic(seccion) {
-  // Cambiar lugar
-  cerebroDatos.actualizarDatosLugar(seccion);
+  if (hayLugarSeleccionado.value) {
+    if (seccion.codigo === cerebroDatos.lugarSeleccionado) {
+      // Si se hace clic en el lugar ya seleccionado, se borra la selección
+      cerebroDatos.vaciarDatosLugar();
+      cerebroGlobales.lugarSeleccionado = null;
+    } else {
+      cerebroDatos.actualizarDatosLugar(seccion);
+    }
+  } else {
+    cerebroDatos.actualizarDatosLugar(seccion);
+  }
+  hayLugarSeleccionado.value = !hayLugarSeleccionado.value;
 }
 </script>
 
@@ -241,11 +267,7 @@ function eventoClic(seccion) {
         v-for="seccion in datosSanAndres"
         :key="`seccion-${seccion.codigo}`"
         class="lugar sanAndres"
-        :class="
-          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
-            ? 'activo'
-            : ''
-        "
+        :class="claseLugar(seccion)"
         :d="seccion.linea"
         :fill="seccion.color"
         :data-nombre="seccion.nombre"
@@ -259,11 +281,7 @@ function eventoClic(seccion) {
         v-for="seccion in datosProvidencia"
         :key="`seccion-${seccion.codigo}`"
         class="lugar providencia"
-        :class="
-          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
-            ? 'activo'
-            : ''
-        "
+        :class="claseLugar(seccion)"
         :d="seccion.linea"
         :fill="seccion.color"
         :data-nombre="seccion.nombre"
@@ -288,11 +306,7 @@ function eventoClic(seccion) {
           :id="seccion.codigo"
           :key="`seccion-${seccion.codigo}`"
           class="lugar"
-          :class="
-            cerebroGlobales.lugarSeleccionado && seccion.codigo === cerebroGlobales.lugarSeleccionado.codigo
-              ? 'activo'
-              : ''
-          "
+          :class="claseLugar(seccion)"
           :d="seccion.linea"
           :fill="seccion.color"
           :data-nombre="seccion.nombre"

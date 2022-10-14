@@ -86,7 +86,6 @@ function actualizarDims() {
       </div>
 
       <Mapa />
-      <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
     </div>
 
     <div id="seccionDerecha" ref="seccionDerecha">
@@ -110,6 +109,10 @@ function actualizarDims() {
   cursor: pointer;
 }
 
+.etnia {
+  cursor: pointer;
+}
+
 #filtros {
   margin: 0 1em;
   display: flex;
@@ -117,13 +120,13 @@ function actualizarDims() {
   color: #0041bf;
   text-transform: uppercase;
   font-weight: 600;
+}
 
-  #indicadorSeleccionado {
-    h3 {
-      font-size: 1em;
-      display: none;
-      text-transform: none;
-    }
+#indicadorSeleccionado {
+  h3 {
+    font-size: 1em;
+    display: none;
+    text-transform: none;
   }
 }
 

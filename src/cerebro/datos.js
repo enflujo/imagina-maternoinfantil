@@ -5,11 +5,14 @@ import { rutaBase } from '../utilidades/constantes';
 
 export const usarCerebroDatos = defineStore('datos', {
   state: () => ({
-    nombre: '',
     indice: 0,
     cargandoDatos: false,
     datos: [],
     datosNacionales: [],
+    datosNacionalesEtniaSeleccionada: [],
+    datosDepartamentoEtniaSeleccionada: [],
+    datosEtniasNacionales: {},
+    datosEtnia: [],
     datosLugar: [],
     _cache: {
       departamentos: null,
@@ -39,16 +42,17 @@ export const usarCerebroDatos = defineStore('datos', {
       if (forzar || this.indice !== indiceIndicador) {
         const cerebroGlobales = usarCerebroGlobales();
         const { nombreArchivo, tipo } = fuentes[indiceIndicador];
-        const respuesta = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-${cerebroGlobales.nivel}.json`);
-        const respuestaPais = await fetch(`${rutaBase}/mi_v2/${nombreArchivo}-pais.json`);
-        const datosIndicador = await respuesta.json();
-        const datosPais = await respuestaPais.json();
+        const ruta = `${rutaBase}/${nombreArchivo}`;
+        const { nivel } = cerebroGlobales;
+
+        const datosIndicador = await fetch(`${ruta}-${nivel}.json`).then((respuesta) => respuesta.json());
+        const datosPais = await fetch(`${ruta}-pais.json`).then((respuesta) => respuesta.json());
 
         let añoMin = Infinity;
         let añoMax = 0;
 
-        this.datosNacionales = Object.keys(datosPais).map((anno) => {
-          const [numerador, denominador, porcentaje] = datosPais[anno];
+        this.datosNacionales = Object.keys(datosPais.datos).map((anno) => {
+          const [numerador, denominador, porcentaje] = datosPais.datos[anno];
           añoMin = anno < añoMin ? anno : añoMin;
           añoMax = anno > añoMax ? anno : añoMax;
 
@@ -60,10 +64,54 @@ export const usarCerebroDatos = defineStore('datos', {
           };
         });
 
+        const nacionalEtnias = datosPais.etnias;
+
+        for (let tipoEtnia in nacionalEtnias) {
+          nacionalEtnias[tipoEtnia] = Object.keys(nacionalEtnias[tipoEtnia].datos).map((anno) => {
+            const [numerador, denominador, porcentaje] = nacionalEtnias[tipoEtnia].datos[anno];
+            añoMin = anno < añoMin ? anno : añoMin;
+            añoMax = anno > añoMax ? anno : añoMax;
+
+            return {
+              anno: anno,
+              numerador,
+              denominador,
+              porcentaje,
+            };
+          });
+        }
+
+        if (nivel === 'departamentos') {
+          datosIndicador.forEach((lugar) => {
+            for (let tipoEtnia in lugar.etnias) {
+              lugar.etnias[tipoEtnia] = Object.keys(lugar.etnias[tipoEtnia].datos).map((anno) => {
+                const [numerador, denominador, porcentaje] = lugar.etnias[tipoEtnia].datos[anno];
+                añoMin = anno < añoMin ? anno : añoMin;
+                añoMax = anno > añoMax ? anno : añoMax;
+
+                return {
+                  anno: anno,
+                  numerador,
+                  denominador,
+                  porcentaje,
+                };
+              });
+            }
+          });
+        }
+
+        this.datosEtniasNacionales = nacionalEtnias;
+
+        if (cerebroGlobales.etniaSeleccionada) {
+          this.actualizarDatosEtnia();
+        }
+
         const años = [];
+
         for (let i = +añoMin; i <= +añoMax; i++) {
           años.push(i);
         }
+
         this.años = años;
         this.datos = datosIndicador;
 
@@ -75,16 +123,6 @@ export const usarCerebroDatos = defineStore('datos', {
           this.valorMax = 500;
         }
 
-        // if (cerebroGlobales.año) {
-        //   const existeAñoSeleccionado = años.includes(cerebroGlobales.año);
-
-        //   if (!existeAñoSeleccionado) {
-        //     if (años[0] > cerebroGlobales.año) {
-        //       cerebroGlobales.año = años[0];
-        //     }
-        //   }
-        // }
-
         if (cerebroGlobales.lugarSeleccionado) {
           const dLugar = datosIndicador.find((obj) => obj.codigo === cerebroGlobales.lugarSeleccionado.codigo);
 
@@ -92,8 +130,6 @@ export const usarCerebroDatos = defineStore('datos', {
         }
 
         this.indice = indiceIndicador;
-
-        cerebroGlobales.definirPorcentajes();
       }
 
       this.cargandoDatos = false;
@@ -113,7 +149,7 @@ export const usarCerebroDatos = defineStore('datos', {
         /**
          * Cargar los datos desde el servidor si aún no se han cargado
          */
-        const respuesta = await fetch(`${rutaBase}/mi_v2/${cerebroGlobales.nivel}.json`);
+        const respuesta = await fetch(`${rutaBase}/${cerebroGlobales.nivel}.json`);
         const geojson = await respuesta.json();
 
         let geoSanAndres;
@@ -154,6 +190,28 @@ export const usarCerebroDatos = defineStore('datos', {
           porcentaje,
         };
       });
+
+      this.actualizarDatosEtnia();
+    },
+
+    vaciarDatosLugar() {
+      this.datosLugar = [];
+    },
+
+    actualizarDatosEtnia() {
+      const cerebroGlobales = usarCerebroGlobales();
+      if (cerebroGlobales.etniaSeleccionada) {
+        // Acá se pinta la línea nacional de etnia
+        this.datosNacionalesEtniaSeleccionada = this.datosEtniasNacionales[cerebroGlobales.etniaSeleccionada.codigo];
+
+        if (this.lugarSeleccionado) {
+          const datosDepartamento = this.datos.find((lugar) => lugar.codigo === this.lugarSeleccionado);
+          if (datosDepartamento && datosDepartamento.etnias) {
+            this.datosDepartamentoEtniaSeleccionada =
+              datosDepartamento.etnias[cerebroGlobales.etniaSeleccionada.codigo];
+          }
+        }
+      }
     },
   },
 });
