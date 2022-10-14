@@ -4,34 +4,44 @@ import { rutaBase } from '../utilidades/constantes';
 import fuentes from '../utilidades/fuentes';
 import FichaTecnica from '../componentes/FichaTecnica.vue';
 
+import iconoDescarga from '../assets/imgs/bajada.svg';
+const mostrarFicha = ref(false);
+const indicador = ref(null);
+const ficha = ref(null);
+const pesos = ref([]);
+
 onMounted(async () => {
   // Este archivo lo generamos en el tally, se debe actualizar el archivo en la bodega cuando cambien los datos.
-  const pesos = await fetch(`${rutaBase}/maternoinfantil/pesosArchivos.json`).then((respuesta) => respuesta.json());
-  // document.body.addEventListener('click', clicFuera);
+  const datosPesos = await fetch(`${rutaBase}/maternoinfantil/pesosArchivos.json`).then((respuesta) =>
+    respuesta.json()
+  );
+
   fuentes.forEach((fuente) => {
-    const peso = pesos[fuente.archivoDescarga];
-    // Agregar el peso del archivo a cada fuente para tener esta información disponible en el bucle del html.
-    fuente.pesoArchivo = peso;
+    pesos.value.push(datosPesos[fuente.archivoDescarga]);
   });
+
+  document.body.addEventListener('click', clicFuera);
 });
 
-/* onUnmounted(() => {
+onUnmounted(() => {
   document.body.removeEventListener('click', clicFuera);
-}); */
-
-const mostrarFicha = ref(false);
-const indicador = ref(0);
-const ficha = ref(null);
+});
 
 function mostrarFichaTecnica(i) {
   indicador.value = i;
-  mostrarFicha.value = !mostrarFicha.value;
+  mostrarFicha.value = true;
+  console.log(indicador.value);
 }
 
 // POR HACER! Arreglar
 function clicFuera(evento) {
-  if (!(ficha.value.contenedor === evento.target || ficha.value.contenedor.contains(evento.target))) {
-    mostrarFicha.value = false;
+  if (indicador.value) {
+    if (!(ficha.value.contenedor === evento.target || ficha.value.contenedor.contains(evento.target))) {
+      if (!evento.target.classList.contains('ficha')) {
+        mostrarFicha.value = false;
+        indicador.value = null;
+      }
+    }
   }
 }
 </script>
@@ -49,24 +59,23 @@ function clicFuera(evento) {
 
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
-          <span class="columna ficha" @click="mostrarFichaTecnica(i)">Ficha Técnica </span>
-
           <p class="columna enlace">
             <a :href="`${rutaBase}/maternoinfantil/${fuente.archivoDescarga}.zip`" download>
               <span class="nombre">{{ fuente.nombreIndicador + ' ' }}</span>
-              <span class="peso">({{ fuente.pesoArchivo }})</span>
+              <span class="peso">({{ pesos[i] }})</span>
+              <img class="iconoDescarga" :src="iconoDescarga" alt="Icono Descarga" />
             </a>
           </p>
+
+          <span class="columna ficha" :class="indicador === i ? 'activo' : ''" @click="mostrarFichaTecnica(i)">
+            Ficha Técnica
+          </span>
         </div>
       </div>
+
       <div id="contenedorFichas">
-        <FichaTecnica ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="indicador" />
+        <FichaTecnica v-if="indicador !== null" ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="indicador" />
       </div>
-      <!-- <div id="boton">
-        <a href="https://enflujo.com" target="_blank">
-          <img class="boton" src="../assets/imgs/bajada.svg" />
-        </a>
-      </div> -->
     </header>
   </main>
 </template>
@@ -74,6 +83,12 @@ function clicFuera(evento) {
 <style lang="scss" scoped>
 @use 'sass:color';
 @import '../assets/constantes.scss';
+
+.iconoDescarga {
+  width: 22px;
+  margin-left: 0.5em;
+  vertical-align: bottom;
+}
 
 #indicadores {
   width: 50vw;
@@ -83,15 +98,11 @@ function clicFuera(evento) {
     display: flex;
     margin: 0.4em 0;
     border: 1px dotted;
-    width: 84vw;
+    justify-content: space-between;
   }
 
   .columna {
     padding: 0.5em 1em;
-  }
-
-  .enlace {
-    padding-left: 2em;
   }
 
   .nombre {
@@ -101,6 +112,10 @@ function clicFuera(evento) {
   .ficha {
     cursor: pointer;
     width: 85px;
+
+    &.activo {
+      background-color: $colorFondoClaro2;
+    }
   }
 }
 
@@ -132,8 +147,9 @@ h3 {
   display: flex;
   flex-direction: row;
   top: 0;
-  right: 6vw;
-  left: 2vw;
+  // right: 6vw;
+  // left: 2vw;
+  overflow: auto;
 }
 
 section {
@@ -218,7 +234,6 @@ ul {
       display: flex;
       margin: 0.4em 0;
       border: 1px dotted;
-      width: 55vw;
     }
   }
   #datos {
@@ -235,7 +250,6 @@ ul {
       display: flex;
       margin: 0.4em 0;
       border: 1px dotted;
-      width: 55vw;
     }
   }
   #fichaTecnica {
@@ -262,25 +276,28 @@ ul {
       display: flex;
       margin: 0.4em 0;
       border: 1px dotted;
-      width: 55vw;
     }
   }
   #datos {
     width: 50vw;
     max-width: 900px;
   }
-  #fichaTecnica {
-    position: relative;
-    width: 100%;
-    left: 20vw;
-  }
+
   #contenedorFichas {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    top: 0;
-    right: 22vw;
-    left: 39vw;
+    position: fixed;
+    right: 0;
+    width: 45vw;
+    left: auto;
+    top: 50px;
+
+    #fichaTecnica {
+      position: relative;
+      width: 100%;
+      display: block;
+      left: auto;
+      top: 0;
+      max-height: calc(100vh - 50px);
+    }
   }
 }
 </style>

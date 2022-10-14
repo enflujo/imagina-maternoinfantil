@@ -1,10 +1,8 @@
 <script setup>
 import fuentes from '../utilidades/fuentes';
-import { usarCerebroDatos } from '../cerebro/datos';
 import { urlsAEnlacesHTML } from '../utilidades/ayudas';
 import { ref } from 'vue';
 
-const cerebroDatos = usarCerebroDatos();
 const contenedor = ref(null);
 defineProps({
   mostrar: Boolean,
