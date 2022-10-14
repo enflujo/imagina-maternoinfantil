@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, onMounted, computed } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
 import { usarCerebroDatos } from '../cerebro/datos';
