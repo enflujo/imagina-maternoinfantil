@@ -196,6 +196,7 @@ export const usarCerebroDatos = defineStore('datos', {
 
     vaciarDatosLugar() {
       this.datosLugar = [];
+      this.datosDepartamentoEtniaSeleccionada = [];
     },
 
     actualizarDatosEtnia() {
