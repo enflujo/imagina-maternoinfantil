@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { rutaBase } from '../utilidades/constantes';
 import fuentes from '../utilidades/fuentes';
 import FichaTecnica from '../componentes/FichaTecnica.vue';
@@ -7,6 +7,7 @@ import FichaTecnica from '../componentes/FichaTecnica.vue';
 onMounted(async () => {
   // Este archivo lo generamos en el tally, se debe actualizar el archivo en la bodega cuando cambien los datos.
   const pesos = await fetch(`${rutaBase}/maternoinfantil/pesosArchivos.json`).then((respuesta) => respuesta.json());
+  // document.body.addEventListener('click', clicFuera);
   fuentes.forEach((fuente) => {
     const peso = pesos[fuente.archivoDescarga];
     // Agregar el peso del archivo a cada fuente para tener esta información disponible en el bucle del html.
@@ -14,19 +15,20 @@ onMounted(async () => {
   });
 });
 
+/* onUnmounted(() => {
+  document.body.removeEventListener('click', clicFuera);
+}); */
+
 const mostrarFicha = ref(false);
-const indicador = ref(null);
+const indicador = ref(0);
 const ficha = ref(null);
-/* const mostrarFichaTecnica = (evento) => {
-  evento.stopPropagation();
-  mostrarFicha.value = !mostrarFicha.value;
-}; */
 
 function mostrarFichaTecnica(i) {
   indicador.value = i;
   mostrarFicha.value = !mostrarFicha.value;
 }
 
+// POR HACER! Arreglar
 function clicFuera(evento) {
   if (!(ficha.value.contenedor === evento.target || ficha.value.contenedor.contains(evento.target))) {
     mostrarFicha.value = false;
@@ -45,8 +47,6 @@ function clicFuera(evento) {
         <span class="negrita">.zip</span>
       </p>
 
-      <FichaTecnica ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="indicador" />
-
       <div id="indicadores">
         <div v-for="(fuente, i) in fuentes" :key="`fuente${i}`" class="indicador">
           <span class="columna ficha" @click="mostrarFichaTecnica(i)">Ficha Técnica </span>
@@ -59,7 +59,9 @@ function clicFuera(evento) {
           </p>
         </div>
       </div>
-
+      <div id="contenedorFichas">
+        <FichaTecnica ref="ficha" :mostrar="mostrarFicha" :indiceIndicador="indicador" />
+      </div>
       <!-- <div id="boton">
         <a href="https://enflujo.com" target="_blank">
           <img class="boton" src="../assets/imgs/bajada.svg" />
@@ -79,12 +81,17 @@ function clicFuera(evento) {
 
   .indicador {
     display: flex;
-    margin: 0.3em 0;
+    margin: 0.4em 0;
     border: 1px dotted;
+    width: 84vw;
   }
 
   .columna {
-    padding: 0.5em;
+    padding: 0.5em 1em;
+  }
+
+  .enlace {
+    padding-left: 2em;
   }
 
   .nombre {
@@ -93,11 +100,7 @@ function clicFuera(evento) {
 
   .ficha {
     cursor: pointer;
-  }
-
-  #fichaTecnica {
-    position: relative;
-    width: 100%;
+    width: 85px;
   }
 }
 
@@ -116,6 +119,21 @@ h3 {
 #datos {
   padding: 2em 2em 10em 2em;
   color: $colorOscuro;
+}
+
+#fichaTecnica {
+  position: relative;
+  width: 100%;
+  left: 2vw;
+}
+
+#contenedorFichas {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  right: 6vw;
+  left: 2vw;
 }
 
 section {
@@ -189,27 +207,80 @@ ul {
 
 // Teléfonos horizontal
 @media (min-width: $minCelular) {
-  .logo {
-    height: 45px;
-  }
 }
 // Pantallas medianas (Tablets)
 @media (min-width: $minTablet) {
+  #indicadores {
+    width: 50vw;
+    margin-top: 2em;
+
+    .indicador {
+      display: flex;
+      margin: 0.4em 0;
+      border: 1px dotted;
+      width: 55vw;
+    }
+  }
   #datos {
     margin: 5em;
   }
 }
 // Dispositivos grandes y pantallas medianas
 @media (min-width: $minPantalla) {
-  .logo {
-    height: 50px;
+  #indicadores {
+    width: 50vw;
+    margin-top: 2em;
+
+    .indicador {
+      display: flex;
+      margin: 0.4em 0;
+      border: 1px dotted;
+      width: 55vw;
+    }
+  }
+  #fichaTecnica {
+    position: relative;
+    width: 100%;
+    left: 20vw;
+  }
+  #contenedorFichas {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    right: 20vw;
+    left: 37vw;
   }
 }
 // Pantallas grandes
 @media (min-width: $minPantallaGrande) {
+  #indicadores {
+    width: 50vw;
+    margin-top: 2em;
+
+    .indicador {
+      display: flex;
+      margin: 0.4em 0;
+      border: 1px dotted;
+      width: 55vw;
+    }
+  }
   #datos {
     width: 50vw;
     max-width: 900px;
+  }
+  #fichaTecnica {
+    position: relative;
+    width: 100%;
+    left: 20vw;
+  }
+  #contenedorFichas {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    right: 22vw;
+    left: 39vw;
   }
 }
 </style>
