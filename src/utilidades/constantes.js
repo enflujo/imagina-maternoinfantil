@@ -1,4 +1,4 @@
-export const rutaBase = 'https://enflujo.com/bodega';
+export const rutaBase = 'https://enflujo.com/bodega/maternoinfantil';
 export const colores = {
   mapaCero: '#BEEFED',
   mapaCien: '#0042BF',

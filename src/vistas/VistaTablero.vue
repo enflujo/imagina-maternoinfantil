@@ -86,7 +86,6 @@ function actualizarDims() {
       </div>
 
       <Mapa />
-      <!--  <LeyendaColor :colores="colores" :porcentajeMin="porcentajeMin" :porcentajeMax="porcentajeMax" /> -->
     </div>
 
     <div id="seccionDerecha" ref="seccionDerecha">
