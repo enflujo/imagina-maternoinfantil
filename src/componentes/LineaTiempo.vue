@@ -249,6 +249,7 @@ function textoPuntoY(i) {
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
         :color="colores.lineaNal"
+        :opacidad="!cerebroGlobales.etniaSeleccionada || cerebroGlobales.etniaSeleccionada.codigo === 0 ? 1 : 0.3"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />
@@ -261,12 +262,12 @@ function textoPuntoY(i) {
         :posicionY="posicionY"
         :alturaVis="dimsVis.altoVis"
         :color="colores.lineaLugar"
+        :opacidad="!cerebroGlobales.etniaSeleccionada || cerebroGlobales.etniaSeleccionada.codigo === 0 ? 1 : 0.3"
         @eventoEncima="eventoEncima"
         @eventoFuera="eventoFuera"
       />
 
-      <!-- LINEA DATOS ETNIA -->
-
+      <!-- LINEA DATOS ETNIA NACIONAL-->
       <LineaDatos
         v-if="
           cerebroGlobales.nivel === 'departamentos' &&
@@ -284,6 +285,7 @@ function textoPuntoY(i) {
         @eventoFuera="eventoFuera"
       />
 
+      <!-- LINEA DATOS ETNIA DEPTO-->
       <LineaDatos
         v-if="
           cerebroGlobales.nivel === 'departamentos' &&

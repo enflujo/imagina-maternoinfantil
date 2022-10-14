@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, onMounted } from 'vue';
+import { ref, reactive, watch, onMounted, computed } from 'vue';
 import { extremosLugar } from '../utilidades/procesador';
 import { escalaCoordenadas, escalaColores, crearLinea } from '../utilidades/ayudas';
 import { usarCerebroDatos } from '../cerebro/datos';
@@ -24,6 +24,10 @@ const datosLugar = ref([]);
 const datosSanAndres = ref([]);
 const datosProvidencia = ref([]);
 const lugaresColombia = ref(null);
+const hayLugarSeleccionado = ref(false);
+
+const claseLugar = (seccion) =>
+  cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre ? 'activo' : '';
 
 watch(
   () => cerebroDatos.geojsonLugar,
@@ -236,7 +240,18 @@ function eventoMovimiento(evento) {
  * Cambiar lugar seleccionado haciendo clic en el mapa
  */
 function eventoClic(seccion) {
-  cerebroDatos.actualizarDatosLugar(seccion);
+  if (hayLugarSeleccionado.value) {
+    if (seccion.codigo === cerebroDatos.lugarSeleccionado) {
+      // Si se hace clic en el lugar ya seleccionado, se borra la selección
+      cerebroDatos.vaciarDatosLugar();
+      cerebroGlobales.lugarSeleccionado = null;
+    } else {
+      cerebroDatos.actualizarDatosLugar(seccion);
+    }
+  } else {
+    cerebroDatos.actualizarDatosLugar(seccion);
+  }
+  hayLugarSeleccionado.value = !hayLugarSeleccionado.value;
 }
 </script>
 
@@ -252,11 +267,7 @@ function eventoClic(seccion) {
         v-for="seccion in datosSanAndres"
         :key="`seccion-${seccion.codigo}`"
         class="lugar sanAndres"
-        :class="
-          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
-            ? 'activo'
-            : ''
-        "
+        :class="claseLugar(seccion)"
         :d="seccion.linea"
         :fill="seccion.color"
         :data-nombre="seccion.nombre"
@@ -270,11 +281,7 @@ function eventoClic(seccion) {
         v-for="seccion in datosProvidencia"
         :key="`seccion-${seccion.codigo}`"
         class="lugar providencia"
-        :class="
-          cerebroGlobales.lugarSeleccionado && seccion.nombre === cerebroGlobales.lugarSeleccionado.nombre
-            ? 'activo'
-            : ''
-        "
+        :class="claseLugar(seccion)"
         :d="seccion.linea"
         :fill="seccion.color"
         :data-nombre="seccion.nombre"
@@ -299,11 +306,7 @@ function eventoClic(seccion) {
           :id="seccion.codigo"
           :key="`seccion-${seccion.codigo}`"
           class="lugar"
-          :class="
-            cerebroGlobales.lugarSeleccionado && seccion.codigo === cerebroGlobales.lugarSeleccionado.codigo
-              ? 'activo'
-              : ''
-          "
+          :class="claseLugar(seccion)"
           :d="seccion.linea"
           :fill="seccion.color"
           :data-nombre="seccion.nombre"

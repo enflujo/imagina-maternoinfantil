@@ -30,12 +30,12 @@ const tieneMeta = computed(() => !!fuentes[cerebroDatos.indice].meta.umbral);
 #leyenda {
   font-size: 0.7em;
   border: 2px solid $colorOscuro;
-  width: 180px;
+  width: 46vw;
   background-color: $colorBlanco;
   padding: 0.3em;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
+  left: 51%;
+  top: -18px;
   color: $colorOscuro;
 }
 
@@ -159,6 +159,35 @@ li {
       vertical-align: middle;
       margin-top: -2px;
     }
+  }
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+  #leyenda {
+    width: 180px;
+  }
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+  #leyenda {
+    width: 180px;
+    left: 76%;
+  }
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  #leyenda {
+    width: 180px;
+    left: 67%;
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  #leyenda {
+    width: 180px;
+    left: 67%;
+    top: -18px;
   }
 }
 </style>

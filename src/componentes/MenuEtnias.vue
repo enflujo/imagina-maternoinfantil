@@ -67,14 +67,11 @@ nav {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 210px;
-  margin-bottom: 4em;
+  width: 44vw;
   max-height: 1em;
 
   #menuEtnias {
     display: none;
-    position: absolute;
-    top: 2em;
     width: 100%;
     z-index: 2;
     text-transform: none;
@@ -103,6 +100,25 @@ nav {
   &.actual {
     background-color: color.scale($colorOscuro, $lightness: 90%);
     color: $colorOscuro;
+  }
+}
+
+// Teléfonos horizontal
+@media (min-width: $minCelular) {
+}
+// Pantallas medianas (Tablets)
+@media (min-width: $minTablet) {
+}
+// Dispositivos grandes y pantallas medianas
+@media (min-width: $minPantalla) {
+  nav {
+    width: 230px;
+  }
+}
+// Pantallas grandes
+@media (min-width: $minPantallaGrande) {
+  nav {
+    width: 230px;
   }
 }
 </style>

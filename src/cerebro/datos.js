@@ -47,7 +47,7 @@ export const usarCerebroDatos = defineStore('datos', {
 
         const datosIndicador = await fetch(`${ruta}-${nivel}.json`).then((respuesta) => respuesta.json());
         const datosPais = await fetch(`${ruta}-pais.json`).then((respuesta) => respuesta.json());
-        console.log(datosIndicador);
+
         let añoMin = Infinity;
         let añoMax = 0;
 
@@ -192,6 +192,10 @@ export const usarCerebroDatos = defineStore('datos', {
       });
 
       this.actualizarDatosEtnia();
+    },
+
+    vaciarDatosLugar() {
+      this.datosLugar = [];
     },
 
     actualizarDatosEtnia() {

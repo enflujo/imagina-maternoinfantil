@@ -5,6 +5,7 @@ const props = defineProps({
   datos: Array,
   alturaVis: Number,
   color: String,
+  opacidad: Number,
 });
 
 const radioPuntos = 4;
@@ -34,7 +35,7 @@ function construirLinea() {
 </script>
 
 <template>
-  <g :stroke="color" :fill="color">
+  <g :stroke="color" :fill="color" :opacity="opacidad">
     <path :d="construirLinea()" class="lineaDatos" fill="none" shape-rendering="geometricPrecision" />
 
     <circle
