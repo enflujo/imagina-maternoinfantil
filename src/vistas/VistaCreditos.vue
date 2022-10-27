@@ -37,7 +37,7 @@
         </li>
         <li>
           <a href="https://academia.uniandes.edu.co/AcademyCv/cgonzalez" target="_blank" rel="external"
-            >Catalina González</a
+            >Catalina González Uribe</a
           >, PhD - Profesora Asociada, Facultad de Medicina Universidad de Los Andes
         </li>
         <li>
