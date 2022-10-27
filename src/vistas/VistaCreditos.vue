@@ -78,6 +78,7 @@
         <li>David Madinger</li>
         <li>Santiago Muñoz Vergara</li>
         <li>Samuel Pérez Castiblanco</li>
+        <li>Daniel Mendivelso</li>
       </ul>
     </section>
 
