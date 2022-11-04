@@ -1,4 +1,5 @@
 <script setup>
+// Importar imágenes
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
 import iconoAnticoncepcion from '../assets/imgs/iconoAnticoncepcion.svg';
@@ -8,6 +9,9 @@ import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 import madreHija from '../assets/imgs/madre-hija.png';
 import bebeMama from '../assets/imgs/bebe-mama.png';
 import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
+
+import { onMounted, ref } from 'vue';
+import GraficaTorta from '../componentes/GraficaTorta.vue';
 </script>
 
 <template>
@@ -33,6 +37,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     </div>
 
     <div id="intro">
+      <GraficaTorta indicador="Partos"/>
       <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." /></div>
       <div class="seccionDerecha">
         <p>
@@ -76,7 +81,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </p>
       </div>
       <div class="seccionDerecha">
-        <img class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
+        <img ref="amamantando" class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
         <p>
           Con respecto a la comida hay diferencias regionales. Por ejemplo, algunas mujeres que estuvieron en la costa
           cuentan que hay más presencia de plátano o yuca. En cambio, quienes se quedaron en Bogotá o municipios
