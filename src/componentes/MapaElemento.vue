@@ -175,7 +175,7 @@ function actualizarDatos() {
 
 const actualizarDimension = (latitudMin, latitudMax, longitudMin, longitudMax) => {
   let ancho = window.innerWidth;
-  let alto = window.innerHeight / 1.9;
+  let alto = window.innerHeight / 1.4;
 
   const coordenadasAncho = longitudMax - longitudMin;
   const coordenadasAlto = latitudMax - latitudMin;
@@ -337,7 +337,6 @@ function eventoClic(seccion) {
 
 #contenedorMapa {
   position: relative;
-  margin-left: 12vw;
   margin-top: 4vh;
   margin-bottom: 3vh;
 }
