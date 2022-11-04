@@ -1,7 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import datosCuali from '../cerebro/datoscuali.json';
 
+const colores = {
+  cesárea: '#3853d8',
+  natural: '#5e1c59',
+  'sin datos': '#71f6a9',
+};
 defineProps({
   indicador: '',
   datos: [],
@@ -13,16 +18,19 @@ const listaPartos = ref([]);
 const anticonceptivosCantidad = ref({ total: 0, datos: [] });
 const partosCantidad = ref({ total: 0, datos: [] });
 
+const grafica = ref();
+const porcionesTorta = ref([]);
+
+onMounted(() => {
+  dibujarTorta();
+});
+
 function convertirListaEnConjunto(lista) {
   lista.value = new Set(lista.value);
 }
 
 function crearListaIndicadorValor(lista, objeto) {
   convertirListaEnConjunto(lista);
-
-  /*lista.value.forEach((i) => {
-    objeto.value.datos[i] = 0;
-  });*/
 }
 
 // Iterar sobre los datos para sacar cada lista de indicadores
@@ -42,7 +50,7 @@ datosCuali.mujeres.forEach((dato) => {
   const anticoncepcionI = datosPartos.findIndex((obj) => obj.parto === dato.parto);
   const planificacionI = datosAnticonceptivos.findIndex((obj) => obj.planificacion === dato.planificacion);
 
-  // Ordentar los datos por cantidad de menor a mayor
+  // Ordenar los datos por cantidad de menor a mayor
   if (planificacionI < 0) {
     datosAnticonceptivos.push({
       planificacion: dato.planificacion,
@@ -61,71 +69,80 @@ datosCuali.mujeres.forEach((dato) => {
     datosPartos[anticoncepcionI].valor += 1;
   }
 
-  // anticonceptivosCantidad.value.datos[dato.planificacion] += 1;
   anticonceptivosCantidad.value.total += 1;
-  //partosCantidad.value.datos[dato.parto] += 1;
   partosCantidad.value.total += 1;
 });
 
 anticonceptivosCantidad.value.datos = anticonceptivosCantidad.value.datos.sort((a, b) => {
-  if (a.valor < b.valor) {
-    return -1;
-  }
-  if (a.valor > b.valor) {
-    return 1;
-  }
+  if (a.valor < b.valor) return -1;
+  if (a.valor > b.valor) return 1;
   return 0;
 });
 
-console.log(partosCantidad.value.datos[0].valor);
-console.log(anticonceptivosCantidad.value);
+/**
+ * Graficar datos en forma de torta
+ */
+function dibujarTorta() {
+  const total = partosCantidad.value.total;
+  const datosPrueba = partosCantidad.value.datos.map((dato) => {
+    return {
+      valor: dato.valor,
+      color: colores[dato.parto],
+    };
+  });
+
+  let anguloActual = 0;
+
+  datosPrueba.forEach((dato) => {
+    // Dibujar círculo
+    const ang = (360 * dato.valor) / total;
+    calcularPorcion(anguloActual, anguloActual + ang, dato.color);
+    anguloActual += ang;
+  });
+
+  function calcularPorcion(ang1, ang2, color) {
+    const cx = 400;
+    const cy = 300;
+    const radio = 200;
+
+    // Radianes angulares
+    const gradosARadianes = (ang) => (ang * Math.PI) / 180;
+
+    function punto(ang) {
+      // Coordenadas según el ángulo
+      return {
+        x: cx + radio * Math.sin(gradosARadianes(ang)),
+        y: cy - radio * Math.cos(gradosARadianes(ang)),
+      };
+    }
+
+    // Dibujar
+    const linea = [];
+
+    // Primer paso
+    const { x: x1, y: y1 } = punto(ang1);
+    // Dibujar la primera línea
+    linea.push(`M ${cx} ${cy} L ${x1} ${y1}`);
+    // Segundo paso
+    const { x: x2, y: y2 } = punto(ang2);
+    // Dibujar el arco
+    linea.push(`A ${radio} ${radio} 0 ${ang2 - ang1 > 180 ? 1 : 0} 1 ${x2} ${y2}`);
+    // Tercer paso: cerrar
+    linea.push('Z');
+
+    porcionesTorta.value.push({
+      color,
+      linea: linea.join(' '),
+    });
+  }
+}
 </script>
 <template>
   <div id="contenedor">
     <h1 id="titulo">{{ indicador }}</h1>
-    <svg height="200" width="200" viewBox="0 0 20 20">
-      <circle r="10" cx="10" cy="10" fill="white" />
 
-      <circle
-        r="5"
-        cx="10"
-        cy="10"
-        fill="transparent"
-        stroke="#5e1c5a"
-        stroke-width="10"
-        :stroke-dasharray="`${(partosCantidad.datos[0].valor * 31.4) / partosCantidad.total} ${
-          partosCantidad.datos[0].valor
-        }`"
-        :stroke-dashoffset="`${(-34 * 31.4) / partosCantidad.total}`"
-        transform="rotate(-90) translate(-20)"
-      />
-
-      <circle
-        r="5"
-        cx="10"
-        cy="10"
-        fill="transparent"
-        stroke="#3853d8"
-        stroke-width="10"
-        :stroke-dasharray="`${(partosCantidad.datos[1].valor * 31.4) / partosCantidad.total} ${
-          partosCantidad.datos[1].valor
-        }`"
-        :stroke-dashoffset="`${(-26 * 31.4) / partosCantidad.total}`"
-        transform="rotate(-90) translate(-20)"
-      />
-
-      <circle
-        r="5"
-        cx="10"
-        cy="10"
-        fill="transparent"
-        stroke="#71f6a9"
-        stroke-width="10"
-        :stroke-dasharray="`${(partosCantidad.datos[2].valor * 31.4) / partosCantidad.total} ${
-          partosCantidad.datos[2].valor
-        }`"
-        transform="rotate(-90) translate(-20)"
-      />
+    <svg id="grafica" ref="grafica" width="800" height="500">
+      <path v-for="(porcion, i) in porcionesTorta" :key="`linea${i}`" :d="porcion.linea" :fill="porcion.color"></path>
     </svg>
   </div>
 </template>
