@@ -1,0 +1,482 @@
+{
+  "mujeres": [
+    {
+      "nacionalidad": "colombiana",
+      "edad": 17,
+      "planificacion": "gestante",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+    },
+
+    {
+      "nacionalidad": "colombiana",
+      "edad": 29,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "migrar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" }
+      ]
+    },
+
+    {
+      "nacionalidad": "venezolana",
+      "edad": null,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "retornar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+    },
+
+    {
+      "nacionalidad": "venezolana",
+      "edad": null,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "retornar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+    },
+
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+    },
+
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "ligadura de trompas",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "retornar",
+      "trabajo": "óptica",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "pareja", "genero": "" }]
+    },
+
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 31,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 31,
+      "planificacion": "gestante",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "venezolana",
+      "edad": 21,
+      "planificacion": "dispositivo intrauterino",
+      "parto": "natural",
+      "experienciaServSalud": "positiva",
+      "plan": "retornar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 32,
+      "planificacion": "implante subdérmico",
+      "parto": "natural",
+      "experienciaServSalud": "negativa",
+      "plan": "comprar vivienda",
+      "trabajo": "asistente",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "padres", "parentezco": "padre", "genero": "masculino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 21,
+      "planificacion": "gestante",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 26,
+      "planificacion": "no",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "viajar",
+      "trabajo": "manicurista",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "venezolana",
+      "edad": 17,
+      "planificacion": "inyección anticonceptiva",
+      "parto": "natural",
+      "experienciaServSalud": "negativa",
+      "plan": "migrar",
+      "trabajo": "manufactura",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 27,
+      "planificacion": "dispositivo intrauterino",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "venezolana",
+      "edad": 28,
+      "planificacion": "dispositivo intrauterino",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 28,
+      "planificacion": "ligadura de trompas",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 19,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "suegrxs", "parentezco": "suegra", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 35,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 30,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 27,
+      "planificacion": "sin datos",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "comercio",
+      "pareja": "sí",
+      "apoyo": []
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "sin datos",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "aseo",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 22,
+      "planificacion": "ligadura de trompas",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "hermanxs", "parentezco": "hermano", "genero": "masculino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 15,
+      "planificacion": "implante subdérmico",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "estudiar",
+      "trabajo": "comercio",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "suegrxs", "parentezco": "suegra", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "cuñadxs", "parentezco": "cuñado", "genero": "masculino" },
+        { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "sin datos",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "padrastrxs", "parentezco": "padrastro", "genero": "masculino" },
+        { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "sin datos",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "migrar",
+      "trabajo": "alimentos",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "padre", "genero": "masculino" }]
+    },
+    {
+      "nacionalidad": "venezolana",
+      "edad": null,
+      "planificacion": "gestante",
+      "parto": "sin datos",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "primxs", "parentezco": "prima", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "venezolana",
+      "edad": null,
+      "planificacion": "sin datos",
+      "parto": "sin datos",
+      "experienciaServSalud": "sin datos",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 32,
+      "planificacion": "ligadura de trompas",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "trabajar",
+      "trabajo": "comercio",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 32,
+      "planificacion": "no",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "estudiar",
+      "trabajo": "comercio",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "dispositivo intrauterino",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "estudiar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 33,
+      "planificacion": "condón",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "cuidar a los hijos",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "inyección anticonceptiva",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "estudiar",
+      "trabajo": "casa",
+      "pareja": "no",
+      "apoyo": [
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 35,
+      "planificacion": "implante subdérmico",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "comprar vivienda",
+      "trabajo": "comercio",
+      "pareja": "sí",
+      "apoyo": [
+        { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
+        { "categoria": "médicos", "parentezco": "médico", "genero": "" }
+      ]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": null,
+      "planificacion": "ligadura de trompas",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 21,
+      "planificacion": "inyección anticonceptiva",
+      "parto": "cesárea",
+      "experienciaServSalud": "positiva",
+      "plan": "estudiar",
+      "trabajo": "casa",
+      "pareja": "sí",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    },
+    {
+      "nacionalidad": "colombiana",
+      "edad": 23,
+      "planificacion": "dispositivo intrauterino",
+      "parto": "cesárea",
+      "experienciaServSalud": "negativa",
+      "plan": "trabajar",
+      "trabajo": "comercio",
+      "pareja": "no",
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+    }
+  ]
+}
