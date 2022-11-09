@@ -37,7 +37,8 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
     </div>
 
     <div id="intro">
-      <GraficaTorta indicador="Partos"/>
+      <GraficaTorta indicador="partos" />
+      <GraficaTorta indicador="anticonceptivos" />
       <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." /></div>
       <div class="seccionDerecha">
         <p>
