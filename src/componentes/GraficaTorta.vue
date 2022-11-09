@@ -2,27 +2,25 @@
 import { onMounted, ref } from 'vue';
 import datosCuali from '../cerebro/datoscuali.json';
 
-const colores = {
-  cesárea: '#3853d8',
-  natural: '#5e1c59',
-  'sin datos': '#71f6a9',
-};
-defineProps({
+const colores = ['#3853d8', '#5e1c59', '#71f6a9', '#51e9a9', '#71967a', '#8736a9', '#ddffa9', '#78ff99'];
+
+const props = defineProps({
   indicador: '',
-  datos: [],
 });
 
 const listaAnticonceptivos = ref([]);
 const listaPartos = ref([]);
-// [método, valor]
+
 const anticonceptivosCantidad = ref({ total: 0, datos: [] });
 const partosCantidad = ref({ total: 0, datos: [] });
+
+const indicadores = { anticonceptivos: anticonceptivosCantidad, partos: partosCantidad };
 
 const grafica = ref();
 const porcionesTorta = ref([]);
 
 onMounted(() => {
-  dibujarTorta();
+  dibujarTorta(indicadores[props.indicador]);
 });
 
 function convertirListaEnConjunto(lista) {
@@ -82,12 +80,12 @@ anticonceptivosCantidad.value.datos = anticonceptivosCantidad.value.datos.sort((
 /**
  * Graficar datos en forma de torta
  */
-function dibujarTorta() {
-  const total = partosCantidad.value.total;
-  const datosPrueba = partosCantidad.value.datos.map((dato) => {
+function dibujarTorta(indicador) {
+  const total = indicador.value.total;
+  const datosPrueba = indicador.value.datos.map((dato, i) => {
     return {
       valor: dato.valor,
-      color: colores[dato.parto],
+      color: colores[i],
     };
   });
 
@@ -139,7 +137,7 @@ function dibujarTorta() {
 </script>
 <template>
   <div id="contenedor">
-    <h1 id="titulo">{{ indicador }}</h1>
+    <h1 id="titulo">{{ props.indicador }}</h1>
 
     <svg id="grafica" ref="grafica" width="800" height="500">
       <path v-for="(porcion, i) in porcionesTorta" :key="`linea${i}`" :d="porcion.linea" :fill="porcion.color"></path>
@@ -158,5 +156,6 @@ function dibujarTorta() {
 #titulo {
   font-size: 1.2em;
   margin-bottom: 1em;
+  text-transform: capitalize;
 }
 </style>
