@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
 import datosCuali from '../cerebro/datoscuali.json';
 
 const colores = ['#3853d8', '#5e1c59', '#71f6a9', '#51e9a9', '#71967a', '#8736a9', '#ddffa9', '#78ff99'];
@@ -17,7 +17,9 @@ const partosCantidad = ref({ total: 0, datos: [] });
 const indicadores = { anticonceptivos: anticonceptivosCantidad, partos: partosCantidad };
 
 const grafica = ref();
+const infoPorcion = ref();
 const porcionesTorta = ref([]);
+const posInfo = reactive({ x: 0, y: 0 });
 
 onMounted(() => {
   dibujarTorta(indicadores[props.indicador]);
@@ -45,13 +47,13 @@ datosCuali.mujeres.forEach((dato) => {
   const datosPartos = partosCantidad.value.datos;
   const datosAnticonceptivos = anticonceptivosCantidad.value.datos;
 
-  const anticoncepcionI = datosPartos.findIndex((obj) => obj.parto === dato.parto);
-  const planificacionI = datosAnticonceptivos.findIndex((obj) => obj.planificacion === dato.planificacion);
+  const anticoncepcionI = datosPartos.findIndex((obj) => obj.nombre === dato.parto);
+  const planificacionI = datosAnticonceptivos.findIndex((obj) => obj.nombre === dato.planificacion);
 
   // Ordenar los datos por cantidad de menor a mayor
   if (planificacionI < 0) {
     datosAnticonceptivos.push({
-      planificacion: dato.planificacion,
+      nombre: dato.planificacion,
       valor: 1,
     });
   } else {
@@ -60,7 +62,7 @@ datosCuali.mujeres.forEach((dato) => {
 
   if (anticoncepcionI < 0) {
     datosPartos.push({
-      parto: dato.parto,
+      nombre: dato.parto,
       valor: 1,
     });
   } else {
@@ -82,8 +84,9 @@ anticonceptivosCantidad.value.datos = anticonceptivosCantidad.value.datos.sort((
  */
 function dibujarTorta(indicador) {
   const total = indicador.value.total;
-  const datosPrueba = indicador.value.datos.map((dato, i) => {
+  const datos = indicador.value.datos.map((dato, i) => {
     return {
+      nombre: dato.nombre,
       valor: dato.valor,
       color: colores[i],
     };
@@ -91,14 +94,14 @@ function dibujarTorta(indicador) {
 
   let anguloActual = 0;
 
-  datosPrueba.forEach((dato) => {
+  datos.forEach((dato) => {
     // Dibujar círculo
     const ang = (360 * dato.valor) / total;
-    calcularPorcion(anguloActual, anguloActual + ang, dato.color);
+    calcularPorcion(anguloActual, anguloActual + ang, dato);
     anguloActual += ang;
   });
 
-  function calcularPorcion(ang1, ang2, color) {
+  function calcularPorcion(ang1, ang2, dato) {
     const cx = 400;
     const cy = 300;
     const radio = 200;
@@ -129,10 +132,27 @@ function dibujarTorta(indicador) {
     linea.push('Z');
 
     porcionesTorta.value.push({
-      color,
+      nombre: dato.nombre,
+      valor: dato.valor,
+      color: dato.color,
       linea: linea.join(' '),
     });
   }
+}
+
+function mostrarInfo(porcion, evento) {
+  console.log('hola', porcion, evento);
+  infoPorcion.value.style.visibility = 'visible';
+  infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
+}
+
+function ocultarInfo() {
+  infoPorcion.value.style.visibility = 'hidden';
+}
+
+function eventoMovimiento(evento) {
+  posInfo.x = evento.clientX;
+  posInfo.y = evento.clientY;
 }
 </script>
 <template>
@@ -140,9 +160,19 @@ function dibujarTorta(indicador) {
     <h1 id="titulo">{{ props.indicador }}</h1>
 
     <svg id="grafica" ref="grafica" width="800" height="500">
-      <path v-for="(porcion, i) in porcionesTorta" :key="`linea${i}`" :d="porcion.linea" :fill="porcion.color"></path>
+      <path
+        v-for="(porcion, i) in porcionesTorta"
+        :key="`linea${i}`"
+        :d="porcion.linea"
+        :fill="porcion.color"
+        @mouseenter="(evento) => mostrarInfo(porcion, evento)"
+        @mouseleave="ocultarInfo"
+        @mousemove="eventoMovimiento"
+      ></path>
     </svg>
   </div>
+
+  <div id="infoPorcion" ref="infoPorcion" :style="`left:${posInfo.x}px; top:${posInfo.y}px`"></div>
 </template>
 
 <style lang="scss" scoped>
@@ -157,5 +187,11 @@ function dibujarTorta(indicador) {
   font-size: 1.2em;
   margin-bottom: 1em;
   text-transform: capitalize;
+}
+#infoPorcion {
+  position: fixed;
+  background-color: white;
+  padding: 0.3em 0.5em;
+  transform: translate(-50%, -200%);
 }
 </style>
