@@ -19,3 +19,6 @@ export const etnias = [
   { codigo: '-1', nombre: 'No reportado' },
   { codigo: 0, nombre: 'Quitar selección' },
 ];
+
+// Colores para gráficas
+export const coloresGraficas = ['#3853d8', '#5e1c59', '#71f6a9', '#51e9a9', '#71967a', '#8736a9', '#ddffa9', '#78ff99'];
