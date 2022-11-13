@@ -2,7 +2,7 @@
 import { onMounted, ref, reactive } from 'vue';
 import datosCuali from '../cerebro/datoscuali.json';
 
-const colores = ['#3853d8', '#5e1c59', '#71f6a9', '#51e9a9', '#71967a', '#8736a9', '#ddffa9', '#78ff99'];
+import { coloresGraficas } from '../utilidades/constantes';
 
 const props = defineProps({
   indicador: '',
@@ -88,7 +88,7 @@ function dibujarTorta(indicador) {
     return {
       nombre: dato.nombre,
       valor: dato.valor,
-      color: colores[i],
+      color: coloresGraficas[i],
     };
   });
 
@@ -141,7 +141,6 @@ function dibujarTorta(indicador) {
 }
 
 function mostrarInfo(porcion, evento) {
-  console.log('hola', porcion, evento);
   infoPorcion.value.style.visibility = 'visible';
   infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
 }
