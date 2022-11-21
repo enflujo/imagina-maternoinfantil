@@ -14,6 +14,8 @@ export const usarCerebroDatos = defineStore('datos', {
     datosEtniasNacionales: {},
     datosEtnia: [],
     datosLugar: [],
+    nacionalMin: 0,
+    nacionalMax: 1000,
     _cache: {
       departamentos: null,
       municipios: null,
@@ -53,6 +55,7 @@ export const usarCerebroDatos = defineStore('datos', {
 
         this.datosNacionales = Object.keys(datosPais.datos).map((anno) => {
           const [numerador, denominador, porcentaje] = datosPais.datos[anno];
+
           añoMin = anno < añoMin ? anno : añoMin;
           añoMax = anno > añoMax ? anno : añoMax;
 
@@ -82,7 +85,10 @@ export const usarCerebroDatos = defineStore('datos', {
         }
 
         if (nivel === 'departamentos') {
+          let nacionalMax = 0;
+
           datosIndicador.forEach((lugar) => {
+            nacionalMax = lugar.max > nacionalMax ? lugar.max : nacionalMax;
             for (let tipoEtnia in lugar.etnias) {
               lugar.etnias[tipoEtnia] = Object.keys(lugar.etnias[tipoEtnia].datos).map((anno) => {
                 const [numerador, denominador, porcentaje] = lugar.etnias[tipoEtnia].datos[anno];
@@ -98,6 +104,8 @@ export const usarCerebroDatos = defineStore('datos', {
               });
             }
           });
+
+          this.nacionalMax = nacionalMax;
         }
 
         this.datosEtniasNacionales = nacionalEtnias;
@@ -120,7 +128,7 @@ export const usarCerebroDatos = defineStore('datos', {
         } else if (tipo === 'razón') {
           this.valorMax = 1000;
         } else {
-          this.valorMax = 500;
+          this.valorMax = this.nacionalMax;
         }
 
         if (cerebroGlobales.lugarSeleccionado) {

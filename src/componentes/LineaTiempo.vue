@@ -17,6 +17,7 @@ const cerebroGlobales = usarCerebroGlobales();
 const cerebroDatos = usarCerebroDatos();
 
 const infoVisible = ref(false);
+const cuantasLineas = ref(5);
 const infoPorcentaje = ref('');
 const infoX = ref(null);
 const infoY = ref(null);
@@ -57,7 +58,7 @@ const posicionY = (valor) =>
 
 function alturaEjeY(i) {
   if (i === 0) return dimsVis.margenArriba;
-  return (((dimsVis.altoVis / 5) * i) | 0) + dimsVis.margenArriba;
+  return (((dimsVis.altoVis / cuantasLineas.value) * i) | 0) + dimsVis.margenArriba;
 }
 
 function definirUmbral() {
@@ -76,6 +77,8 @@ function definirUmbral() {
 
   posUmbral.y = y;
   posUmbral.alto = alto;
+
+  cuantasLineas.value = cerebroDatos.nacionalMax < 5 ? Math.ceil(cerebroDatos.nacionalMax) : 5;
 }
 
 /* Definir detalle del valor del indicador al pasar el mouse 
@@ -110,7 +113,10 @@ function textoPuntoY(i) {
   } else if (info.tipo === 'razón') {
     respuesta = 1000 - i * 200;
   } else {
-    respuesta = 500 - i * 100;
+    const paso = (cerebroDatos.nacionalMax / cuantasLineas.value) | 0;
+    const valorCielo = cuantasLineas.value * paso;
+
+    respuesta = (valorCielo - i * paso) | 0;
   }
 
   return respuesta;
@@ -189,7 +195,7 @@ function textoPuntoY(i) {
 
       <!-- DIVISIONES -->
       <line
-        v-for="(division, i) in Array(5)"
+        v-for="(division, i) in cuantasLineas"
         :key="`division-${i}`"
         class="lineaDivision"
         :x1="dimsVis.marcoIz"
@@ -200,7 +206,7 @@ function textoPuntoY(i) {
       />
 
       <line
-        v-for="(division, i) in Array(5)"
+        v-for="(division, i) in cuantasLineas"
         :key="`division2-${i}`"
         class="marcaMarco"
         :x1="dimsVis.marcoIz - 7"
@@ -211,7 +217,7 @@ function textoPuntoY(i) {
       />
 
       <text
-        v-for="(division, i) in Array(5)"
+        v-for="(division, i) in cuantasLineas"
         :key="`division2-${i}`"
         class="textoEjeY textoEje"
         :x="dimsVis.marcoIz - 25"
