@@ -3,6 +3,7 @@ import { onMounted, ref, reactive } from 'vue';
 import datosCuali from '../cerebro/datoscuali.json';
 
 import { coloresGraficas } from '../utilidades/constantes';
+import { convertirListaEnConjunto } from '../utilidades/ayudas';
 
 const props = defineProps({
   indicador: '',
@@ -31,22 +32,14 @@ onMounted(() => {
   dibujarTorta(indicadores[props.indicador]);
 });
 
-function convertirListaEnConjunto(lista) {
-  lista.value = new Set(lista.value);
-}
-
-function crearListaIndicadorValor(lista, objeto) {
-  convertirListaEnConjunto(lista);
-}
-
 // Iterar sobre los datos para sacar cada lista de indicadores
 datosCuali.mujeres.forEach((i) => {
   listaAnticonceptivos.value.push(i.planificacion);
   listaPartos.value.push(i.parto);
 });
 
-crearListaIndicadorValor(listaAnticonceptivos, anticonceptivosCantidad);
-crearListaIndicadorValor(listaPartos, partosCantidad);
+convertirListaEnConjunto(listaAnticonceptivos);
+convertirListaEnConjunto(listaPartos);
 
 // Agregar la cantidad de cada valor de los indicadores y sumar la cantidad total
 datosCuali.mujeres.forEach((dato) => {

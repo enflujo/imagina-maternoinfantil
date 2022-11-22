@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 // Importar imágenes
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
@@ -8,10 +9,10 @@ import madresMigrantes from '../assets/imgs/madres_migrantes.png';
 import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 import madreHija from '../assets/imgs/madre-hija.png';
 import bebeMama from '../assets/imgs/bebe-mama.png';
-import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 
-import { onMounted, ref } from 'vue';
+import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
 import GraficaTorta from '../componentes/GraficaTorta.vue';
+import GraficaBarras from '../componentes/GraficaBarras.vue';
 </script>
 
 <template>
@@ -38,6 +39,7 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
 
     <div id="intro">
       <div class="seccionIzquierda">
+        <GraficaBarras />
         <img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." />
       </div>
       <div class="seccionDerecha">
