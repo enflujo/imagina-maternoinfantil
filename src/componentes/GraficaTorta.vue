@@ -22,8 +22,9 @@ const porcionesTorta = ref([]);
 const posInfo = reactive({ x: 0, y: 0 });
 
 const anchoGrafica = window.innerWidth / 3.5;
-const altoGrafica = window.innerWidth / 4.5;
+const altoGrafica = window.innerWidth / 3.7;
 const anchoContenedor = window.innerWidth / 3.2;
+const infoVisible = ref(false);
 
 onMounted(() => {
   dibujarTorta(indicadores[props.indicador]);
@@ -145,24 +146,23 @@ function dibujarTorta(indicador) {
 }
 
 function mostrarInfo(porcion, evento) {
-  if (infoPorcion.value.style.visibility === 'hidden') {
-    infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
+  infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
+  if (infoVisible.value === false) {
+    infoVisible.value = true;
   }
-  infoPorcion.value.style.visibility = 'visible';
 }
 
 function ocultarInfo() {
-  infoPorcion.value.style.visibility = 'hidden';
+  infoVisible.value = false;
 }
 
 function eventoMovimiento(evento) {
   posInfo.x = evento.clientX;
   posInfo.y = evento.clientY;
-  infoPorcion.value.style.visibility = 'visible';
 }
 </script>
-<template>
-  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`">
+<template @mouseleave="ocultarInfo">
+  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`" @mouseenter="ocultarInfo">
     <h1 id="titulo">{{ props.indicador }}</h1>
 
     <svg id="grafica" ref="grafica" :width="`${anchoGrafica}px`" :height="`${altoGrafica}px`">
@@ -172,13 +172,15 @@ function eventoMovimiento(evento) {
         :d="porcion.linea"
         :fill="porcion.color"
         @mouseenter="(evento) => mostrarInfo(porcion, evento)"
-        @mouseleave="ocultarInfo"
         @mousemove="eventoMovimiento"
       ></path>
     </svg>
   </div>
-
-  <div id="infoPorcion" ref="infoPorcion" :style="`left:${posInfo.x}px; top:${posInfo.y}px`"></div>
+  <div
+    id="infoPorcion"
+    ref="infoPorcion"
+    :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`"
+  ></div>
 </template>
 
 <style lang="scss" scoped>
@@ -204,8 +206,10 @@ function eventoMovimiento(evento) {
   color: #5670cd;
   padding: 0.3em 0.5em;
   z-index: 99;
+  opacity: 0;
+  visibility: visible;
 }
 #grafica {
-  transform: translate(1%, -3em);
+  transform: translate(0%, -2em);
 }
 </style>
