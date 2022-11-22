@@ -21,6 +21,10 @@ const infoPorcion = ref();
 const porcionesTorta = ref([]);
 const posInfo = reactive({ x: 0, y: 0 });
 
+const anchoGrafica = window.innerWidth / 3.5;
+const altoGrafica = window.innerWidth / 4.5;
+const anchoContenedor = window.innerWidth / 3.2;
+
 onMounted(() => {
   dibujarTorta(indicadores[props.indicador]);
 });
@@ -102,9 +106,9 @@ function dibujarTorta(indicador) {
   });
 
   function calcularPorcion(ang1, ang2, dato) {
-    const cx = 400;
-    const cy = 300;
-    const radio = 200;
+    const cx = 200;
+    const cy = 200;
+    const radio = anchoGrafica / 3.5;
 
     // Radianes angulares
     const gradosARadianes = (ang) => (ang * Math.PI) / 180;
@@ -141,8 +145,10 @@ function dibujarTorta(indicador) {
 }
 
 function mostrarInfo(porcion, evento) {
+  if (infoPorcion.value.style.visibility === 'hidden') {
+    infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
+  }
   infoPorcion.value.style.visibility = 'visible';
-  infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
 }
 
 function ocultarInfo() {
@@ -152,13 +158,14 @@ function ocultarInfo() {
 function eventoMovimiento(evento) {
   posInfo.x = evento.clientX;
   posInfo.y = evento.clientY;
+  infoPorcion.value.style.visibility = 'visible';
 }
 </script>
 <template>
-  <div id="contenedor">
+  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`">
     <h1 id="titulo">{{ props.indicador }}</h1>
 
-    <svg id="grafica" ref="grafica" width="800" height="500">
+    <svg id="grafica" ref="grafica" :width="`${anchoGrafica}px`" :height="`${altoGrafica}px`">
       <path
         v-for="(porcion, i) in porcionesTorta"
         :key="`linea${i}`"
@@ -181,16 +188,24 @@ function eventoMovimiento(evento) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: $colorBlanco;
+  border-radius: 7px;
+  margin: 2em 0;
 }
 #titulo {
   font-size: 1.2em;
-  margin-bottom: 1em;
+  margin: 1.5em auto 0em;
   text-transform: capitalize;
+  color: #0042bf;
 }
 #infoPorcion {
   position: fixed;
-  background-color: white;
+  background-color: $colorBlanco;
+  color: #5670cd;
   padding: 0.3em 0.5em;
-  transform: translate(-50%, -200%);
+  z-index: 99;
+}
+#grafica {
+  transform: translate(1%, -3em);
 }
 </style>

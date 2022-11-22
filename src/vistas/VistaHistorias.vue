@@ -37,9 +37,9 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
     </div>
 
     <div id="intro">
-      <GraficaTorta indicador="partos" />
-      <GraficaTorta indicador="anticonceptivos" />
-      <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." /></div>
+      <div class="seccionIzquierda">
+        <img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." />
+      </div>
       <div class="seccionDerecha">
         <p>
           En mayo y junio de 2022 se llevó a cabo una indagación cualitativa en las ciudades de
@@ -47,7 +47,6 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
           mujeres colombianas y venezolanas (regularizadas, no regularizadas y pendulares) que vivieron embarazos y
           partos durante la pandemia.
         </p>
-
         <p>
           De los resultados de esta investigación extrajimos algunos fragmentos sobre su experiencia alimentaria y sus
           vivencias en los servicios de salud colombianos.
@@ -116,7 +115,8 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
           las entrevistadas tuvo controles prenatales durante el embarazo y accedió a ellos sin pagar, muchos se
           realizaron de forma virtual. Durante su parto en los hospitales las mujeres estuvieron solas, sin
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
-          ventanas abiertas en plena noche.
+          ventanas abiertas en plena noche. La mayor parte de las mujeres encuestadas tuvo a su bebé por cesárea.
+          <GraficaTorta indicador="partos" />
         </p>
         <p>
           A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia<a href="#parrafoNota"> *</a
@@ -324,6 +324,10 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
           También encuentran una fuerte resistencia en el personal de salud cuando ellas solicitan retirarse los
           dispositivos.
         </p>
+        <p>
+          Entre las mujeres encuestadas estos son los métodos de planificación utilizados:
+          <GraficaTorta indicador="anticonceptivos" />
+        </p>
         <h3>Experiencias</h3>
         <p>
           Varias mujeres hablan del momento en el que sintieron ganas de vomitar o vomitaron en medio de la cesárea.
@@ -423,7 +427,7 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
   }
 
   #tituloGeneral {
-    margin: 2em 5vw;
+    margin: 3em 9vw 0em;
 
     .titulo {
       color: #f2f2f2;
