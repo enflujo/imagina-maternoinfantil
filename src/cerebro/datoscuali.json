@@ -158,7 +158,7 @@
     {
       "nacionalidad": "colombiana",
       "edad": 26,
-      "planificacion": "no",
+      "planificacion": "no planifica",
       "parto": "cesárea",
       "experienciaServSalud": "positiva",
       "plan": "viajar",
@@ -387,7 +387,7 @@
     {
       "nacionalidad": "colombiana",
       "edad": 32,
-      "planificacion": "no",
+      "planificacion": "no planifica",
       "parto": "cesárea",
       "experienciaServSalud": "positiva",
       "plan": "estudiar",

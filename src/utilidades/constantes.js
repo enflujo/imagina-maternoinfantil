@@ -21,4 +21,14 @@ export const etnias = [
 ];
 
 // Colores para gráficas
-export const coloresGraficas = ['#3853d8', '#5e1c59', '#71f6a9', '#51e9a9', '#71967a', '#8736a9', '#ddffa9', '#78ff99'];
+export const coloresGraficas = [
+  '#b1d7e0',
+  '#8d40e7',
+  '#dd823b',
+  '#8736a9',
+  '#71f6a9',
+  '#25438e',
+  '#ddffa9',
+  '#4ace04',
+  '#a686b4',
+];
