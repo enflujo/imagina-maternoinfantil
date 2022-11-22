@@ -77,8 +77,6 @@ function definirUmbral() {
 
   posUmbral.y = y;
   posUmbral.alto = alto;
-
-  cuantasLineas.value = cerebroDatos.nacionalMax < 5 ? Math.ceil(cerebroDatos.nacionalMax) : 5;
 }
 
 /* Definir detalle del valor del indicador al pasar el mouse 

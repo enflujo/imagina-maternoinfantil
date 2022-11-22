@@ -104,8 +104,8 @@ export const usarCerebroDatos = defineStore('datos', {
               });
             }
           });
-
-          this.nacionalMax = nacionalMax;
+          const subirAl10Cercano = Math.ceil(nacionalMax / 10) * 10;
+          this.nacionalMax = subirAl10Cercano;
         }
 
         this.datosEtniasNacionales = nacionalEtnias;
