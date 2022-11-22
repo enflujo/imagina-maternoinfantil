@@ -116,7 +116,7 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
           realizaron de forma virtual. Durante su parto en los hospitales las mujeres estuvieron solas, sin
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
           ventanas abiertas en plena noche. La mayor parte de las mujeres encuestadas tuvo a su bebé por cesárea.
-          <GraficaTorta indicador="partos" />
+          <GraficaTorta indicador="partos" titulo="Tipos de parto" />
         </p>
         <p>
           A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia<a href="#parrafoNota"> *</a
@@ -326,7 +326,7 @@ import GraficaTorta from '../componentes/GraficaTorta.vue';
         </p>
         <p>
           Entre las mujeres encuestadas estos son los métodos de planificación utilizados:
-          <GraficaTorta indicador="anticonceptivos" />
+          <GraficaTorta indicador="anticonceptivos" titulo="Métodos de planificación" />
         </p>
         <h3>Experiencias</h3>
         <p>

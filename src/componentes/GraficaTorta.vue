@@ -6,6 +6,7 @@ import { coloresGraficas } from '../utilidades/constantes';
 
 const props = defineProps({
   indicador: '',
+  titulo: '',
 });
 
 const listaAnticonceptivos = ref([]);
@@ -163,7 +164,7 @@ function eventoMovimiento(evento) {
 </script>
 <template @mouseleave="ocultarInfo">
   <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`" @mouseenter="ocultarInfo">
-    <h1 id="titulo">{{ props.indicador }}</h1>
+    <h1 id="titulo">{{ props.titulo }}</h1>
 
     <svg id="grafica" ref="grafica" :width="`${anchoGrafica}px`" :height="`${altoGrafica}px`">
       <path
@@ -197,7 +198,6 @@ function eventoMovimiento(evento) {
 #titulo {
   font-size: 1.2em;
   margin: 1.5em auto 0em;
-  text-transform: capitalize;
   color: #0042bf;
 }
 #infoPorcion {
