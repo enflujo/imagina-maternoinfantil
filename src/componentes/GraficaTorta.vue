@@ -6,8 +6,8 @@ import { coloresGraficas } from '../utilidades/constantes';
 import { convertirListaEnConjunto } from '../utilidades/ayudas';
 
 const props = defineProps({
-  indicador: '',
-  titulo: '',
+  indicador: String,
+  titulo: String,
 });
 
 const listaAnticonceptivos = ref([]);
@@ -139,7 +139,7 @@ function dibujarTorta(indicador) {
   }
 }
 
-function mostrarInfo(porcion, evento) {
+function mostrarInfo(porcion) {
   infoPorcion.value.innerHTML = `<p>${porcion.nombre}: ${porcion.valor}%</p>`;
   if (infoVisible.value === false) {
     infoVisible.value = true;
@@ -155,8 +155,9 @@ function eventoMovimiento(evento) {
   posInfo.y = evento.clientY;
 }
 </script>
-<template @mouseleave="ocultarInfo">
-  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`">
+
+<template>
+  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`" @mouseleave="ocultarInfo">
     <h1 id="titulo">{{ props.titulo }}</h1>
 
     <svg

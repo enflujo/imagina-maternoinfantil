@@ -36,7 +36,6 @@ const anchoChupetines = computed(() => {
 const chupetinesX = computed(() => {
   if (!chupetines.value) return 0;
   return chupetines.value.offsetLeft;
-  console.dir(chupetines.value);
 });
 
 dimsVis.alturaEjeY = parientes.value.length * 20;

@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref } from 'vue';
 // Importar imágenes
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
