@@ -29,8 +29,18 @@ function comparar(a, b) {
 }
 
 function elegirOrden(criterio) {
-  criterioOrden.value = criterio;
-  actualizarDatos();
+  if (criterioOrden.value === criterio) {
+    criterioOrden.value = null;
+    if (criterio === 'pandemia') {
+      cerebroGlobales.mostrarPandemia = false;
+    }
+  } else {
+    criterioOrden.value = criterio;
+    if (criterio === 'pandemia') {
+      cerebroGlobales.mostrarPandemia = true;
+      cerebroGlobales.año = '2019';
+    }
+  }
 }
 
 function ordenarDatos() {
@@ -103,12 +113,12 @@ function actualizarDatos() {
     <span id="menuOrden">
       <h4>ANALÍTICO</h4>
       <span class="seccionMenu">
-        <span class="botonOrden" :class="criterioOrden === 'decada' ? 'activo' : ''" @click="elegirOrden('decada')">
+        <!-- <span class="botonOrden" :class="criterioOrden === 'decada' ? 'activo' : ''" @click="elegirOrden('decada')">
           2010 vs. 2020
-        </span>
+        </span> -->
 
         <span class="botonOrden" :class="criterioOrden === 'pandemia' ? 'activo' : ''" @click="elegirOrden('pandemia')">
-          2019 vs. 2020
+          Pandemia
         </span>
       </span>
 

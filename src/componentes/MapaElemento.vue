@@ -80,6 +80,7 @@ watch(() => cerebroDatos.datos, actualizarDatos);
 watch(() => cerebroGlobales.año, actualizarDatos);
 watch(() => cerebroGlobales.etniaSeleccionada, actualizarDatos);
 watch(() => cerebroGlobales.nivel, actualizarDatos);
+watch(() => cerebroGlobales.mostrarPandemia, actualizarDatos);
 
 function iniciarDatosSanAndres() {
   const geojson = cerebroDatos.geojsonSanAndres;
@@ -120,6 +121,7 @@ function iniciarDatosSanAndres() {
 }
 
 function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
+  const { mostrarPandemia } = cerebroGlobales;
   const d = cerebroDatos.datos.find((obj) => obj.codigo === seccion.codigo);
   if (!d) return seccion;
 
@@ -129,7 +131,16 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
   }
 
   seccion.datos = d.datos;
-  seccion.color = mapearColor(d.datos[añoSeleccionado][2]);
+
+  if (mostrarPandemia) {
+    if (d.analisis && d.analisis.alarma) {
+      seccion.color = '#f08080';
+    } else {
+      seccion.color = mapearColor(d.datos[añoSeleccionado][2]);
+    }
+  } else {
+    seccion.color = mapearColor(d.datos[añoSeleccionado][2]);
+  }
 
   return seccion;
 }
@@ -139,7 +150,7 @@ function redefinirSanAndresP(seccion, añoSeleccionado, mapearColor) {
  */
 function actualizarDatos() {
   if (!cerebroDatos.geojsonLugar) return;
-  const añoSeleccionado = cerebroGlobales.año;
+  const { año: añoSeleccionado, mostrarPandemia } = cerebroGlobales;
   const datosNacionalesAño = cerebroDatos.datosNacionales.find((obj) => obj.anno == añoSeleccionado);
   const mapearColor = escalaColores(0, cerebroDatos.valorMax, colores.mapaCero, colores.mapaCien);
 
@@ -160,7 +171,16 @@ function actualizarDatos() {
 
     datosLugar.value[i].datos = d.datos;
     datosLugar.value[i].etnias = d.etnias ? d.etnias : [];
-    datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
+
+    if (mostrarPandemia) {
+      if (d.analisis && d.analisis.alarma) {
+        datosLugar.value[i].color = '#f08080';
+      } else {
+        datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
+      }
+    } else {
+      datosLugar.value[i].color = mapearColor(d.datos[añoSeleccionado][2]);
+    }
 
     if (cerebroGlobales.nivel === 'municipios') {
       cerebroGlobales.actualizarEtnia(0);
@@ -325,9 +345,16 @@ function eventoClic(seccion) {
     <div
       class="vistaMapa"
       id="informacion"
-      :style="`opacity:${infoVisible ? 1 : 0};left:${posInfo.x}px; top:${posInfo.y}px`"
+      :style="`opacity:${infoVisible ? 0.85 : 0};left:${posInfo.x}px; top:${posInfo.y}px`"
     >
       <DetalleDatos :dato="infoDetalle" :esLista="false" />
+    </div>
+
+    <div v-if="cerebroGlobales.mostrarPandemia" id="leyendaAnalisis">
+      <p class="alarma" v-if="cerebroDatos.pandemiaNacional.alarma">
+        A nivel nacional, este indicador empeoró durante la pandemia.
+      </p>
+      <p class="tendencia">La tendencia deseada es hacia {{ cerebroDatos.pandemiaNacional.tendencia }}</p>
     </div>
   </div>
 </template>
@@ -407,6 +434,20 @@ function eventoClic(seccion) {
 
   .resaltar {
     font-weight: bold;
+  }
+}
+
+#leyendaAnalisis {
+  font-size: 0.85em;
+  margin-top: -4em;
+
+  .alarma {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .tendencia {
+    font-style: italic;
   }
 }
 </style>
