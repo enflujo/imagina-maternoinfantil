@@ -39,7 +39,6 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
 
     <div id="intro">
       <div class="seccionIzquierda">
-        <GraficaBarras />
         <img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." />
       </div>
       <div class="seccionDerecha">
@@ -119,6 +118,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
           ventanas abiertas en plena noche. La mayor parte de las mujeres encuestadas tuvo a su bebé por cesárea.
           <GraficaTorta indicador="partos" titulo="Tipos de parto" />
+          <GraficaBarras />
         </p>
         <p>
           A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia<a href="#parrafoNota"> *</a
@@ -616,7 +616,6 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
     .seccionIzquierda {
       width: 30vw;
       margin-left: 10vw;
-      padding-right: 3em;
       padding-left: 2em;
     }
 

@@ -206,6 +206,7 @@ function eventoMovimiento(evento) {
   z-index: 99;
   opacity: 0;
   visibility: visible;
+  pointer-events: none;
 }
 #grafica {
   transform: translate(0%, -2em);

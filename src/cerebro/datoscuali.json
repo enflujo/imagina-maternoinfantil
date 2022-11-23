@@ -9,7 +9,7 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
     },
 
     {
@@ -36,7 +36,7 @@
       "plan": "retornar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
     },
 
     {
@@ -48,7 +48,7 @@
       "plan": "retornar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
     },
 
     {
@@ -60,7 +60,7 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
     },
 
     {
@@ -72,7 +72,7 @@
       "plan": "retornar",
       "trabajo": "óptica",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "pareja", "genero": "" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "pareja", "genero": "masculino" }]
     },
 
     {
@@ -121,7 +121,7 @@
       "trabajo": "casa",
       "pareja": "sí",
       "apoyo": [
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" }
       ]
     },
@@ -137,7 +137,7 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "padres", "parentezco": "padre", "genero": "masculino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
       ]
     },
@@ -151,7 +151,7 @@
       "trabajo": "casa",
       "pareja": "sí",
       "apoyo": [
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
       ]
     },
@@ -179,7 +179,7 @@
       "trabajo": "manufactura",
       "pareja": "sí",
       "apoyo": [
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
       ]
     },
@@ -222,7 +222,7 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
       ]
     },
     {
@@ -250,7 +250,7 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
       ]
     },
     {
@@ -314,7 +314,7 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "suegrxs", "parentezco": "suegra", "genero": "femenino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" },
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñado", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
       ]
@@ -381,7 +381,7 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
       ]
     },
     {
