@@ -25,6 +25,7 @@ export const usarCerebroDatos = defineStore('datos', {
     años: [],
     valorMax: 0,
     lugarSeleccionado: null,
+    pandemiaNacional: null,
   }),
 
   getters: {
@@ -66,6 +67,8 @@ export const usarCerebroDatos = defineStore('datos', {
             porcentaje,
           };
         });
+
+        this.pandemiaNacional = datosPais.analisis;
 
         const nacionalEtnias = datosPais.etnias;
 
