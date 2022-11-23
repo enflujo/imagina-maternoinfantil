@@ -41,6 +41,7 @@ function elegirOrden(criterio) {
       cerebroGlobales.año = '2019';
     }
   }
+  ordenarDatos();
 }
 
 function ordenarDatos() {

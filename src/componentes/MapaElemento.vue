@@ -438,7 +438,7 @@ function eventoClic(seccion) {
 
 #leyendaAnalisis {
   font-size: 0.85em;
-  margin-top: -4em;
+  margin-top: -6em;
 
   .alarma {
     font-weight: bold;
