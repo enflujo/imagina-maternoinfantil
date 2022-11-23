@@ -414,7 +414,6 @@ function eventoClic(seccion) {
   background-color: rgba(255, 255, 255, 0.9);
   pointer-events: none;
   transform: translate(-50%, -110%);
-  // max-width: 10vw;
   z-index: 99;
 
   p {

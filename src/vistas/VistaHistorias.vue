@@ -1,4 +1,6 @@
 <script setup>
+import { onMounted, ref } from 'vue';
+// Importar imágenes
 import iconoAlimentacion from '../assets/imgs/iconoAlimentacion.svg';
 import iconoExperiencias from '../assets/imgs/iconoExperiencias.svg';
 import iconoAnticoncepcion from '../assets/imgs/iconoAnticoncepcion.svg';
@@ -7,7 +9,10 @@ import madresMigrantes from '../assets/imgs/madres_migrantes.png';
 import servicioHospitalario from '../assets/imgs/servicio-hospitalario.png';
 import madreHija from '../assets/imgs/madre-hija.png';
 import bebeMama from '../assets/imgs/bebe-mama.png';
+
 import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
+import GraficaTorta from '../componentes/GraficaTorta.vue';
+import GraficaBarras from '../componentes/GraficaBarras.vue';
 </script>
 
 <template>
@@ -33,7 +38,9 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     </div>
 
     <div id="intro">
-      <div class="seccionIzquierda"><img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." /></div>
+      <div class="seccionIzquierda">
+        <img class="imagen" :src="bebeMama" alt="Madre mirando a su bebé." />
+      </div>
       <div class="seccionDerecha">
         <p>
           En mayo y junio de 2022 se llevó a cabo una indagación cualitativa en las ciudades de
@@ -41,7 +48,6 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           mujeres colombianas y venezolanas (regularizadas, no regularizadas y pendulares) que vivieron embarazos y
           partos durante la pandemia.
         </p>
-
         <p>
           De los resultados de esta investigación extrajimos algunos fragmentos sobre su experiencia alimentaria y sus
           vivencias en los servicios de salud colombianos.
@@ -76,7 +82,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
         </p>
       </div>
       <div class="seccionDerecha">
-        <img class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
+        <img ref="amamantando" class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
         <p>
           Con respecto a la comida hay diferencias regionales. Por ejemplo, algunas mujeres que estuvieron en la costa
           cuentan que hay más presencia de plátano o yuca. En cambio, quienes se quedaron en Bogotá o municipios
@@ -110,7 +116,9 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           las entrevistadas tuvo controles prenatales durante el embarazo y accedió a ellos sin pagar, muchos se
           realizaron de forma virtual. Durante su parto en los hospitales las mujeres estuvieron solas, sin
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
-          ventanas abiertas en plena noche.
+          ventanas abiertas en plena noche. La mayor parte de las mujeres encuestadas tuvo a su bebé por cesárea.
+          <GraficaTorta indicador="partos" titulo="Tipos de parto" />
+          <GraficaBarras />
         </p>
         <p>
           A continuación algunos testimonios de mujeres que dieron a luz durante la pandemia<a href="#parrafoNota"> *</a
@@ -318,6 +326,10 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
           También encuentran una fuerte resistencia en el personal de salud cuando ellas solicitan retirarse los
           dispositivos.
         </p>
+        <p>
+          Entre las mujeres encuestadas estos son los métodos de planificación utilizados:
+          <GraficaTorta indicador="anticonceptivos" titulo="Métodos de planificación" />
+        </p>
         <h3>Experiencias</h3>
         <p>
           Varias mujeres hablan del momento en el que sintieron ganas de vomitar o vomitaron en medio de la cesárea.
@@ -417,7 +429,7 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
   }
 
   #tituloGeneral {
-    margin: 2em 5vw;
+    margin: 3em 9vw 0em;
 
     .titulo {
       color: #f2f2f2;
@@ -604,7 +616,6 @@ import GuardaEscobas from '../componentes/SeccionGuardaescobas.vue';
     .seccionIzquierda {
       width: 30vw;
       margin-left: 10vw;
-      padding-right: 3em;
       padding-left: 2em;
     }
 

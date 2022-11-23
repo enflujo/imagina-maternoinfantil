@@ -142,3 +142,8 @@ export const urlsAEnlacesHTML = (valor) => {
 
   return valor;
 };
+
+// Para gráficas
+export function convertirListaEnConjunto(lista) {
+  lista.value = new Set(lista.value);
+}
