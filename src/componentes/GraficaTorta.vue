@@ -163,17 +163,23 @@ function eventoMovimiento(evento) {
 }
 </script>
 <template @mouseleave="ocultarInfo">
-  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`" @mouseenter="ocultarInfo">
+  <div id="contenedor" :width="`${anchoContenedor}px`" :height="`${altoGrafica * 1.1}px`">
     <h1 id="titulo">{{ props.titulo }}</h1>
 
-    <svg id="grafica" ref="grafica" :width="`${anchoGrafica}px`" :height="`${altoGrafica}px`">
+    <svg
+      id="grafica"
+      ref="grafica"
+      :width="`${anchoGrafica}px`"
+      :height="`${altoGrafica}px`"
+      @mousemove="eventoMovimiento"
+    >
       <path
         v-for="(porcion, i) in porcionesTorta"
         :key="`linea${i}`"
         :d="porcion.linea"
         :fill="porcion.color"
         @mouseenter="(evento) => mostrarInfo(porcion, evento)"
-        @mousemove="eventoMovimiento"
+        @mouseleave="ocultarInfo"
       ></path>
     </svg>
   </div>
@@ -191,7 +197,6 @@ function eventoMovimiento(evento) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $colorBlanco;
   border-radius: 7px;
   margin: 2em 0;
 }
