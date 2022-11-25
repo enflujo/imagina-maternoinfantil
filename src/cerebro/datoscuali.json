@@ -9,7 +9,10 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"}
+      ]
     },
 
     {
@@ -24,6 +27,10 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"","alimento":"sopa"}
       ]
     },
 
@@ -36,7 +43,12 @@
       "plan": "retornar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"menudencias"}
+      ]
+      
     },
 
     {
@@ -48,7 +60,12 @@
       "plan": "retornar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"},
+        {"grupoAlimenticio":"","alimento":"enlatados"}
+      ]
     },
 
     {
@@ -60,7 +77,14 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"huevo"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"yuca"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"plátano"},
+        {"grupoAlimenticio":"lácteos", "alimento":"queso"}
+      ]
     },
 
     {
@@ -72,7 +96,16 @@
       "plan": "retornar",
       "trabajo": "óptica",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "pareja", "genero": "masculino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"},
+        {"grupoAlimenticio":"lácteos", "alimento":"leche"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"huevo"},
+        {"grupoAlimenticio":"fruta", "alimento":"fruta"},
+        {"grupoAlimenticio":"hortalizas y verduras","alimento":"verdura"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"carne"}
+      ]
     },
 
     {
@@ -87,6 +120,11 @@
       "apoyo": [
         { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"hortalizas y verduras", "alimento":"tomate"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"huevo"}
       ]
     },
     {
@@ -98,7 +136,13 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"pasta"},
+        {"grupoAlimenticio":"lácteos", "alimento":"leche"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"atún"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -109,7 +153,12 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "no",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"huevo"}
+      ]
     },
     {
       "nacionalidad": "venezolana",
@@ -123,6 +172,13 @@
       "apoyo": [
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "tíxs", "parentezco": "tía", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"yuca"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"plátano"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"ñame"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"maíz"},
+        {"grupoAlimenticio":"fruta", "alimento":"mango"}
       ]
     },
     {
@@ -139,6 +195,13 @@
         { "categoria": "padres", "parentezco": "padre", "genero": "masculino" },
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"pollo"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"papa"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"pan"},
+        {"grupoAlimenticio":"otras bebidas", "alimento":"café"}
       ]
     },
     {
@@ -153,6 +216,12 @@
       "apoyo": [
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"carne"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"huevo"}
       ]
     },
     {
@@ -167,6 +236,12 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"carne"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"huevo"}
       ]
     },
     {
@@ -181,6 +256,13 @@
       "apoyo": [
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"plátano"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"carne"},
+        {"grupoAlimenticio":"carnes/pescados y huevos", "alimento":"pollo"},
+        {"grupoAlimenticio":"legumbres", "alimento":"granos"}
       ]
     },
     {
@@ -194,7 +276,14 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
-        { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+        { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
+      ],
+      "comida": [
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"pasta"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"plátano"},
+        {"grupoAlimenticio":"bebidas azucaradas","alimento":"agua de panela"},
+        {"grupoAlimenticio":"hortalizas y verduras","alimento":"zanahoria"}
       ]
     },
     {
@@ -209,6 +298,11 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio": "carnes/pescados y huevos","alimento":"pollo"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"plátano"}
       ]
     },
     {
@@ -223,6 +317,10 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
+      ],
+      "comida":[
+        { "grupoAlimenticio": "", "alimento": "enlatados"},
+        { "grupoAlimenticio": "carnes/pescados y huevos", "alimento": "huevo"}
       ]
     },
     {
@@ -237,6 +335,11 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "suegrxs", "parentezco": "suegra", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio": "cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio": "carnes/pescados y huevos", "alimento":"huevo"},
+        {"grupoAlimenticio": "carnes/pescados y huevos", "alimento":"caldo de huevo"}
       ]
     },
     {
@@ -251,6 +354,11 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio": "cereales, raíces, tubérculos y plátano", "alimento":"arroz"},
+        {"grupoAlimenticio": "legumbres","alimento":"granos"},
+        {"grupoAlimenticio": "carnes/pescados y huevos","alimento":"huevo"}
       ]
     },
     {
@@ -265,6 +373,11 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "pareja", "parentezco": "pareja", "genero": "" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"","alimento":"enlatados"},
+        {"grupoAlimenticio":"legumbres","alimento":"granos"}
       ]
     },
     {
@@ -276,7 +389,14 @@
       "plan": "trabajar",
       "trabajo": "comercio",
       "pareja": "sí",
-      "apoyo": []
+      "apoyo": [],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"legumbres","alimento":"granos"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"huevo"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"pollo"},
+        {"grupoAlimenticio":"hortalizas y verduras","alimento":"verdura"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -287,7 +407,13 @@
       "plan": "trabajar",
       "trabajo": "aseo",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"","alimento":"sopa"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"huevo"},
+        {"grupoAlimenticio":"lácteos","alimento":"queso"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -301,6 +427,12 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "hermanxs", "parentezco": "hermano", "genero": "masculino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"pollo"},
+        {"grupoAlimenticio":"legumbres","alimento":"granos"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"pan"}
       ]
     },
     {
@@ -317,6 +449,12 @@
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñado", "genero": "masculino" },
         { "categoria": "cuñadxs", "parentezco": "cuñada", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"papa"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"pollo"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"yuca"}
       ]
     },
     {
@@ -332,6 +470,12 @@
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "padrastrxs", "parentezco": "padrastro", "genero": "masculino" },
         { "categoria": "hermanxs", "parentezco": "hermana", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"arroz"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"carne"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"papa"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"plátano"}
       ]
     },
     {
@@ -343,7 +487,13 @@
       "plan": "migrar",
       "trabajo": "alimentos",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "padre", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "padre", "genero": "masculino" }],
+      "comida":[
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"papa"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"pollo"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"huevo"},
+        {"grupoAlimenticio":"cereales, raíces, tubérculos y plátano","alimento":"yuca"}
+      ]
     },
     {
       "nacionalidad": "venezolana",
@@ -442,7 +592,7 @@
       "pareja": "sí",
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
-        { "categoria": "médicos", "parentezco": "médico", "genero": "" }
+        { "categoria": "médicos", "parentezco": "médico", "genero": "masculino" }
       ]
     },
     {
