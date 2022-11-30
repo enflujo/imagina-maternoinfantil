@@ -507,6 +507,9 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "primxs", "parentezco": "prima", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
       ]
     },
     {
@@ -519,6 +522,10 @@
       "trabajo": "casa",
       "pareja": "sí",
       "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      ,
+      "comida":[
+        {"grupoAlimenticio":"legumbres","alimento":"granos"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -532,6 +539,10 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"proteína"},
+        {"grupoAlimenticio":"fruta","alimento":"fruta"}
       ]
     },
     {
@@ -543,7 +554,10 @@
       "plan": "estudiar",
       "trabajo": "comercio",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -554,7 +568,10 @@
       "plan": "estudiar",
       "trabajo": "casa",
       "pareja": "no",
-      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }]
+      "apoyo": [{ "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" }],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -565,7 +582,10 @@
       "plan": "cuidar a los hijos",
       "trabajo": "casa",
       "pareja": "no",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -579,6 +599,9 @@
       "apoyo": [
         { "categoria": "pareja", "parentezco": "pareja", "genero": "masculino" },
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
       ]
     },
     {
@@ -593,6 +616,9 @@
       "apoyo": [
         { "categoria": "padres", "parentezco": "madre", "genero": "femenino" },
         { "categoria": "médicos", "parentezco": "médico", "genero": "masculino" }
+      ],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
       ]
     },
     {
@@ -604,7 +630,12 @@
       "plan": "trabajar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida":[
+        {"grupoAlimenticio":"fruta","alimento":"fruta"},
+        {"grupoAlimenticio":"","alimento":"sopa"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"proteína"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -615,7 +646,11 @@
       "plan": "estudiar",
       "trabajo": "casa",
       "pareja": "sí",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":"caldo"},
+        {"grupoAlimenticio":"carnes/pescados y huevos","alimento":"pollo"}
+      ]
     },
     {
       "nacionalidad": "colombiana",
@@ -626,7 +661,10 @@
       "plan": "trabajar",
       "trabajo": "comercio",
       "pareja": "no",
-      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }]
+      "apoyo": [{ "categoria": "padres", "parentezco": "madre", "genero": "femenino" }],
+      "comida":[
+        {"grupoAlimenticio":"","alimento":""}
+      ]
     }
   ]
 }
