@@ -14,5 +14,5 @@ export default defineConfig({
     outDir: './publico',
     emptyOutDir: true,
   },
-  base: '/maternoinfantil/',
+  base: '/especiales/maternoinfantil/',
 });

@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.USUARIO_IMAGINA }}
           password: ${{ secrets.CLAVE_IMAGINA }}
           localDir: 'publico'
-          remoteDir: '/srv/www/wordpress/maternoinfantil/'
+          remoteDir: '/srv/www/wordpress/especiales/maternoinfantil/'
