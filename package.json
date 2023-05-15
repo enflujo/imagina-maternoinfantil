@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build && copy-file ./docs/index.html ./docs/404.html",
-    "build-servidor": "vite --config vite-config-servidor.js build && copy-file ./publico/index.html ./publico/404.html && copy-file ./publico/index.html ./publico/historias.html && copy-file ./publico/index.html ./publico/creditos.html && copy-file ./publico/index.html ./publico/datos.html",
+    "build-servidor": "vite --config vite-config-servidor.js build && copy-file ./publico/index.html ./publico/404.html && copy-file ./publico/index.html ./publico/historias/index.html && copy-file ./publico/index.html ./publico/creditos/index.html && copy-file ./publico/index.html ./publico/datos/index.html",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
   },
