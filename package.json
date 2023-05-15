@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build && copy-file ./docs/index.html ./docs/404.html",
+    "build-servidor": "vite --config vite-config-servidor.js build && copy-file ./publico/index.html ./publico/404.html",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
   },
@@ -20,6 +21,7 @@
     "@rushstack/eslint-patch": "^1.1.0",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
+    "copy-file-util": "^1.0.0",
     "eslint": "^8.21.0",
     "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.5.1",
