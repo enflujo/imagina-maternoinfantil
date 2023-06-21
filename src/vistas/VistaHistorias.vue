@@ -59,18 +59,18 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
         <h3 class="subtitulo">La experiencia de la alimentación en tiempos pandémicos</h3>
 
         <p>
-          La comida no siempre estuvo presenten de la misma forma en la experiencia de estas mujeres. En algunos casos,
-          gracias a las ayudas que recibían de organizaciones o familiares, no faltó comida. Sin embargo, cuando este
+          La comida no siempre estuvo presente de la misma forma en la experiencia de estas mujeres. En algunos casos,
+          gracias a las ayudas que recibían de organizaciones o familiares, no faltó comida. Sin embargo, cuando el
           mercado empezaba a agotarse días antes de que llegara el siguiente, se reducían las porciones, la cantidad de
           comidas o los productos de los platos.
         </p>
 
         <p>
           En medio de la pandemia y ante la pérdida de trabajo, algunas mujeres salieron de Bogotá para ir a vivir con
-          sus familiares o los familiares de sus parejas en municipios o pueblo donde había más posibilidad de trabajar
-          la tierra. Allí cultivaban diferentes alimentos para comer o para intercambiar con vecinos por otras cosas.
-          Aunque no pasaron hambre, en esta situación no hubo variedad, ya que los municipios usualmente se dedican al
-          cultivo de uno o pocos productos.
+          sus familiares o los familiares de sus parejas en el municipio o pueblo donde había más posibilidad de
+          trabajar la tierra. Allí cultivaban diferentes alimentos para comer o para intercambiar con vecinos por otras
+          cosas. Aunque no pasaron hambre, en esta situación no hubo variedad, ya que los municipios usualmente se
+          dedican al cultivo de uno o pocos productos.
         </p>
 
         <p class="testimonio">
@@ -133,7 +133,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
           </p>
           <p>
             En julio de 2021 fue por urgencias al hospital Simón Bolívar. Le hicieron un examen y le formularon algunos
-            medicamentos porque tuvo una infección. Fuera de esa atención solo tuvo otros dos controles prenatales que
+            medicamentos porque tuvo una infección. Además de esta atención solo tuvo otros dos controles prenatales que
             pagó en un centro médico particular por el Olaya, en donde le hicieron un ecograma.
           </p>
           <p>
@@ -334,6 +334,23 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
           Varias mujeres hablan del momento en el que sintieron ganas de vomitar o vomitaron en medio de la cesárea.
           También cuentan que les tocó controlar esta sensación o vomitaron a escondidas porque, en teoría, ellas no
           podían moverse ni incomodar al personal de salud en su espacio de trabajo.
+        </p>
+
+        <p>
+          El contexto social y económico es un determinante en las experiencias de las mujeres gestantes en el sistema
+          de salud, en los relatos se hizo evidente el alto nivel de incertidumbre al que se ven sometidas las mujeres
+          migrantes, especialmente las que no cuentan con regularización migratoria.
+        </p>
+
+        <p>
+          Se hace necesaria una estretagia asertiva de comunicación para que las gestantes y sus familias conozcan el
+          sistema de salud colombiano. También, falta una estrategia de sensibilización al personal de salud, porque
+          ninguna mujer debería tomar decisiones sobre su salud reproductiva motivada por la presión.
+        </p>
+
+        <p>
+          Estos relatos son ejemplos que muestran la complejidad de la salud materno infantil en Colombia y la necesidad
+          de abordarla desde una mirada multidimensional, que tenga en cuenta las diversas realidades del país.
         </p>
       </div>
       <div class="seccionDerecha">
