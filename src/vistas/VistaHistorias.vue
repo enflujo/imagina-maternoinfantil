@@ -81,7 +81,8 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
         </p>
       </div>
       <div class="seccionDerecha">
-        <img ref="amamantando" class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
+        <img id="imagenMadres" class="imagen" :src="madresMigrantes" alt="Madres migrantes cargando a sus bebés." />
+
         <p>
           Con respecto a la comida hay diferencias regionales. Por ejemplo, algunas mujeres que estuvieron en la costa
           cuentan que hay más presencia de plátano o yuca. En cambio, quienes se quedaron en Bogotá o municipios
@@ -211,7 +212,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
         </div>
       </div>
       <div class="seccionDerecha">
-        <img id="imagenMadres" class="imagen" :src="madresMigrantes" alt="Madres migrantes cargando a sus bebés." />
+        <img ref="amamantando" class="imagen" :src="madreAmamantando" alt="Madre amamantando a su hija." />
 
         <div class="historiaMujer" id="claudia">
           <h3>Claudia</h3>
