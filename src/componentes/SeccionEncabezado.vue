@@ -2,8 +2,8 @@
   <header id="encabezado">
     <nav>
       <router-link id="nombreProyecto" to="/">
-        <img id="logo" src="../assets/imgs/logo.svg" alt="Logo de Salud Maternoinfantil en Colombia" />
-        <h1 class="tituloProyecto">Salud Maternoinfantil en Colombia</h1>
+        <img id="logo" src="../assets/imgs/logo.svg" alt="Logo de Salud Materno Infantil en Colombia" />
+        <h1 class="tituloProyecto">Salud Materno Infantil en Colombia</h1>
       </router-link>
 
       <ul>
