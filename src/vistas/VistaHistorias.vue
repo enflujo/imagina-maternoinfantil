@@ -382,6 +382,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
   padding: 1em 0em;
   background: linear-gradient(180deg, $colorOscuro 0%, $colorFondoHistorias 1%);
   font-size: 1.5em;
+  line-height: 1.3;
   color: $colorOscuro;
 
   h1 {
@@ -469,6 +470,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
 
     .tituloHistoria {
       color: $colorOscuro;
+      line-height: 1.3;
     }
   }
 
@@ -482,7 +484,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
 
     p {
       padding-bottom: 2em;
-      font-size: 1.1em;
+      font-size: 1.2em;
     }
 
     img {
@@ -503,6 +505,8 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
 
     p {
       margin-bottom: 1em;
+      font-size: 1.2em;
+      line-height: 1.3;
     }
 
     h3 {
@@ -511,6 +515,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
       margin-right: 3em;
       line-height: 25px;
       margin-left: 2;
+      line-height: 1.3;
     }
 
     .testimonio {
