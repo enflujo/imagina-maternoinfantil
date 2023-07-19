@@ -117,7 +117,9 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
           realizaron de forma virtual. Durante su parto en los hospitales las mujeres estuvieron solas, sin
           acompañantes, y tuvieron que respirar, soportar las contracciones y pujar con el tapabocas puesto y las
           ventanas abiertas en plena noche. La mayor parte de las mujeres encuestadas tuvo a su bebé por cesárea.
+
           <GraficaTorta indicador="partos" titulo="Tipos de parto" />
+
           <GraficaBarras />
         </p>
         <p>
@@ -379,7 +381,7 @@ import GraficaBarras from '../componentes/GraficaBarras.vue';
 #cuali {
   padding: 1em 0em;
   background: linear-gradient(180deg, $colorOscuro 0%, $colorFondoHistorias 1%);
-  font-size: 1.1em;
+  font-size: 1.5em;
   color: $colorOscuro;
 
   h1 {
